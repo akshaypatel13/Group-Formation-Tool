@@ -1,6 +1,6 @@
 package com.example.CATME.signup;
 
-public class Signup {
+public class User {
 	
 	private String firstname;
 	private String lastname;

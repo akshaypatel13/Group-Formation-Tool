@@ -8,18 +8,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 
+
 @Controller
 public class SignUpController {
+	UserService userService =new UserServiceImpl();
+
 	
 	@GetMapping("/signup")
 	public String signup(Model model) {
 		
-		model.addAttribute("signup", new Signup());
+		model.addAttribute("user", new User());
 		return "signup";
 	}
 	
 	 @PostMapping("/signup")
-	  public String signupSubmit(@ModelAttribute Signup  signup) {
+	  public String signupSubmit(@ModelAttribute User  user) {
+	    userService.register(user);
 	    return "result";
 	  }
 	
