@@ -15,6 +15,18 @@ public class User {
 	@NotNull
 	@NotEmpty
 	private String lastname;
+	
+	@NotNull
+	@NotEmpty
+	private String bannerId;
+
+	public String getBannerId() {
+		return bannerId;
+	}
+
+	public void setBannerId(String bannerId) {
+		this.bannerId = bannerId;
+	}
 
 	@NotNull
 	@NotEmpty
@@ -68,5 +80,6 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 
 }

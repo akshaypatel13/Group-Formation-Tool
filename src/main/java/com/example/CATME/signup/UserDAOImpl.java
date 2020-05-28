@@ -31,8 +31,8 @@ public class UserDAOImpl implements UserDAO {
 			Statement statement = myConn.createStatement();
 			Statement statement1 = myConn.createStatement();
 			System.out.println(user.getFirstname());
-			String query1 = "Insert into USER(user_id , first_name , last_name ,email) " + "Values ('" + uuid + "','"
-					+ user.getFirstname() + "','" + user.getLastname() + "' , '" + user.getEmail() + "');";
+			String query1 = "Insert into USER(user_id ,banner_id, first_name , last_name ,email,password) " + "Values ('" + uuid + "', '" +user.getBannerId()+"','"
+					+ user.getFirstname() + "','" + user.getLastname() + "' , '" + user.getEmail() + "','"+user.getSetPassword()+"');";
 
 			String query2 = "Insert into ROLE(role_id,user_id,role) " + "Values ('" + rid + "' ,'" + uuid + "',1 );";
 
