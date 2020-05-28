@@ -14,11 +14,11 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public void register(User user) {
-		
+
 		final String uuid = UUID.randomUUID().toString().replace("-", "");
-	    System.out.println("uuid = " + uuid);
-	    final String rid = UUID.randomUUID().toString().replace("-", "");
-	    System.out.println("rid = " + rid);
+		System.out.println("uuid = " + uuid);
+		final String rid = UUID.randomUUID().toString().replace("-", "");
+		System.out.println("rid = " + rid);
 
 		System.out.println("reached daooo!!");
 		try {
@@ -29,14 +29,13 @@ public class UserDAOImpl implements UserDAO {
 					"CSCI5308_21_DEVINT_USER", "CSCI5308_21_DEVINT_21168");
 
 			Statement statement = myConn.createStatement();
-			Statement statement1= myConn.createStatement();
+			Statement statement1 = myConn.createStatement();
 			System.out.println(user.getFirstname());
 			String query1 = "Insert into USER(user_id , first_name , last_name ,email) " + "Values ('" + uuid + "','"
 					+ user.getFirstname() + "','" + user.getLastname() + "' , '" + user.getEmail() + "');";
-			
-			String query2 = "Insert into ROLE(role_id,user_id,role) " + "Values ('" + rid + "' ,'"+uuid+"',1 );";
-			
-			
+
+			String query2 = "Insert into ROLE(role_id,user_id,role) " + "Values ('" + rid + "' ,'" + uuid + "',1 );";
+
 			int resultSet1 = statement.executeUpdate(query1);
 			statement1.executeUpdate(query2);
 

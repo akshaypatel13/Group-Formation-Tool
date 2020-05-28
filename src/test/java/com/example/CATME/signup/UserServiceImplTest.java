@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class UserServiceImplTest {
 	
 	@Test
-	public void register(User user)
+	public void register()
 	{
 		
 	}
