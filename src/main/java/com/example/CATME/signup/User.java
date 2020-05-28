@@ -1,13 +1,32 @@
 package com.example.CATME.signup;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+@PasswordValidator
 public class User {
+
 	
+	@NotNull
+	@NotEmpty
 	private String firstname;
-	private String lastname;
 	
+	@NotNull
+	@NotEmpty
+	private String lastname;
+
+	@NotNull
+	@NotEmpty
+	@Email
 	private String email;
 	
+	@NotNull
+    @NotEmpty
 	private String setPassword;
+	
+	@NotNull
+	@NotEmpty
 	private String confirmPassword;
 
 	public String getFirstname() {
@@ -49,6 +68,5 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 }
