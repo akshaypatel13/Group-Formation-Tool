@@ -16,12 +16,14 @@ public class SignUpControllerImpl implements SignUpController{
 	@Autowired
 	UserService userService;
 
+	@Override
 	@GetMapping("/signup")
 	public String signup(Model model) {
 		model.addAttribute("user", new User());
 		return "signup";
 	}
 
+	@Override
 	@PostMapping("/signup")
 	public String signupSubmit(@Valid User user, BindingResult bindingresult) {
 		if (bindingresult.hasErrors()) {

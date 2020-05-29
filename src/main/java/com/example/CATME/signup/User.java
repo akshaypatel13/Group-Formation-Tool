@@ -5,6 +5,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @PasswordValidator
+@EmailValidator
+
 public class User {
 
 	
@@ -31,6 +33,7 @@ public class User {
 	@NotNull
 	@NotEmpty
 	@Email
+	
 	private String email;
 	
 	@NotNull
