@@ -1,7 +1,10 @@
 package com.example.CATME.signup;
 
+import com.example.CATME.database.UserSignUpDB;
+import com.example.CATME.user.User;
+
 public interface UserDAO {
 
-	void register(User user);
+	public void register(UserSignUpDB UserSignUpDB,User user);
 
 }

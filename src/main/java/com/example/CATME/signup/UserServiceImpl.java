@@ -1,17 +1,23 @@
 package com.example.CATME.signup;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
+import com.example.CATME.database.UserSignUpDB;
+import com.example.CATME.user.User;
+
+//Service
 public class UserServiceImpl implements UserService {
 
-	@Autowired
-	UserDAO userDAO;
+	UserDAO UserDAO;
+	UserSignUpDB UserSignUpDB;
+	
+	public UserServiceImpl(UserDAO UserDAO, UserSignUpDB UserSignUpDB) {
+		this.UserDAO = UserDAO;
+		this.UserSignUpDB = UserSignUpDB;
+	}
 
 	public void register(User user) {
 
-		userDAO.register(user);
+		UserDAO.register(UserSignUpDB , user);
 	}
 
 }

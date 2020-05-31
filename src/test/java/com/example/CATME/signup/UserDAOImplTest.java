@@ -5,24 +5,28 @@ import static org.mockito.Mockito.verify;
 
 import org.junit.Test;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.example.CATME.database.UserSignUpDBImpl;
+import com.example.CATME.user.User;
 
 @SpringBootTest
 public class UserDAOImplTest {
-	@Autowired
 	UserDAOImpl UserDAOImpl;
+	UserSignUpDBImpl UserSignUpDBImpl;
 	
 	@Test
 	public void registerTest() 
-	{
+	{	
+		
 		UserDAOImpl = mock(UserDAOImpl.class);
+		UserSignUpDBImpl = mock(UserSignUpDBImpl.class);
 		User user = new User();
 		
-		UserDAOImpl.register(user);
+		UserDAOImpl.register(UserSignUpDBImpl, user);
 
 	    // Then
-	    verify(UserDAOImpl).register(user); 
+	    verify(UserDAOImpl).register(UserSignUpDBImpl,user); 
 		
 	}
 

@@ -9,6 +9,8 @@ import java.sql.Statement;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import com.example.CATME.user.User;
+
 public class EmailValidatorImpl implements ConstraintValidator<EmailValidator, Object> {
 
 	@Override

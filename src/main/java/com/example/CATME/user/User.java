@@ -21,6 +21,16 @@ public class User {
 	private String email;
 	private String password;
 	
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+
+	private String confirmPassword;
+	
 	// the reset token would be used when use forget password
 	// the reset token will be generate by uuid
 	private String resetToken;
