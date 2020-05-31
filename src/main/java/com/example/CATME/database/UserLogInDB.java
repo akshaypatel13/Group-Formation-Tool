@@ -7,6 +7,6 @@ import com.example.CATME.user.User;
  * @author Ruize Nie
  * @version 1.0
  */
-public interface UserDB {
+public interface UserLogInDB {
 	public User findUserByEmail(String email);
 }

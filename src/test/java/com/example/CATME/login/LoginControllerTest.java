@@ -25,7 +25,7 @@ public class LoginControllerTest {
 	}
 	
 	@Test
-	public void loginGetPost() {
+	public void loginPostTest() {
 		LoginController loginController= createDefaultLoginController();
 		final Model model = new ExtendedModelMap();
 		assertTrue(loginController.loginPost("nimda@dal.ca", "admin", model).equals("messageDisplay"));

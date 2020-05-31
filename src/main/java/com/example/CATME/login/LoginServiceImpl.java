@@ -1,22 +1,24 @@
 package com.example.CATME.login;
 
-import com.example.CATME.database.UserDB;
-import com.example.CATME.user.User;
-import com.example.CATME.user.UserLoginDAO;
+import org.springframework.stereotype.Service;
 
+import com.example.CATME.database.UserLogInDB;
+import com.example.CATME.user.User;
+
+@Service
 public class LoginServiceImpl implements LoginService {
 
 	private UserLoginDAO userLoginDAO;
-	private UserDB userDB;
+	private UserLogInDB userLogInDB;
 	
-	public LoginServiceImpl(UserLoginDAO userLoginDAO, UserDB userDB) {
+	public LoginServiceImpl(UserLoginDAO userLoginDAO, UserLogInDB userLogInDB) {
 		this.userLoginDAO = userLoginDAO;
-		this.userDB = userDB;
+		this.userLogInDB = userLogInDB;
 	}
 	
 	@Override
 	public User findUserByEmail(String email) {
-		return userLoginDAO.findUserByEmail(userDB, email);
+		return userLoginDAO.findUserByEmail(userLogInDB, email);
 	}
 
 }
