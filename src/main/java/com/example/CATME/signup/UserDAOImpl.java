@@ -21,18 +21,19 @@ public class UserDAOImpl implements UserDAO {
 		try {
 			Connection myConn = DriverManager.getConnection(
 
-					"jdbc:mysql://db-5308.cs.dal.ca:3306/CSCI5308_21_TEST?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+					"jdbc:mysql://localhost:3306/group21?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
 
-					"CSCI5308_21_TEST_USER", "CSCI5308_21_TEST_21529");
+					"root", "password");
 
 			Statement statement = myConn.createStatement();
 			Statement statement1 = myConn.createStatement();
 			System.out.println(user.getFirstname());
-			String query1 = "Insert into USER(user_id ,banner_id, first_name , last_name ,email,password) "
+			String query1 = "Insert into user(user_id ,banner_id, first_name , last_name ,username, password) "
 					+ "Values ('" + uuid + "', '" + user.getBannerId() + "','" + user.getFirstname() + "','"
 					+ user.getLastname() + "' , '" + user.getEmail() + "','" + user.getSetPassword() + "');";
 
-			String query2 = "Insert into ROLE(role_id,user_id,role) " + "Values ('" + rid + "' ,'" + uuid + "',1 );";
+			String str = "ROLE_GUEST";
+			String query2 = "Insert into authorities(auth_id,username,authority) " + "Values ('" + rid + "' ,'" + user.getEmail() + "','"  + str + "' );";
 
 			int resultSet1 = statement.executeUpdate(query1);
 			statement1.executeUpdate(query2);
