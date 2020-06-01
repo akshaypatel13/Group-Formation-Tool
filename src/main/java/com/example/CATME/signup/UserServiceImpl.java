@@ -1,6 +1,5 @@
 package com.example.CATME.signup;
 
-
 import com.example.CATME.database.UserSignUpDB;
 import com.example.CATME.user.User;
 
@@ -9,7 +8,7 @@ public class UserServiceImpl implements UserService {
 
 	UserDAO UserDAO;
 	UserSignUpDB UserSignUpDB;
-	
+
 	public UserServiceImpl(UserDAO UserDAO, UserSignUpDB UserSignUpDB) {
 		this.UserDAO = UserDAO;
 		this.UserSignUpDB = UserSignUpDB;
@@ -17,7 +16,7 @@ public class UserServiceImpl implements UserService {
 
 	public void register(User user) {
 
-		UserDAO.register(UserSignUpDB , user);
+		UserDAO.register(UserSignUpDB, user);
 	}
 
 }

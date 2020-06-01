@@ -19,9 +19,9 @@ public class MySQLConnection {
 		if(dbConnection == null) {
 		    try {
 				dbConnection = DriverManager.getConnection(
-						"jdbc:mysql://db-5308.cs.dal.ca/CSCI5308_21_TEST?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", 
-						"CSCI5308_21_TEST_USER", 
-						"CSCI5308_21_TEST_21529");
+						"jdbc:mysql://db-5308.cs.dal.ca/CSCI5308_21_DEVINT?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", 
+						"CSCI5308_21_DEVINT_USER", 
+						"CSCI5308_21_DEVINT_21168");
 				return dbConnection;
 			} catch (SQLException e) {
 				e.printStackTrace();

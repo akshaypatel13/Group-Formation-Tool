@@ -8,17 +8,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
 import com.example.CATME.database.UserSignUpDBImpl;
 import com.example.CATME.user.User;
 
 @Controller
-public class SignUpControllerImpl implements SignUpController{
+public class SignUpControllerImpl implements SignUpController {
 
 	UserService userService;
+
 	public SignUpControllerImpl() {
-		userService=new UserServiceImpl(new UserDAOImpl(),new UserSignUpDBImpl());
-		
+		userService = new UserServiceImpl(new UserDAOImpl(), new UserSignUpDBImpl());
+
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class SignUpControllerImpl implements SignUpController{
 	@PostMapping("/signup")
 	public String signupSubmit(@Valid User user, BindingResult bindingresult) {
 		if (bindingresult.hasErrors()) {
-            return "signup";
+			return "signup";
 		} else {
 			userService.register(user);
 			return "login";

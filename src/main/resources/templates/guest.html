@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{/css/signup.css}"/>
+<head>
+<title>Courses</title>
+</head>
+<body>
+<table>
+  <thead>
+    <tr>
+      <th>Course Name</th>
+      <th>Term</th>
+      <th>Year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="cr : ${course}">
+    	<td th:text="${cr[1]}">&nbsp;</td>
+    	<td th:text="${cr[2]}">&nbsp;</td>
+    	<td th:text="${cr[3]}">&nbsp;</td>
+      <!-- <td th:text="${cr.course_name}">&nbsp;</td>
+      <td th:text="${cr.term}">&nbsp;</td>
+      <td th:text="${cr.year}">&nbsp;</td> -->
+    </tr>
+  </tbody>
+</table>
+<table>
+  <thead>
+    <tr>
+      <th>Course Name</th>
+      <th>Term</th>
+      <th>Year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="cr : ${taCourse}">
+    	<td th:text="${cr[1]}">&nbsp;</td>
+    	<td th:text="${cr[2]}">&nbsp;</td>
+    	<td th:text="${cr[3]}">&nbsp;</td>
+      <!-- <td th:text="${cr.course_name}">&nbsp;</td>
+      <td th:text="${cr.term}">&nbsp;</td>
+      <td th:text="${cr.year}">&nbsp;</td> -->
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
