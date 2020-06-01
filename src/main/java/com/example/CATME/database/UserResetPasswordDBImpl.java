@@ -31,6 +31,7 @@ public class UserResetPasswordDBImpl implements UserResetPasswordDB {
 				user.setResetToken(myRs.getString("reset_token"));
 				return user;
 			}
+			mysql.closeConnection();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

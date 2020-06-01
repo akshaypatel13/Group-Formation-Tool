@@ -32,7 +32,7 @@ public class UserLogInDBImpl implements UserLogInDB{
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		} 
 		return null;
 	}
 

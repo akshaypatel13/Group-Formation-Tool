@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * MySQLConnection class for mysql instance.
@@ -41,10 +42,7 @@ public class MySQLConnection {
 	
 	public ResultSet selectQuery(String query) {
 	    try {
-	    	
-	    	ResultSet rs = getDBConnection().createStatement().executeQuery(query);
-	    	closeConnection();
-			return rs;
+	    	return getDBConnection().createStatement().executeQuery(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -53,9 +51,7 @@ public class MySQLConnection {
 	
 	public int updateQuery(String query) {
 	    try {
-	    	int rs = getDBConnection().createStatement().executeUpdate(query);
-	    	closeConnection();
-			return rs;
+	    	return getDBConnection().createStatement().executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
