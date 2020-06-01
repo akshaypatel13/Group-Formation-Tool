@@ -29,9 +29,22 @@ public class MySQLConnection {
 		return dbConnection;
 	  }
 	
+	public void closeConnection() {
+		if(dbConnection!=null) {
+			try {
+				dbConnection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public ResultSet selectQuery(String query) {
 	    try {
-			return getDBConnection().createStatement().executeQuery(query);
+	    	
+	    	ResultSet rs = getDBConnection().createStatement().executeQuery(query);
+	    	closeConnection();
+			return rs;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -40,7 +53,9 @@ public class MySQLConnection {
 	
 	public int updateQuery(String query) {
 	    try {
-			return getDBConnection().createStatement().executeUpdate(query);
+	    	int rs = getDBConnection().createStatement().executeUpdate(query);
+	    	closeConnection();
+			return rs;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

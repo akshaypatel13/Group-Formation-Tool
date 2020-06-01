@@ -78,7 +78,6 @@ public class ResetPasswordController {
 			@RequestParam("password") String password,
 			Model theModel) {
 		
-		System.out.println(resetToken);
 		User user = resetPasswordService.findUserByResetToken(resetToken);
 
 		if(user!=null) {
