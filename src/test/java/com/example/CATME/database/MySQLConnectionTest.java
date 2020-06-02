@@ -5,28 +5,32 @@ import static org.junit.Assert.assertTrue;
 import java.sql.ResultSet;
 
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Value;
+
+import com.example.CATME.user.User;
 /**
  * UserMySqlDBTest class for unit testing.
  * @author Ruize Nie
  * @version 1.0
  */
 public class MySQLConnectionTest {
-	
+
 	private MySQLConnection createMySQLConnection() {
 		return new MySQLConnection();
 	}
 	
 	@Test
-	public void getDBConnectionTest() {
+	public void getDBConnectionTest() throws Exception {
 		MySQLConnection mySQLConnection = createMySQLConnection();
-		assertNotNull(mySQLConnection.getDBConnection());
+		assertNotNull(mySQLConnection.getConnection());
+
 	}
 	
 	@Test
-	public void executeQueryTest() {
+	public void findUserTest() {
 		MySQLConnection mySQLConnection = createMySQLConnection();
-		ResultSet result = mySQLConnection.selectQuery("select * from USER");
-		assertNotNull(result);
+		User user = mySQLConnection.findUser("select * from USER where email = 'admin@dal.ca'");
+		assertNotNull(user);
 	}
 	
 	@Test
