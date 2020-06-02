@@ -1,8 +1,5 @@
 package com.example.CATME.database;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import org.springframework.stereotype.Repository;
 
 import com.example.CATME.user.User;
@@ -13,7 +10,7 @@ import com.example.CATME.user.User;
 @Repository
 public class UserResetPasswordDBImpl implements UserResetPasswordDB {
 	
-	private MySQLConnection mysql = new MySQLConnection();
+	private MySQLOperationForUser mysql = new MySQLOperationForUser();
 	
 	@Override
 	public User findUserByEmail(String email) {
@@ -27,7 +24,7 @@ public class UserResetPasswordDBImpl implements UserResetPasswordDB {
 		String userId = user.getUserId();
 		String resetToken = user.getResetToken();
 		String query = "UPDATE USER SET reset_token = '" + resetToken +"' WHERE user_id = '" + userId + "'";
-		mysql.updateQuery(query);
+		mysql.updateUser(query);
 
 	}
 
@@ -43,7 +40,7 @@ public class UserResetPasswordDBImpl implements UserResetPasswordDB {
 		String userId = user.getUserId();
 		String password = user.getPassword();
 		String query = "UPDATE USER SET password = '" + password +"' WHERE user_id = '" + userId + "'";
-		mysql.updateQuery(query);
+		mysql.updateUser(query);
 		
 	}
 

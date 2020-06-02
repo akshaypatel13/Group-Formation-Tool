@@ -2,12 +2,11 @@ package com.example.CATME.database;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import java.sql.ResultSet;
+
+import java.sql.Connection;
+import java.sql.Statement;
 
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Value;
-
-import com.example.CATME.user.User;
 /**
  * UserMySqlDBTest class for unit testing.
  * @author Ruize Nie
@@ -20,23 +19,21 @@ public class MySQLConnectionTest {
 	}
 	
 	@Test
-	public void getDBConnectionTest() throws Exception {
+	public void getConnectionTest() throws Exception {
 		MySQLConnection mySQLConnection = createMySQLConnection();
-		assertNotNull(mySQLConnection.getConnection());
+		Connection conn = mySQLConnection.getConnection();
+		assertNotNull(conn);
+		Statement st = conn.createStatement();
+		mySQLConnection.closeConnection(conn, st);
+	}
+	
+	@Test
+	public void closeConnectionTest() throws Exception {
+		MySQLConnection mySQLConnection = createMySQLConnection();
+		Connection conn = mySQLConnection.getConnection();
+		Statement st = conn.createStatement();
+		mySQLConnection.closeConnection(conn, st);
+		assertTrue(conn.isClosed());
+	}
 
-	}
-	
-	@Test
-	public void findUserTest() {
-		MySQLConnection mySQLConnection = createMySQLConnection();
-		User user = mySQLConnection.findUser("select * from USER where email = 'admin@dal.ca'");
-		assertNotNull(user);
-	}
-	
-	@Test
-	public void updateQueryTest() {
-		MySQLConnection mySQLConnection = createMySQLConnection();
-		int result = mySQLConnection.updateQuery(" UPDATE USER SET first_name = 'admin' WHERE email = 'admin@dal.ca'");
-		assertTrue(result != 0);
-	}
 }

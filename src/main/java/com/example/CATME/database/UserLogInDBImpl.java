@@ -1,9 +1,5 @@
 package com.example.CATME.database;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import org.springframework.stereotype.Repository;
 
 import com.example.CATME.user.User;
@@ -17,7 +13,7 @@ import com.example.CATME.user.User;
 @Repository
 public class UserLogInDBImpl implements UserLogInDB{
 
-	private MySQLConnection mysql = new MySQLConnection();
+	private MySQLOperationForUser mysql = new MySQLOperationForUser();
 
 	@Override
 	public User findUserByEmail(String email){
