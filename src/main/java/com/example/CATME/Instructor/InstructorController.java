@@ -1,6 +1,8 @@
 package com.example.CATME.Instructor;
 
- public interface InstructorController {
+import com.example.CATME.signup.UserService;
 
-    boolean addStudents(String[] details);
+public interface InstructorController {
+
+    boolean addStudents(String[] details, UserService userService);
 }

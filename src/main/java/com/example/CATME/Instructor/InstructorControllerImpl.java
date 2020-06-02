@@ -4,6 +4,7 @@ import com.example.CATME.passwordGenerator.PasswordGenerator;
 import com.example.CATME.passwordGenerator.PasswordGeneratorImpl;
 import com.example.CATME.signup.User;
 import com.example.CATME.signup.UserService;
+import com.example.CATME.signup.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,14 +21,18 @@ import java.io.Reader;
 @Controller
 public class InstructorControllerImpl implements InstructorController {
 
-    @Autowired
     UserService userService;
 
-    @Autowired
     PasswordGenerator passwordGenerator;
 
+    public InstructorControllerImpl(UserService userService, PasswordGenerator passwordGenerator){
+        this.userService = userService;
+        this.passwordGenerator = passwordGenerator;
+    }
+
     @GetMapping("/instructor")
-    public String instructor(){
+    public String instructor(Model model){
+        model.addAttribute("status", true);
         return "instructor";
     }
 
@@ -45,17 +50,20 @@ public class InstructorControllerImpl implements InstructorController {
                 while( (row = reader.readLine()) != null){
 
                     String[] data = row.split(",");
-                    addStudents(data);
+                    addStudents(data, userService);
                 }
+                model.addAttribute("status", true);
             } catch (Exception e) {
                 e.printStackTrace();
+                model.addAttribute("message", "An error occurred while processing the CSV file.");
+                model.addAttribute("status", false);
             }
         }
         return "instructor";
     }
 
     @Override
-    public boolean addStudents(String[] userDetails) {
+    public boolean addStudents(String[] userDetails, UserService userService) {
 
         User user = new User();
         user.setEmail(userDetails[0]);

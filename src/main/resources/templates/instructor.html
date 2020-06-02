@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Instructor</title>
-</head>
-<body>
-<p>Click on the "Choose File" button to upload a file:</p>
-
-<form th:action="@{/instructor}"  method="post" enctype="multipart/form-data">
-    <input type="file" accept=".csv" id="file" name="file">
-    <input type="submit">
-</form>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Instructor</title>
+    </head>
+    <body>
+        <div class="container">
+            <p>Click on the "Choose File" button to upload a file:</p>
+            <form th:action="@{/instructor}"  method="post" enctype="multipart/form-data">
+                <input type="file" accept=".csv" id="file" name="file">
+                <button type="submit">Add Students</button>
+                <div  role="alert" th:if="${!status}">
+                    <strong>Error:</strong>
+                    <span th:text="${message}"></span>
+                </div>
+            </form>
+        </div>
+    </body>
 </html>

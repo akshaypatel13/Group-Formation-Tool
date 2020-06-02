@@ -21,9 +21,9 @@ public class UserDAOImpl implements UserDAO {
 		try {
 			Connection myConn = DriverManager.getConnection(
 
-					"jdbc:mysql://localhost:3306/group21?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+					"jdbc:mysql://db-5308.cs.dal.ca/CSCI5308_21_TEST?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
 
-					"root", "password");
+					"CSCI5308_21_TEST_USER", "CSCI5308_21_TEST_21529");
 
 			Statement statement = myConn.createStatement();
 			Statement statement1 = myConn.createStatement();
