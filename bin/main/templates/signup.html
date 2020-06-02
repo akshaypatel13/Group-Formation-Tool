@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{/css/signup.css}"/>
+<head>
+<title>Welcome To SignUp Page</title>
+</head>
+<body>
+<form action="#" th:action="@{/signup}" th:object="${user}" method="post">
+
+ <h2> Sign Up </h2>
+
+  <div class="container">
+    <label for="fname"><b>FirstName</b></label>
+    <input type="text" placeholder="Enter Firstname"  id="fname" name="fname"  th:field="*{firstname}" required>
+    
+    <label for="lname"><b>LastName</b></label>
+    <input type="text" placeholder="Enter Lastname"  id="lname" name="lname" th:field="*{lastname}"required>
+    
+    <label for="bid"><b>BannerId</b></label>
+    <input type="text" placeholder="Enter BannerId"  id="bid" name="bid" th:field="*{bannerId}"required>
+    
+     <label for="email"><b>Email</b></label>
+    <input type="email" placeholder="Enter Email"  id="email" name="email" th:field="*{email}" required>
+ 
+    <label for="psw"><b>Set Password</b></label>
+    <input type="password" placeholder="Set Password" name="psw" th:field="*{setPassword}" required>
+    
+    <label for="psw"><b>Confirm Password</b></label>
+    <input type="password" placeholder="Confirm Password" name="psw" th:field="*{confirmPassword}"required>
+    <p class="error" th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" th:text="${message}"></p>
+    <ul class="text-danger" th:each="error: ${#fields.errors('confirmPassword')}">
+        <li th:each="message : ${error.split(',')}">
+            <p class="error-message" th:text="${message}"></p>
+        </li>
+    </ul>
+    
+    <div></div>
+    
+    
+    
+   
+	
+    <button type="submit">Submit</button>
+
+  </div>
+
+
+</form>
+
+
+
+</body>
+</html>

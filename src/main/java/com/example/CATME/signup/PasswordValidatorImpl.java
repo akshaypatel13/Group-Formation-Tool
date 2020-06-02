@@ -3,7 +3,6 @@ package com.example.CATME.signup;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-
 public class PasswordValidatorImpl implements ConstraintValidator<PasswordValidator, Object> {
 
 	@Override
