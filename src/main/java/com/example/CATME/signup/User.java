@@ -3,14 +3,13 @@ package com.example.CATME.signup;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
 
 @PasswordValidator
 @EmailValidator
 
 public class User {
 
+	
 	@NotNull
 	@NotEmpty
 	private String firstname;
@@ -23,9 +22,18 @@ public class User {
 	@NotEmpty
 	private String bannerId;
 
+	public String getBannerId() {
+		return bannerId;
+	}
+
+	public void setBannerId(String bannerId) {
+		this.bannerId = bannerId;
+	}
+
 	@NotNull
 	@NotEmpty
 	@Email
+	
 	private String email;
 	
 	@NotNull
@@ -35,14 +43,6 @@ public class User {
 	@NotNull
 	@NotEmpty
 	private String confirmPassword;
-
-	public String getBannerId() {
-		return bannerId;
-	}
-
-	public void setBannerId(String bannerId) {
-		this.bannerId = bannerId;
-	}
 
 	public String getFirstname() {
 		return firstname;
