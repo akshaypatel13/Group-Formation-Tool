@@ -10,4 +10,6 @@ public interface LandingPageService {
 
 	public List<ArrayList<String>> getTACourses(String email);
 
+	public List<ArrayList<String>> getInstructorCourses(String email);
+
 }

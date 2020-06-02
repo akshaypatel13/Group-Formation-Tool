@@ -12,4 +12,6 @@ public interface LandingPageDAO {
 
 	public List<ArrayList<String>> getTACourses(String email, CoursesDB coursesDB);
 
+	public List<ArrayList<String>> getInstructorCourses(String email, CoursesDB coursesDB);
+
 }

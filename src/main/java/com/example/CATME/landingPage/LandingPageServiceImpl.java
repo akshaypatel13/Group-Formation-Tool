@@ -28,7 +28,13 @@ public class LandingPageServiceImpl implements LandingPageService {
 
 	@Override
 	public List<ArrayList<String>> getTACourses(String email) {
-		return landingPageDAO.getStudentCourses(email, coursesDB);
+		return landingPageDAO.getTACourses(email, coursesDB);
+	}
+
+	@Override
+	public List<ArrayList<String>> getInstructorCourses(String email) {
+		return landingPageDAO.getInstructorCourses(email, coursesDB);
+
 	}
 
 }

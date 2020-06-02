@@ -22,4 +22,9 @@ public class LandingPageDAOImpl implements LandingPageDAO {
 		return coursesDB.getTACourses(email);
 	}
 
+	@Override
+	public List<ArrayList<String>> getInstructorCourses(String email, CoursesDB coursesDB) {
+		return coursesDB.getInstructorCourses(email);
+	}
+
 }

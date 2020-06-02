@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class CoursesDBImpl implements CoursesDB {
 	private MySQLConnection myConn = new MySQLConnection();
 
@@ -56,7 +55,7 @@ public class CoursesDBImpl implements CoursesDB {
 	}
 
 	public List<ArrayList<String>> getTACourses(String email) {
-		List<ArrayList<String>> taCourses = new ArrayList<ArrayList<String>>();  
+		List<ArrayList<String>> taCourses = new ArrayList<ArrayList<String>>();
 		// SQL query to fetch course data for given user email
 		String query = "with user_data as (Select course_id from ROLE where user_id = (select user_id from USER where email ='"
 				+ email + "' and role = 3))" + "select * from COURSE join user_data using (course_id);";
@@ -68,7 +67,7 @@ public class CoursesDBImpl implements CoursesDB {
 				course.add(myRs.getString(2));
 				course.add(myRs.getString(3));
 				course.add(myRs.getString(4));
-			
+
 				taCourses.add(course);
 			}
 		} catch (SQLException e) {
@@ -76,6 +75,30 @@ public class CoursesDBImpl implements CoursesDB {
 		}
 		System.out.println(taCourses);
 		return taCourses;
+
+	}
+
+	public List<ArrayList<String>> getInstructorCourses(String email) {
+		List<ArrayList<String>> insCourses = new ArrayList<ArrayList<String>>();
+		// SQL query to fetch course data for given user email
+		String query = "with ins_data as (Select course_id from ROLE where user_id = (select user_id from USER where email ='"
+				+ email + "' and role = 4))" + "select * from COURSE join ins_data using (course_id);";
+		ResultSet myRs = myConn.selectQuery(query);
+		try {
+			while (myRs.next()) {
+				ArrayList<String> course = new ArrayList<String>();
+				course.add(myRs.getString(1));
+				course.add(myRs.getString(2));
+				course.add(myRs.getString(3));
+				course.add(myRs.getString(4));
+
+				insCourses.add(course);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(insCourses);
+		return insCourses;
 
 	}
 
