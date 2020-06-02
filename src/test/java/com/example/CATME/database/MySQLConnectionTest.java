@@ -2,7 +2,9 @@ package com.example.CATME.database;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import java.sql.ResultSet;
+
+import java.sql.Connection;
+import java.sql.Statement;
 
 import org.junit.Test;
 /**
@@ -11,28 +13,27 @@ import org.junit.Test;
  * @version 1.0
  */
 public class MySQLConnectionTest {
-	
+
 	private MySQLConnection createMySQLConnection() {
 		return new MySQLConnection();
 	}
 	
 	@Test
-	public void getDBConnectionTest() {
+	public void getConnectionTest() throws Exception {
 		MySQLConnection mySQLConnection = createMySQLConnection();
-		assertNotNull(mySQLConnection.getDBConnection());
+		Connection conn = mySQLConnection.getConnection();
+		assertNotNull(conn);
+		Statement st = conn.createStatement();
+		mySQLConnection.closeConnection(conn, st);
 	}
 	
 	@Test
-	public void executeQueryTest() {
+	public void closeConnectionTest() throws Exception {
 		MySQLConnection mySQLConnection = createMySQLConnection();
-		ResultSet result = mySQLConnection.selectQuery("select * from USER");
-		assertNotNull(result);
+		Connection conn = mySQLConnection.getConnection();
+		Statement st = conn.createStatement();
+		mySQLConnection.closeConnection(conn, st);
+		assertTrue(conn.isClosed());
 	}
-	
-	@Test
-	public void updateQueryTest() {
-		MySQLConnection mySQLConnection = createMySQLConnection();
-		int result = mySQLConnection.updateQuery(" UPDATE USER SET first_name = 'admin' WHERE email = 'admin@dal.ca'");
-		assertTrue(result != 0);
-	}
+
 }

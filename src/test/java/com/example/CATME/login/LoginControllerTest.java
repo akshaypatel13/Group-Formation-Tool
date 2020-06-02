@@ -29,6 +29,6 @@ public class LoginControllerTest {
 		LoginController loginController= createDefaultLoginController();
 		final Model model = new ExtendedModelMap();
 		assertTrue(loginController.loginPost("nimda@dal.ca", "admin", model).equals("messageDisplay"));
-		assertTrue(loginController.loginPost("admin@dal.ca", "admin", model).equals("homePage"));
+		assertTrue(loginController.loginPost("admin@dal.ca", "admin", model).equals("admin"));
 	}
 }
