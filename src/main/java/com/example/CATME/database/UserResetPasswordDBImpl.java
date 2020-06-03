@@ -14,7 +14,7 @@ public class UserResetPasswordDBImpl implements UserResetPasswordDB {
 	
 	@Override
 	public User findUserByEmail(String email) {
-		String query = "SELECT * FROM USER WHERE username = '" + email +"'";
+		String query = "SELECT * FROM user WHERE username = '" + email +"'";
 		return mysql.findUser(query);
 	}
 
@@ -23,14 +23,14 @@ public class UserResetPasswordDBImpl implements UserResetPasswordDB {
 		
 		String userId = user.getUserId();
 		String resetToken = user.getResetToken();
-		String query = "UPDATE USER SET reset_token = '" + resetToken +"' WHERE user_id = '" + userId + "'";
+		String query = "UPDATE user SET reset_token = '" + resetToken +"' WHERE user_id = '" + userId + "'";
 		mysql.updateUser(query);
 
 	}
 
 	@Override
 	public User findUserByResetToken(String resetToken) {
-		String query = "SELECT * FROM USER WHERE reset_token = '" + resetToken +"'";
+		String query = "SELECT * FROM user WHERE reset_token = '" + resetToken +"'";
 		return mysql.findUser(query);
 	}
 
@@ -39,7 +39,7 @@ public class UserResetPasswordDBImpl implements UserResetPasswordDB {
 		
 		String userId = user.getUserId();
 		String password = user.getPassword();
-		String query = "UPDATE USER SET password = '" + password +"' WHERE user_id = '" + userId + "'";
+		String query = "UPDATE user SET password = '" + password +"' WHERE user_id = '" + userId + "'";
 		mysql.updateUser(query);
 		
 	}

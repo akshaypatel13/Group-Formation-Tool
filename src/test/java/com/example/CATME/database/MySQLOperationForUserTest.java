@@ -16,14 +16,14 @@ public class MySQLOperationForUserTest {
 	@Test
 	public void findUserTest() {
 		MySQLOperationForUser mySQLOperationForUser = createMySQLOperationForUser();
-		User user = mySQLOperationForUser.findUser("select * from USER where email = 'admin@dal.ca'");
+		User user = mySQLOperationForUser.findUser("select * from user where username = 'admin@gmail.com'");
 		assertNotNull(user);
 	}
 	
 	@Test
 	public void updateQueryTest() {
 		MySQLOperationForUser mySQLOperationForUser = createMySQLOperationForUser();
-		int result = mySQLOperationForUser.updateUser(" UPDATE USER SET first_name = 'admin' WHERE email = 'admin@dal.ca'");
+		int result = mySQLOperationForUser.updateUser(" UPDATE user SET first_name = 'admin' WHERE username = 'admin@gmail.com'");
 		assertTrue(result != 0);
 	}
 }
