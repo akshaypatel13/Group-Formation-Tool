@@ -19,14 +19,14 @@ public class UserResetPasswordDBImplTest {
 	@Test
 	public void findUserByEmailTest() {
 		UserResetPasswordDBImpl userResetPasswordDBImpl = createDefaultMySqlDB();
-		User u = userResetPasswordDBImpl.findUserByEmail("admin@dal.ca");
+		User u = userResetPasswordDBImpl.findUserByEmail("admin@gmail.com");
 		assertNotNull(u);
 	}
 	
 	@Test
 	public void saveUserResetTokenTest() {
 		UserResetPasswordDBImpl userResetPasswordDBImpl = createDefaultMySqlDB();
-		User u = userResetPasswordDBImpl.findUserByEmail("admin@dal.ca");
+		User u = userResetPasswordDBImpl.findUserByEmail("admin@gmail.com");
 		u.setResetToken("test_reset_token");
 		userResetPasswordDBImpl.saveUserResetToken(u);
 		u = userResetPasswordDBImpl.findUserByResetToken("test_reset_token");
@@ -36,7 +36,8 @@ public class UserResetPasswordDBImplTest {
 	@Test
 	public void findUserByResetTokenTest() {
 		UserResetPasswordDBImpl userResetPasswordDBImpl = createDefaultMySqlDB();
-		User u = userResetPasswordDBImpl.findUserByEmail("admin@dal.ca");
+		User u = userResetPasswordDBImpl.findUserByEmail("admin@gmail.com");
+		System.out.println(u);
 		u.setResetToken("test_reset_token");
 		String resetToken = "test_reset_token";
 		u = userResetPasswordDBImpl.findUserByResetToken(resetToken);
@@ -46,7 +47,7 @@ public class UserResetPasswordDBImplTest {
 	@Test
 	public void saveUserPasswordTest() {
 		UserResetPasswordDBImpl userResetPasswordDBImpl = createDefaultMySqlDB();
-		User u = userResetPasswordDBImpl.findUserByEmail("admin@dal.ca");	
+		User u = userResetPasswordDBImpl.findUserByEmail("admin@gmail.com");	
 		u.setPassword("admin");
 		userResetPasswordDBImpl.saveUserPassword(u);
 		assertTrue(u.getPassword().equals("admin"));
