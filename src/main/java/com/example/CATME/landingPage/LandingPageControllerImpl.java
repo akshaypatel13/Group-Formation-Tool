@@ -25,7 +25,6 @@ public class LandingPageControllerImpl implements LandingPageController {
 		landingPageService = new LandingPageServiceImpl(new LandingPageDAOImpl(), new CoursesDBImpl());
 	}
 
-
 	@Override
 	@GetMapping("/")
 	public String landingView(Model model) {
@@ -34,9 +33,6 @@ public class LandingPageControllerImpl implements LandingPageController {
 		UserDetails user = (UserDetails) auth.getPrincipal();
 		String userName = user.getUsername();
 		userRole = (Set<GrantedAuthority>) user.getAuthorities();
-
-		System.out.println(userName);
-		System.out.println(userRole);
 
 		if (userRole.contains(new SimpleGrantedAuthority("ROLE_INSTRUCTOR"))) {
 			model.addAttribute("course", landingPageService.getInstructorCourses("ak@gmail.com"));
