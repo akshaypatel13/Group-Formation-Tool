@@ -1,6 +1,6 @@
 package com.example.CATME.adminTest;
 
-
+import com.example.CATME.admin.*;
 import com.example.CATME.admin.courseModel;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

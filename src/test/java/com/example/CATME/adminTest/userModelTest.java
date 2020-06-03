@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.Assert.assertTrue;
+import com.example.CATME.admin.*;
 
 @SpringBootTest
 public class userModelTest {
