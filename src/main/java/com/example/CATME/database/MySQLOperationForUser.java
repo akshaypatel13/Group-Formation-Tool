@@ -25,7 +25,7 @@ public class MySQLOperationForUser extends MySQLConnection {
 				user.setBannerId(myRs.getString("banner_id"));
 				user.setFirstName(myRs.getString("first_name"));
 				user.setLastName(myRs.getString("last_name"));
-				user.setEmail(myRs.getString("email"));
+				user.setEmail(myRs.getString("username"));
 				user.setPassword(myRs.getString("password"));
 				user.setResetToken(myRs.getString("reset_token"));
 				return user;

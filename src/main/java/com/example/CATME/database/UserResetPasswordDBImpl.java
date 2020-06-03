@@ -14,7 +14,7 @@ public class UserResetPasswordDBImpl implements UserResetPasswordDB {
 	
 	@Override
 	public User findUserByEmail(String email) {
-		String query = "SELECT * FROM USER WHERE email = '" + email +"'";
+		String query = "SELECT * FROM USER WHERE username = '" + email +"'";
 		return mysql.findUser(query);
 	}
 
