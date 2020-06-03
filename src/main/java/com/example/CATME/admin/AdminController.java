@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+
 
 @Controller
 public class AdminController {
@@ -14,23 +16,31 @@ public class AdminController {
 
     @RequestMapping("/admin")
     public String adminPage(Model model) {
-
-        model.addAttribute("courses",course_service.getCourses());
+        ArrayList<courseModel> courses=course_service.getCourses();
+        if(courses.isEmpty()){
+            model.addAttribute("status","No Courses Present in the DB");
+        }else {
+            model.addAttribute("courses", courses);
+        }
         return "admin";
     }
 
     @RequestMapping("/searchBanner")
     public String searchBannerId(Model model,@RequestParam(name="bannerid") String banner_id){
-        System.out.print(banner_id);
-        model.addAttribute("users",course_service.searchInstructor(banner_id));
-        return "redirect:addInstructor";
+        userModel user=new userModel();
+        if(user==null){
+            model.addAttribute("status","No Users found with given BannerID.");
+        }else {
+            model.addAttribute("users", user);
+        }
+        return "addInstructor";
     }
     @RequestMapping("/deleteCourse")
     public String deleteCourse(Model model,@RequestParam(name="course_id") int course_id) {
-
+        System.out.print(course_service.deleteCourse(course_id));
         model.addAttribute("status", course_service.deleteCourse(course_id));
         model.addAttribute("courses",course_service.getCourses());
-        return "redirect:admin";
+        return "admin";
     }
 
     @RequestMapping("/addInstructor")
@@ -44,7 +54,7 @@ public class AdminController {
     public String insertInstructor(Model model,@RequestParam(name="course_id") int course_id, @RequestParam(name="username") String username) {
         model.addAttribute("status", course_service.insertInstructor(course_id,username));
         model.addAttribute("courses",course_service.getCourses());
-        return "redirect:admin";
+        return "admin";
     }
 
     @RequestMapping("/insertCourse")
@@ -53,7 +63,7 @@ public class AdminController {
                             @RequestParam(name="year") int year) {
         model.addAttribute("status", course_service.insertCourse(course_code,course_name, term, year));
         model.addAttribute("courses",course_service.getCourses());
-        return "redirect:admin";
+        return "admin";
     }
 
 }

@@ -33,6 +33,7 @@ public class courseServiceTest {
         course.setCourse_name("Cloud Computing");
         course.setTerm("summer");
         course.setYear(2020);
+        courses.add(course);
         given(dao.getAllCourses()).willReturn(courses);
         ArrayList<courseModel> expected_courses=service.getCourses();
         assertEquals(expected_courses,courses);

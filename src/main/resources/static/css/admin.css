@@ -51,7 +51,7 @@ display: inline-block;
 	border: 3px solid #f1f1f1;
     position: absolute;
     left: 10;
-    top: 0;
+    top: 45px;
     padding: 10px;
     margin: 20px auto;
     width: 300px;
@@ -61,7 +61,7 @@ display: inline-block;
 
 .container1{
   position: absolute;
-  top: 0;
+  top: 45px;
   left:400px;
   right:20px;
   padding: 6px;

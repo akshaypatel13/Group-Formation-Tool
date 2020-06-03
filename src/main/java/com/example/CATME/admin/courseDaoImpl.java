@@ -8,17 +8,14 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import com.example.CATME.database.MySQLConnection;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import com.example.CATME.DatabaseConnection.DBConnectionImpl;
 
-import static com.example.CATME.DatabaseConnection.DBConnectionImpl.connection;
 
 
 public class courseDaoImpl implements courseDao{
 
 
-	DBConnectionImpl db;
+
 	Connection connection;
 	
 	@Override
