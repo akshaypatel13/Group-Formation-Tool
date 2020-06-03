@@ -1,7 +1,5 @@
 package com.example.CATME.landingPage;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.security.core.Authentication;
@@ -32,17 +30,19 @@ public class LandingPageControllerImpl implements LandingPageController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserDetails user = (UserDetails) auth.getPrincipal();
 		String userName = user.getUsername();
+		System.out.println(userName);
 		userRole = (Set<GrantedAuthority>) user.getAuthorities();
+		System.out.println(userRole);
 
 		if (userRole.contains(new SimpleGrantedAuthority("ROLE_INSTRUCTOR"))) {
-			model.addAttribute("course", landingPageService.getInstructorCourses("ak@gmail.com"));
+			model.addAttribute("course", landingPageService.getInstructorCourses(userName));
 			return ("instructor");
 		} else if (userRole.contains(new SimpleGrantedAuthority("ROLE_TA"))) {
-			model.addAttribute("course", landingPageService.getStudentCourses("ta@gmail.com"));
-			model.addAttribute("taCourse", landingPageService.getTACourses("ta@gmail.com"));
+			model.addAttribute("course", landingPageService.getStudentCourses(userName));
+			model.addAttribute("taCourse", landingPageService.getTACourses(userName));
 			return ("ta");
 		} else if (userRole.contains(new SimpleGrantedAuthority("ROLE_STUDENT"))) {
-			model.addAttribute("course", landingPageService.getStudentCourses("student@gmail.com"));
+			model.addAttribute("course", landingPageService.getStudentCourses(userName));
 			return ("student");
 		} else {
 			model.addAttribute("course", landingPageService.getAllCourses());
