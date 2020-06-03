@@ -22,7 +22,7 @@ public class UserSignUpDBImplTest {
 
 		// Then
 		verify(userSignUpDBImpl).insertGuestUser(user);
-		
+
 
 	}
 
