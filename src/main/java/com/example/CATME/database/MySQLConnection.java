@@ -15,32 +15,22 @@ import com.example.CATME.user.User;
  * @version 1.0
  */
 public class MySQLConnection {
+
+
+//	private Connection dbConnection;
+
+	private static String dbURL = "jdbc:mysql://db-5308.cs.dal.ca/CSCI5308_21_TEST?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	private static String dbUserName = "CSCI5308_21_TEST_USER";
+	private static String dbPassword = "CSCI5308_21_TEST_21529";
 	
-	private Connection dbConnection;
-	
-	public Connection getDBConnection() {
-		if(dbConnection == null) {
-		    try {
-				dbConnection = DriverManager.getConnection(
-						"jdbc:mysql://db-5308.cs.dal.ca/CSCI5308_21_DEVINT?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", 
-						"CSCI5308_21_DEVINT_USER", 
-						"CSCI5308_21_DEVINT_21168");
-				return dbConnection;
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}	
-		}
-		return dbConnection;
-	  }
-	
-	public void closeConnection() {
-		if(dbConnection!=null) {
-			try {
-				dbConnection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+//	private static String dbURL = "jdbc:mysql://db-5308.cs.dal.ca/CSCI5308_21_DEVINT?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+//	private static String dbUserName = "CSCI5308_21_DEVINT_USER";
+//	private static String dbPassword = "CSCI5308_21_DEVINT_21168";
+
+	// static method for get connection
+	public static Connection getConnection() throws Exception {
+		Connection conn = DriverManager.getConnection(dbURL, dbUserName, dbPassword);
+		return conn;
 	}
 
 	// static method for close connection

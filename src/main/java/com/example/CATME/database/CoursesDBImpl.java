@@ -1,21 +1,28 @@
 package com.example.CATME.database;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CoursesDBImpl implements CoursesDB {
-	private MySQLConnection myConn = new MySQLConnection();
 
 	@Override
 	public List<ArrayList<String>> getAllCourses() {
 
 		List<ArrayList<String>> courses = new ArrayList<ArrayList<String>>();
 
-		String query = "SELECT * FROM COURSE";
-		ResultSet myRs = myConn.selectQuery(query);
+		String query = "SELECT * FROM course";
+		Connection conn = null;
+		Statement st = null;
 		try {
+			// step 1: object connection from Mysql Connection util
+			conn = MySQLConnection.getConnection();
+			// step 2: create the statement to run the sql
+			st = conn.createStatement();
+			// step 3: run the sql
+			ResultSet myRs = st.executeQuery(query);
 			while (myRs.next()) {
 				ArrayList<String> course = new ArrayList<String>();
 				course.add(myRs.getString(1));
@@ -24,8 +31,11 @@ public class CoursesDBImpl implements CoursesDB {
 				course.add(myRs.getString(4));
 				courses.add(course);
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			// step 6: close the connection
+			MySQLConnection.closeConnection(conn, st);
 		}
 		System.out.println(courses);
 		return courses;
@@ -33,11 +43,18 @@ public class CoursesDBImpl implements CoursesDB {
 
 	public List<ArrayList<String>> getStudentCourses(String email) {
 		List<ArrayList<String>> courses = new ArrayList<ArrayList<String>>();
-
-		String query = "with user_data as (Select course_id from ROLE where user_id = (select user_id from USER where email ='"
-				+ email + " ' and role = 2 ))" + "select * from COURSE join user_data using (course_id);";
-		ResultSet myRs = myConn.selectQuery(query);
+		Connection conn = null;
+		Statement st = null;
+		String query = "with course_data as (Select course_id from authorities where username= '"+email
+				+"' and authority = 'ROLE_STUDENT')"+
+				"select * from course join course_data using (course_id);";
 		try {
+			// step 1: object connection from Mysql Connection util
+			conn = MySQLConnection.getConnection();
+			// step 2: create the statement to run the sql
+			st = conn.createStatement();
+			// step 3: run the sql
+			ResultSet myRs = st.executeQuery(query);
 			while (myRs.next()) {
 				ArrayList<String> course = new ArrayList<String>();
 				course.add(myRs.getString(1));
@@ -46,21 +63,28 @@ public class CoursesDBImpl implements CoursesDB {
 				course.add(myRs.getString(4));
 				courses.add(course);
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		System.out.println(courses);
 		return courses;
-
 	}
 
 	public List<ArrayList<String>> getTACourses(String email) {
 		List<ArrayList<String>> taCourses = new ArrayList<ArrayList<String>>();
 		// SQL query to fetch course data for given user email
-		String query = "with user_data as (Select course_id from ROLE where user_id = (select user_id from USER where email ='"
-				+ email + "' and role = 3))" + "select * from COURSE join user_data using (course_id);";
-		ResultSet myRs = myConn.selectQuery(query);
+		String query = "with course_data as (Select course_id from authorities where username= '"+email
+				+"' and authority = 'ROLE_TA')"+
+				"select * from course join course_data using (course_id);";
+		Connection conn = null;
+		Statement st = null;
 		try {
+			// step 1: object connection from Mysql Connection util
+			conn = MySQLConnection.getConnection();
+			// step 2: create the statement to run the sql
+			st = conn.createStatement();
+			// step 3: run the sql
+			ResultSet myRs = st.executeQuery(query);
 			while (myRs.next()) {
 				ArrayList<String> course = new ArrayList<String>();
 				course.add(myRs.getString(1));
@@ -70,7 +94,7 @@ public class CoursesDBImpl implements CoursesDB {
 
 				taCourses.add(course);
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		System.out.println(taCourses);
@@ -81,10 +105,18 @@ public class CoursesDBImpl implements CoursesDB {
 	public List<ArrayList<String>> getInstructorCourses(String email) {
 		List<ArrayList<String>> insCourses = new ArrayList<ArrayList<String>>();
 		// SQL query to fetch course data for given user email
-		String query = "with ins_data as (Select course_id from ROLE where user_id = (select user_id from USER where email ='"
-				+ email + "' and role = 4))" + "select * from COURSE join ins_data using (course_id);";
-		ResultSet myRs = myConn.selectQuery(query);
+		String query = "with course_data as (Select course_id from authorities where username= '"+email+"'" + 
+				"and authority = 'ROLE_INSTRUCTOR')" + 
+				"select * from course join course_data using (course_id);";
+		Connection conn = null;
+		Statement st = null;
 		try {
+			// step 1: object connection from Mysql Connection util
+			conn = MySQLConnection.getConnection();
+			// step 2: create the statement to run the sql
+			st = conn.createStatement();
+			// step 3: run the sql
+			ResultSet myRs = st.executeQuery(query);
 			while (myRs.next()) {
 				ArrayList<String> course = new ArrayList<String>();
 				course.add(myRs.getString(1));
@@ -94,12 +126,11 @@ public class CoursesDBImpl implements CoursesDB {
 
 				insCourses.add(course);
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		System.out.println(insCourses);
 		return insCourses;
-
 	}
 
 }

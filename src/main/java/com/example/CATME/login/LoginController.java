@@ -1,6 +1,5 @@
 package com.example.CATME.login;
 
-import com.example.CATME.signup.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

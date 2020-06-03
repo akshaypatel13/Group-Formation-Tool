@@ -1,8 +1,12 @@
 package com.example.CATME.Instructor;
 
+import com.example.CATME.database.UserSignUpDBImpl;
 import com.example.CATME.passwordGenerator.PasswordGenerator;
-import com.example.CATME.signup.User;
-import com.example.CATME.signup.UserService;
+import com.example.CATME.signup.UserSignUpDAOImpl;
+import com.example.CATME.signup.UserSignUpService;
+import com.example.CATME.signup.UserSignUpServiceImpl;
+import com.example.CATME.user.User;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,12 +20,12 @@ import java.io.InputStreamReader;
 @Controller
 public class InstructorControllerImpl implements InstructorController {
 
-    UserService userService;
+	UserSignUpService userService;
 
     PasswordGenerator passwordGenerator;
 
-    public InstructorControllerImpl(UserService userService, PasswordGenerator passwordGenerator){
-        this.userService = userService;
+    public InstructorControllerImpl(PasswordGenerator passwordGenerator){
+        this.userService = new UserSignUpServiceImpl(new UserSignUpDAOImpl(), new UserSignUpDBImpl());
         this.passwordGenerator = passwordGenerator;
     }
 
@@ -45,7 +49,7 @@ public class InstructorControllerImpl implements InstructorController {
                 while( (row = reader.readLine()) != null){
 
                     String[] data = row.split(",");
-                    addStudents(data, userService);
+                    addStudents(data, this.userService);
                 }
                 model.addAttribute("status", true);
             } catch (Exception e) {
@@ -58,16 +62,16 @@ public class InstructorControllerImpl implements InstructorController {
     }
 
     @Override
-    public boolean addStudents(String[] userDetails, UserService userService) {
+    public boolean addStudents(String[] userDetails, UserSignUpService userService) {
 
         User user = new User();
         user.setEmail(userDetails[0]);
         user.setBannerId(userDetails[1]);
-        user.setLastname(userDetails[2]);
-        user.setFirstname(userDetails[3]);
+        user.setLastName(userDetails[2]);
+        user.setFirstName(userDetails[3]);
 
-        user.setSetPassword(passwordGenerator.generatePassword());
-        userService.register(user);
+        user.setPassword(passwordGenerator.generatePassword());
+        this.userService.register(user);
         return true;
     }
 }
