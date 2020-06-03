@@ -1,13 +1,14 @@
 package com.example.CATME.instructor;
 
-import com.example.CATME.signup.User;
-import com.example.CATME.signup.UserService;
 
-public class UserServiceMock implements UserService {
+import com.example.CATME.signup.UserSignUpService;
+import com.example.CATME.user.User;
+
+public class UserServiceMock implements UserSignUpService {
     @Override
     public void register(User user) {
-        user.setFirstname("Tom");
-        user.setLastname("Johnson");
+        user.setFirstName("Tom");
+        user.setLastName("Johnson");
         user.setBannerId("B1111111");
         user.setEmail("abc@dal.ca");
     }
