@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import com.example.CATME.database.MySQLConnection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.CATME.DatabaseConnection.DBConnectionImpl;
@@ -26,7 +27,7 @@ public class courseDaoImpl implements courseDao{
 		ArrayList<courseModel> courses=new ArrayList<courseModel>();
 		
 		try {
-			connection=db.createConnection();
+			connection= MySQLConnection.getConnection();
 			CallableStatement select=connection.prepareCall("{call getCourses()}");
 			ResultSet rs=select.executeQuery();
 			if(rs!=null) {
@@ -45,8 +46,9 @@ public class courseDaoImpl implements courseDao{
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		finally{
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
 			try {
 				connection.close();
 			} catch (SQLException throwables) {
@@ -63,7 +65,7 @@ public class courseDaoImpl implements courseDao{
 
 		
 		try {
-			connection=db.createConnection();
+			connection= MySQLConnection.getConnection();
 			CallableStatement delete=connection.prepareCall("{call deleteCourses(?)}");
 			delete.setInt(1,course_id);
 			delete.execute();
@@ -86,7 +88,7 @@ public class courseDaoImpl implements courseDao{
 		ArrayList<userModel> users=new ArrayList<userModel>();
 		
 		try {
-			connection=db.createConnection();
+			connection= MySQLConnection.getConnection();
 			CallableStatement select=connection.prepareCall("{call getUsers()}");
 			ResultSet rs=select.executeQuery();
 			
@@ -104,7 +106,9 @@ public class courseDaoImpl implements courseDao{
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
 			try {
 				connection.close();
 			} catch (SQLException throwables) {
@@ -120,7 +124,7 @@ public class courseDaoImpl implements courseDao{
 	@Override
 	public Boolean addCourse( String course_code, String course_name, String term, int year) {
 		try {
-			connection=db.createConnection();
+			connection= MySQLConnection.getConnection();
 			CallableStatement insert=connection.prepareCall("{call insertCourse(?,?,?,?,?)}");
 			insert.setInt(1,0);
 			insert.setString(2,course_code);
@@ -148,7 +152,7 @@ public class courseDaoImpl implements courseDao{
 	public Boolean addInstructor(String username, String authority,int course_id) {
 		try {
 			final String auth_id = UUID.randomUUID().toString().replace("-", "");
-			connection=db.createConnection();
+			connection= MySQLConnection.getConnection();
 			CallableStatement insert=connection.prepareCall("{call addInstructor(?,?,?,?)}");
 			insert.setString(1,username);
 			insert.setString(2,authority);
@@ -176,7 +180,7 @@ public class courseDaoImpl implements courseDao{
 	public userModel searchByBannerID(String banner_id) {
 		userModel user = new userModel();
 		try {
-			connection=db.createConnection();
+			connection= MySQLConnection.getConnection();
 			CallableStatement search = connection.prepareCall("{call searchInstructor(?)}");
 			search.setString(1, banner_id);
 			ResultSet rs = search.executeQuery();

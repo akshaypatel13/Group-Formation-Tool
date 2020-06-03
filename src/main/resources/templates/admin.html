@@ -59,7 +59,7 @@
                     <td th:text="${course.course_name}"></td>
                     <td th:text="${course.term}"></td>
                     <td th:text="${course.year}"></td>
-                    
+
                     <td>
                     <form th:action="@{/addInstructor}" method="post">
                     <input type="hidden" th:value="${course.course_id}" name="course_id"/>
@@ -81,4 +81,3 @@
 
 	</body>
 	</html>
-	

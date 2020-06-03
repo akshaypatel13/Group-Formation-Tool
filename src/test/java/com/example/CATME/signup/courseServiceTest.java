@@ -85,7 +85,7 @@ public class courseServiceTest {
         roles.setUsername("akshay123@gmail.com");
         roles.setCourse_id(3);
         given(dao.addInstructor(roles.getUsername(),roles.getAuthority(),roles.getCourse_id())).willReturn(true);
-        assertEquals(result,service.insertInstructor(2,"aksh@gmail.com"));
+        assertEquals(result,service.insertInstructor(3,"akshay123@gmail.com"));
     }
 
     @Test

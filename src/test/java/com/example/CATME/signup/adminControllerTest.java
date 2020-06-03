@@ -23,7 +23,7 @@ public class adminControllerTest {
 	
 	@Test
 	public void admintest() throws Exception{
-		this.mock.perform(get("/admin")).andExpect(status().isOk()).andExpect(model().attributeExists("courses"));
+		this.mock.perform(get("/admin")).andExpect(status().isOk()).andExpect(model().attributeExists("courses")).andExpect(status().isOk());
 	}
 
 	@Test
