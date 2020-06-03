@@ -14,10 +14,10 @@ import com.example.CATME.user.User;
 @Controller
 public class SignUpControllerImpl implements SignUpController {
 
-	UserService userService;
+	UserSignUpService userService;
 
 	public SignUpControllerImpl() {
-		userService = new UserServiceImpl(new UserDAOImpl(), new UserSignUpDBImpl());
+		userService = new UserSignUpServiceImpl(new UserSignUpDAOImpl(), new UserSignUpDBImpl());
 
 	}
 

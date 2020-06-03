@@ -11,22 +11,22 @@ import com.example.CATME.database.UserSignUpDBImpl;
 import com.example.CATME.user.User;
 
 @SpringBootTest
-public class UserDAOImplTest {
-	UserDAOImpl UserDAOImpl;
-	UserSignUpDBImpl UserSignUpDBImpl;
+public class UserSignUpDAOImplTest {
+	UserSignUpDAOImpl userDAOImpl;
+	UserSignUpDBImpl userSignUpDBImpl;
 	
 	@Test
 	public void registerTest() 
 	{	
 		
-		UserDAOImpl = mock(UserDAOImpl.class);
-		UserSignUpDBImpl = mock(UserSignUpDBImpl.class);
+		userDAOImpl = mock(UserSignUpDAOImpl.class);
+		userSignUpDBImpl = mock(UserSignUpDBImpl.class);
 		User user = new User();
 		
-		UserDAOImpl.register(UserSignUpDBImpl, user);
+		userDAOImpl.register(userSignUpDBImpl, user);
 
 	    // Then
-	    verify(UserDAOImpl).register(UserSignUpDBImpl,user); 
+	    verify(userDAOImpl).register(userSignUpDBImpl,user); 
 		
 	}
 

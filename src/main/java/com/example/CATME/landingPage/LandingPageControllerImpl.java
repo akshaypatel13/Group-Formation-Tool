@@ -49,7 +49,7 @@ public class LandingPageControllerImpl implements LandingPageController {
 	@Override
 	@GetMapping("/courseDetails")
 	public String courseView(@RequestParam(value = "courseName") String courseName, Model model) {
-		model.addAttribute("courseName",courseName);
+		model.addAttribute("courseName", courseName);
 		return "courseDetails";
 	}
 

@@ -4,12 +4,12 @@ import com.example.CATME.database.UserSignUpDB;
 import com.example.CATME.user.User;
 
 //Service
-public class UserServiceImpl implements UserService {
+public class UserSignUpServiceImpl implements UserSignUpService {
 
-	UserDAO UserDAO;
+	UserSignUpDAO UserDAO;
 	UserSignUpDB UserSignUpDB;
 
-	public UserServiceImpl(UserDAO UserDAO, UserSignUpDB UserSignUpDB) {
+	public UserSignUpServiceImpl(UserSignUpDAO UserDAO, UserSignUpDB UserSignUpDB) {
 		this.UserDAO = UserDAO;
 		this.UserSignUpDB = UserSignUpDB;
 	}

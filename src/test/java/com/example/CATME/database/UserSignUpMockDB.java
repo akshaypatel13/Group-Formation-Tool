@@ -1,8 +1,8 @@
-package com.example.CATME.signup;
+package com.example.CATME.database;
 
 import com.example.CATME.user.User;
 
-public class UserMockData {
+public class UserSignUpMockDB {
 	
 	public boolean insertGuestUser(User user) {
 		user.setFirstName("Tom");
@@ -11,5 +11,6 @@ public class UserMockData {
 		user.setEmail("abc@dal.ca");
 		return true;
 	}
+
 
 }
