@@ -6,6 +6,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.CATME.user.User;
+
 public class CoursesDBImpl implements CoursesDB {
 
 	@Override
@@ -25,10 +27,10 @@ public class CoursesDBImpl implements CoursesDB {
 			ResultSet myRs = st.executeQuery(query);
 			while (myRs.next()) {
 				ArrayList<String> course = new ArrayList<String>();
-				course.add(myRs.getString(1));
-				course.add(myRs.getString(2));
 				course.add(myRs.getString(3));
+				course.add(myRs.getString(2));
 				course.add(myRs.getString(4));
+				course.add(myRs.getString(5));
 				courses.add(course);
 			}
 		} catch (Exception e) {
@@ -56,10 +58,10 @@ public class CoursesDBImpl implements CoursesDB {
 			ResultSet myRs = st.executeQuery(query);
 			while (myRs.next()) {
 				ArrayList<String> course = new ArrayList<String>();
-				course.add(myRs.getString(1));
-				course.add(myRs.getString(2));
 				course.add(myRs.getString(3));
+				course.add(myRs.getString(2));
 				course.add(myRs.getString(4));
+				course.add(myRs.getString(5));
 				courses.add(course);
 			}
 		} catch (Exception e) {
@@ -85,10 +87,10 @@ public class CoursesDBImpl implements CoursesDB {
 			ResultSet myRs = st.executeQuery(query);
 			while (myRs.next()) {
 				ArrayList<String> course = new ArrayList<String>();
-				course.add(myRs.getString(1));
-				course.add(myRs.getString(2));
 				course.add(myRs.getString(3));
+				course.add(myRs.getString(2));
 				course.add(myRs.getString(4));
+				course.add(myRs.getString(5));
 
 				taCourses.add(course);
 			}
@@ -116,10 +118,10 @@ public class CoursesDBImpl implements CoursesDB {
 			ResultSet myRs = st.executeQuery(query);
 			while (myRs.next()) {
 				ArrayList<String> course = new ArrayList<String>();
-				course.add(myRs.getString(1));
-				course.add(myRs.getString(2));
 				course.add(myRs.getString(3));
+				course.add(myRs.getString(2));
 				course.add(myRs.getString(4));
+				course.add(myRs.getString(5));
 
 				insCourses.add(course);
 			}
@@ -130,4 +132,5 @@ public class CoursesDBImpl implements CoursesDB {
 		return insCourses;
 	}
 
+	
 }

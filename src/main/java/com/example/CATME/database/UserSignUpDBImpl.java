@@ -1,6 +1,7 @@
 package com.example.CATME.database;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.UUID;
 
@@ -41,5 +42,50 @@ public class UserSignUpDBImpl implements UserSignUpDB {
 			MySQLConnection.closeConnection(conn, st);
 		}
 
+	}
+
+	@Override
+	public boolean findUserByEmail(String email) {
+		String query = "SELECT * FROM user WHERE username = '" + email + "'";
+		Connection conn = null;
+		Statement st = null;
+		try {
+			// step 1: object connection from Mysql Connection util
+			conn = MySQLConnection.getConnection();
+			// step 2: create the statement to run the sql
+			st = conn.createStatement();
+			// step 3: run the sql
+			ResultSet myRs = st.executeQuery(query);
+			if (myRs.next()) {
+				return true;
+			} else
+				return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean findUserByBannerId(String bannerId) {
+		String query = "SELECT * FROM user WHERE banner_id = '" + bannerId + "'";
+		Connection conn = null;
+		Statement st = null;
+		try {
+			// step 1: object connection from Mysql Connection util
+			conn = MySQLConnection.getConnection();
+			// step 2: create the statement to run the sql
+			st = conn.createStatement();
+			// step 3: run the sql
+			ResultSet myRs = st.executeQuery(query);
+			if (myRs.next()) {
+
+				return true;
+			} else
+				return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

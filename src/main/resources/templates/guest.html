@@ -10,6 +10,7 @@
 		<thead>
 			<tr>
 				<th>Course Name</th>
+				<th>Course Code</th>
 				<th>Term</th>
 				<th>Year</th>
 			</tr>
@@ -17,6 +18,7 @@
 		</thead>
 		<tbody>
 			<tr th:each="cr : ${course}">
+				<td th:text="${cr[0]}">&nbsp;</td>
 				<td th:text="${cr[1]}">&nbsp;</td>
 				<td th:text="${cr[2]}">&nbsp;</td>
 				<td th:text="${cr[3]}">&nbsp;</td>
