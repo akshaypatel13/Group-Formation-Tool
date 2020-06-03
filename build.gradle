@@ -22,6 +22,8 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+	// https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+	//testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0-M1'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testCompile 'junit:junit:4.12'
 }
