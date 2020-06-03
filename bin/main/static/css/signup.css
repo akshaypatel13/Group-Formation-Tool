@@ -49,3 +49,7 @@ span.psw {
 .error {
 	color: red;
 }
+
+.validation-message {
+	color: red;
+}

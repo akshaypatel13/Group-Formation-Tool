@@ -10,6 +10,14 @@
  <h2> Sign Up </h2>
 
   <div class="container">
+  <p th:if="${error}"
+					class="validation-message">The
+					email address already exists</p>
+				<br>
+				<p th:if="${biderror}"
+					class="validation-message">The
+					bannerId already exists</p>
+				<br>
     <label for="fname"><b>FirstName</b></label>
     <input type="text" placeholder="Enter Firstname"  id="fname" name="fname"  th:field="*{firstName}" required>
     

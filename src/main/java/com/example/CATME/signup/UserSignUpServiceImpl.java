@@ -19,4 +19,15 @@ public class UserSignUpServiceImpl implements UserSignUpService {
 		UserDAO.register(UserSignUpDB, user);
 	}
 
+	@Override
+	public boolean findUserByEmail(String email) {
+		return UserDAO.findUserByEmail(UserSignUpDB, email);
+	}
+
+	@Override
+	public boolean findUserByBannerId(String bannerId) {
+		return UserDAO.findUserByBannerId(UserSignUpDB, bannerId);
+
+	}
+
 }

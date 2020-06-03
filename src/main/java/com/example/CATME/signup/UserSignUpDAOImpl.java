@@ -13,4 +13,15 @@ public class UserSignUpDAOImpl implements UserSignUpDAO {
 
 	}
 
+	@Override
+	public boolean findUserByEmail(UserSignUpDB UserSignUpDB, String email) {
+		return UserSignUpDB.findUserByEmail(email);
+	}
+
+	@Override
+	public boolean findUserByBannerId(UserSignUpDB UserSignUpDB, String bannerId) {
+		return UserSignUpDB.findUserByBannerId(bannerId);
+
+	}
+
 }

@@ -1,5 +1,7 @@
 package com.example.CATME.signup;
 
+import javax.validation.Valid;
+
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
@@ -9,7 +11,7 @@ public interface SignUpController {
 
 	public String signup(Model model);
 
-	// public String signupSubmit(@ModelAttribute User user);
-	public String signupSubmit(User user, BindingResult bindingresult);
+
+	String signupSubmit(@Valid User user, BindingResult bindingresult, Model model);
 
 }
