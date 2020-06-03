@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Welcome, Admin</title>
+</head>
+<body>
+
+	<h1> Insert Course:</h1>
+	<form th:action="@{/insertCourse}" method="post">
+	 
+    <label for="name"><b>Course Name:</b></label>
+    <input type="text" placeholder="Enter Course Name" name="course_name" th:value:"*{course_name}" >
+
+  	<label for="term"><b>Term:</b></label>
+    <input type="text" placeholder="Enter Course Term" name="term" th:value:"*{term}" >
+
+    <label for="year"><b>Year:</b></label>
+    <input type="text" placeholder="Enter Course Year" name="year" th:value:"*{year}" >
+
+  
+    <button name="submit" type="submit" >Add Course</button>
+	</form>
+
+	<h1>Courses Available:</h1>
+	
+	<table>
+                <thead>
+                <tr>
+                    <th scope="col">Course ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Term</th>
+                    <th scope="col">Year</th>
+                    <th scope="col">Instructor</th>
+                    <th scope="col">Course</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="course, i : ${courses}">
+                    <td th:text="${course.course_id}" ></td>
+                    <td th:text="${course.course_name}"></td>
+                    <td th:text="${course.term}"></td>
+                    <td th:text="${course.year}"></td>
+                    
+                    <td>
+                    <form th:action="@{/addInstructor}" method="post">
+                    <input type="hidden" th:value="${course.course_id}" name="course_id"/>
+                    <button type="Submit" name="addInst"> Add</button>
+                    </form></td>
+                    <td>
+                    <form th:action="@{/deleteCourse}" method="post">
+                    <input type="hidden" th:value="${course.course_id}" name="course_id"/>
+                    <button type="submit" name="deletecourse" />Delete</button>
+                	</form>
+                	</td>
+                </tr>
+                </tbody>
+            </table>
+            
+            <h1 th:text="${status}"></h1>
+	</body>
+	</html>
+	
