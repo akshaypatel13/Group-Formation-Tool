@@ -1,5 +1,6 @@
 package com.example.CATME.signup;
 
+
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.CATME.database.UserSignUpDBImpl;
 import com.example.CATME.user.User;
+
+import javax.validation.Valid;
 
 @Controller
 public class SignUpControllerImpl implements SignUpController {

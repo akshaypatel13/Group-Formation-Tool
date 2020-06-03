@@ -6,8 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.example.CATME.user.User;
+
 /**
  * MySQLConnection class for mysql instance.
+ * 
  * @author Ruize Nie
  * @version 1.0
  */
@@ -39,22 +42,20 @@ public class MySQLConnection {
 			}
 		}
 	}
-	
-	public ResultSet selectQuery(String query) {
-	    try {
-	    	return getDBConnection().createStatement().executeQuery(query);
+
+	// static method for close connection
+	public static void closeConnection(Connection conn, Statement st) {
+		try {
+			if (st != null)
+				st.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
-	  }
-	
-	public int updateQuery(String query) {
-	    try {
-	    	return getDBConnection().createStatement().executeUpdate(query);
+		try {
+			if (conn != null)
+				conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return 0;
-	  }
+	}
 }

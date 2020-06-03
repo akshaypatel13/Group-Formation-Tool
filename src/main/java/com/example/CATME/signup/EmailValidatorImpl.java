@@ -1,13 +1,8 @@
 package com.example.CATME.signup;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.sql.*;
 
 import com.example.CATME.user.User;
 

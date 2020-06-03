@@ -1,10 +1,7 @@
 package com.example.CATME.signup;
 
-
-
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-
 
 import com.example.CATME.user.User;
 
