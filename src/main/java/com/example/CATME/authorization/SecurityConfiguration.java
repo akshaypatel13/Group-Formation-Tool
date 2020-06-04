@@ -39,6 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/home").hasAnyRole("ADMIN", "TA")
                 .antMatchers("/").hasAnyRole("ADMIN", "INSTRUCTOR", "TA", "STUDENT", "GUEST")
                 .and()
+                .csrf().disable()
                 .formLogin().loginPage("/login").defaultSuccessUrl("/", true);
     }
     @Override

@@ -190,7 +190,6 @@ public class courseDaoImpl implements courseDao{
 				user.setEnabled(rs.getInt(5));
 				user.setBanner_id(rs.getString(6));
 				user.setUser_id(rs.getString(7));
-
 			}
 		} catch (Exception e) {
 			return null;
