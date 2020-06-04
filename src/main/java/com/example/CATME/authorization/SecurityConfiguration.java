@@ -4,12 +4,14 @@ import com.example.CATME.DatabaseConfiguration.DataSourceConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
+
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -23,6 +25,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .dataSource(dataSource)
                 .usersByUsernameQuery("select username, password, enabled from user where username = ?")
                 .authoritiesByUsernameQuery("select username, authority from authorities where username = ?");
+
+        dataSource.getConnection().close();
     }
 
     @Bean
@@ -37,11 +41,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/instructor").hasAnyRole("ADMIN", "INSTRUCTOR")
                 .antMatchers("/home").hasAnyRole("ADMIN", "TA")
-                .antMatchers("/").permitAll()
+                .antMatchers("/").hasAnyRole("ADMIN", "INSTRUCTOR", "TA", "STUDENT", "GUEST")
                 .and()
-                .formLogin().loginPage("/login").permitAll()
-                .and().logout()
-                .permitAll();//.loginProcessingUrl("/authentication").successForwardUrl("/home")
-
+                .formLogin().loginPage("/login").defaultSuccessUrl("/", true);
+    }
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/resetPassword").antMatchers("/logout");
     }
 }

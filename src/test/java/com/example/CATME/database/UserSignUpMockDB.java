@@ -5,11 +5,12 @@ import com.example.CATME.user.User;
 public class UserSignUpMockDB implements UserSignUpDB{
 	
 	@Override
-	public void insertGuestUser(User user) {
+	public boolean insertGuestUser(User user) {
 		user.setFirstName("Tom");
 		user.setLastName("Johnson");
 		user.setBannerId("B1111111");
 		user.setEmail("abc@dal.ca");
+		return true;
 	}
 
 
@@ -29,5 +30,12 @@ public class UserSignUpMockDB implements UserSignUpDB{
 		return false;
 	}
 
-
+	@Override
+	public boolean insertStudentUser(User user, int courseID) {
+		user.setFirstName("Tom");
+		user.setLastName("Johnson");
+		user.setBannerId("B1111111");
+		user.setEmail("abc@dal.ca");
+		return true;
+	}
 }

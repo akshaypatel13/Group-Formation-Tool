@@ -63,7 +63,6 @@ public class CoursesDBImplTest {
 		when(CoursesDBImpl.getInstructorCourses("mock@gmail.com"))
 			.thenReturn(mockDB.getInstructorCourses("mock@gmail.com"));
 		assertEquals(1, CoursesDBImpl.getInstructorCourses("mock@gmail.com").size());
-		
 	}
 
 }

@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
+import javax.xml.crypto.Data;
 
 @Configuration
 public class DataSourceConfig {
@@ -16,6 +17,5 @@ public class DataSourceConfig {
         dataSourceBuilder.username("CSCI5308_21_TEST_USER");
         dataSourceBuilder.password("CSCI5308_21_TEST_21529");
         return dataSourceBuilder.build();
-
     }
 }

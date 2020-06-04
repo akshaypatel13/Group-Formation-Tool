@@ -95,7 +95,7 @@ public class CoursesDBImpl implements CoursesDB {
 				course.add(myRs.getString(2));
 				course.add(myRs.getString(4));
 				course.add(myRs.getString(5));
-
+				course.add(myRs.getString("course_id"));
 				taCourses.add(course);
 			}
 		} catch (Exception e) {
@@ -126,10 +126,13 @@ public class CoursesDBImpl implements CoursesDB {
 			ResultSet myRs = st.executeQuery(query);
 			while (myRs.next()) {
 				ArrayList<String> course = new ArrayList<String>();
+
 				course.add(myRs.getString(3));
 				course.add(myRs.getString(2));
 				course.add(myRs.getString(4));
+
 				course.add(myRs.getString(5));
+				course.add(myRs.getString("course_id"));
 
 				insCourses.add(course);
 			}

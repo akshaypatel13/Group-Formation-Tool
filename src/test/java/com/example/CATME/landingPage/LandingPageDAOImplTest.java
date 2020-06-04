@@ -18,14 +18,14 @@ public class LandingPageDAOImplTest {
 	public void getAllCoursesTest() {
 		LandingPageDAOImpl = mock(LandingPageDAOImpl.class);
 
-		assertNotEquals(null, LandingPageDAOImpl.getAllCourses((CoursesDB) mockDB));
+		assertNotEquals(null, LandingPageDAOImpl.getAllCourses(mockDB));
 	}
 
 	@Test
 	public void getStudentCoursesTest() {
 		LandingPageDAOImpl = mock(LandingPageDAOImpl.class);
 
-		assertNotEquals(null, LandingPageDAOImpl.getStudentCourses("mock@gmail.com", (CoursesDB) mockDB));
+		assertNotEquals(null, LandingPageDAOImpl.getStudentCourses("mock@gmail.com",  mockDB));
 
 	}
 
@@ -33,14 +33,14 @@ public class LandingPageDAOImplTest {
 	public void getTACoursesTest() {
 		LandingPageDAOImpl = mock(LandingPageDAOImpl.class);
 
-		assertNotEquals(null, LandingPageDAOImpl.getTACourses("mock@gmail.com", (CoursesDB) mockDB));
+		assertNotEquals(null, LandingPageDAOImpl.getTACourses("mock@gmail.com",  mockDB));
 	}
 
 	@Test
 	public void getInstructorCoursesTest() {
 		LandingPageDAOImpl = mock(LandingPageDAOImpl.class);
 
-		assertNotEquals(null, LandingPageDAOImpl.getInstructorCourses("mock@gmail.com", (CoursesDB) mockDB));
+		assertNotEquals(null, LandingPageDAOImpl.getInstructorCourses("mock@gmail.com", mockDB));
 	}
 
 }

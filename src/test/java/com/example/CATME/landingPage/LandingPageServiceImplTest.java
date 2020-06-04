@@ -18,7 +18,7 @@ public class LandingPageServiceImplTest {
 	}
 
 	@Test
-	public void getStudentCourses(String email) {
+	public void getStudentCourses() {
 
 		landingPageServiceImpl = mock(LandingPageServiceImpl.class);
 
@@ -27,7 +27,7 @@ public class LandingPageServiceImplTest {
 	}
 
 	@Test
-	public void getTACourses(String email) {
+	public void getTACourses() {
 		landingPageServiceImpl = mock(LandingPageServiceImpl.class);
 
 		assertNotEquals(null, landingPageServiceImpl.getTACourses("mock@gmail.com"));
@@ -35,7 +35,7 @@ public class LandingPageServiceImplTest {
 	}
 
 	@Test
-	public void getInstructorCourses(String email) {
+	public void getInstructorCourses() {
 		landingPageServiceImpl = mock(LandingPageServiceImpl.class);
 
 		assertNotEquals(null, landingPageServiceImpl.getInstructorCourses("mock@gmail.com"));
