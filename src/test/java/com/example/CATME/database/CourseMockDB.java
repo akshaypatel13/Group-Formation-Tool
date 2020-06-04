@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CourseMockDB {
+public class CourseMockDB implements CoursesDB{
 
 
 	private String courseId=null;
@@ -19,6 +19,7 @@ public class CourseMockDB {
 		this.year = "2020";
 	}
 	
+	@Override
 	public List<ArrayList<String>> getAllCourses() {
 		List<ArrayList<String>> courses = new ArrayList<ArrayList<String>>();
 		ArrayList<String> cr = new ArrayList<String>();
@@ -30,7 +31,7 @@ public class CourseMockDB {
 		return courses;
 	}
 
-	
+	@Override
 	public List<ArrayList<String>> getStudentCourses(String email) {
 		List<ArrayList<String>> courses = new ArrayList<ArrayList<String>>();
 		ArrayList<String> cr = new ArrayList<String>();
@@ -42,7 +43,7 @@ public class CourseMockDB {
 		return courses;
 	}
 
-	
+	@Override
 	public List<ArrayList<String>> getTACourses(String email) {
 		List<ArrayList<String>> courses = new ArrayList<ArrayList<String>>();
 		ArrayList<String> cr = new ArrayList<String>();
@@ -54,7 +55,7 @@ public class CourseMockDB {
 		return courses;
 	}
 
-	
+	@Override
 	public List<ArrayList<String>> getInstructorCourses(String email) {
 		List<ArrayList<String>> courses = new ArrayList<ArrayList<String>>();
 		ArrayList<String> cr = new ArrayList<String>();
