@@ -35,10 +35,10 @@ public class InstructorControllerImpl implements InstructorController {
 
     PasswordGenerator passwordGenerator;
 
-    private EmailService emailService;
+    @Autowired
+    EmailService emailService;
 
     public InstructorControllerImpl(PasswordGenerator passwordGenerator){
-        emailService = new EmailServiceImpl();
         this.userService = new UserSignUpDBImpl();
         this.passwordGenerator = passwordGenerator;
     }
@@ -65,8 +65,9 @@ public class InstructorControllerImpl implements InstructorController {
                 while( (row = reader.readLine()) != null){
 
                     String[] data = row.split(",");
-                    System.out.print(courseID);
-                    addStudents(data, courseID, courseName, userService);
+                    String password = passwordGenerator.generatePassword();
+                    addStudents(data, password, courseID, courseName, userService);
+                    emailCredentials(data[0], password, courseName);
                 }
                 model.addAttribute("status", true);
             } catch (Exception e) {
@@ -85,30 +86,32 @@ public class InstructorControllerImpl implements InstructorController {
     }
 
     @Override
-    public boolean addStudents(String[] userDetails, int courseId, String courseName, UserSignUpDB userService) {
+    public boolean addStudents(String[] userDetails, String password, int courseId, String courseName, UserSignUpDB userService) {
 
         User user = new User();
         user.setEmail(userDetails[0]);
         user.setBannerId(userDetails[1]);
         user.setLastName(userDetails[2]);
         user.setFirstName(userDetails[3]);
-
-        user.setPassword(passwordGenerator.generatePassword());
+        user.setPassword(password);
         userService.insertStudentUser(user, courseId);
-        emailCredentials(user, courseName, emailService);
         return true;
     }
 
-    public void emailCredentials(User user, String courseName, EmailService emailService ){
+    public boolean emailCredentials(String email, String password, String courseName){
 
         // Email message
         SimpleMailMessage Email = new SimpleMailMessage();
         Email.setFrom("support@group21.com");
-        Email.setTo(user.getEmail());
+        Email.setTo(email);
         Email.setSubject("Account Credentials");
-
-        Email.setText("You have been added to Course: " + courseName + "\n" + "Please find your Login Credentials \nUsername: " + user.getEmail() + "\nPassword: " + user.getPassword());
-
-        emailService.sendEmail(Email);
+        Email.setText("You have been added to Course: " + courseName + "\n" + "Please find your Login Credentials \nUsername: " + email + "\nPassword: " + password);
+       try{
+           emailService.sendEmail(Email);
+       }
+       catch (Exception e){
+           System.out.print(e.getMessage());
+       }
+        return true;
     }
 }

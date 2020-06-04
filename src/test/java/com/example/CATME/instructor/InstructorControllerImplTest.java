@@ -24,6 +24,7 @@ public class InstructorControllerImplTest {
         PasswordGenerator passwordGenerator = new PasswordGeneratorImpl();
         InstructorController instructorController = new InstructorControllerImpl(passwordGenerator);
         assertEquals(true,
-                instructorController.addStudents(userDetails,1, "Physics", mock) );
+                instructorController.addStudents(userDetails, "password",1, "Physics", mock) );
     }
+
 }

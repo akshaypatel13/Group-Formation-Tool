@@ -21,8 +21,7 @@ public class UserLogInDBImplTest {
 	@Test
 	public void findUserByEmailTest() {
 		UserLogInDBImpl userLogInDBImpl = createDefaultMySqlDB();
-		User u = userLogInDBImpl.findUserByEmail("admin@dal.ca");
+		User u = userLogInDBImpl.findUserByEmail("admin@gmail.com");
 		assertNotNull(u);
 	}
-
 }

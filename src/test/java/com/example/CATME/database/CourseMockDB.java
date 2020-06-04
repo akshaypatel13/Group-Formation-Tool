@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CourseMockDB {
+public class CourseMockDB implements CoursesDB{
 
 
 	private String courseId=null;

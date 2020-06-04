@@ -20,5 +20,4 @@ public class UserLogInDBImpl implements UserLogInDB{
 		String query = "SELECT * FROM user WHERE username = '" + email +"'";
 		return mysql.findUser(query);
 	}
-
 }
