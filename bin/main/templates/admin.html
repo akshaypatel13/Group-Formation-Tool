@@ -1,32 +1,51 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{/css/admin.css}"/>
 <head>
 <title>Welcome, Admin</title>
 </head>
 <body>
 
-	<h1> Insert Course:</h1>
+
+    <div class="container">
 	<form th:action="@{/insertCourse}" method="post">
 
-    <label for="name"><b>Course Name:</b></label>
+    <h1> Insert Course:</h1>
+        <br/>
+        <label for="course_code"><b>Course Code:</b></label>
+        <input type="text" placeholder="Enter Course Code" name="course_code" th:value:"*{course_code}" />
+
+    <label for="course_name"><b>Course Name:</b></label>
     <input type="text" placeholder="Enter Course Name" name="course_name" th:value:"*{course_name}" />
 
   	<label for="term"><b>Term:</b></label>
-    <input type="text" placeholder="Enter Course Term" name="term" th:value:"*{term}"/ >
+    <input type="text" placeholder="Enter Course Term" name="term" th:value:"*{term}" />
 
     <label for="year"><b>Year:</b></label>
-    <input type="text" placeholder="Enter Course Year" name="year" th:value:"*{year}"/ >
+    <input type="text" placeholder="Enter Course Year" name="year" th:value:"*{year}" />
 
 
+        <br/>
+        <br/>
     <button name="submit" type="submit" >Add Course</button>
 	</form>
+    </div>
 
-	<h1>Courses Available:</h1>
+    <h2 align="center">Admin Page</h2>
 
+    <div class="container1">
+        <br/>
+        <h1>Courses Available:</h1>
+        <h3 th:text="${status}"></h3>
+
+        <br/>
+        <br/>
 	<table>
+
                 <thead>
                 <tr>
-                    <th scope="col">Course ID</th>
+<!--                    <th scope="col">Course ID</th>-->
+                    <th scope="col">Code</th>
                     <th scope="col">Name</th>
                     <th scope="col">Term</th>
                     <th scope="col">Year</th>
@@ -34,9 +53,12 @@
                     <th scope="col">Course</th>
                 </tr>
                 </thead>
+
                 <tbody>
+
                 <tr th:each="course, i : ${courses}">
-                    <td th:text="${course.course_id}" ></td>
+<!--                    <td th:text="${course.course_id}" ></td>-->
+                    <td th:text="${course.course_code}"></td>
                     <td th:text="${course.course_name}"></td>
                     <td th:text="${course.term}"></td>
                     <td th:text="${course.year}"></td>
@@ -53,9 +75,12 @@
                 	</form>
                 	</td>
                 </tr>
-                </tbody>
-            </table>
 
-            <h1 th:text="${status}"></h1>
+                </tbody>
+
+    </table>
+
+    </div>
+
 	</body>
 	</html>

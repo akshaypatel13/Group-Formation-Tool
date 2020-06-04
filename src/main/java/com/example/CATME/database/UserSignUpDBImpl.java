@@ -62,6 +62,9 @@ public class UserSignUpDBImpl implements UserSignUpDB {
 				return false;
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			// step 6: close the connection
+			MySQLConnection.closeConnection(conn, st);
 		}
 		return false;
 	}
@@ -85,7 +88,11 @@ public class UserSignUpDBImpl implements UserSignUpDB {
 				return false;
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			// step 6: close the connection
+			MySQLConnection.closeConnection(conn, st);
 		}
+
 		return false;
 	}
 }

@@ -2,6 +2,7 @@ package com.example.CATME.database;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +68,10 @@ public class CoursesDBImpl implements CoursesDB {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		finally {
+			// step 6: close the connection
+			MySQLConnection.closeConnection(conn, st);
+		}
 		return courses;
 	}
 
@@ -96,6 +100,10 @@ public class CoursesDBImpl implements CoursesDB {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		finally {
+			// step 6: close the connection
+			MySQLConnection.closeConnection(conn, st);
 		}
 
 		return taCourses;
@@ -127,6 +135,10 @@ public class CoursesDBImpl implements CoursesDB {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		finally {
+			// step 6: close the connection
+			MySQLConnection.closeConnection(conn, st);
 		}
 
 		return insCourses;
