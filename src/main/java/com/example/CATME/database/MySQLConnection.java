@@ -19,13 +19,13 @@ public class MySQLConnection {
 
 //	private Connection dbConnection;
 
+	private static String dbURL = System.getenv("db_url");
+	private static String dbUserName = System.getenv("db_username");
+	private static String dbPassword = System.getenv("db_pass");
+/*
 	private static String dbURL = "jdbc:mysql://db-5308.cs.dal.ca/CSCI5308_21_TEST?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	private static String dbUserName = "CSCI5308_21_TEST_USER";
-	private static String dbPassword = "CSCI5308_21_TEST_21529";
-	
-//	private static String dbURL = "jdbc:mysql://db-5308.cs.dal.ca/CSCI5308_21_DEVINT?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-//	private static String dbUserName = "CSCI5308_21_DEVINT_USER";
-//	private static String dbPassword = "CSCI5308_21_DEVINT_21168";
+	private static String dbPassword = "CSCI5308_21_TEST_21529";*/
 
 	// static method for get connection
 	public static Connection getConnection() throws Exception {
