@@ -1,5 +1,6 @@
 package com.example.CATME.Instructor;
 
+import com.example.CATME.admin.courseServiceImpl;
 import com.example.CATME.database.UserResetPasswordDBImpl;
 import com.example.CATME.database.UserSignUpDB;
 import com.example.CATME.database.UserSignUpDBImpl;
@@ -34,7 +35,7 @@ public class InstructorControllerImpl implements InstructorController {
 	UserSignUpDB userService;
 
     PasswordGenerator passwordGenerator;
-
+    courseServiceImpl course_service=new courseServiceImpl();
     @Autowired
     EmailService emailService;
 
@@ -43,6 +44,25 @@ public class InstructorControllerImpl implements InstructorController {
         this.passwordGenerator = passwordGenerator;
     }
 
+    @PostMapping("/insertTA")
+    public String insertTA(@RequestParam("courseID") int courseID, @RequestParam("courseName") String courseName, Model model){
+        model.addAttribute("users",course_service.getUsers());
+        model.addAttribute("course_id", courseID);
+        model.addAttribute("coursename", courseName);
+        return "addTA";
+    }
+    
+    @PostMapping("/addTA")
+    public String addTA(@RequestParam("course_id") int course_id, @RequestParam("coursename") String coursename, 
+    		@RequestParam("username") String userName, Model model){
+        model.addAttribute("status", course_service.insertTA(course_id,userName));
+        model.addAttribute("courseID", course_id);
+        model.addAttribute("courseName", coursename);
+        model.addAttribute("message", "Please select a CSV file to upload");
+        model.addAttribute("status", true);
+        return "courseDetails";
+    }
+    
     @GetMapping("/instructor")
     public String instructor(Model model){
         model.addAttribute("status", true);
