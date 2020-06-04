@@ -11,7 +11,6 @@ public interface SignUpController {
 
 	public String signup(Model model);
 
-
 	String signupSubmit(@Valid User user, BindingResult bindingresult, Model model);
 
 }

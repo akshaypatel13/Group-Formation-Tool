@@ -10,17 +10,25 @@ import com.example.CATME.user.User;
 
 @SpringBootTest
 public class UserSignUpServiceImplTest {
-	
+
 	UserSignUpServiceImpl UserServiceImpl;
-	
+
 	@Test
-	public void registerTest()
-	{
+	public void registerTest() {
 		UserSignUpMockDB userMock = new UserSignUpMockDB();
 		User user = new User();
-		
+
 		assertEquals(true, userMock.insertGuestUser(user));
-	
+
+	}
+
+	@Test
+	public void findUserByEmail() {
+	}
+
+	@Test
+	public void findUserByBannerId() {
+
 	}
 
 }

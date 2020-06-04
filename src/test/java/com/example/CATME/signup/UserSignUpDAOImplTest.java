@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.example.CATME.database.UserSignUpDB;
 import com.example.CATME.database.UserSignUpDBImpl;
 import com.example.CATME.user.User;
 
@@ -28,6 +29,15 @@ public class UserSignUpDAOImplTest {
 	    // Then
 	    verify(userDAOImpl).register(userSignUpDBImpl,user); 
 		
+	}
+	@Test
+	public void findUserByEmail() {
+		
+	}
+
+	@Test
+	public void findUserByBannerId() {
+
 	}
 
 
