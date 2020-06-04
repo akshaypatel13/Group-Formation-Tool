@@ -13,41 +13,13 @@
 		<thead>
 			<tr>
 				<th>Course Name</th>
-				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td th:text="${courseID}"></td>
 				<td th:text="${courseName}"></td>
 			</tr>
 		</tbody>
 	</table>
-<<<<<<< HEAD
-=======
-	
-	
-	<div class="container">
-		<form th:action="@{/insertTA}" method="post">
-			<input type="hidden" th:value="${courseName}" name="courseName" />
-			<input type="hidden" th:value="${courseID}" name="courseID" />
-			<button type="Submit" name="addTA">Add TA</button>
-		</form>
-	</div>
-	
-	
->>>>>>> feature_ta_enrollment
-	<div class="container">
-		<p>Click on the "Choose File" button to upload a file:</p>
-		<form th:action="@{/instructor/{courseID}/{courseName} (courseID = ${courseID}, courseName = ${courseName})}"  method="post" enctype="multipart/form-data">
-		<input type="file" accept=".csv" id="file" name="file">
-		<button type="submit">Add Students</button>
-		<div  role="alert" th:if="${!status}">
-			<strong>Error:</strong>
-			<span th:text="${message}"></span>
-		</div>
-		</form>
-	</div>
-
 </body>
 </html>
