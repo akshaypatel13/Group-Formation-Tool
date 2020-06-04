@@ -5,9 +5,11 @@
 <title>Welcome To SignUp Page</title>
 </head>
 <body>
+<div>
+ <h2 class = "signup-text"> Sign Up </h2>
 <form action="#" th:action="@{/signup}" th:object="${user}" method="post">
 
- <h2> Sign Up </h2>
+
 
   <div class="container">
   <p th:if="${error}"
@@ -32,28 +34,24 @@
  
     <label for="psw"><b>Set Password</b></label>
     <input type="password" placeholder="Password" name="psw" th:field="*{password}" required>
-    
-    <label for="psw"><b>Confirm Password</b></label>
-    <input type="password" placeholder="Confirm Password" name="psw" th:field="*{confirmPassword}"required>
+   
+   <!--  <label for="psw"><b>Confirm Password</b></label>
+    <input type="password" placeholder="Confirm Password" name="psw" th:field="*{confirmPassword}"required>  -->
     <p class="error" th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" th:text="${message}"></p>
     <ul class="text-danger" th:each="error: ${#fields.errors('confirmPassword')}">
         <li th:each="message : ${error.split(',')}">
             <p class="error-message" th:text="${message}"></p>
         </li>
     </ul>
-    
-    <div></div>
-    
-    
-    
-   
-	
+ 	
     <button type="submit">Submit</button>
 
   </div>
 
 
 </form>
+
+</div>
 
 
 

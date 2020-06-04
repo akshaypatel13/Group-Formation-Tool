@@ -40,6 +40,7 @@ public class UserSignUpDBImpl implements UserSignUpDB {
 		} finally {
 			// step 6: close the connection
 			MySQLConnection.closeConnection(conn, st);
+			MySQLConnection.closeConnection(conn, st1);
 		}
 
 	}
