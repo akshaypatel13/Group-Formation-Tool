@@ -11,5 +11,4 @@ public class CatmeApplication {
 		SpringApplication.run(CatmeApplication.class, args);
 		System.out.print("Hello Hi");
 	}
-
 }

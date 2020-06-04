@@ -7,7 +7,7 @@ import com.example.CATME.database.UserSignUpMockDB;
 import com.example.CATME.passwordGenerator.PasswordGenerator;
 import com.example.CATME.passwordGenerator.PasswordGeneratorImpl;
 import com.example.CATME.signup.UserSignUpService;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

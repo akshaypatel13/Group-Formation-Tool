@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.CATME.database.CoursesDBImpl;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 
 @Controller
 public class LandingPageControllerImpl implements LandingPageController {
