@@ -49,6 +49,8 @@ public class InstructorControllerImpl implements InstructorController {
         return "instructor";
     }
 
+
+
     @PostMapping("/instructor/{courseID}/{courseName}")
     public String instructorPost(@PathVariable("courseID") int courseID, @PathVariable("courseName") String courseName, @RequestParam("file")MultipartFile file, Model model, HttpServletResponse response){
 
@@ -56,7 +58,7 @@ public class InstructorControllerImpl implements InstructorController {
             model.addAttribute("message", "Please select a CSV file to upload");
             model.addAttribute("status", false);
 
-            return "courseDetails";
+            return "addStudentInstructor";
         }
         else {
             String row = "";
@@ -83,6 +85,14 @@ public class InstructorControllerImpl implements InstructorController {
             e.printStackTrace();
         }
         return "instructor";
+    }
+
+    @GetMapping("/instructor/addStudent")
+    public String courseView(@RequestParam(value = "courseName") String courseName, @RequestParam(value = "courseID") int courseID, Model model) {
+        model.addAttribute("courseName", courseName);
+        model.addAttribute("courseID", courseID);
+        model.addAttribute("status", true);
+        return "addStudentInstructor";
     }
 
     @Override
