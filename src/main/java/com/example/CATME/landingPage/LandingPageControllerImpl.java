@@ -33,9 +33,7 @@ public class LandingPageControllerImpl implements LandingPageController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserDetails user = (UserDetails) auth.getPrincipal();
 		String userName = user.getUsername();
-		System.out.println(userName);
 		userRole = (Set<GrantedAuthority>) user.getAuthorities();
-		System.out.println(userRole);
 
 		if (userRole.contains(new SimpleGrantedAuthority("ROLE_INSTRUCTOR"))) {
 			model.addAttribute("course", landingPageService.getInstructorCourses(userName));
@@ -62,9 +60,8 @@ public class LandingPageControllerImpl implements LandingPageController {
 
 	@Override
 	@GetMapping("/courseDetails")
-	public String courseView(@RequestParam(value = "courseName") String courseName, @RequestParam(value = "courseID") int courseID, Model model) {
+	public String courseView(@RequestParam(value = "courseName") String courseName, Model model) {
 		model.addAttribute("courseName", courseName);
-		model.addAttribute("courseID", courseID);
 		model.addAttribute("status", true);
 		return "courseDetails";
 	}
