@@ -51,6 +51,7 @@ public class courseServiceImpl implements courseService {
 		return users;
 		
 	}
+	
 
 	@Override
 	public String insertCourse(String course_code,String course_name, String term, int year) {
@@ -76,6 +77,19 @@ public class courseServiceImpl implements courseService {
 			status="Instructor Inserted Successfully";
 		}else {
 			status="Instructor Not Inserted";
+		}
+		return status;
+	}
+	
+	public String insertTA(int course_id, String username) {
+		String status="";
+		String authority="ROLE_TA";
+
+		Boolean result=dao.addInstructor(username,authority,course_id);
+		if(result==true) {
+			status="TA Inserted Successfully";
+		}else {
+			status="TA Not Inserted";
 		}
 		return status;
 	}
