@@ -14,6 +14,7 @@ public class AdminController {
 
     courseServiceImpl course_service=new courseServiceImpl();
 
+
     @RequestMapping("/admin")
     public String adminPage(Model model) {
         ArrayList<courseModel> courses=course_service.getCourses();

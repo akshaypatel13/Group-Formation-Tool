@@ -12,6 +12,7 @@ input[type=text], input[type=password] {
   box-sizing: border-box;
 }
 
+
 /* Set a style for all buttons */
 button, input[type=submit] {
   background-color: #4CAF50;

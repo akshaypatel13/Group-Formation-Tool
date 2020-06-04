@@ -9,6 +9,7 @@
   padding: 8px;
 }
 
+
 #courseTable tr:nth-child(even){background-color: #f2f2f2;}
 
 #courseTable tr:hover {background-color: #ddd;}
