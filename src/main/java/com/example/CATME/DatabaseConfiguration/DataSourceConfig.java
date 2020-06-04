@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
+import javax.xml.crypto.Data;
 
 @Configuration
 public class DataSourceConfig {
@@ -12,10 +13,9 @@ public class DataSourceConfig {
     public DataSource getDataSource(){
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName("com.mysql.cj.jdbc.Driver");
-        dataSourceBuilder.url("jdbc:mysql://db-5308.cs.dal.ca/CSCI5308_21_TEST?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
-        dataSourceBuilder.username("CSCI5308_21_TEST_USER");
-        dataSourceBuilder.password("CSCI5308_21_TEST_21529");
+        dataSourceBuilder.url("jdbc:mysql://localhost:3306/group21?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
+        dataSourceBuilder.username("root");
+        dataSourceBuilder.password("password");
         return dataSourceBuilder.build();
-
     }
 }

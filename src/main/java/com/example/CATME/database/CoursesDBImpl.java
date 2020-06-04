@@ -65,6 +65,10 @@ public class CoursesDBImpl implements CoursesDB {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		finally {
+			// step 6: close the connection
+			MySQLConnection.closeConnection(conn, st);
+		}
 
 		return courses;
 	}
@@ -89,11 +93,14 @@ public class CoursesDBImpl implements CoursesDB {
 				course.add(myRs.getString(2));
 				course.add(myRs.getString(3));
 				course.add(myRs.getString(4));
-
 				taCourses.add(course);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		finally {
+			// step 6: close the connection
+			MySQLConnection.closeConnection(conn, st);
 		}
 
 		return taCourses;
@@ -120,11 +127,14 @@ public class CoursesDBImpl implements CoursesDB {
 				course.add(myRs.getString(2));
 				course.add(myRs.getString(3));
 				course.add(myRs.getString(4));
-
 				insCourses.add(course);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		finally {
+			// step 6: close the connection
+			MySQLConnection.closeConnection(conn, st);
 		}
 
 		return insCourses;

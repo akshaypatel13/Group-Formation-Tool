@@ -9,6 +9,7 @@
 	<table id="courseTable">
 		<thead>
 			<tr>
+				<th>Course ID</th>
 				<th>Course Name</th>
 				<th>Term</th>
 				<th>Year</th>
@@ -16,25 +17,14 @@
 		</thead>
 		<tbody>
 			<tr th:each="cr : ${course}">
+				<td th:text="${cr[0]}">
 				<td><a th:text="${cr[1]}"
-					th:href="@{/courseDetails?courseName={courseName} (courseName=${cr[1]})}">&nbsp;</a></td>
+					th:href="@{/courseDetails (courseName=${cr[1]}, courseID = ${cr[0]})}">&nbsp;</a></td>
 				<td th:text="${cr[2]}">&nbsp;</td>
 				<td th:text="${cr[3]}">&nbsp;</td>
-				<!-- <td th:text="${cr.course_name}">&nbsp;</td>
-      <td th:text="${cr.term}">&nbsp;</td>
-      <td th:text="${cr.year}">&nbsp;</td> -->
+
 			</tr>
 		</tbody>
 	</table>
-      <!--  <div class="container">
-           <p>Click on the "Choose File" button to upload a file:</p>
-           <form th:action="@{/instructor}"  method="post" enctype="multipart/form-data">
-               <input type="file" accept=".csv" id="file" name="file">
-               <button type="submit">Add Students</button>
-               <div  role="alert" th:if="${!status}">
-                   <strong>Error:</strong>
-                   <span th:text="${message}"></span>
-               </div>
-           </form>
-       </div> -->
+</body>
 </html>

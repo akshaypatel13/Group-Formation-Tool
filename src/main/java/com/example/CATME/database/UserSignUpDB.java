@@ -4,6 +4,7 @@ import com.example.CATME.user.User;
 
 public interface UserSignUpDB {
 
-	public void insertGuestUser(User user);
+	public boolean insertGuestUser(User user);
+	public boolean insertStudentUser(User user, int courseID);
 
 }

@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
 
+
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -24,6 +25,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .dataSource(dataSource)
                 .usersByUsernameQuery("select username, password, enabled from user where username = ?")
                 .authoritiesByUsernameQuery("select username, authority from authorities where username = ?");
+
+        dataSource.getConnection().close();
     }
 
     @Bean
@@ -38,12 +41,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/instructor").hasAnyRole("ADMIN", "INSTRUCTOR")
                 .antMatchers("/home").hasAnyRole("ADMIN", "TA")
-                .antMatchers("/").permitAll()
+                .antMatchers("/").hasAnyRole("ADMIN", "INSTRUCTOR", "TA", "STUDENT", "GUEST")
                 .and()
-                .formLogin().loginPage("/login");
+                .formLogin().loginPage("/login").defaultSuccessUrl("/", true);
     }
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/").antMatchers("/resetPassword");
+        web.ignoring().antMatchers("/resetPassword").antMatchers("/logout");
     }
 }
