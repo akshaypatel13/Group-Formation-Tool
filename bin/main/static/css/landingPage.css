@@ -1,0 +1,52 @@
+#courseTable {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 70%;
+}
+
+#courseTable td, #guest th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#courseTable tr:nth-child(even){background-color: #f2f2f2;}
+
+#courseTable tr:hover {background-color: #ddd;}
+
+#courseTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+.click a {
+  display: block;
+}
+
+body {
+	margin-left: 30px;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  font-size: 18px;
+  color: white;
+  padding: 14px 20px;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+  opacity: 0.8;
+}

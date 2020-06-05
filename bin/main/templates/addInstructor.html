@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{/css/admin.css}" />
+<head>
+<title>Add Instructor</title>
+</head>
+<body>
+
+<!--	<h1 th:text="${course_id}"></h1>-->
+<div align="center">
+<div>
+	<h1>Add Instructor</h1>
+	<br/>
+	<form th:action="@{/searchBanner}" method="post" style="display:block">
+		<input type="text" name="bannerid" placeholder="Search BannerID" style="width:150px;"/>
+		<button type="submit" name="search" style="width:150px;">Search</button>
+	</form>
+	<br/>
+	<br/>
+</div>
+
+<div style="display:inline-block">
+		<table class="table table-striped" >
+		<thead>
+			<tr>
+				<th scope="col">Banner ID</th>
+				<th scope="col">First Name</th>
+				<th scope="col">Last Name</th>
+				<th scope="col">Email</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="user, i : ${users}">
+
+				<td th:text="${user.banner_id}"></td>
+				<td th:text="${user.first_name}"></td>
+				<td th:text="${user.last_name}"></td>
+				<td th:text="${user.username}"></td>
+
+				<td>
+					<form th:action="@{/insertInst}" method="post">
+						<input type="hidden" th:value="${user.username}" name="username" />
+						<input type="hidden" th:value="${course_id}" name="course_id" />
+						<button type="Submit" name="addInst">Add</button>
+					</form>
+				</td>
+		</tbody>
+	</table>
+</div>
+</div>
+</body>
+</html>
