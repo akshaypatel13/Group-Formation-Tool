@@ -7,22 +7,23 @@
 <body>
 
 
+
     <div class="container">
 	<form th:action="@{/insertCourse}" method="post">
 
     <h1> Insert Course:</h1>
         <br/>
         <label for="course_code"><b>Course Code:</b></label>
-        <input type="text" placeholder="Enter Course Code" name="course_code" th:value:"*{course_code} required" />
+        <input type="text" placeholder="Enter Course Code" name="course_code" th:value="*{course_code}" required />
 
     <label for="course_name"><b>Course Name:</b></label>
-    <input type="text" placeholder="Enter Course Name" name="course_name" th:value:"*{course_name} required" />
+    <input type="text" placeholder="Enter Course Name" name="course_name" th:value="*{course_name}" required />
 
   	<label for="term"><b>Term:</b></label>
-    <input type="text" placeholder="Enter Course Term" name="term" th:value:"*{term} required" />
+    <input type="text" placeholder="Enter Course Term" name="term" th:value="*{term}" required />
 
     <label for="year"><b>Year:</b></label>
-    <input type="text" placeholder="Enter Course Year" name="year" th:value:"*{year} required" />
+    <input type="text" placeholder="Enter Course Year" name="year" th:value="*{year}" required />
 
 
         <br/>
