@@ -1,10 +1,10 @@
 package CSCI5308.GroupFormationTool.QuestionManageTest;
 
-import org.junit.Test;
-import java.util.Date;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import java.util.Date;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.Assert;
 
 import CSCI5308.GroupFormationTool.QuestionManage.IQuestionPersistence;
 import CSCI5308.GroupFormationTool.QuestionManage.Question;
@@ -14,21 +14,23 @@ import CSCI5308.GroupFormationTool.QuestionManage.Question;
  * @author nieruize
  *
  */
+@SpringBootTest
+@SuppressWarnings("deprecation")
 public class QuestionTest {
 
 	@Test
 	public void ConstructorTests() 
 	{
 		Question question = new Question();
-		assertTrue(question.getId() == -1);
-		assertTrue(question.getTitle().isEmpty());
-		assertNull(question.getCreated());
+		Assert.isTrue(question.getId() == -1);
+		Assert.isTrue(question.getTitle().isEmpty());
+		Assert.isNull(question.getCreated());
 
 		IQuestionPersistence questionDB = new QuestionDBMock();
 		question = new Question(1, questionDB);
-		assertTrue(question.getId() == 1);
-		assertTrue(question.getTitle().equals("How is going?"));
-		assertTrue(question.getCreated().equals(new Date(0)));
+		Assert.isTrue(question.getId() == 1);
+		Assert.isTrue(question.getTitle().equals("How is going?"));
+		Assert.isTrue(question.getCreated().equals(new Date(0)));
 	}
 	
 	@Test
@@ -36,7 +38,7 @@ public class QuestionTest {
 	{
 		Question question = new Question();
 		question.setId(7);
-		assertTrue(question.getId() == 7);
+		Assert.isTrue(question.getId() == 7);
 	}
 
 	@Test
@@ -44,7 +46,7 @@ public class QuestionTest {
 	{
 		Question question = new Question();
 		question.setId(7);
-		assertTrue(question.getId() == 7);
+		Assert.isTrue(question.getId() == 7);
 	}
 
 	@Test
@@ -52,7 +54,7 @@ public class QuestionTest {
 	{
 		Question question = new Question();
 		question.setTitle("How is going?");
-		assertTrue(question.getTitle().equals("How is going?"));
+		Assert.isTrue(question.getTitle().equals("How is going?"));
 	}
 
 	@Test
@@ -60,7 +62,7 @@ public class QuestionTest {
 	{
 		Question question = new Question();
 		question.setTitle("How is going?");
-		assertTrue(question.getTitle().equals("How is going?"));
+		Assert.isTrue(question.getTitle().equals("How is going?"));
 	}
 	
 	@Test
@@ -68,7 +70,7 @@ public class QuestionTest {
 	{
 		Question question = new Question();
 		question.setCreated(new Date(0));
-		assertTrue(question.getCreated().equals(new Date(0)));
+		Assert.isTrue(question.getCreated().equals(new Date(0)));
 	}
 
 	@Test
@@ -76,7 +78,7 @@ public class QuestionTest {
 	{
 		Question question = new Question();
 		question.setCreated(new Date(0));
-		assertTrue(question.getCreated().equals(new Date(0)));
+		Assert.isTrue(question.getCreated().equals(new Date(0)));
 	}
 
 	@Test
@@ -84,7 +86,7 @@ public class QuestionTest {
 	{
 		IQuestionPersistence questionDB = new QuestionDBMock();
 		boolean status = questionDB.deleteQuestion(1);
-		assertTrue(status);
+		Assert.isTrue(status);
 	}
 
 }
