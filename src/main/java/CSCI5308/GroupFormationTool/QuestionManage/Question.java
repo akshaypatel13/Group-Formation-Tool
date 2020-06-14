@@ -11,6 +11,8 @@ public class Question {
 	
 	private long id;
 	private String title;
+	private String description;
+	private String type;
 	private Date created;
 	
 	public Question()
@@ -22,6 +24,8 @@ public class Question {
 	{
 		id = -1;
 		title = "";
+		description = "";
+		type = "";
 		created = null;
 	}
 
@@ -54,6 +58,29 @@ public class Question {
 	public void setCreated(Date created) {
 		this.created = created;
 	}
+	
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+//	Need implement by Akashy
+//	public boolean createQuestion(IQuestionPersistence questionDB)
+//	{
+//		return questionDB.createQuestion(this);
+//	}
 	
 	public boolean delete(IQuestionPersistence questionDB)
 	{

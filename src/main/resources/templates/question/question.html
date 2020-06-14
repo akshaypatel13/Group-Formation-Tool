@@ -29,11 +29,15 @@
 			<table>
 			  	<tr>
     				<th>Title</th>
+    				<th>Type</th>
+    				<th>Description</th>
     				<th>Created</th>
     				<th>Action</th>
   				</tr>
 		 		<tr th:each="question : ${questions}">
 					<td><a th:text="${question.title}"></a></td>
+					<td><a th:text="${question.type}"></a></td>
+					<td><a th:text="${question.description}"></a></td>
 					<td><a th:text="${question.created}"></a></td>
 					<td><a th:href="@{/question/warning(id=${question.id})}">Delete</a></td>
 				</tr>

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import CSCI5308.GroupFormationTool.AccessControl.User;
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
 
 /**
@@ -28,10 +29,16 @@ public class QuestionDB implements IQuestionPersistence {
 				while (results.next())
 				{
 					String title = results.getString(2);
-					Date created = results.getDate(3);
+					String description = results.getString(3);
+					String type = results.getString(4);
+					Date created = results.getDate(5);
+
 					question.setId(id);
 					question.setTitle(title);
 					question.setCreated(created);
+					question.setType(type);
+					question.setDescription(description);
+
 				}
 			}
 		}
@@ -49,12 +56,13 @@ public class QuestionDB implements IQuestionPersistence {
 	}
 
 	@Override
-	public List<Question> loadAllQuestions() {
+	public List<Question> loadAllQuestions(User user) {
 		List<Question> questions = new ArrayList<Question>();
 		CallStoredProcedure proc = null;
 		try
 		{
-			proc = new CallStoredProcedure("spLoadAllQuestions()");
+			proc = new CallStoredProcedure("spLoadAllQuestions(?)");
+			proc.setParameter(1, user.getId());
 			ResultSet results = proc.executeWithResults();
 			if (null != results)
 			{
@@ -62,11 +70,15 @@ public class QuestionDB implements IQuestionPersistence {
 				{
 					long id = results.getLong(1);
 					String title = results.getString(2);
-					Date created = results.getDate(3);
+					String description = results.getString(3);
+					String type = results.getString(4);
+					Date created = results.getDate(5);
 					Question q = new Question();
 					q.setId(id);
 					q.setTitle(title);
 					q.setCreated(created);
+					q.setType(type);
+					q.setDescription(description);
 					questions.add(q);
 				}
 			}
@@ -86,13 +98,14 @@ public class QuestionDB implements IQuestionPersistence {
 	}
 
 	@Override
-	public List<Question> sortAllQuestions(String sort) {
+	public List<Question> sortAllQuestions(String sort, User user) {
 		List<Question> questions = new ArrayList<Question>();
 		CallStoredProcedure proc = null;
 		try
 		{
-			proc = new CallStoredProcedure("spSortAllQuestions(?)");
+			proc = new CallStoredProcedure("spSortAllQuestions(?,?)");
 			proc.setParameter(1, sort);
+			proc.setParameter(2, user.getId());
 			ResultSet results = proc.executeWithResults();
 			if (null != results)
 			{
@@ -100,11 +113,15 @@ public class QuestionDB implements IQuestionPersistence {
 				{
 					long id = results.getLong(1);
 					String title = results.getString(2);
-					Date created = results.getDate(3);
+					String description = results.getString(3);
+					String type = results.getString(4);
+					Date created = results.getDate(5);
 					Question q = new Question();
 					q.setId(id);
 					q.setTitle(title);
 					q.setCreated(created);
+					q.setType(type);
+					q.setDescription(description);
 					questions.add(q);
 				}
 			}

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import CSCI5308.GroupFormationTool.SystemConfig;
+import CSCI5308.GroupFormationTool.AccessControl.CurrentUser;
 
 /**
  * 
@@ -24,7 +25,7 @@ public class QuestionController {
 	public String question(Model model) {
 		IQuestionPersistence questionDB = SystemConfig.instance().getQuestionDB();
 		
-		List<Question> allQuestions = questionDB.loadAllQuestions();
+		List<Question> allQuestions = questionDB.loadAllQuestions(CurrentUser.instance().getCurrentAuthenticatedUser());
 		model.addAttribute("questions", allQuestions);
 
 		return "question/question";
@@ -34,7 +35,7 @@ public class QuestionController {
 	public String sortQuestion(@PathVariable("sort") String sort, Model model) {
 		IQuestionPersistence questionDB = SystemConfig.instance().getQuestionDB();
 		
-		List<Question> sortQuestions = questionDB.sortAllQuestions(sort);
+		List<Question> sortQuestions = questionDB.sortAllQuestions(sort, CurrentUser.instance().getCurrentAuthenticatedUser());
 		model.addAttribute("questions", sortQuestions);
 		
 		return "question/question";

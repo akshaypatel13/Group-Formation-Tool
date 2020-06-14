@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
+import CSCI5308.GroupFormationTool.AccessControl.User;
 import CSCI5308.GroupFormationTool.QuestionManage.IQuestionPersistence;
 import CSCI5308.GroupFormationTool.QuestionManage.Question;
 
@@ -15,39 +16,59 @@ import CSCI5308.GroupFormationTool.QuestionManage.Question;
 public class QuestionDBMock implements IQuestionPersistence  {
 
 	@Override
-	public List<Question> loadAllQuestions() {
+	public List<Question> loadAllQuestions(User user) {
+		
 		List<Question> questionList = new ArrayList<>();
+		
 		Question question = new Question();
 		question.setId(1);
-		question.setTitle("How is going?");
+		question.setTitle("Greeting");
 		question.setCreated(new Date(0));
+		question.setType("text");
+		question.setDescription("How is going?");
 		questionList.add(question);
+		
 		question = new Question();
 		question.setId(2);
-		question.setTitle("Are you finished the assignment?");
+		question.setTitle("Greeting");
 		question.setCreated(new Date(1));
+		question.setType("text");
+		question.setDescription("Are u ok?");
 		questionList.add(question);
+		
 		return questionList;
 	}
 
 	@Override
 	public void loadQuestionByID(long id, Question question) {
+		
 		question.setId(1);
-		question.setTitle("How is going?");
+		question.setTitle("Greeting");
 		question.setCreated(new Date(0));
+		question.setType("text");
+		question.setDescription("How is going?");
+		
 	}
 
 	@Override
-	public List<Question> sortAllQuestions(String sort) {
+	public List<Question> sortAllQuestions(String sort, User user) {
+		
 		List<Question> questionList = new ArrayList<>();
+		
 		Question question1 = new Question();
 		question1.setId(1);
-		question1.setTitle("How is going?");
+		question1.setTitle("Greeting");
 		question1.setCreated(new Date(0));
+		question1.setType("text");
+		question1.setDescription("How is going?");
+		
 		Question question2 = new Question();
 		question2.setId(2);
-		question2.setTitle("Are you finished the assignment?");
+		question2.setTitle("Greeting");
 		question2.setCreated(new Date(1));
+		question2.setType("text");
+		question2.setDescription("Are u ok?");
+		
 		if(sort == "title") {
 			questionList.add(question2);
 			questionList.add(question1);
@@ -56,16 +77,21 @@ public class QuestionDBMock implements IQuestionPersistence  {
 			questionList.add(question1);
 			questionList.add(question2);
 		}
+		
 		return questionList;
 	}
 
 	@Override
 	public boolean deleteQuestion(long id) {
+		
 		Question question = new Question();
 		question.setId(1);
-		question.setTitle("How is going?");
+		question.setTitle("Greeting");
 		question.setCreated(new Date(0));
+		question.setType("text");
+		question.setDescription("How is going?");
 		question.setDefaults();
+		
 		return true;
 	}
 

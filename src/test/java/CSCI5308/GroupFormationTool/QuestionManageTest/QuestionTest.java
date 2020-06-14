@@ -24,13 +24,17 @@ public class QuestionTest {
 		Question question = new Question();
 		Assert.isTrue(question.getId() == -1);
 		Assert.isTrue(question.getTitle().isEmpty());
+		Assert.isTrue(question.getType().isEmpty());
+		Assert.isTrue(question.getDescription().isEmpty());
 		Assert.isNull(question.getCreated());
 
 		IQuestionPersistence questionDB = new QuestionDBMock();
 		question = new Question(1, questionDB);
 		Assert.isTrue(question.getId() == 1);
-		Assert.isTrue(question.getTitle().equals("How is going?"));
+		Assert.isTrue(question.getTitle().equals("Greeting"));
 		Assert.isTrue(question.getCreated().equals(new Date(0)));
+		Assert.isTrue(question.getType().equals("text"));
+		Assert.isTrue(question.getDescription().equals("How is going?"));
 	}
 	
 	@Test
@@ -53,16 +57,16 @@ public class QuestionTest {
 	public void setTitleTest() 
 	{
 		Question question = new Question();
-		question.setTitle("How is going?");
-		Assert.isTrue(question.getTitle().equals("How is going?"));
+		question.setTitle("Greeting");
+		Assert.isTrue(question.getTitle().equals("Greeting"));
 	}
 
 	@Test
 	public void getTitleTest() 
 	{
 		Question question = new Question();
-		question.setTitle("How is going?");
-		Assert.isTrue(question.getTitle().equals("How is going?"));
+		question.setTitle("Greeting");
+		Assert.isTrue(question.getTitle().equals("Greeting"));
 	}
 	
 	@Test
@@ -79,6 +83,34 @@ public class QuestionTest {
 		Question question = new Question();
 		question.setCreated(new Date(0));
 		Assert.isTrue(question.getCreated().equals(new Date(0)));
+	}
+	
+	@Test
+	public void setTypeTest() {
+		Question question = new Question();
+		question.setType("text");;
+		Assert.isTrue(question.getType().equals("text"));
+	}
+	
+	@Test
+	public void getTypeTest() {
+		Question question = new Question();
+		question.setType("text");;
+		Assert.isTrue(question.getType().equals("text"));
+	}
+	
+	@Test
+	public void getDescriptionTest() {
+		Question question = new Question();
+		question.setDescription("How is going?");;
+		Assert.isTrue(question.getDescription().equals("How is going?"));
+	}
+	
+	@Test
+	public void setDescriptionTest() {
+		Question question = new Question();
+		question.setDescription("How is going?");;
+		Assert.isTrue(question.getDescription().equals("How is going?"));
 	}
 
 	@Test
