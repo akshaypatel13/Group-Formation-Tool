@@ -35,7 +35,7 @@ public class SignupController
    	@RequestParam(name = EMAIL) String email)
 	{
 		boolean success = false;
-		if (User.isBannerIDValid(bannerID) &&
+		if (User.isFollowingSecurityRules(password) && User.isBannerIDValid(bannerID) &&
 			 User.isEmailValid(email) &&
 			 User.isFirstNameValid(firstName) &&
 			 User.isLastNameValid(lastName) &&

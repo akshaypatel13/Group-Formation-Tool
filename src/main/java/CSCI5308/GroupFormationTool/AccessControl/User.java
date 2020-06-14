@@ -3,6 +3,7 @@ package CSCI5308.GroupFormationTool.AccessControl;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import CSCI5308.GroupFormationTool.SystemConfig;
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
 
 public class User
@@ -21,6 +22,11 @@ public class User
 	public User()
 	{
 		setDefaults();
+	}
+	public static boolean isFollowingSecurityRules(String password)
+	{	
+		IPasswordSecurityPolicy passwordSecurityPolicy = SystemConfig.instance().getIPasswordSecurityPolicy();
+		return passwordSecurityPolicy.isFollowingSecurityRules(password);
 	}
 	
 	public User(long id, IUserPersistence persistence)
