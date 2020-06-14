@@ -1,32 +1,38 @@
 plugins {
-	id 'org.springframework.boot' version '2.2.7.RELEASE'
+	id 'org.springframework.boot' version '2.2.4.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
 }
 
-group = 'com.example'
+group = 'CSCI5308'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
+
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+}
 
 repositories {
 	mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-devtools'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	implementation 'org.springframework.session:spring-session-core'
+	compile "com.opencsv:opencsv:5.1"
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'mysql:mysql-connector-java'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
-	// https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
-	//testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0-M1'
 	testImplementation 'org.springframework.security:spring-security-test'
-	testCompile 'junit:junit:4.12'
 }
 
 test {
