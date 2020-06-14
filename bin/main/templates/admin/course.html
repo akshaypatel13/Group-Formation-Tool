@@ -15,15 +15,22 @@
 	           <input type="submit" value="Sign Out"/>
 	       </form>
 		</div>
-		<h1 th:text="'Course: ' + ${course.title}">Course: Title Not Found</h1>
-		<div th:if="${instructor} or ${ta}">
-			<br/>
-			<a th:href="@{/course/instructoradmin(id=${course.id})}">Course Administration</a>
+		<h1>Course Administration Page</h1>
+		<div>
+	  		<table>
+				<tr th:each="course : ${courses}">
+					<td><a th:href="@{/course/course(id=${course.id})}" th:text="${course.title}">Title</a></td>
+					<td><a th:href="@{/admin/assigninstructor(id=${course.id})}">Assign Instructor</a>
+					<td><a th:href="@{/admin/deletecourse(id=${course.id})}">Delete</a></td>
+				</tr>
+	  		</table>
 		</div>
-		
-		<div th:if="${instructor}">
-			<br/>
-			<a th:href="@{/question/question}">Question Bank</a>
+		<div>
+			<h4>Create a new course:</h4>
+			<form th:action="@{/admin/createcourse}" method="post">
+			    <div><label> Title : <input type="text" name="title"/> </label></div>
+			    <div><input type="submit" value="Create Course"/></div>
+			</form>
 		</div>
 	</body>
 </html>
