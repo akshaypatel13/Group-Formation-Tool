@@ -18,7 +18,14 @@ public class User
 	private String firstName;
 	private String lastName;
 	private String email;
+	public static String error;
 	
+	public static String getError() {
+		return error;
+	}
+	public static void setError(String err) {
+		error = err;
+	}
 	public User()
 	{
 		setDefaults();
@@ -26,7 +33,13 @@ public class User
 	public static boolean isFollowingSecurityRules(String password)
 	{	
 		IPasswordSecurityPolicy passwordSecurityPolicy = SystemConfig.instance().getIPasswordSecurityPolicy();
-		return passwordSecurityPolicy.isFollowingSecurityRules(password);
+		String result=passwordSecurityPolicy.isFollowingSecurityRules(password);
+		if(result!=null)
+		{
+			setError(result);
+			return false;
+		}
+		return true;
 	}
 	
 	public User(long id, IUserPersistence persistence)
