@@ -1,12 +1,7 @@
 package CSCI5308.GroupFormationTool.Security;
 
 import CSCI5308.GroupFormationTool.AccessControl.User;
-import CSCI5308.GroupFormationTool.Courses.Course;
-import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PasswordPolicy {
