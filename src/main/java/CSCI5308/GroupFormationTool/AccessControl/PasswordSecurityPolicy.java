@@ -6,26 +6,26 @@ import java.util.regex.Pattern;
 public class PasswordSecurityPolicy implements IPasswordSecurityPolicy {
 
 	// private static final String MIN_LENGTH = System.getenv("5");
-	private static final String MIN_LENGTH = System.getenv("min_length");
-	private static final String MIN_LENGTH_ENABLED = System.getenv("min_length_enabled");
-	private static final String MAX_LENGTH = System.getenv("max_length");
-	private static final String MAX_LENGTH_ENABLED = System.getenv("max_length_enabled");
-	private static final String MIN_UPPERCASE_CHARS = System.getenv("min_uppercase_chars");
-	private static final String MIN_UPPERCASE_CHARS_ENABLED = System.getenv("min_uppercase_chars_enabled");
-	private static final String MIN_LOWERCASE_CHARS = System.getenv("min_lowercase_chars");
-	private static final String MIN_LOWERCASE_CHARS_ENABLED = System.getenv("min_lowercase_chars_enabled");
-	private static final String MIN_SPECIAL_CHARS = System.getenv("min_special_chars");
-	private static final String MIN_SPECIAL_CHARS_ENABLED = System.getenv("min_special_chars_enabled");
-//	private static final String MIN_LENGTH = "5";
-//	private static final String MIN_LENGTH_ENABLED = "1";
-//	private static final String MAX_LENGTH = "8";
-//	private static final String MAX_LENGTH_ENABLED = "1";
-//	private static final String MIN_UPPERCASE_CHARS = "1";
-//	private static final String MIN_UPPERCASE_CHARS_ENABLED = "1";
-//	private static final String MIN_LOWERCASE_CHARS = "1";
-//	private static final String MIN_LOWERCASE_CHARS_ENABLED = "1";
-//	private static final String MIN_SPECIAL_CHARS = "2";
-//	private static final String MIN_SPECIAL_CHARS_ENABLED = "1";
+//	private static final String MIN_LENGTH = System.getenv("min_length");
+//	private static final String MIN_LENGTH_ENABLED = System.getenv("min_length_enabled");
+//	private static final String MAX_LENGTH = System.getenv("max_length");
+//	private static final String MAX_LENGTH_ENABLED = System.getenv("max_length_enabled");
+//	private static final String MIN_UPPERCASE_CHARS = System.getenv("min_uppercase_chars");
+//	private static final String MIN_UPPERCASE_CHARS_ENABLED = System.getenv("min_uppercase_chars_enabled");
+//	private static final String MIN_LOWERCASE_CHARS = System.getenv("min_lowercase_chars");
+//	private static final String MIN_LOWERCASE_CHARS_ENABLED = System.getenv("min_lowercase_chars_enabled");
+//	private static final String MIN_SPECIAL_CHARS = System.getenv("min_special_chars");
+//	private static final String MIN_SPECIAL_CHARS_ENABLED = System.getenv("min_special_chars_enabled");
+	private static final String MIN_LENGTH = "5";
+	private static final String MIN_LENGTH_ENABLED = "1";
+	private static final String MAX_LENGTH = "8";
+	private static final String MAX_LENGTH_ENABLED = "1";
+	private static final String MIN_UPPERCASE_CHARS = "1";
+	private static final String MIN_UPPERCASE_CHARS_ENABLED = "1";
+	private static final String MIN_LOWERCASE_CHARS = "1";
+	private static final String MIN_LOWERCASE_CHARS_ENABLED = "1";
+	private static final String MIN_SPECIAL_CHARS = "2";
+	private static final String MIN_SPECIAL_CHARS_ENABLED = "1";
 
 	private static final String LAST_X_PASSWORDS = "last_x_passwords";
 	private static final String LAST_X_PASSWORDS_ENABLED = "last_x_passwords_enabled";
@@ -49,7 +49,7 @@ public class PasswordSecurityPolicy implements IPasswordSecurityPolicy {
 					count++;
 				}
 			}
-			if (count > Integer.parseInt(MIN_UPPERCASE_CHARS)) {
+			if (count < Integer.parseInt(MIN_UPPERCASE_CHARS)) {
 				return "Minimum uppercase characters required in password : " + MIN_UPPERCASE_CHARS;
 			}
 		}
