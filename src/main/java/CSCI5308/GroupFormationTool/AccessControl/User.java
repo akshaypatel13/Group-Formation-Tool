@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.AccessControl;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -119,7 +120,7 @@ public class User
 	{
 		return email;
 	}
-	
+
 	public boolean isValidUser()
 	{
 		return id != -1; 

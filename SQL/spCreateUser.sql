@@ -17,6 +17,9 @@ BEGIN
     
     INSERT INTO UserContactInfo(userID, firstName, lastName, email)
     VALUES (@userID, firstName, lastName, email);
+
+    INSERT INTO Password(userID, previousPassword)
+    VALUES (@userID, password);
     
     SELECT Role.id
     INTO @guestRoleID

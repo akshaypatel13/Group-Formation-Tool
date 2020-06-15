@@ -2,6 +2,8 @@ package CSCI5308.GroupFormationTool.AccessControl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
 
@@ -95,6 +97,7 @@ public class UserDB implements IUserPersistence
 			proc.setParameter(5, user.getEmail());
 			proc.registerOutputParameterLong(6);
 			proc.execute();
+
 		}
 		catch (SQLException e)
 		{
@@ -116,4 +119,6 @@ public class UserDB implements IUserPersistence
 		// Coming in M2!
 		return false;
 	}
+
+
 }

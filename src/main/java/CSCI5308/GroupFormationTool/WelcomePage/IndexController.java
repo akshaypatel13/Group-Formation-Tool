@@ -1,5 +1,8 @@
 package CSCI5308.GroupFormationTool.WelcomePage;
 
+import CSCI5308.GroupFormationTool.AccessControl.CurrentUser;
+import CSCI5308.GroupFormationTool.AccessControl.User;
+import CSCI5308.GroupFormationTool.Security.PasswordPolicy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.security.core.Authentication;
@@ -22,6 +25,9 @@ public class IndexController
 			ICoursePersistence courseDB = SystemConfig.instance().getCourseDB();
 			List<Course> allCourses = courseDB.loadAllCourses();
 			model.addAttribute("courses", allCourses);
+
+			User u = CurrentUser.instance().getCurrentAuthenticatedUser();
+
 		}
 		return "index";
 	}
