@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import CSCI5308.GroupFormationTool.SystemConfig;
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
+import CSCI5308.GroupFormationTool.Security.IPasswordSecurityPolicy;
 
 public class User
 {

@@ -1,10 +1,9 @@
-package CSCI5308.GroupFormationTool.AccessControlTest;
+package CSCI5308.GroupFormationTool.SecurityTest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
-import CSCI5308.GroupFormationTool.AccessControl.IPasswordSecurityPolicyConfig;
 
 @SpringBootTest
 @SuppressWarnings("deprecation")

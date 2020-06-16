@@ -1,4 +1,4 @@
-package CSCI5308.GroupFormationTool.AccessControl;
+package CSCI5308.GroupFormationTool.Security;
 
 public interface IPasswordSecurityPolicy {
 	

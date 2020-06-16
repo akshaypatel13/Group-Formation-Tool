@@ -41,7 +41,7 @@ public class SystemConfig {
 		courseUserRelationshipDB = new CourseUserRelationshipDB();
 		questionDB = new QuestionDB();
 		passwordSecurityPolicy = new PasswordSecurityPolicy();
-		passwordSecurityPolicyConfig = new PasswordSecurityPolicyConfig();
+		passwordSecurityPolicyConfig =  new PasswordSecurityPolicyConfig();
 	}
 
 	// This is the way the rest of the application gets access to the System object.

@@ -1,6 +1,6 @@
-package CSCI5308.GroupFormationTool.AccessControlTest;
+package CSCI5308.GroupFormationTool.SecurityTest;
 
-import CSCI5308.GroupFormationTool.AccessControl.IPasswordSecurityPolicyConfig;
+import CSCI5308.GroupFormationTool.Security.IPasswordSecurityPolicyConfig;
 
 public class PasswordSecurityPolicyConfigMock implements IPasswordSecurityPolicyConfig{
 
@@ -75,5 +75,6 @@ public class PasswordSecurityPolicyConfigMock implements IPasswordSecurityPolicy
 	public String getCharsNotAllowedEnabled() {
 		return CHARS_NOT_ALLOWED_ENABLED;
 	}
+	
 
 }
