@@ -31,13 +31,8 @@ public class SignupController {
 			@RequestParam(name = EMAIL) String email) {
 		boolean success = false;
 		ModelAndView m;
-		if (!User.isFollowingSecurityRules(password)) {
+		if (User.isFollowingSecurityRules(password)) {
 
-			String err = User.getError();
-			m = new ModelAndView("signup");
-			m.addObject("errorMessage", err);
-
-		} else {
 			if (User.isBannerIDValid(bannerID) && User.isEmailValid(email) && User.isFirstNameValid(firstName)
 					&& User.isLastNameValid(lastName) && password.equals(passwordConfirm)) {
 				User u = new User();
@@ -59,7 +54,12 @@ public class SignupController {
 				m = new ModelAndView("signup");
 				m.addObject("errorMessage", "Invalid data, please check your values.");
 			}
-		}
+		} else {
+			String err = User.getError();
+			m = new ModelAndView("signup");
+			m.addObject("errorMessage", err);
+
+		} 
 		return m;
 	}
 }
