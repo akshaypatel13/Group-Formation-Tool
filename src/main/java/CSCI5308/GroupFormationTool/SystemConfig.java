@@ -26,6 +26,7 @@ public class SystemConfig {
 	private ICourseUserRelationshipPersistence courseUserRelationshipDB;
 	private IQuestionPersistence questionDB;
 	private IPasswordSecurityPolicy passwordSecurityPolicy;
+	private IPasswordSecurityPolicyConfig passwordSecurityPolicyConfig;
 
 	// This private constructor ensures that no class other than System can allocate
 	// the System object. The compiler would prevent it.
@@ -40,6 +41,7 @@ public class SystemConfig {
 		courseUserRelationshipDB = new CourseUserRelationshipDB();
 		questionDB = new QuestionDB();
 		passwordSecurityPolicy = new PasswordSecurityPolicy();
+		passwordSecurityPolicyConfig = new PasswordSecurityPolicyConfig();
 	}
 
 	// This is the way the rest of the application gets access to the System object.
@@ -54,6 +56,10 @@ public class SystemConfig {
 
 	public IPasswordSecurityPolicy getIPasswordSecurityPolicy() {
 		return passwordSecurityPolicy;
+	}
+	
+	public IPasswordSecurityPolicyConfig getIPasswordSecurityPolicyConfig() {
+		return passwordSecurityPolicyConfig;
 	}
 
 	public IPasswordEncryption getPasswordEncryption() {

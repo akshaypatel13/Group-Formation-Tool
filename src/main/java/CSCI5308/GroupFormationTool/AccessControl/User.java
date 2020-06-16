@@ -33,8 +33,8 @@ public class User
 	public static boolean isFollowingSecurityRules(String password)
 	{	
 		IPasswordSecurityPolicy passwordSecurityPolicy = SystemConfig.instance().getIPasswordSecurityPolicy();
-		String result=passwordSecurityPolicy.isFollowingSecurityRules(password);
-		if(result!=null)
+		String result = passwordSecurityPolicy.isFollowingSecurityRules(password);
+		if(result!= null)
 		{
 			setError(result);
 			return false;

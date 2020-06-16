@@ -149,5 +149,11 @@ public class UserTest
 		Assert.isTrue(!User.isEmailValid(""));
 		Assert.isTrue(!User.isEmailValid("@dal.ca"));
 		Assert.isTrue(!User.isEmailValid("rhawkey@"));
-	}	
+	}
+	
+	@Test
+	public void isFollowingSecurityRulesTest()
+	{
+		IPasswordSecurityPolicyConfig passwordPolicyMock = new PasswordSecurityPolicyConfigMock();
+	}
 }
