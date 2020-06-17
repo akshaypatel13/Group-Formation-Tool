@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.SecurityTest;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -36,6 +37,13 @@ public class PasswordSecurityPolicyTest {
 		when(passwordConfig.getMinSpecialChars()).thenReturn(passwordConfigMock.getMinSpecialChars());
 		when(passwordConfig.getMinSpecialCharsEnabled()).thenReturn(passwordConfigMock.getMinSpecialCharsEnabled());
 		
+		assertEquals("1", passwordConfig.getMinLength());
+		assertEquals("6", passwordConfig.getMaxLength());
+		assertEquals("1", passwordConfig.getMinUppercaseChars());
+		assertEquals("1", passwordConfig.getMinLowercaseChars());
+		assertEquals("#", passwordConfig.getCharsNotAllowed());
+		assertEquals("1", passwordConfig.getMinSpecialChars());
+		//returns err which should be null as password satisfies all conditions
 		assertNull(passwordSecurityPolicy.isFollowingSecurityRules(password));
 		
 	}

@@ -49,6 +49,12 @@ public class PasswordSecurityPolicy implements IPasswordSecurityPolicy {
 				specialCharCount++;
 			}
 		}
+		
+		if ((MIN_LENGTH_ENABLED == null) || (MAX_LENGTH_ENABLED == null) || (MIN_UPPERCASE_CHARS_ENABLED == null)
+				|| (MIN_LOWERCASE_CHARS_ENABLED == null)|| (MIN_SPECIAL_CHARS_ENABLED == null)|| (CHARS_NOT_ALLOWED_ENABLED == null)) {
+			return "Password security policy not found!!";
+		}
+		
 
 		if (Integer.parseInt(MIN_LENGTH_ENABLED) == 1) {
 			if (password.length() < Integer.parseInt(MIN_LENGTH)) {
