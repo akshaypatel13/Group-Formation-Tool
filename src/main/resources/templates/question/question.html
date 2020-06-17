@@ -12,7 +12,6 @@
 	  	<div sec:authorize="isAuthenticated()">
 	       <h4 th:inline="text">BannerID: [[${#httpServletRequest.remoteUser}]]</h4>
 	       <form th:action="@{/logout}" method="post">
-
 	           <input type="submit" value="Sign Out"/>
 	       </form>
 		</div>
@@ -22,7 +21,7 @@
 			<!-- Learned how to do this here: https://www.baeldung.com/thymeleaf-list -->
 			<h4>Available questions:</h4>
 			<form th:action="@{/question/create}">
-				<input type="submit" value="Create Question"/>
+	           <input type="submit" value="Create Question"/>
 	        </form><br>
 			<span>Sort by: </span>
 		   <a th:href="@{/question/title}">Title</a>
