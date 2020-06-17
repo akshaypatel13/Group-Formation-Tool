@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.ArrayList;
 import java.util.List;
 
+import CSCI5308.GroupFormationTool.AccessControl.IUserNotifications;
+import CSCI5308.GroupFormationTool.AccessControlTest.UserNotificationsMock;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
@@ -27,8 +29,9 @@ class StudentCSVImportTest
 		User user = new User();
 		Course course = new Course();
 		IUserPersistence userDB = new UserDBMock();
+		IUserNotifications userNotifications = new UserNotificationsMock();
 		IPasswordEncryption passwordEncryption = new PasswordEncryptionMock();
-		Assert.isTrue(user.createUser(userDB, passwordEncryption, null));
+		Assert.isTrue(user.createUser(userDB, passwordEncryption, userNotifications));
 		Assert.isTrue(course.enrollUserInCourse(Role.STUDENT, user) == false);
 	}
 

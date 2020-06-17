@@ -15,6 +15,7 @@ public class StudentCSVImport
 	private IUserPersistence userDB;
 	private IPasswordEncryption passwordEncryption;
 	private IStudentCSVParser parser;
+	private IUserNotifications userNotifications;
 	
 	public StudentCSVImport(IStudentCSVParser parser, Course course)
 	{
@@ -23,6 +24,7 @@ public class StudentCSVImport
 		failureResults = new ArrayList<String>();
 		userDB = SystemConfig.instance().getUserDB();
 		passwordEncryption = SystemConfig.instance().getPasswordEncryption();
+		userNotifications = SystemConfig.instance().getUserNotifications();
 		this.parser = parser;
 		enrollStudentFromRecord();
 	}
@@ -46,7 +48,7 @@ public class StudentCSVImport
 				user.setFirstName(firstName);
 				user.setLastName(lastName);
 				user.setEmail(email);
-				if (user.createUser(userDB, passwordEncryption, null))
+				if (user.createUser(userDB, passwordEncryption, userNotifications))
 				{
 					successResults.add("Created: " + userDetails);
 					userDB.loadUserByBannerID(bannerID, user);

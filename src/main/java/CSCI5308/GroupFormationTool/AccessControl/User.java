@@ -17,6 +17,9 @@ public class User
 	private String firstName;
 	private String lastName;
 	private String email;
+	// the reset token would be used when use forget password
+	// the reset token will be generate by uuid
+	private String resetToken;
 	
 	public User()
 	{
@@ -43,6 +46,7 @@ public class User
 		firstName = "";
 		lastName = "";
 		email = "";
+		resetToken = "";
 	}
 	
 	public void setID(long id)
@@ -118,6 +122,14 @@ public class User
 	public String getEmail()
 	{
 		return email;
+	}
+
+	public String getResetToken() {
+		return resetToken;
+	}
+
+	public void setResetToken(String resetToken) {
+		this.resetToken = resetToken;
 	}
 	
 	public boolean isValidUser()

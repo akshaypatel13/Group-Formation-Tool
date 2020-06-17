@@ -28,6 +28,7 @@ public class CustomAuthenticationManager implements AuthenticationManager
 			List<GrantedAuthority> rights = new ArrayList<GrantedAuthority>();
 			rights.add(new SimpleGrantedAuthority("ADMIN"));
 			// Return valid authentication token.
+			System.out.print("ADMIN roles ");
 			UsernamePasswordAuthenticationToken token;
 			token = new UsernamePasswordAuthenticationToken(authentication.getPrincipal(),
 																			authentication.getCredentials(),

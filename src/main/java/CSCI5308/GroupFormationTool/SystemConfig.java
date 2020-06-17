@@ -23,6 +23,7 @@ public class SystemConfig
 	private IDatabaseConfiguration databaseConfiguration;
 	private ICoursePersistence courseDB;
 	private ICourseUserRelationshipPersistence courseUserRelationshipDB;
+	private IUserNotifications UserNotifications;
 	
 	// This private constructor ensures that no class other than System can allocate
 	// the System object. The compiler would prevent it.
@@ -36,6 +37,7 @@ public class SystemConfig
 		databaseConfiguration = new DefaultDatabaseConfiguration();
 		courseDB = new CourseDB();
 		courseUserRelationshipDB = new CourseUserRelationshipDB();
+		UserNotifications = new UserNotifications();
 	}
 	
 	// This is the way the rest of the application gets access to the System object.
@@ -53,6 +55,11 @@ public class SystemConfig
 	public IPasswordEncryption getPasswordEncryption()
 	{
 		return passwordEncryption;
+	}
+
+	public IUserNotifications getUserNotifications()
+	{
+		return UserNotifications;
 	}
 	
 	public void setPasswordEncryption(IPasswordEncryption passwordEncryption)
