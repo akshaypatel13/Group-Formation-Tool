@@ -2,11 +2,13 @@ package CSCI5308.GroupFormationTool.QuestionManage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import CSCI5308.GroupFormationTool.AccessControl.User;
+import CSCI5308.GroupFormationTool.Courses.Course;
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
 
 /**
@@ -153,6 +155,60 @@ public class QuestionDB implements IQuestionPersistence {
 		catch (SQLException e)
 		{
 			// Logging needed
+			return false;
+		}
+		finally
+		{
+			if (null != proc)
+			{
+				proc.cleanup();
+			}
+		}
+		return true;
+	}
+
+	public boolean insertQuestion(Question question,User user)
+	{
+		CallStoredProcedure proc = null;
+		try
+		{
+			proc = new CallStoredProcedure("spInsertQuestion(?, ?, ?, ?, ?, ?)");
+			proc.setParameter(1, question.getTitle());
+			proc.setParameter(2,question.getDescription());
+			proc.setParameter(3,question.getType());
+			proc.setParameter(4, LocalDate.now().toString());
+			proc.setParameter(5,user.getID());
+			proc.registerOutputParameterLong(6);
+			proc.execute();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+		finally
+		{
+			if (null != proc)
+			{
+				proc.cleanup();
+			}
+		}
+		return true;
+	}
+
+	public boolean insertOptions(Options options)
+	{
+		CallStoredProcedure proc = null;
+		try
+		{
+			proc = new CallStoredProcedure("spInsertOptions(?, ?)");
+			proc.setParameter(1, options.getDescription());
+			proc.setParameter(2,options.getStoredas());
+			proc.execute();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
 			return false;
 		}
 		finally

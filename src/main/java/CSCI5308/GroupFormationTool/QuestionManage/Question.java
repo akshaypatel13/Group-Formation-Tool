@@ -1,5 +1,7 @@
 package CSCI5308.GroupFormationTool.QuestionManage;
 
+import CSCI5308.GroupFormationTool.AccessControl.User;
+
 import java.util.Date;
 
 /**
@@ -7,25 +9,27 @@ import java.util.Date;
  * @author nieruize
  *
  */
-public class Question {
+public class 	Question {
 	
 	private long id;
 	private String title;
 	private String description;
 	private String type;
 	private Date created;
+	private long instruct_id;
 	
 	public Question()
 	{
 		setDefaults();
 	}
-	
+
 	public void setDefaults()
 	{
 		id = -1;
 		title = "";
 		description = "";
 		type = "";
+		instruct_id=-1;
 		created = null;
 	}
 
@@ -76,17 +80,27 @@ public class Question {
 		this.type = type;
 	}
 
-//	Need implement by Akashy
-//	public boolean createQuestion(IQuestionPersistence questionDB)
-//	{
-//		return questionDB.createQuestion(this);
-//	}
-	
+
+	public long getInstruct_id() {
+		return instruct_id;
+	}
+
+	public void setInstruct_id(long instruct_id) {
+		this.instruct_id = instruct_id;
+	}
+
+
+
+	public boolean insertQuestion(IQuestionPersistence questionDB, User user)
+	{
+		return questionDB.insertQuestion(this, user);
+	}
+
 	public boolean delete(IQuestionPersistence questionDB)
 	{
 		return questionDB.deleteQuestion(id);
 	}
 
-	
+
 	
 }

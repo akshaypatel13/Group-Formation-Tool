@@ -14,4 +14,7 @@ public interface IQuestionPersistence {
 	public void loadQuestionByID(long id, Question question);
 	public List<Question> sortAllQuestions(String sort, User user);
 	public boolean deleteQuestion(long id);
+	public boolean insertQuestion(Question question,User user);
+	public boolean insertOptions(Options options);
+
 }
