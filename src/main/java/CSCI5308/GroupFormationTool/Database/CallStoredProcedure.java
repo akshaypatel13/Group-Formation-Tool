@@ -68,7 +68,6 @@ public class CallStoredProcedure
 	{
 		statement.registerOutParameter(paramIndex, java.sql.Types.BIGINT);
 	}
-
 	
 	public ResultSet executeWithResults() throws SQLException
 	{

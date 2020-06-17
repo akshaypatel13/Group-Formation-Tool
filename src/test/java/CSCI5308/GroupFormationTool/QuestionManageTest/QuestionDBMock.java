@@ -1,13 +1,11 @@
 package CSCI5308.GroupFormationTool.QuestionManageTest;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
 import CSCI5308.GroupFormationTool.AccessControl.User;
 import CSCI5308.GroupFormationTool.QuestionManage.IQuestionPersistence;
-import CSCI5308.GroupFormationTool.QuestionManage.Options;
 import CSCI5308.GroupFormationTool.QuestionManage.Question;
 
 /**
@@ -94,23 +92,6 @@ public class QuestionDBMock implements IQuestionPersistence  {
 		question.setDescription("How is going?");
 		question.setDefaults();
 		
-		return true;
-	}
-
-	@Override
-	public boolean insertQuestion(Question question, User user) {
-		question.setTitle("Hello");
-		question.setDescription("How are you?");
-		question.setType("Numeric");
-		question.setCreated(new Date("13/04/2015"));
-		question.setInstruct_id(1);
-		return true;
-	}
-
-	@Override
-	public boolean insertOptions(Options options) {
-		options.setStoredas(1);
-		options.setDescription("Option1");
 		return true;
 	}
 
