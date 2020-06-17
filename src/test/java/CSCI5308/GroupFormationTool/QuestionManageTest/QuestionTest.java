@@ -2,12 +2,19 @@ package CSCI5308.GroupFormationTool.QuestionManageTest;
 
 
 import java.util.Date;
+
+import CSCI5308.GroupFormationTool.AccessControl.User;
+import CSCI5308.GroupFormationTool.QuestionManage.Options;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
 import CSCI5308.GroupFormationTool.QuestionManage.IQuestionPersistence;
 import CSCI5308.GroupFormationTool.QuestionManage.Question;
+
+import javax.validation.constraints.AssertFalse;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * 
@@ -114,11 +121,37 @@ public class QuestionTest {
 	}
 
 	@Test
-	public void deleteCourseTest() 
+	public void delete()
 	{
 		IQuestionPersistence questionDB = new QuestionDBMock();
 		boolean status = questionDB.deleteQuestion(1);
 		Assert.isTrue(status);
+	}
+
+	@Test
+	public void insertQuestion(){
+		IQuestionPersistence questionDB = new QuestionDBMock();
+		Question question=new Question();
+		User user=new User();
+		questionDB.insertQuestion(question,user);
+		Assert.isTrue(question.getTitle().equals("Hello"));
+		Assert.isTrue(question.getDescription().equals("How are you?"));
+		Assert.isTrue(question.getType().equals("Numeric"));
+		Assert.isTrue(question.getCreated().equals(new Date("13/04/2015")));
+		Assert.isTrue(question.getInstruct_id()==1);
+	}
+
+	@Test
+	public void insertQuestionFalse(){
+		IQuestionPersistence questionDB = new QuestionDBMock();
+		Question question=new Question();
+		User user=new User();
+		questionDB.insertQuestion(question,user);
+		assertFalse(question.getTitle().equals("Hi"));
+		assertFalse(question.getDescription().equals("How?"));
+		assertFalse(question.getType().equals("Num"));
+		assertFalse(question.getCreated().equals(new Date("13/04/2025")));
+		assertFalse(question.getInstruct_id()==12);
 	}
 
 }
