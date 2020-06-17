@@ -66,7 +66,7 @@ public class QuestionController {
     @GetMapping("/question/create")
     public String createQuestion(Model model) {
         model.addAttribute("questionTypes", questionTypes);
-        return "/question/questioninsert";
+        return "question/questioninsert";
     }
 
     @RequestMapping(value = "/question/insert", method = RequestMethod.POST)
@@ -88,7 +88,7 @@ public class QuestionController {
             OptionsList opts=new OptionsList();
             opts.add(5);
             model.addAttribute("opts",opts);
-            return "/question/question_options";
+            return "question/question_options";
         }
 
     }
