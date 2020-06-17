@@ -6,6 +6,7 @@ import java.util.List;
 import CSCI5308.GroupFormationTool.SystemConfig;
 import CSCI5308.GroupFormationTool.AccessControl.*;
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class StudentCSVImport
 {
@@ -16,7 +17,7 @@ public class StudentCSVImport
 	private IPasswordEncryption passwordEncryption;
 	private IStudentCSVParser parser;
 	private IUserNotifications userNotifications;
-	
+
 	public StudentCSVImport(IStudentCSVParser parser, Course course)
 	{
 		this.course = course;

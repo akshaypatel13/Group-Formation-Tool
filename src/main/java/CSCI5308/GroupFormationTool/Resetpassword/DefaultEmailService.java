@@ -1,24 +1,21 @@
-package CSCI5308.GroupFormationTool.resetpassword;
+package CSCI5308.GroupFormationTool.Resetpassword;
 
+import CSCI5308.GroupFormationTool.AccessControl.DefaultJavaMailSender;
 import CSCI5308.GroupFormationTool.AccessControl.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Service
+
 public class DefaultEmailService implements IEmailService {
 
-	@Autowired
-	private JavaMailSender mailSender;
-	
+	DefaultJavaMailSender javaMailSender = new DefaultJavaMailSender();
+	JavaMailSender mailSender = javaMailSender.getJavaMailSender();
+
 	@Async
 	public void sendEmail(User user, HttpServletRequest request) {
-
-
 		String appUrl = request.getScheme() + "://" + request.getServerName();
 
 		// Email message

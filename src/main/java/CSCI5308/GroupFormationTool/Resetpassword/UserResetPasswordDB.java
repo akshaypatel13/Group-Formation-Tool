@@ -1,4 +1,4 @@
-package CSCI5308.GroupFormationTool.resetpassword;
+package CSCI5308.GroupFormationTool.Resetpassword;
 
 import CSCI5308.GroupFormationTool.AccessControl.User;
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;

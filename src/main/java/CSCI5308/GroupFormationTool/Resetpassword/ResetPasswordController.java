@@ -1,11 +1,10 @@
-package CSCI5308.GroupFormationTool.resetpassword;
+package CSCI5308.GroupFormationTool.Resetpassword;
 
 import CSCI5308.GroupFormationTool.AccessControl.IUserPersistence;
 import CSCI5308.GroupFormationTool.AccessControl.User;
 import CSCI5308.GroupFormationTool.Security.BCryptPasswordEncryption;
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
 import CSCI5308.GroupFormationTool.SystemConfig;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,14 +20,15 @@ public class ResetPasswordController {
 	
 	private IResetPasswordService resetPasswordService;
 	private IUserPersistence userDB;
-	
-	@Autowired
-	private DefaultEmailService emailServiceImpl;
+
+	private IEmailService emailService;
 	
 	public ResetPasswordController() {
 		resetPasswordService = new DefaultResetPasswordService(
 				new UserResetPasswordDAO(),
 				new UserResetPasswordDB());
+
+		emailService = SystemConfig.instance().getEmailService();
 	}
 	
 	@GetMapping("/resetPassword")
@@ -41,12 +41,10 @@ public class ResetPasswordController {
 			HttpServletRequest request,
 			Model theModel) {
 
-		System.out.print(bannerID);
 		// look up user in database by bannerID
 		userDB = SystemConfig.instance().getUserDB();
 		User user = new User();
 		userDB.loadUserByBannerID(bannerID, user);
-		System.out.print(user.getEmail());
 		if (!user.isValidUser())
 		{
 			theModel.addAttribute("message", "We didn't find an account for that e-mail address.");
@@ -56,7 +54,7 @@ public class ResetPasswordController {
 			// generate uuid used as reset_token
 			user.setResetToken(UUID.randomUUID().toString().replace("-", ""));
 			resetPasswordService.saveUserResetToken(user);
-			emailServiceImpl.sendEmail(user, request);
+			emailService.sendEmail(user, request);
 		}
 		
 		return "messageDisplay";

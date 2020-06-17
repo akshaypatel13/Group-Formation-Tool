@@ -1,7 +1,6 @@
-package CSCI5308.GroupFormationTool.resetpassword;
+package CSCI5308.GroupFormationTool.Resetpassword;
 
 import CSCI5308.GroupFormationTool.AccessControl.User;
-import org.springframework.mail.SimpleMailMessage;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -4,6 +4,8 @@ import CSCI5308.GroupFormationTool.Security.*;
 import CSCI5308.GroupFormationTool.AccessControl.*;
 import CSCI5308.GroupFormationTool.Database.*;
 import CSCI5308.GroupFormationTool.Courses.*;
+import CSCI5308.GroupFormationTool.Resetpassword.DefaultEmailService;
+import CSCI5308.GroupFormationTool.Resetpassword.IEmailService;
 
 /*
  * This is a singleton, we will learn about these when we learn design patterns.
@@ -23,7 +25,9 @@ public class SystemConfig
 	private IDatabaseConfiguration databaseConfiguration;
 	private ICoursePersistence courseDB;
 	private ICourseUserRelationshipPersistence courseUserRelationshipDB;
-	private IUserNotifications UserNotifications;
+	private IUserNotifications userNotifications;
+	private IEmailService emailService;
+
 	
 	// This private constructor ensures that no class other than System can allocate
 	// the System object. The compiler would prevent it.
@@ -37,7 +41,8 @@ public class SystemConfig
 		databaseConfiguration = new DefaultDatabaseConfiguration();
 		courseDB = new CourseDB();
 		courseUserRelationshipDB = new CourseUserRelationshipDB();
-		UserNotifications = new UserNotifications();
+		userNotifications = new UserNotifications();
+		emailService = new DefaultEmailService();
 	}
 	
 	// This is the way the rest of the application gets access to the System object.
@@ -59,14 +64,25 @@ public class SystemConfig
 
 	public IUserNotifications getUserNotifications()
 	{
-		return UserNotifications;
+		return userNotifications;
+	}
+
+	public void setUserNotifications(IUserNotifications userNotifications){
+		this.userNotifications = userNotifications;
 	}
 	
 	public void setPasswordEncryption(IPasswordEncryption passwordEncryption)
 	{
 		this.passwordEncryption = passwordEncryption;
 	}
-	
+	public IEmailService getEmailService(){
+		return emailService;
+	}
+
+	public void setEmailService(IEmailService emailService) {
+		this.emailService = emailService;
+	}
+
 	public IUserPersistence getUserDB()
 	{
 		return userDB;
