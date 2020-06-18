@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
@@ -25,14 +26,17 @@ public class ResetPasswordController {
 	private IEmailService emailService;
 
 	private IPasswordSecurityPolicy passwordSecurityPolicy;
-	
+
+	private IPasswordEncryption passwordEncryption;
+
 	public ResetPasswordController() {
 		resetPasswordService = new DefaultResetPasswordService(
 				new UserResetPasswordDAO(),
 				new UserResetPasswordDB());
 
 		emailService = SystemConfig.instance().getEmailService();
-		passwordSecurityPolicy = SystemConfig.instance().getPasswordSecurityPolicy();
+		passwordSecurityPolicy = SystemConfig.instance().getIPasswordSecurityPolicy();
+		passwordEncryption = SystemConfig.instance().getPasswordEncryption();
 	}
 	
 	@GetMapping("/resetPassword")
@@ -74,25 +78,33 @@ public class ResetPasswordController {
 	public String confirmPasswordPost(@PathVariable("param") String resetToken,
 			@RequestParam("password") String password,
 			Model theModel) {
-		
 		User user = resetPasswordService.findUserByResetToken(resetToken);
 
+
 		if(user!=null) {
-			IPasswordEncryption passwordEncryption = new BCryptPasswordEncryption();
-			password = passwordEncryption.encryptPassword(password);
-			if (passwordSecurityPolicy.checkPreviousPassword(user)){
+			if (!User.isFollowingSecurityRules(password)){
+				theModel.addAttribute("errorMessage", User.getError());
+				theModel.addAttribute("resetToken", resetToken);
+				return "confirmPassword";
+			}
+
+			if (passwordSecurityPolicy.checkPreviousPassword(user, password)){
+				password = passwordEncryption.encryptPassword(password);
 				user.setPassword(password);
 				resetPasswordService.saveUserPassword(user);
 				theModel.addAttribute("message", "Password reset success!");
 			}
 			else{
-				theModel.addAttribute("message", "New Password cannot be equal to previous passwords");
+				theModel.addAttribute("errorMessage", "New Password cannot be equal to previous passwords");
+				theModel.addAttribute("resetToken", resetToken);
+				return "confirmPassword";
 			}
 
 		}else {
+
 			theModel.addAttribute("message", "Invalid Reset Token");
 		}
-		
+
 		return "messageDisplay";
 	}
 	

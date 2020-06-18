@@ -54,10 +54,11 @@ public class PasswordSecurityPolicyTest {
 	@Test
 	public void checkPreviousPasswordTest(){
 		IPasswordManager passwordManager = new PasswordManagerMock();
-		IPasswordSecurityPolicy passwordSecurityPolicy = new PasswordSecurityPolicy(passwordManager);
+		IPasswordSecurityPolicyConfig passwordSecurityPolicyConfig = new PasswordSecurityPolicyConfigMock();
+		IPasswordSecurityPolicy passwordSecurityPolicy = new PasswordSecurityPolicy(passwordManager, passwordSecurityPolicyConfig);
 		IUserPersistence userDBMock = new UserDBMock();
 		User u = new User(1, userDBMock);
-		Assert.isTrue(passwordSecurityPolicy.checkPreviousPassword(u));
+		Assert.isTrue(passwordSecurityPolicy.checkPreviousPassword(u, "password"));
 	}
 
 }

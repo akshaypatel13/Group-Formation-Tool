@@ -44,6 +44,8 @@ public class CustomAuthenticationManager implements AuthenticationManager
 	private Authentication checkNormal(String password, User u, Authentication authentication) throws AuthenticationException
 	{
 		IPasswordEncryption passwordEncryption = SystemConfig.instance().getPasswordEncryption();
+		System.out.println(password);
+		System.out.println(u.getPassword());
 		if (passwordEncryption.matches(password, u.getPassword()))
 		{
 			// Grant USER rights system-wide, this is used to protect controller mappings.

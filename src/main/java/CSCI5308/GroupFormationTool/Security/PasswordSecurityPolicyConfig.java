@@ -2,18 +2,6 @@ package CSCI5308.GroupFormationTool.Security;
 
 public class PasswordSecurityPolicyConfig implements IPasswordSecurityPolicyConfig {
 
-//	private static String MIN_LENGTH = "2";
-//	private static String MIN_LENGTH_ENABLED = "1";
-//	private static String MAX_LENGTH = "8";
-//	private static String MAX_LENGTH_ENABLED = "1";
-//	private static String MIN_UPPERCASE_CHARS = "1";
-//	private static String MIN_UPPERCASE_CHARS_ENABLED = "0";
-//	private static String MIN_LOWERCASE_CHARS = "1";
-//	private static String MIN_LOWERCASE_CHARS_ENABLED = "0";
-//	private static String MIN_SPECIAL_CHARS = "2";
-//	private static String MIN_SPECIAL_CHARS_ENABLED = "0";
-//	private static String CHARS_NOT_ALLOWED = "#";
-//	private static String CHARS_NOT_ALLOWED_ENABLED = "1";
 
 	private static String MIN_LENGTH;
 	private static String MIN_LENGTH_ENABLED;
@@ -59,7 +47,6 @@ public class PasswordSecurityPolicyConfig implements IPasswordSecurityPolicyConf
 		setPasswordHistoryCount(System.getenv("password_history_count"));
 		setPasswordHistoryEnabled(System.getenv("password_history_enabled"));
 
-		
 	}
 
 	@Override
@@ -201,7 +188,5 @@ public class PasswordSecurityPolicyConfig implements IPasswordSecurityPolicyConf
 	public void setCharsNotAllowedEnabled(String charsNotAllowedEnabled) {
 		CHARS_NOT_ALLOWED_ENABLED = charsNotAllowedEnabled;
 	}
-
-
 
 }

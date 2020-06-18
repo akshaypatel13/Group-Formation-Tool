@@ -22,14 +22,13 @@ public class PasswordSecurityPolicy implements IPasswordSecurityPolicy {
 	private static String PASSWORD_HISTORY_COUNT;
 	private static String PASSWORD_HISTORY_ENABLED;
 
-	IPasswordSecurityPolicyConfig passwordSecurityPolicyConfig;
+	private IPasswordSecurityPolicyConfig passwordSecurityPolicyConfig;
 
 	private IPasswordManager passwordManager;
 
-	public PasswordSecurityPolicy(IPasswordManager passwordManager){
+	public PasswordSecurityPolicy(IPasswordManager passwordManager, IPasswordSecurityPolicyConfig passwordSecurityPolicyConfig){
 		this.passwordManager = passwordManager;
-		passwordSecurityPolicyConfig =  SystemConfig.instance()
-				.getPasswordSecurityPolicyConfig();
+		this.passwordSecurityPolicyConfig =  passwordSecurityPolicyConfig;
 	}
 
 	public String isFollowingSecurityRules(String password) {
@@ -46,7 +45,6 @@ public class PasswordSecurityPolicy implements IPasswordSecurityPolicy {
 		MIN_SPECIAL_CHARS_ENABLED = passwordSecurityPolicyConfig.getMinSpecialCharsEnabled();
 		CHARS_NOT_ALLOWED = passwordSecurityPolicyConfig.getCharsNotAllowed();
 		CHARS_NOT_ALLOWED_ENABLED = passwordSecurityPolicyConfig.getCharsNotAllowedEnabled();
-
 
 		int upperCaseCount = 0;
 		int lowerCaseCount = 0;
@@ -110,7 +108,7 @@ public class PasswordSecurityPolicy implements IPasswordSecurityPolicy {
 	}
 
 	@Override
-	public boolean checkPreviousPassword(User U) {
+	public boolean checkPreviousPassword(User U, String password) {
 
 		PASSWORD_HISTORY_ENABLED = passwordSecurityPolicyConfig.getPasswordHistoryEnabled();
 		PASSWORD_HISTORY_COUNT = passwordSecurityPolicyConfig.getPasswordHistoryCount();
@@ -120,11 +118,17 @@ public class PasswordSecurityPolicy implements IPasswordSecurityPolicy {
 		}
 
 		List<String> previousPasswords = passwordManager.getPreviousPasswords(U, Integer.parseInt(PASSWORD_HISTORY_COUNT));
+		System.out.println(previousPasswords);
+		System.out.println(password);
+		IPasswordEncryption passwordEncryption = SystemConfig.instance().getPasswordEncryption();
+
 		for(int i=0;i<previousPasswords.size();i++){
-			if (previousPasswords.get(i).equals(U.getPassword()))
-				return true;
+			if (passwordEncryption.matches(password, previousPasswords.get(i)))
+			{
+				return false;
+			}
 		}
-		return false;
+		return true;
 	}
 
 }
