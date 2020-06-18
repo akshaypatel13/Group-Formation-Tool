@@ -32,8 +32,9 @@ public class SystemConfig {
 
 	
 	private IQuestionPersistence questionDB;
-	private IPasswordSecurityPolicy passwordSecurityPolicy;
 	private IPasswordSecurityPolicyConfig passwordSecurityPolicyConfig;
+	private IPasswordSecurityPolicy passwordSecurityPolicy;
+	private IPasswordManager passwordManager;
 
 
 	// This private constructor ensures that no class other than System can allocate
@@ -42,6 +43,7 @@ public class SystemConfig {
 		// The default instantiations are the choices that would be used in the
 		// production application. These choices can all be overridden by test
 		// setup logic when necessary.
+
 		passwordEncryption = new BCryptPasswordEncryption();
 		userDB = new UserDB();
 		databaseConfiguration = new DefaultDatabaseConfiguration();
@@ -51,8 +53,11 @@ public class SystemConfig {
 		emailService = new DefaultEmailService();
 
 		questionDB = new QuestionDB();
-		passwordSecurityPolicy = new PasswordSecurityPolicy();
+
 		passwordSecurityPolicyConfig =  new PasswordSecurityPolicyConfig();
+		passwordManager = new DefaultPasswordManager();
+
+		passwordSecurityPolicy = new PasswordSecurityPolicy(passwordManager, passwordSecurityPolicyConfig);
 
 	}
 
@@ -140,5 +145,9 @@ public class SystemConfig {
 
 	public IQuestionPersistence getQuestionDB() {
 		return questionDB;
+	}
+
+	public IPasswordManager getPasswordManager(){
+		return passwordManager;
 	}
 }

@@ -26,6 +26,10 @@ public interface IPasswordSecurityPolicyConfig {
 
 	public String getMinLowercaseCharsEnabled();
 
+	public String getPasswordHistoryEnabled();
+
+	public String getPasswordHistoryCount();
+
 	public void setCharsNotAllowedEnabled(String charsNotAllowedEnabled);
 
 	public void setCharsNotAllowed(String charsNotAllowed);
@@ -49,5 +53,9 @@ public interface IPasswordSecurityPolicyConfig {
 	public void setMaxLengthEnabled(String maxLengthEnabled);
 
 	public void setMinUppercaseChars(String minUppercaseChars);
+
+	public void setPasswordHistoryCount(String passwordHistoryCount);
+
+	public void setPasswordHistoryEnabled(String passwordHistoryEnabled);
 
 }

@@ -5,12 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import CSCI5308.GroupFormationTool.AccessControl.IUserPersistence;
+import CSCI5308.GroupFormationTool.AccessControl.User;
+import CSCI5308.GroupFormationTool.AccessControlTest.UserDBMock;
+import CSCI5308.GroupFormationTool.Security.*;
+import CSCI5308.GroupFormationTool.SystemConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import CSCI5308.GroupFormationTool.Security.IPasswordSecurityPolicyConfig;
-import CSCI5308.GroupFormationTool.Security.PasswordSecurityPolicy;
-import CSCI5308.GroupFormationTool.Security.PasswordSecurityPolicyConfig;
+import org.springframework.util.Assert;
 
 
 @SpringBootTest
@@ -46,6 +49,16 @@ public class PasswordSecurityPolicyTest {
 		//returns err which should be null as password satisfies all conditions
 		assertNull(passwordSecurityPolicy.isFollowingSecurityRules(password));
 		
+	}
+
+	@Test
+	public void checkPreviousPasswordTest(){
+		IPasswordManager passwordManager = new PasswordManagerMock();
+		IPasswordSecurityPolicyConfig passwordSecurityPolicyConfig = new PasswordSecurityPolicyConfigMock();
+		IPasswordSecurityPolicy passwordSecurityPolicy = new PasswordSecurityPolicy(passwordManager, passwordSecurityPolicyConfig);
+		IUserPersistence userDBMock = new UserDBMock();
+		User u = new User(1, userDBMock);
+		Assert.isTrue(passwordSecurityPolicy.checkPreviousPassword(u, "password"));
 	}
 
 }

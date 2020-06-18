@@ -16,6 +16,8 @@ public class PasswordSecurityPolicyConfigMock implements IPasswordSecurityPolicy
 	private static String MIN_SPECIAL_CHARS_ENABLED;
 	private static String CHARS_NOT_ALLOWED;
 	private static String CHARS_NOT_ALLOWED_ENABLED;
+	private static String PASSWORD_HISTORY_ENABLED;
+	private static String PASSWORD_HISTORY_COUNT;
 
 	public PasswordSecurityPolicyConfigMock() {
 		setMinLength("1");
@@ -36,6 +38,8 @@ public class PasswordSecurityPolicyConfigMock implements IPasswordSecurityPolicy
 		setCharsNotAllowed("#");
 		setCharsNotAllowedEnabled("1");
 
+		setPasswordHistoryEnabled("1");
+		setPasswordHistoryCount("3");
 	}
 
 	@Override
@@ -89,6 +93,16 @@ public class PasswordSecurityPolicyConfigMock implements IPasswordSecurityPolicy
 	}
 
 	@Override
+	public void setPasswordHistoryCount(String passwordHistoryCount) {
+		PASSWORD_HISTORY_COUNT = passwordHistoryCount;
+	}
+
+	@Override
+	public void setPasswordHistoryEnabled(String passwordHistoryEnabled) {
+		PASSWORD_HISTORY_ENABLED = passwordHistoryEnabled;
+	}
+
+	@Override
 	public String getMinUppercaseCharsEnabled() {
 		return MIN_UPPERCASE_CHARS_ENABLED;
 	}
@@ -111,6 +125,16 @@ public class PasswordSecurityPolicyConfigMock implements IPasswordSecurityPolicy
 	@Override
 	public String getMinLowercaseCharsEnabled() {
 		return MIN_LOWERCASE_CHARS_ENABLED;
+	}
+
+	@Override
+	public String getPasswordHistoryEnabled() {
+		return PASSWORD_HISTORY_ENABLED;
+	}
+
+	@Override
+	public String getPasswordHistoryCount() {
+		return PASSWORD_HISTORY_COUNT;
 	}
 
 	@Override
@@ -157,5 +181,6 @@ public class PasswordSecurityPolicyConfigMock implements IPasswordSecurityPolicy
 	public void setCharsNotAllowedEnabled(String charsNotAllowedEnabled) {
 		CHARS_NOT_ALLOWED_ENABLED = charsNotAllowedEnabled;
 	}
+
 
 }

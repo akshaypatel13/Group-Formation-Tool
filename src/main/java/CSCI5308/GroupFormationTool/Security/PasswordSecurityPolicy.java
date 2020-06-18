@@ -1,6 +1,9 @@
 package CSCI5308.GroupFormationTool.Security;
 
+import CSCI5308.GroupFormationTool.AccessControl.User;
 import CSCI5308.GroupFormationTool.SystemConfig;
+
+import java.util.List;
 
 public class PasswordSecurityPolicy implements IPasswordSecurityPolicy {
 
@@ -16,10 +19,20 @@ public class PasswordSecurityPolicy implements IPasswordSecurityPolicy {
 	private static String MIN_SPECIAL_CHARS_ENABLED;
 	private static String CHARS_NOT_ALLOWED;
 	private static String CHARS_NOT_ALLOWED_ENABLED;
+	private static String PASSWORD_HISTORY_COUNT;
+	private static String PASSWORD_HISTORY_ENABLED;
+
+	private IPasswordSecurityPolicyConfig passwordSecurityPolicyConfig;
+
+	private IPasswordManager passwordManager;
+
+	public PasswordSecurityPolicy(IPasswordManager passwordManager, IPasswordSecurityPolicyConfig passwordSecurityPolicyConfig){
+		this.passwordManager = passwordManager;
+		this.passwordSecurityPolicyConfig =  passwordSecurityPolicyConfig;
+	}
 
 	public String isFollowingSecurityRules(String password) {
-		IPasswordSecurityPolicyConfig passwordSecurityPolicyConfig = SystemConfig.instance()
-				.getIPasswordSecurityPolicyConfig();
+
 		MIN_LENGTH = passwordSecurityPolicyConfig.getMinLength();
 		MIN_LENGTH_ENABLED = passwordSecurityPolicyConfig.getMinLengthEnabled();
 		MAX_LENGTH = passwordSecurityPolicyConfig.getMaxLength();
@@ -92,6 +105,30 @@ public class PasswordSecurityPolicy implements IPasswordSecurityPolicy {
 		}
 
 		return null;
+	}
+
+	@Override
+	public boolean checkPreviousPassword(User U, String password) {
+
+		PASSWORD_HISTORY_ENABLED = passwordSecurityPolicyConfig.getPasswordHistoryEnabled();
+		PASSWORD_HISTORY_COUNT = passwordSecurityPolicyConfig.getPasswordHistoryCount();
+
+		if (Integer.parseInt(PASSWORD_HISTORY_ENABLED) == 0){
+			return true;
+		}
+
+		List<String> previousPasswords = passwordManager.getPreviousPasswords(U, Integer.parseInt(PASSWORD_HISTORY_COUNT));
+		System.out.println(previousPasswords);
+		System.out.println(password);
+		IPasswordEncryption passwordEncryption = SystemConfig.instance().getPasswordEncryption();
+
+		for(int i=0;i<previousPasswords.size();i++){
+			if (passwordEncryption.matches(password, previousPasswords.get(i)))
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 
 }
