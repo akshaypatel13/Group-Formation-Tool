@@ -98,10 +98,13 @@ public class PasswordSecurityPolicy implements IPasswordSecurityPolicy {
 			}
 		}
 		if (Integer.parseInt(CHARS_NOT_ALLOWED_ENABLED) == 1) {
-			if (password != null && password.contains(CHARS_NOT_ALLOWED)) {
+		
+			for(int i=0;i<CHARS_NOT_ALLOWED.length();i++) {
+				if(password!=null && password.indexOf(CHARS_NOT_ALLOWED.charAt(i)) >= 0) {
 				return "Characters not allowed in password : " + CHARS_NOT_ALLOWED;
 			}
 
+		}
 		}
 
 		return null;
