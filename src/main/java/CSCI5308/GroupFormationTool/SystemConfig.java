@@ -6,6 +6,8 @@ import CSCI5308.GroupFormationTool.Database.*;
 import CSCI5308.GroupFormationTool.QuestionManage.IQuestionPersistence;
 import CSCI5308.GroupFormationTool.QuestionManage.QuestionDB;
 import CSCI5308.GroupFormationTool.Courses.*;
+import CSCI5308.GroupFormationTool.Resetpassword.DefaultEmailService;
+import CSCI5308.GroupFormationTool.Resetpassword.IEmailService;
 
 /*
  * This is a singleton, we will learn about these when we learn design patterns.
@@ -24,9 +26,15 @@ public class SystemConfig {
 	private IDatabaseConfiguration databaseConfiguration;
 	private ICoursePersistence courseDB;
 	private ICourseUserRelationshipPersistence courseUserRelationshipDB;
+
+	private IUserNotifications userNotifications;
+	private IEmailService emailService;
+
+	
 	private IQuestionPersistence questionDB;
 	private IPasswordSecurityPolicy passwordSecurityPolicy;
 	private IPasswordSecurityPolicyConfig passwordSecurityPolicyConfig;
+
 
 	// This private constructor ensures that no class other than System can allocate
 	// the System object. The compiler would prevent it.
@@ -39,9 +47,13 @@ public class SystemConfig {
 		databaseConfiguration = new DefaultDatabaseConfiguration();
 		courseDB = new CourseDB();
 		courseUserRelationshipDB = new CourseUserRelationshipDB();
+		userNotifications = new UserNotifications();
+		emailService = new DefaultEmailService();
+
 		questionDB = new QuestionDB();
 		passwordSecurityPolicy = new PasswordSecurityPolicy();
 		passwordSecurityPolicyConfig =  new PasswordSecurityPolicyConfig();
+
 	}
 
 	// This is the way the rest of the application gets access to the System object.
@@ -66,11 +78,31 @@ public class SystemConfig {
 		return passwordEncryption;
 	}
 
-	public void setPasswordEncryption(IPasswordEncryption passwordEncryption) {
-		this.passwordEncryption = passwordEncryption;
+	public IUserNotifications getUserNotifications()
+	{
+		return userNotifications;
 	}
 
+	public void setUserNotifications(IUserNotifications userNotifications){
+		this.userNotifications = userNotifications;
+	}
+	
+	public void setPasswordEncryption(IPasswordEncryption passwordEncryption)
+	{
+		this.passwordEncryption = passwordEncryption;
+	}
+	
+	public IEmailService getEmailService(){
+		return emailService;
+	}
+
+	public void setEmailService(IEmailService emailService) {
+		this.emailService = emailService;
+	}
+
+
 	public IUserPersistence getUserDB() {
+
 		return userDB;
 	}
 

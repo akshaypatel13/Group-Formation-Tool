@@ -22,9 +22,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
 	@Override
    public void configure(WebSecurity web) throws Exception
 	{
-   	web.ignoring().antMatchers("/resources/**");
+   	web.ignoring().antMatchers("/resources/**").antMatchers("/resetPassword");
    }
-   
+
 	@Override  
 	public void configure(HttpSecurity http) throws Exception
 	{
