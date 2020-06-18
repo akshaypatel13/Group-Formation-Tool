@@ -15,15 +15,21 @@
 	           <input type="submit" value="Sign Out"/>
 	       </form>
 		</div>
-		<h1 th:text="'Course: ' + ${course.title}">Course: Title Not Found</h1>
-		<div th:if="${instructor} or ${ta}">
-			<br/>
-			<a th:href="@{/course/instructoradmin(id=${course.id})}">Course Administration</a>
-		</div>
-		
-		<div th:if="${instructor}">
-			<br/>
-			<a th:href="@{/question/question}">Question Bank</a>
-		</div>
+		<h1 th:text="'Choose from these users to assign as the instructor for ' + ${course.title} + ':'">
+			Choose from these users to assign as the instructor:
+		</h1>
+		<form th:action="@{/admin/assigninstructor(id=${course.id})}" method="post">
+			<div>
+		  		<table>
+					<tr th:each="user : ${users}">
+						<td>
+							<input type="checkbox" name="instructor" th:value="${user.id}">
+							<label th:text="${user.banner} + ', ' + ${user.firstName} + ' ' + ${user.lastName}"></label>
+						</td>
+					</tr>
+		  		</table>
+			</div>
+			<input type="submit" value="Assign Instructors"/>
+		</form>
 	</body>
 </html>

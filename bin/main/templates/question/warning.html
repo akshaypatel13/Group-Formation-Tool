@@ -15,15 +15,13 @@
 	           <input type="submit" value="Sign Out"/>
 	       </form>
 		</div>
-		<h1 th:text="'Course: ' + ${course.title}">Course: Title Not Found</h1>
-		<div th:if="${instructor} or ${ta}">
-			<br/>
-			<a th:href="@{/course/instructoradmin(id=${course.id})}">Course Administration</a>
-		</div>
 		
-		<div th:if="${instructor}">
-			<br/>
-			<a th:href="@{/question/question}">Question Bank</a>
+		<div class="mainGridRow" sec:authorize="isAuthenticated()">
+			<!-- Display list of questions. -->
+			<!-- Learned how to do this here: https://www.baeldung.com/thymeleaf-list -->
+			<h4>Are you sure want to delete this question ?</h4>
+			<a th:href="@{/question/delete(id=${questionID})}">Yes</a>
+			<a th:href="@{/question/question}">Cancel</a>
 		</div>
 	</body>
 </html>

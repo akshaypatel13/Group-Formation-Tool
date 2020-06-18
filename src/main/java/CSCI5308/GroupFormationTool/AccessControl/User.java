@@ -3,7 +3,9 @@ package CSCI5308.GroupFormationTool.AccessControl;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import CSCI5308.GroupFormationTool.SystemConfig;
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
+import CSCI5308.GroupFormationTool.Security.IPasswordSecurityPolicy;
 
 public class User
 {
@@ -17,13 +19,33 @@ public class User
 	private String firstName;
 	private String lastName;
 	private String email;
+
 	// the reset token would be used when use forget password
 	// the reset token will be generate by uuid
 	private String resetToken;
+
+	public static String error;
 	
+	public static String getError() {
+		return error;
+	}
+	public static void setError(String err) {
+		error = err;
+	}
 	public User()
 	{
 		setDefaults();
+	}
+	public static boolean isFollowingSecurityRules(String password)
+	{	
+		IPasswordSecurityPolicy passwordSecurityPolicy = SystemConfig.instance().getIPasswordSecurityPolicy();
+		String result = passwordSecurityPolicy.isFollowingSecurityRules(password);
+		if(result!= null)
+		{
+			setError(result);
+			return false;
+		}
+		return true;
 	}
 	
 	public User(long id, IUserPersistence persistence)

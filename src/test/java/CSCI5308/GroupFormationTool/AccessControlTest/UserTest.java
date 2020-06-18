@@ -149,5 +149,13 @@ public class UserTest
 		Assert.isTrue(!User.isEmailValid(""));
 		Assert.isTrue(!User.isEmailValid("@dal.ca"));
 		Assert.isTrue(!User.isEmailValid("rhawkey@"));
-	}	
+	}
+	
+	@Test
+	public void isFollowingSecurityRulesTest()
+	{
+		Assert.isTrue(!User.isFollowingSecurityRules("123"));
+		Assert.isTrue(!User.isFollowingSecurityRules("123iI"));
+		Assert.isTrue(!User.isFollowingSecurityRules("123I@"));
+	}
 }
