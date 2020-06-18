@@ -1,6 +1,9 @@
 package CSCI5308.GroupFormationTool.Security;
 
+import CSCI5308.GroupFormationTool.AccessControl.User;
 import CSCI5308.GroupFormationTool.SystemConfig;
+
+import java.util.List;
 
 public class PasswordSecurityPolicy implements IPasswordSecurityPolicy {
 
@@ -16,10 +19,21 @@ public class PasswordSecurityPolicy implements IPasswordSecurityPolicy {
 	private static String MIN_SPECIAL_CHARS_ENABLED;
 	private static String CHARS_NOT_ALLOWED;
 	private static String CHARS_NOT_ALLOWED_ENABLED;
+	private static String PASSWORD_HISTORY_COUNT;
+	private static String PASSWORD_HISTORY_ENABLED;
+
+	IPasswordSecurityPolicyConfig passwordSecurityPolicyConfig;
+
+	private IPasswordManager passwordManager;
+
+	public PasswordSecurityPolicy(IPasswordManager passwordManager){
+		this.passwordManager = passwordManager;
+		passwordSecurityPolicyConfig =  SystemConfig.instance()
+				.getPasswordSecurityPolicyConfig();
+	}
 
 	public String isFollowingSecurityRules(String password) {
-		IPasswordSecurityPolicyConfig passwordSecurityPolicyConfig = SystemConfig.instance()
-				.getIPasswordSecurityPolicyConfig();
+
 		MIN_LENGTH = passwordSecurityPolicyConfig.getMinLength();
 		MIN_LENGTH_ENABLED = passwordSecurityPolicyConfig.getMinLengthEnabled();
 		MAX_LENGTH = passwordSecurityPolicyConfig.getMaxLength();
@@ -32,6 +46,7 @@ public class PasswordSecurityPolicy implements IPasswordSecurityPolicy {
 		MIN_SPECIAL_CHARS_ENABLED = passwordSecurityPolicyConfig.getMinSpecialCharsEnabled();
 		CHARS_NOT_ALLOWED = passwordSecurityPolicyConfig.getCharsNotAllowed();
 		CHARS_NOT_ALLOWED_ENABLED = passwordSecurityPolicyConfig.getCharsNotAllowedEnabled();
+
 
 		int upperCaseCount = 0;
 		int lowerCaseCount = 0;
@@ -92,6 +107,24 @@ public class PasswordSecurityPolicy implements IPasswordSecurityPolicy {
 		}
 
 		return null;
+	}
+
+	@Override
+	public boolean checkPreviousPassword(User U) {
+
+		PASSWORD_HISTORY_ENABLED = passwordSecurityPolicyConfig.getPasswordHistoryEnabled();
+		PASSWORD_HISTORY_COUNT = passwordSecurityPolicyConfig.getPasswordHistoryCount();
+
+		if (Integer.parseInt(PASSWORD_HISTORY_ENABLED) == 0){
+			return true;
+		}
+
+		List<String> previousPasswords = passwordManager.getPreviousPasswords(U, Integer.parseInt(PASSWORD_HISTORY_COUNT));
+		for(int i=0;i<previousPasswords.size();i++){
+			if (previousPasswords.get(i).equals(U.getPassword()))
+				return true;
+		}
+		return false;
 	}
 
 }

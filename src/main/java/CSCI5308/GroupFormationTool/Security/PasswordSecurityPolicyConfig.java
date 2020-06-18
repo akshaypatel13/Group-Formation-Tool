@@ -33,6 +33,9 @@ public class PasswordSecurityPolicyConfig implements IPasswordSecurityPolicyConf
 	private static String CHARS_NOT_ALLOWED;
 	private static String CHARS_NOT_ALLOWED_ENABLED;
 
+	private static String PASSWORD_HISTORY_ENABLED;
+	private static String PASSWORD_HISTORY_COUNT;
+
 	public PasswordSecurityPolicyConfig()
 	{
 		setMinLength(System.getenv("min_length"));
@@ -52,6 +55,10 @@ public class PasswordSecurityPolicyConfig implements IPasswordSecurityPolicyConf
 		
 		setCharsNotAllowed(System.getenv("chars_not_allowed"));
 		setCharsNotAllowedEnabled(System.getenv("chars_not_allowed_enabled"));
+
+		setPasswordHistoryCount(System.getenv("password_history_count"));
+		setPasswordHistoryEnabled(System.getenv("password_history_enabled"));
+
 		
 	}
 
@@ -106,6 +113,16 @@ public class PasswordSecurityPolicyConfig implements IPasswordSecurityPolicyConf
 	}
 
 	@Override
+	public void setPasswordHistoryCount(String passwordHistoryCount) {
+		PASSWORD_HISTORY_COUNT = passwordHistoryCount;
+	}
+
+	@Override
+	public void setPasswordHistoryEnabled(String passwordHistoryEnabled) {
+		PASSWORD_HISTORY_ENABLED = passwordHistoryEnabled;
+	}
+
+	@Override
 	public String getMinUppercaseCharsEnabled() {
 		return MIN_UPPERCASE_CHARS_ENABLED;
 	}
@@ -128,6 +145,16 @@ public class PasswordSecurityPolicyConfig implements IPasswordSecurityPolicyConf
 	@Override
 	public String getMinLowercaseCharsEnabled() {
 		return MIN_LOWERCASE_CHARS_ENABLED;
+	}
+
+	@Override
+	public String getPasswordHistoryEnabled() {
+		return PASSWORD_HISTORY_ENABLED;
+	}
+
+	@Override
+	public String getPasswordHistoryCount() {
+		return PASSWORD_HISTORY_COUNT;
 	}
 
 	@Override
@@ -174,5 +201,7 @@ public class PasswordSecurityPolicyConfig implements IPasswordSecurityPolicyConf
 	public void setCharsNotAllowedEnabled(String charsNotAllowedEnabled) {
 		CHARS_NOT_ALLOWED_ENABLED = charsNotAllowedEnabled;
 	}
+
+
 
 }

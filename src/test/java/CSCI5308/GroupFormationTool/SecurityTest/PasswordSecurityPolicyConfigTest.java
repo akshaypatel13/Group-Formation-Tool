@@ -214,4 +214,33 @@ public class PasswordSecurityPolicyConfigTest {
 		assertEquals("1", policyConfig.getCharsNotAllowedEnabled());
 	}
 
+	@Test void setPasswordHistoryEnabled(){
+		IPasswordSecurityPolicyConfig policyConfig = new PasswordSecurityPolicyConfig();
+
+		policyConfig.setPasswordHistoryEnabled("1");
+		assertEquals("1", policyConfig.getPasswordHistoryEnabled());
+	}
+
+	@Test void getPasswordHistoryEnabled(){
+		IPasswordSecurityPolicyConfig policyConfig = new PasswordSecurityPolicyConfig();
+
+		policyConfig.setPasswordHistoryEnabled("1");
+		assertEquals("1", policyConfig.getPasswordHistoryEnabled());
+	}
+
+	@Test void setPasswordHistoryCount(){
+		IPasswordSecurityPolicyConfig policyConfig = new PasswordSecurityPolicyConfig();
+
+		policyConfig.setPasswordHistoryCount("1");
+		assertEquals("1", policyConfig.getPasswordHistoryCount());
+	}
+
+	@Test void getPasswordHistoryCount(){
+		IPasswordSecurityPolicyConfig policyConfig = new PasswordSecurityPolicyConfig();
+
+		policyConfig.setPasswordHistoryCount("1");
+		assertEquals("1", policyConfig.getPasswordHistoryCount());
+	}
+
+
 }

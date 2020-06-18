@@ -4,6 +4,7 @@ import CSCI5308.GroupFormationTool.AccessControl.IUserPersistence;
 import CSCI5308.GroupFormationTool.AccessControl.User;
 import CSCI5308.GroupFormationTool.Security.BCryptPasswordEncryption;
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
+import CSCI5308.GroupFormationTool.Security.IPasswordSecurityPolicy;
 import CSCI5308.GroupFormationTool.SystemConfig;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,8 @@ public class ResetPasswordController {
 	private IUserPersistence userDB;
 
 	private IEmailService emailService;
+
+	private IPasswordSecurityPolicy passwordSecurityPolicy;
 	
 	public ResetPasswordController() {
 		resetPasswordService = new DefaultResetPasswordService(
@@ -29,6 +32,7 @@ public class ResetPasswordController {
 				new UserResetPasswordDB());
 
 		emailService = SystemConfig.instance().getEmailService();
+		passwordSecurityPolicy = SystemConfig.instance().getPasswordSecurityPolicy();
 	}
 	
 	@GetMapping("/resetPassword")
@@ -76,9 +80,15 @@ public class ResetPasswordController {
 		if(user!=null) {
 			IPasswordEncryption passwordEncryption = new BCryptPasswordEncryption();
 			password = passwordEncryption.encryptPassword(password);
-			user.setPassword(password);
-			resetPasswordService.saveUserPassword(user);
-			theModel.addAttribute("message", "Password reset success!");
+			if (passwordSecurityPolicy.checkPreviousPassword(user)){
+				user.setPassword(password);
+				resetPasswordService.saveUserPassword(user);
+				theModel.addAttribute("message", "Password reset success!");
+			}
+			else{
+				theModel.addAttribute("message", "New Password cannot be equal to previous passwords");
+			}
+
 		}else {
 			theModel.addAttribute("message", "Invalid Reset Token");
 		}

@@ -34,6 +34,7 @@ public class SystemConfig {
 	private IQuestionPersistence questionDB;
 	private IPasswordSecurityPolicy passwordSecurityPolicy;
 	private IPasswordSecurityPolicyConfig passwordSecurityPolicyConfig;
+	private IPasswordManager passwordManager;
 
 
 	// This private constructor ensures that no class other than System can allocate
@@ -51,7 +52,8 @@ public class SystemConfig {
 		emailService = new DefaultEmailService();
 
 		questionDB = new QuestionDB();
-		passwordSecurityPolicy = new PasswordSecurityPolicy();
+		passwordManager = new DefaultPasswordManager();
+		passwordSecurityPolicy = new PasswordSecurityPolicy(passwordManager);
 		passwordSecurityPolicyConfig =  new PasswordSecurityPolicyConfig();
 
 	}
@@ -100,6 +102,13 @@ public class SystemConfig {
 		this.emailService = emailService;
 	}
 
+	public IPasswordSecurityPolicy getPasswordSecurityPolicy(){
+		return passwordSecurityPolicy;
+	}
+
+	public IPasswordSecurityPolicyConfig getPasswordSecurityPolicyConfig(){
+		return passwordSecurityPolicyConfig;
+	}
 
 	public IUserPersistence getUserDB() {
 
