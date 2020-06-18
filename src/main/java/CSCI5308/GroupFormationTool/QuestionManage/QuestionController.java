@@ -92,7 +92,6 @@ public class QuestionController {
 
 	@RequestMapping(value = "/question/insertOptions")
 	public String options(@ModelAttribute OptionsList options, final BindingResult bindingresult, Model model) {
-		// System.out.print(options.getOptions().get(0).getDescription());
 		IQuestionPersistence questionDB = SystemConfig.instance().getQuestionDB();
 		OptionsList optionsList = new OptionsList();
 		optionsList.insertOptions(questionDB, options);
