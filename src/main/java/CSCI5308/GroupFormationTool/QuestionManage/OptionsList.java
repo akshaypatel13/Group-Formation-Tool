@@ -16,10 +16,7 @@ public class OptionsList {
 		this.options = options;
 	}
 
-	/*
-	 * public void addOptions(Options options){ this.options.add(options); }
-	 */
-
+	
 	public void add(int number) {
 		for (int i = 1; i <= NO_OF_OPTIONS; i++) {
 			this.options.add(new Options(i));
