@@ -9,36 +9,33 @@ import java.util.Date;
  * @author nieruize
  *
  */
-public class 	Question {
-	
+public class Question {
+
 	private long id;
 	private String title;
 	private String description;
 	private String type;
 	private Date created;
 	private long instruct_id;
-	
-	public Question()
-	{
+
+	public Question() {
 		setDefaults();
 	}
 
-	public void setDefaults()
-	{
+	public void setDefaults() {
 		id = -1;
 		title = "";
 		description = "";
 		type = "";
-		instruct_id=-1;
+		instruct_id = -1;
 		created = null;
 	}
 
-	public Question(long id, IQuestionPersistence questionDB)
-	{
+	public Question(long id, IQuestionPersistence questionDB) {
 		setDefaults();
 		questionDB.loadQuestionByID(id, this);
 	}
-	
+
 	public long getId() {
 		return id;
 	}
@@ -62,8 +59,7 @@ public class 	Question {
 	public void setCreated(Date created) {
 		this.created = created;
 	}
-	
-	
+
 	public String getDescription() {
 		return description;
 	}
@@ -80,7 +76,6 @@ public class 	Question {
 		this.type = type;
 	}
 
-
 	public long getInstruct_id() {
 		return instruct_id;
 	}
@@ -89,18 +84,12 @@ public class 	Question {
 		this.instruct_id = instruct_id;
 	}
 
-
-
-	public boolean insertQuestion(IQuestionPersistence questionDB, User user)
-	{
+	public boolean insertQuestion(IQuestionPersistence questionDB, User user) {
 		return questionDB.insertQuestion(this, user);
 	}
 
-	public boolean delete(IQuestionPersistence questionDB)
-	{
+	public boolean delete(IQuestionPersistence questionDB) {
 		return questionDB.deleteQuestion(id);
 	}
 
-
-	
 }
