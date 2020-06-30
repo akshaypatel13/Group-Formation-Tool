@@ -3,6 +3,8 @@ package CSCI5308.GroupFormationTool;
 import CSCI5308.GroupFormationTool.Security.*;
 import CSCI5308.GroupFormationTool.AccessControl.*;
 import CSCI5308.GroupFormationTool.Database.*;
+import CSCI5308.GroupFormationTool.PasswordPolicy.IPasswordPolicyList;
+import CSCI5308.GroupFormationTool.PasswordPolicy.PasswordPolicyList;
 import CSCI5308.GroupFormationTool.QuestionManage.IQuestionPersistence;
 import CSCI5308.GroupFormationTool.QuestionManage.QuestionDB;
 import CSCI5308.GroupFormationTool.Courses.*;
@@ -35,6 +37,7 @@ public class SystemConfig {
 	private IPasswordSecurityPolicyConfig passwordSecurityPolicyConfig;
 	private IPasswordSecurityPolicy passwordSecurityPolicy;
 	private IPasswordManager passwordManager;
+	private IPasswordPolicyList passwordPolicyList;
 
 
 	// This private constructor ensures that no class other than System can allocate
@@ -58,6 +61,7 @@ public class SystemConfig {
 		passwordManager = new DefaultPasswordManager();
 
 		passwordSecurityPolicy = new PasswordSecurityPolicy(passwordManager, passwordSecurityPolicyConfig);
+		passwordPolicyList = new PasswordPolicyList();
 
 	}
 
@@ -71,6 +75,10 @@ public class SystemConfig {
 		return uniqueInstance;
 	}
 
+	public IPasswordPolicyList getIPasswordPolicyList() {
+		return passwordPolicyList;
+	}
+	
 	public IPasswordSecurityPolicy getIPasswordSecurityPolicy() {
 		return passwordSecurityPolicy;
 	}

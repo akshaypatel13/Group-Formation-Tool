@@ -2,7 +2,6 @@ package CSCI5308.GroupFormationTool.Resetpassword;
 
 import CSCI5308.GroupFormationTool.AccessControl.IUserPersistence;
 import CSCI5308.GroupFormationTool.AccessControl.User;
-import CSCI5308.GroupFormationTool.Security.BCryptPasswordEncryption;
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
 import CSCI5308.GroupFormationTool.Security.IPasswordSecurityPolicy;
 import CSCI5308.GroupFormationTool.SystemConfig;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
@@ -49,7 +47,6 @@ public class ResetPasswordController {
 			HttpServletRequest request,
 			Model theModel) {
 
-		// look up user in database by bannerID
 		userDB = SystemConfig.instance().getUserDB();
 		User user = new User();
 		userDB.loadUserByBannerID(bannerID, user);
@@ -59,7 +56,6 @@ public class ResetPasswordController {
 		}
 		else {
 			theModel.addAttribute("message", "Reset password email has been sent.");
-			// generate uuid used as reset_token
 			user.setResetToken(UUID.randomUUID().toString().replace("-", ""));
 			resetPasswordService.saveUserResetToken(user);
 			emailService.sendEmail(user, request);
@@ -82,11 +78,11 @@ public class ResetPasswordController {
 
 
 		if(user!=null) {
-			if (!User.isFollowingSecurityRules(password)){
-				theModel.addAttribute("errorMessage", User.getError());
-				theModel.addAttribute("resetToken", resetToken);
-				return "confirmPassword";
-			}
+//			if (!User.isFollowingSecurityRules(password)){
+//				theModel.addAttribute("errorMessage", User.getError());
+//				theModel.addAttribute("resetToken", resetToken);
+//				return "confirmPassword";
+//			}
 
 			if (passwordSecurityPolicy.checkPreviousPassword(user, password)){
 				password = passwordEncryption.encryptPassword(password);
