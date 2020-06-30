@@ -57,7 +57,7 @@ public class ResetPasswordController {
 		}
 		else {
 			theModel.addAttribute("message", "Reset password email has been sent.");
-			user.setResetToken(UUID.randomUUID().toString().replace("-", ""));
+			resetPasswordService.setUserResetToken(user);
 			resetPasswordService.saveUserResetToken(user);
 			emailService.sendEmail(user, request);
 		}
