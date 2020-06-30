@@ -147,6 +147,7 @@ public class UserTest
 		Assert.isTrue(User.isEmailInvalid("@dal.ca"));
 		Assert.isTrue(User.isEmailInvalid("rhawkey@"));
 	}
+
 	
 	@Test
 	public void isFollowingSecurityRulesTest()
