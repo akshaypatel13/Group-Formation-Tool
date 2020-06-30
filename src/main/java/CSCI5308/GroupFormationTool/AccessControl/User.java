@@ -260,7 +260,7 @@ public class User
 	{
 		if (isStringNotNullOrEmpty(email))
 		{
-			return true;
+			return false;
 		}
 		 
 		Pattern pattern = Pattern.compile(EMAIL_REGEX);
