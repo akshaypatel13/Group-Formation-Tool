@@ -166,7 +166,6 @@ public class User
 			if(Integer.parseInt(policy.getEnabled()) == 1) {
 				IPasswordPolicyValidator validator = policy.getValidator();
 				if(validator.isPasswordValid(rawPassword) == false) {
-					System.out.println("password policy changed............");
 					success = false;
 					break;
 				}

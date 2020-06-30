@@ -1,6 +1,7 @@
 package CSCI5308.GroupFormationTool.CoursesTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ import CSCI5308.GroupFormationTool.AccessControlTest.UserDBMock;
 import CSCI5308.GroupFormationTool.Courses.Course;
 import CSCI5308.GroupFormationTool.Courses.Role;
 import CSCI5308.GroupFormationTool.PasswordPolicy.IPasswordPolicyList;
+import CSCI5308.GroupFormationTool.PasswordPolicy.PasswordPolicyList;
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
 import CSCI5308.GroupFormationTool.SecurityTest.PasswordEncryptionMock;
 
@@ -33,7 +35,7 @@ class StudentCSVImportTest
 		IUserPersistence userDB = new UserDBMock();
 		IUserNotifications userNotifications = new UserNotificationsMock();
 		IPasswordEncryption passwordEncryption = new PasswordEncryptionMock();
-		IPasswordPolicyList passwordPolicyList = SystemConfig.instance().getIPasswordPolicyList();
+		IPasswordPolicyList passwordPolicyList = mock(PasswordPolicyList.class);
 		Assert.isTrue(user.createUser(userDB, passwordEncryption, userNotifications, passwordPolicyList));
 		Assert.isTrue(course.enrollUserInCourse(Role.STUDENT, user) == false);
 	}
