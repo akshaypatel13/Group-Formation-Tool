@@ -148,12 +148,4 @@ public class UserTest
 		Assert.isTrue(User.isEmailInvalid("rhawkey@"));
 	}
 
-	
-	@Test
-	public void isFollowingSecurityRulesTest()
-	{
-		Assert.isTrue(User.isNotFollowingSecurityRules("123"));
-		Assert.isTrue(User.isNotFollowingSecurityRules("123iI"));
-		Assert.isTrue(User.isNotFollowingSecurityRules("123I@"));
-	}
 }
