@@ -11,8 +11,8 @@ import java.sql.SQLException;
 public class UserResetPasswordDB implements IUserResetPasswordDB {
 
 	@Override
-	public void saveUserResetToken(User user) {
-		
+	public void saveUserResetToken(User user)
+	{
 		long userId = user.getID();
 		String resetToken = user.getResetToken();
 		CallStoredProcedure proc = null;
@@ -37,7 +37,8 @@ public class UserResetPasswordDB implements IUserResetPasswordDB {
 	}
 
 	@Override
-	public User findUserByResetToken(String resetToken) {
+	public User findUserByResetToken(String resetToken)
+	{
 		CallStoredProcedure proc = null;
 		User user = new User();
 		try
@@ -79,11 +80,10 @@ public class UserResetPasswordDB implements IUserResetPasswordDB {
 	}
 
 	@Override
-	public void saveUserPassword(User user) {
-		
+	public void saveUserPassword(User user)
+	{
 		long userId = user.getID();
 		String password = user.getPassword();
-
 		CallStoredProcedure proc = null;
 		try
 		{

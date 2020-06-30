@@ -11,25 +11,29 @@ public class DefaultResetPasswordService implements IResetPasswordService {
 	private IUserResetPasswordDB userResetPasswordDB;
 	
 	public DefaultResetPasswordService(IUserResetPasswordDAO userResetPasswordDAO,
-									   IUserResetPasswordDB userResetPasswordDB) {
+									   IUserResetPasswordDB userResetPasswordDB)
+	{
 		this.userResetPasswordDAO = userResetPasswordDAO;
 		this.userResetPasswordDB = userResetPasswordDB;
 	}
 
 
 	@Override
-	public void saveUserResetToken(User user) {
+	public void saveUserResetToken(User user)
+	{
 		userResetPasswordDAO.saveUserResetToken(userResetPasswordDB, user);
 	}
 
 	@Override
-	public User findUserByResetToken(String resetToken) {
+	public User findUserByResetToken(String resetToken)
+	{
 		User user = userResetPasswordDAO.findUserByResetToken(userResetPasswordDB, resetToken);
 		return user;
 	}
 
 	@Override
-	public void saveUserPassword(User user) {
+	public void saveUserPassword(User user)
+	{
 		userResetPasswordDAO.saveUserPassword(userResetPasswordDB, user);
 	}
 

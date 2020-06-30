@@ -14,16 +14,14 @@ public class UserNotifications implements IUserNotifications{
     JavaMailSender mailSender = javaMailSender.getJavaMailSender();
 
     @Async
-    public void sendUserLoginCredentials(User user, String rawPassword) {
-
-        // Email message
+    public void sendUserLoginCredentials(User user, String rawPassword)
+    {
         SimpleMailMessage Email = new SimpleMailMessage();
         Email.setFrom("support@group21.com");
         Email.setTo(user.getEmail());
         System.out.print(user.getEmail());
         Email.setSubject("Account Credentials");
         Email.setText("You have been added to a Course\nPlease find your Login Credentials \nUsername: " + user.getBannerID() + "\nPassword: " + rawPassword);
-
         mailSender.send(Email);
     }
 }

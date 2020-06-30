@@ -26,12 +26,16 @@ public class User
 
 	public static String error;
 	
-	public static String getError() {
+	public static String getError()
+	{
 		return error;
 	}
-	public static void setError(String err) {
+
+	public static void setError(String err)
+	{
 		error = err;
 	}
+
 	public User()
 	{
 		setDefaults();

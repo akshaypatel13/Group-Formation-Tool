@@ -3,30 +3,32 @@ package CSCI5308.GroupFormationTool.QuestionManage;
 public class Options {
 
 	private String description;
-	private int storedas;
+	private int storedAs;
 
-	public Options(int storedas) {
-		this.storedas = storedas;
+	public Options(int storedAs)
+	{
+		this.storedAs = storedAs;
 	}
 
-	public Options() {
+	public Options() {	}
 
-	}
-
-	public String getDescription() {
+	public String getDescription()
+	{
 		return description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(String description)
+	{
 		this.description = description;
 	}
 
-	public int getStoredas() {
-		return storedas;
+	public int getStoredAs()
+	{
+		return storedAs;
 	}
 
-	public void setStoredas(int storedas) {
-		this.storedas = storedas;
+	public void setStoredAs(int storedAs)
+	{
+		this.storedAs = storedAs;
 	}
-
 }

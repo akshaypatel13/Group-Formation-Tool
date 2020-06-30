@@ -45,7 +45,6 @@ public class StudentCSVImport
 			String lastName = u.getLastName();
 			String email = u.getEmail();
 			String userDetails = bannerID + " " + firstName + " " + lastName +" " + email;
-			
 			User user = new User();
 			userDB.loadUserByBannerID(bannerID, user);
 			if (!user.isValidUser())
