@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import CSCI5308.GroupFormationTool.SystemConfig;
 import CSCI5308.GroupFormationTool.PasswordPolicy.IPasswordPolicyList;
 import CSCI5308.GroupFormationTool.PasswordPolicy.IPasswordPolicyValidator;
 import CSCI5308.GroupFormationTool.PasswordPolicy.PasswordPolicy;
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
+import CSCI5308.GroupFormationTool.Security.IPasswordSecurityPolicy;
 
 public class User
 {
@@ -39,6 +41,30 @@ public class User
 	public User()
 	{
 		setDefaults();
+	}
+
+	public static boolean isFollowingSecurityRules(String password)
+	{	
+		IPasswordSecurityPolicy passwordSecurityPolicy = SystemConfig.instance().getIPasswordSecurityPolicy();
+		String result = passwordSecurityPolicy.isFollowingSecurityRules(password);
+		if(result != null)
+		{
+			setError(result);
+			return false;
+		}
+		return true;
+	}
+	
+	public static boolean isNotFollowingSecurityRules(String password)
+	{	
+		IPasswordSecurityPolicy passwordSecurityPolicy = SystemConfig.instance().getIPasswordSecurityPolicy();
+		String result = passwordSecurityPolicy.isFollowingSecurityRules(password);
+		if(result != null)
+		{
+			return true;
+		}
+		setError(result);
+		return false;
 	}
 	
 	public User(long id, IUserPersistence persistence)
@@ -151,6 +177,11 @@ public class User
 		return id != -1; 
 	}
 	
+	public boolean isInvalidUser()
+	{
+		return id == -1; 
+	}
+	
 	public boolean createUser(
 		IUserPersistence userDB,
 		IPasswordEncryption passwordEncryption,
@@ -195,9 +226,23 @@ public class User
 		return s.isEmpty();
 	}
 	
+	private static boolean isStringNotNullOrEmpty(String s)
+	{
+		if (null == s)
+		{
+			return false;
+		}
+		return !s.isEmpty();
+	}
+	
 	public static boolean isBannerIDValid(String bannerID)
 	{
 		return !isStringNullOrEmpty(bannerID);
+	}
+	
+	public static boolean isBannerIDInvalid(String bannerID)
+	{
+		return !isStringNotNullOrEmpty(bannerID);
 	}
 		
 	public static boolean isFirstNameValid(String name)
@@ -205,9 +250,19 @@ public class User
 		return !isStringNullOrEmpty(name);
 	}
 	
+	public static boolean isFirstNameInvalid(String name)
+	{
+		return !isStringNotNullOrEmpty(name);
+	}
+	
 	public static boolean isLastNameValid(String name)
 	{
 		return !isStringNullOrEmpty(name);
+	}
+	
+	public static boolean isLastNameInvalid(String name)
+	{
+		return !isStringNotNullOrEmpty(name);
 	}
 	
 	public static boolean isEmailValid(String email)
@@ -220,5 +275,17 @@ public class User
 		Pattern pattern = Pattern.compile(EMAIL_REGEX);
 		Matcher matcher = pattern.matcher(email);
 		return matcher.matches();
+	}
+	
+	public static boolean isEmailInvalid(String email)
+	{
+		if (isStringNullOrEmpty(email))
+		{
+			return true;
+		}
+		 
+		Pattern pattern = Pattern.compile(EMAIL_REGEX);
+		Matcher matcher = pattern.matcher(email);
+		return !matcher.matches();
 	}
 }

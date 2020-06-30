@@ -85,14 +85,47 @@ public class QuestionDB implements IQuestionPersistence {
 	}
 
 	@Override
-	public List<Question> sortAllQuestions(String sort, User user)
-	{
+	public List<Question> sortQuestionsByTitle(User user) {
 		List<Question> questions = new ArrayList<Question>();
 		CallStoredProcedure proc = null;
 		try {
-			proc = new CallStoredProcedure("spSortAllQuestions(?,?)");
-			proc.setParameter(1, sort);
-			proc.setParameter(2, user.getId());
+			proc = new CallStoredProcedure("spSortQuestionsByTitle(?)");
+			proc.setParameter(1, user.getId());
+			ResultSet results = proc.executeWithResults();
+			if (null != results) {
+				while (results.next()) {
+					long id = results.getLong(1);
+					String title = results.getString(2);
+					String description = results.getString(3);
+					String type = results.getString(4);
+					Date created = results.getDate(5);
+					Question q = new Question();
+					q.setId(id);
+					q.setTitle(title);
+					q.setCreated(created);
+					q.setType(type);
+					q.setDescription(description);
+					questions.add(q);
+				}
+			}
+		} catch (SQLException e) {
+			// Logging needed.
+		} finally {
+			if (null != proc) {
+				proc.cleanup();
+			}
+		}
+
+		return questions;
+	}
+	
+	@Override
+	public List<Question> sortQuestionsByCreated(User user) {
+		List<Question> questions = new ArrayList<Question>();
+		CallStoredProcedure proc = null;
+		try {
+			proc = new CallStoredProcedure("spSortQuestionsByCreated(?)");
+			proc.setParameter(1, user.getId());
 			ResultSet results = proc.executeWithResults();
 			if (null != results) {
 				while (results.next()) {
