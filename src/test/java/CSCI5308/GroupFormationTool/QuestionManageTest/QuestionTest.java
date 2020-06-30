@@ -95,28 +95,29 @@ public class QuestionTest {
 	@Test
 	public void setTypeTest() {
 		Question question = new Question();
-		question.setType("text");;
+		question.setType("text");
 		Assert.isTrue(question.getType().equals("text"));
 	}
 	
 	@Test
 	public void getTypeTest() {
 		Question question = new Question();
-		question.setType("text");;
+		question.setType("text");
 		Assert.isTrue(question.getType().equals("text"));
 	}
 	
 	@Test
-	public void getDescriptionTest() {
+	public void getDescriptionTest()
+	{
 		Question question = new Question();
-		question.setDescription("How is going?");;
+		question.setDescription("How is going?");
 		Assert.isTrue(question.getDescription().equals("How is going?"));
 	}
 	
 	@Test
 	public void setDescriptionTest() {
 		Question question = new Question();
-		question.setDescription("How is going?");;
+		question.setDescription("How is going?");
 		Assert.isTrue(question.getDescription().equals("How is going?"));
 	}
 
@@ -138,11 +139,12 @@ public class QuestionTest {
 		Assert.isTrue(question.getDescription().equals("How are you?"));
 		Assert.isTrue(question.getType().equals("Numeric"));
 		Assert.isTrue(question.getCreated().equals(new Date("13/04/2015")));
-		Assert.isTrue(question.getInstruct_id()==1);
+		Assert.isTrue(question.getInstructId()==1);
 	}
 
 	@Test
-	public void insertQuestionFalse(){
+	public void insertQuestionFalse()
+	{
 		IQuestionPersistence questionDB = new QuestionDBMock();
 		Question question=new Question();
 		User user=new User();
@@ -151,7 +153,7 @@ public class QuestionTest {
 		assertFalse(question.getDescription().equals("How?"));
 		assertFalse(question.getType().equals("Num"));
 		assertFalse(question.getCreated().equals(new Date("13/04/2025")));
-		assertFalse(question.getInstruct_id()==12);
+		assertFalse(question.getInstructId()==12);
 	}
 
 }

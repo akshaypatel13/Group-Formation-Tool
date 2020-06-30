@@ -17,15 +17,11 @@ public class DefaultEmailService implements IEmailService {
 	@Async
 	public void sendEmail(User user, HttpServletRequest request) {
 		String appUrl = request.getScheme() + "://" + request.getServerName();
-
-		// Email message
 		SimpleMailMessage resetPasswordEmail = new SimpleMailMessage();
 		resetPasswordEmail.setFrom("support@group21.com");
 		resetPasswordEmail.setTo(user.getEmail());
 		resetPasswordEmail.setSubject("Password Reset Request");
-
 		resetPasswordEmail.setText("To reset your password, click the link below:\n" + appUrl + "/reset_token/" + user.getResetToken());
-
 		mailSender.send(resetPasswordEmail);
 	}
 

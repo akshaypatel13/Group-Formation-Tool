@@ -18,7 +18,8 @@ public class SignupController {
 	private final String EMAIL = "email";
 
 	@GetMapping("/signup")
-	public String displaySignup(Model model) {
+	public String displaySignup(Model model)
+	{
 		return "signup";
 	}
 
@@ -27,7 +28,8 @@ public class SignupController {
 			@RequestParam(name = PASSWORD) String password,
 			@RequestParam(name = PASSWORD_CONFIRMATION) String passwordConfirm,
 			@RequestParam(name = FIRST_NAME) String firstName, @RequestParam(name = LAST_NAME) String lastName,
-			@RequestParam(name = EMAIL) String email) {
+			@RequestParam(name = EMAIL) String email)
+	{
 		boolean success = false;
 		ModelAndView m;
 		if (User.isFollowingSecurityRules(password)) {

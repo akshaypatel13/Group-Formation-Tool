@@ -103,13 +103,13 @@ public class QuestionDBMock implements IQuestionPersistence  {
 		question.setDescription("How are you?");
 		question.setType("Numeric");
 		question.setCreated(new Date("13/04/2015"));
-		question.setInstruct_id(1);
+		question.setInstructId(1);
 		return true;
 	}
 
 	@Override
 	public boolean insertOptions(Options options) {
-		options.setStoredas(1);
+		options.setStoredAs(1);
 		options.setDescription("Option1");
 		return true;
 	}

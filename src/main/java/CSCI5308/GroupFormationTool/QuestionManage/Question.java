@@ -16,80 +16,97 @@ public class Question {
 	private String description;
 	private String type;
 	private Date created;
-	private long instruct_id;
+	private long instructId;
 
-	public Question() {
+	public Question()
+	{
 		setDefaults();
 	}
 
-	public void setDefaults() {
+	public void setDefaults()
+	{
 		id = -1;
 		title = "";
 		description = "";
 		type = "";
-		instruct_id = -1;
+		instructId = -1;
 		created = null;
 	}
 
-	public Question(long id, IQuestionPersistence questionDB) {
+	public Question(long id, IQuestionPersistence questionDB)
+	{
 		setDefaults();
 		questionDB.loadQuestionByID(id, this);
 	}
 
-	public long getId() {
+	public long getId()
+	{
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(long id)
+	{
 		this.id = id;
 	}
 
-	public String getTitle() {
+	public String getTitle()
+	{
 		return title;
 	}
 
-	public void setTitle(String title) {
+	public void setTitle(String title)
+	{
 		this.title = title;
 	}
 
-	public Date getCreated() {
+	public Date getCreated()
+	{
 		return created;
 	}
 
-	public void setCreated(Date created) {
+	public void setCreated(Date created)
+	{
 		this.created = created;
 	}
 
-	public String getDescription() {
+	public String getDescription()
+	{
 		return description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(String description)
+	{
 		this.description = description;
 	}
 
-	public String getType() {
+	public String getType()
+	{
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(String type)
+	{
 		this.type = type;
 	}
 
-	public long getInstruct_id() {
-		return instruct_id;
-	}
-
-	public void setInstruct_id(long instruct_id) {
-		this.instruct_id = instruct_id;
-	}
-
-	public boolean insertQuestion(IQuestionPersistence questionDB, User user) {
+	public boolean insertQuestion(IQuestionPersistence questionDB, User user)
+	{
 		return questionDB.insertQuestion(this, user);
 	}
 
-	public boolean delete(IQuestionPersistence questionDB) {
+	public boolean delete(IQuestionPersistence questionDB)
+	{
 		return questionDB.deleteQuestion(id);
+	}
+
+	public long getInstructId()
+	{
+		return instructId;
+	}
+
+	public void setInstructId(long instructId)
+	{
+		this.instructId = instructId;
 	}
 
 }
