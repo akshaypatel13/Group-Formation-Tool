@@ -1,6 +1,5 @@
 package CSCI5308.GroupFormationTool.Resetpassword;
 
-import CSCI5308.GroupFormationTool.AccessControl.DefaultJavaMailSender;
 import CSCI5308.GroupFormationTool.AccessControl.User;
 import CSCI5308.GroupFormationTool.SystemConfig;
 import org.springframework.mail.SimpleMailMessage;
