@@ -10,6 +10,7 @@ import CSCI5308.GroupFormationTool.QuestionManage.QuestionDB;
 import CSCI5308.GroupFormationTool.Courses.*;
 import CSCI5308.GroupFormationTool.Resetpassword.DefaultEmailService;
 import CSCI5308.GroupFormationTool.Resetpassword.IEmailService;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 /*
  * This is a singleton, we will learn about these when we learn design patterns.
@@ -31,8 +32,7 @@ public class SystemConfig {
 
 	private IUserNotifications userNotifications;
 	private IEmailService emailService;
-
-	
+	private JavaMailSenderImpl mailSender;
 	private IQuestionPersistence questionDB;
 	private IPasswordSecurityPolicyConfig passwordSecurityPolicyConfig;
 	private IPasswordSecurityPolicy passwordSecurityPolicy;
@@ -55,6 +55,7 @@ public class SystemConfig {
 		userNotifications = new UserNotifications();
 		emailService = new DefaultEmailService();
 
+		mailSender = new JavaMailSenderImpl();
 		questionDB = new QuestionDB();
 
 		passwordSecurityPolicyConfig =  new PasswordSecurityPolicyConfig();
@@ -129,6 +130,10 @@ public class SystemConfig {
 
 	public void setDatabaseConfiguration(IDatabaseConfiguration databaseConfiguration) {
 		this.databaseConfiguration = databaseConfiguration;
+	}
+
+	public JavaMailSenderImpl getJavaMailSender() {
+		return mailSender;
 	}
 
 	public void setCourseDB(ICoursePersistence courseDB) {
