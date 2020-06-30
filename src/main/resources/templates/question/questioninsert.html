@@ -20,15 +20,14 @@
 <div class="mainGridRow" sec:authorize="isAuthenticated()">
     <h1>Add Questions</h1>
     <br>
-    <form th:action="@{/question/insert}" method="post">
+    <form th:action="@{/question/insert}" th:object="${question}" method="post">
     <label> Question Title:</label>
-    <input type="text" name="title" th:value="*{title}" placeholder="Enter Question title"/>
+    <input type="text" name="title" th:field="${question.title}" placeholder="Enter Question title" required/>
     <label> Question Description:</label>
-    <input type="text" name="description" th:value="*{description}" placeholder="Enter Question Description"/>
+    <input type="text" name="description" th:field="${question.description}" placeholder="Enter Question Description" required/>
     <label> Question Type:</label>
-    <select name="type">
-        <option value="">Select Type</option>
-        <option th:each="type : ${questionTypes}" th:value="${type}" th:text="${type}"></option>
+    <select th:field="${question.type}" required>
+        <option th:each="type : ${questionTypes}" th:value="${type.toString()}" th:text="${type}"></option>
     </select>
         <br>
         <br>

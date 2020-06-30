@@ -8,17 +8,20 @@ public class UserResetPasswordDAO implements IUserResetPasswordDAO {
 
 
 	@Override
-	public void saveUserResetToken(IUserResetPasswordDB userResetPasswordDB, User user) {
+	public void saveUserResetToken(IUserResetPasswordDB userResetPasswordDB, User user)
+	{
 		userResetPasswordDB.saveUserResetToken(user);
 	}
 
 	@Override
-	public User findUserByResetToken(IUserResetPasswordDB userResetPasswordDB, String resetToken) {
+	public User findUserByResetToken(IUserResetPasswordDB userResetPasswordDB, String resetToken)
+	{
 		return userResetPasswordDB.findUserByResetToken(resetToken);
 	}
 
 	@Override
-	public void saveUserPassword(IUserResetPasswordDB userResetPasswordDB, User user) {
+	public void saveUserPassword(IUserResetPasswordDB userResetPasswordDB, User user)
+	{
 		userResetPasswordDB.saveUserPassword(user);
 	}
 

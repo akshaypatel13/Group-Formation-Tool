@@ -1,11 +1,13 @@
 package CSCI5308.GroupFormationTool.AccessControl;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import CSCI5308.GroupFormationTool.SystemConfig;
+import CSCI5308.GroupFormationTool.PasswordPolicy.IPasswordPolicyList;
+import CSCI5308.GroupFormationTool.PasswordPolicy.IPasswordPolicyValidator;
+import CSCI5308.GroupFormationTool.PasswordPolicy.PasswordPolicy;
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
-import CSCI5308.GroupFormationTool.Security.IPasswordSecurityPolicy;
 
 public class User
 {
@@ -20,32 +22,23 @@ public class User
 	private String lastName;
 	private String email;
 
-	// the reset token would be used when use forget password
-	// the reset token will be generate by uuid
 	private String resetToken;
 
 	public static String error;
 	
-	public static String getError() {
+	public static String getError()
+	{
 		return error;
 	}
-	public static void setError(String err) {
+
+	public static void setError(String err)
+	{
 		error = err;
 	}
+
 	public User()
 	{
 		setDefaults();
-	}
-	public static boolean isFollowingSecurityRules(String password)
-	{	
-		IPasswordSecurityPolicy passwordSecurityPolicy = SystemConfig.instance().getIPasswordSecurityPolicy();
-		String result = passwordSecurityPolicy.isFollowingSecurityRules(password);
-		if(result!= null)
-		{
-			setError(result);
-			return false;
-		}
-		return true;
 	}
 	
 	public User(long id, IUserPersistence persistence)
@@ -80,8 +73,7 @@ public class User
 	{
 		return id;
 	}
-	
-	// These are here for the Thymeleaf / Spring binding nonsense.
+
 	public void setId(long id)
 	{
 		this.id = id;
@@ -110,7 +102,7 @@ public class User
 	{
 		return bannerID;
 	}
-	// Also here for Thymeleaf nonsense.
+
 	public String getBanner()
 	{
 		return bannerID;
@@ -162,11 +154,27 @@ public class User
 	public boolean createUser(
 		IUserPersistence userDB,
 		IPasswordEncryption passwordEncryption,
-		IUserNotifications notification)
+		IUserNotifications notification,
+		IPasswordPolicyList passwordPolicyList)
 	{
 		String rawPassword = password;
 		this.password = passwordEncryption.encryptPassword(this.password);
-		boolean success = userDB.createUser(this);
+		ArrayList<PasswordPolicy> policies = new ArrayList<PasswordPolicy>();
+		policies = passwordPolicyList.getAllPasswordPolicies(); 
+		boolean success = true;
+		for(PasswordPolicy policy: policies) {
+			if(Integer.parseInt(policy.getEnabled()) == 1) {
+				IPasswordPolicyValidator validator = policy.getValidator();
+				if(validator.isPasswordValid(rawPassword) == false) {
+					System.out.println("password policy changed............");
+					success = false;
+					break;
+				}
+			}
+		}
+		if(success) {
+			success = userDB.createUser(this);
+		}
 		if (success && (null != notification))
 		{
 			notification.sendUserLoginCredentials(this, rawPassword);

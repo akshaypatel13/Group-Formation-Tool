@@ -10,6 +10,7 @@ import CSCI5308.GroupFormationTool.AccessControl.User;
  *
  */
 public interface IQuestionPersistence {
+
 	public List<Question> loadAllQuestions(User user);
 
 	public void loadQuestionByID(long id, Question question);

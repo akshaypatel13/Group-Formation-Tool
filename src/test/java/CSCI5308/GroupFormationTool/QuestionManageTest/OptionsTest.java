@@ -16,15 +16,15 @@ public class OptionsTest {
     @Test
     public void setStoredAs(){
         Options options=new Options();
-        options.setStoredas(1);
-        Assert.isTrue(options.getStoredas()==1);
+        options.setStoredAs(1);
+        Assert.isTrue(options.getStoredAs()==1);
     }
 
     @Test
     public void getStoredAs(){
         Options options=new Options();
-        options.setStoredas(1);
-        Assert.isTrue(options.getStoredas()==1);
+        options.setStoredAs(1);
+        Assert.isTrue(options.getStoredAs()==1);
     }
 
     @Test
