@@ -18,7 +18,8 @@ import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
 public class QuestionDB implements IQuestionPersistence {
 
 	@Override
-	public void loadQuestionByID(long id, Question question) {
+	public void loadQuestionByID(long id, Question question)
+	{
 		CallStoredProcedure proc = null;
 		try {
 			proc = new CallStoredProcedure("spFindQuestionByID(?)");
@@ -40,7 +41,7 @@ public class QuestionDB implements IQuestionPersistence {
 				}
 			}
 		} catch (SQLException e) {
-			// Logging needed.
+			e.printStackTrace();
 		} finally {
 			if (null != proc) {
 				proc.cleanup();
@@ -49,7 +50,8 @@ public class QuestionDB implements IQuestionPersistence {
 	}
 
 	@Override
-	public List<Question> loadAllQuestions(User user) {
+	public List<Question> loadAllQuestions(User user)
+	{
 		List<Question> questions = new ArrayList<Question>();
 		CallStoredProcedure proc = null;
 		try {
@@ -73,7 +75,7 @@ public class QuestionDB implements IQuestionPersistence {
 				}
 			}
 		} catch (SQLException e) {
-			// Logging needed.
+			e.printStackTrace();
 		} finally {
 			if (null != proc) {
 				proc.cleanup();
@@ -83,7 +85,8 @@ public class QuestionDB implements IQuestionPersistence {
 	}
 
 	@Override
-	public List<Question> sortAllQuestions(String sort, User user) {
+	public List<Question> sortAllQuestions(String sort, User user)
+	{
 		List<Question> questions = new ArrayList<Question>();
 		CallStoredProcedure proc = null;
 		try {
@@ -108,7 +111,7 @@ public class QuestionDB implements IQuestionPersistence {
 				}
 			}
 		} catch (SQLException e) {
-			// Logging needed.
+			e.printStackTrace();
 		} finally {
 			if (null != proc) {
 				proc.cleanup();
@@ -119,14 +122,15 @@ public class QuestionDB implements IQuestionPersistence {
 	}
 
 	@Override
-	public boolean deleteQuestion(long id) {
+	public boolean deleteQuestion(long id)
+	{
 		CallStoredProcedure proc = null;
 		try {
 			proc = new CallStoredProcedure("spDeleteQuestion(?)");
 			proc.setParameter(1, id);
 			proc.execute();
 		} catch (SQLException e) {
-			// Logging needed
+			e.printStackTrace();
 			return false;
 		} finally {
 			if (null != proc) {
@@ -136,7 +140,8 @@ public class QuestionDB implements IQuestionPersistence {
 		return true;
 	}
 
-	public boolean insertQuestion(Question question, User user) {
+	public boolean insertQuestion(Question question, User user)
+	{
 		CallStoredProcedure proc = null;
 		try {
 			proc = new CallStoredProcedure("spInsertQuestion(?, ?, ?, ?, ?, ?)");
@@ -158,12 +163,13 @@ public class QuestionDB implements IQuestionPersistence {
 		return true;
 	}
 
-	public boolean insertOptions(Options options) {
+	public boolean insertOptions(Options options)
+	{
 		CallStoredProcedure proc = null;
 		try {
 			proc = new CallStoredProcedure("spInsertOptions(?, ?)");
 			proc.setParameter(1, options.getDescription());
-			proc.setParameter(2, options.getStoredas());
+			proc.setParameter(2, options.getStoredAs());
 			proc.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
