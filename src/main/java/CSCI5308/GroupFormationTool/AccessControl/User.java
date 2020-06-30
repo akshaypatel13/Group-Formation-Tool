@@ -40,7 +40,7 @@ public class User
 	{	
 		IPasswordSecurityPolicy passwordSecurityPolicy = SystemConfig.instance().getIPasswordSecurityPolicy();
 		String result = passwordSecurityPolicy.isFollowingSecurityRules(password);
-		if(result!= null)
+		if(result != null)
 		{
 			setError(result);
 			return false;
@@ -52,7 +52,7 @@ public class User
 	{	
 		IPasswordSecurityPolicy passwordSecurityPolicy = SystemConfig.instance().getIPasswordSecurityPolicy();
 		String result = passwordSecurityPolicy.isFollowingSecurityRules(password);
-		if(result== null)
+		if(result != null)
 		{
 			return true;
 		}
@@ -205,9 +205,23 @@ public class User
 		return s.isEmpty();
 	}
 	
+	private static boolean isStringNotNullOrEmpty(String s)
+	{
+		if (null == s)
+		{
+			return false;
+		}
+		return !s.isEmpty();
+	}
+	
 	public static boolean isBannerIDValid(String bannerID)
 	{
 		return !isStringNullOrEmpty(bannerID);
+	}
+	
+	public static boolean isBannerIDInvalid(String bannerID)
+	{
+		return !isStringNotNullOrEmpty(bannerID);
 	}
 		
 	public static boolean isFirstNameValid(String name)
@@ -215,11 +229,20 @@ public class User
 		return !isStringNullOrEmpty(name);
 	}
 	
+	public static boolean isFirstNameInvalid(String name)
+	{
+		return !isStringNotNullOrEmpty(name);
+	}
+	
 	public static boolean isLastNameValid(String name)
 	{
 		return !isStringNullOrEmpty(name);
 	}
-
+	
+	public static boolean isLastNameInvalid(String name)
+	{
+		return !isStringNotNullOrEmpty(name);
+	}
 	
 	public static boolean isEmailValid(String email)
 	{
@@ -231,5 +254,17 @@ public class User
 		Pattern pattern = Pattern.compile(EMAIL_REGEX);
 		Matcher matcher = pattern.matcher(email);
 		return matcher.matches();
+	}
+	
+	public static boolean isEmailInvalid(String email)
+	{
+		if (isStringNullOrEmpty(email))
+		{
+			return true;
+		}
+		 
+		Pattern pattern = Pattern.compile(EMAIL_REGEX);
+		Matcher matcher = pattern.matcher(email);
+		return !matcher.matches();
 	}
 }
