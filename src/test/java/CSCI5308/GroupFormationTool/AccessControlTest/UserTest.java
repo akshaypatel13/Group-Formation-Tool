@@ -129,33 +129,33 @@ public class UserTest
 	public void isFirstNameValidTest()
 	{
 		Assert.isTrue(User.isFirstNameValid("rob"));
-		Assert.isTrue(!User.isFirstNameValid(null));
-		Assert.isTrue(!User.isFirstNameValid(""));
+		Assert.isTrue(User.isFirstNameInvalid(null));
+		Assert.isTrue(User.isFirstNameInvalid(""));
 	}
 	
 	@Test
 	public void isLastNameValidTest()
 	{
 		Assert.isTrue(User.isLastNameValid("hawkey"));
-		Assert.isTrue(!User.isLastNameValid(null));
-		Assert.isTrue(!User.isLastNameValid(""));
+		Assert.isTrue(User.isLastNameInvalid(null));
+		Assert.isTrue(User.isLastNameInvalid(""));
 	}
 	
 	@Test
 	public void isEmailValidTest()
 	{
 		Assert.isTrue(User.isEmailValid("rhawkey@dal.ca"));
-		Assert.isTrue(!User.isEmailValid(null));
-		Assert.isTrue(!User.isEmailValid(""));
-		Assert.isTrue(!User.isEmailValid("@dal.ca"));
-		Assert.isTrue(!User.isEmailValid("rhawkey@"));
+		Assert.isTrue(User.isEmailInvalid(null));
+		Assert.isTrue(User.isEmailInvalid(""));
+		Assert.isTrue(User.isEmailInvalid("@dal.ca"));
+		Assert.isTrue(User.isEmailInvalid("rhawkey@"));
 	}
 	
 	@Test
 	public void isFollowingSecurityRulesTest()
 	{
-		Assert.isTrue(!User.isFollowingSecurityRules("123"));
-		Assert.isTrue(!User.isFollowingSecurityRules("123iI"));
-		Assert.isTrue(!User.isFollowingSecurityRules("123I@"));
+		Assert.isTrue(User.isNotFollowingSecurityRules("123"));
+		Assert.isTrue(User.isNotFollowingSecurityRules("123iI"));
+		Assert.isTrue(User.isNotFollowingSecurityRules("123I@"));
 	}
 }
