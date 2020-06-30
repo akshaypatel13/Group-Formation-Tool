@@ -6,19 +6,20 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
-import CSCI5308.GroupFormationTool.PasswordPolicy.MaxLengthValidator;
+import CSCI5308.GroupFormationTool.PasswordPolicy.MinLowercaseValidator;
 
 @SpringBootTest
-public class MaxLengthValidatorTest {
-
+public class MinLowercaseValidatorTest {
+	
 	@SuppressWarnings("deprecation")
 	@Test
 	public void isPasswordValidTest() {
 
-		MaxLengthValidator validator = new MaxLengthValidator("7");
-		Assert.isTrue(validator.isPasswordValid("123456"));
-		assertFalse(validator.isPasswordValid("1212121212"));
+		MinLowercaseValidator validator = new MinLowercaseValidator("1");
+		Assert.isTrue(validator.isPasswordValid("123a"));
+		assertFalse(validator.isPasswordValid("123"));
 
 	}
+
 
 }

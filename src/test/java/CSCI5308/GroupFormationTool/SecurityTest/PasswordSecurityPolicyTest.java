@@ -9,7 +9,6 @@ import CSCI5308.GroupFormationTool.AccessControl.IUserPersistence;
 import CSCI5308.GroupFormationTool.AccessControl.User;
 import CSCI5308.GroupFormationTool.AccessControlTest.UserDBMock;
 import CSCI5308.GroupFormationTool.Security.*;
-import CSCI5308.GroupFormationTool.SystemConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -51,6 +50,7 @@ public class PasswordSecurityPolicyTest {
 		
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void checkPreviousPasswordTest(){
 		IPasswordManager passwordManager = new PasswordManagerMock();
