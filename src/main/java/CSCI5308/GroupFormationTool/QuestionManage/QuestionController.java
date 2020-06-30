@@ -34,11 +34,22 @@ public class QuestionController {
 		return "question/question";
 	}
 
-	@GetMapping("/question/{sort}")
-	public String sortQuestion(@PathVariable("sort") String sort, Model model)
-	{
+	@GetMapping("/question/title")
+	public String sortQuestionByTitle(Model model) {
 		IQuestionPersistence questionDB = SystemConfig.instance().getQuestionDB();
-		List<Question> sortQuestions = questionDB.sortAllQuestions(sort,
+
+		List<Question> sortQuestions = questionDB.sortQuestionsByTitle(
+				CurrentUser.instance().getCurrentAuthenticatedUser());
+		model.addAttribute("questions", sortQuestions);
+
+		return "question/question";
+	}
+	
+	@GetMapping("/question/created")
+	public String sortQuestionByCreated(Model model) {
+		IQuestionPersistence questionDB = SystemConfig.instance().getQuestionDB();
+
+		List<Question> sortQuestions = questionDB.sortQuestionsByCreated(
 				CurrentUser.instance().getCurrentAuthenticatedUser());
 		model.addAttribute("questions", sortQuestions);
 		return "question/question";

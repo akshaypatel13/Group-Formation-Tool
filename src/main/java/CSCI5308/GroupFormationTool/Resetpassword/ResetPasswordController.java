@@ -54,7 +54,7 @@ public class ResetPasswordController {
 		userDB = SystemConfig.instance().getUserDB();
 		User user = new User();
 		userDB.loadUserByBannerID(bannerID, user);
-		if (!user.isValidUser())
+		if (user.isInvalidUser())
 		{
 			theModel.addAttribute("message", "We didn't find an account for that e-mail address.");
 		}
@@ -81,7 +81,7 @@ public class ResetPasswordController {
 	{
 		User user = resetPasswordService.findUserByResetToken(resetToken);
 		if(user!=null) {
-			if (!User.isFollowingSecurityRules(password)){
+			if (User.isNotFollowingSecurityRules(password)){
 				theModel.addAttribute("errorMessage", User.getError());
 				theModel.addAttribute("resetToken", resetToken);
 				return "confirmPassword";
