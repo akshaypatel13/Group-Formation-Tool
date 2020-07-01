@@ -9,16 +9,16 @@ import org.springframework.util.Assert;
 import CSCI5308.GroupFormationTool.PasswordPolicy.CharacterNotAllowedValidator;
 
 @SpringBootTest
-public class CharacterNotAllowedTest {
+public class CharacterNotAllowedTest
+{
 
 	@SuppressWarnings("deprecation")
 	@Test
-	public void isPasswordValidTest() {
-
+	public void isPasswordValidTest()
+	{
 		CharacterNotAllowedValidator validator = new CharacterNotAllowedValidator("#");
 		Assert.isTrue(validator.isPasswordValid("123a"));
 		assertFalse(validator.isPasswordValid("123#"));
-
 	}
 
 }

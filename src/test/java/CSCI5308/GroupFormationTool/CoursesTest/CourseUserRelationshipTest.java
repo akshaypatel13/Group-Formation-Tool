@@ -19,6 +19,7 @@ import CSCI5308.GroupFormationTool.Courses.Role;
 class CourseUserRelationshipTest 
 {
 	private ICourseUserRelationshipPersistence courseUserRelationshipDB;
+	private CurrentUserMock currentUser;
 
 	public CourseUserRelationshipTest() 
 	{
@@ -30,7 +31,7 @@ class CourseUserRelationshipTest
 	{
 		Course course = new Course();
 		course.setId(0);
-		CurrentUserMock currentUser = new CurrentUserMock();
+		currentUser = new CurrentUserMock();
 		User user = currentUser.getCurrentAuthenticatedUser();
 		List<Role> roles = courseUserRelationshipDB.loadUserRolesForCourse(course, user);
 		assertThat(roles).isNotNull();
@@ -43,7 +44,7 @@ class CourseUserRelationshipTest
 	{
 		Course course = new Course();
 		course.setId(0);
-		CurrentUserMock currentUser = new CurrentUserMock();
+		currentUser = new CurrentUserMock();
 		User user = currentUser.getCurrentAuthenticatedUser();
 		List<Role> roles = courseUserRelationshipDB.loadUserRolesForCourse(course, user);
 		Assert.isTrue(roles.size() > 0);

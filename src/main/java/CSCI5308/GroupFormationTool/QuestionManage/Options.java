@@ -1,6 +1,7 @@
 package CSCI5308.GroupFormationTool.QuestionManage;
 
-public class Options {
+public class Options
+{
 
 	private String description;
 	private int storedAs;
@@ -31,4 +32,5 @@ public class Options {
 	{
 		this.storedAs = storedAs;
 	}
+
 }

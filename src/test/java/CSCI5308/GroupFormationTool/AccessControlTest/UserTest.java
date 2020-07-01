@@ -10,6 +10,7 @@ import org.springframework.util.Assert;
 @SuppressWarnings("deprecation")
 public class UserTest
 {
+
 	@Test
 	public void ConstructorTests()
 	{

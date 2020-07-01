@@ -9,16 +9,16 @@ import org.springframework.util.Assert;
 import CSCI5308.GroupFormationTool.PasswordPolicy.MinLengthValidator;
 
 @SpringBootTest
-public class MinLengthValidatorTest {
+public class MinLengthValidatorTest
+{
 
 	@SuppressWarnings("deprecation")
 	@Test
-	public void isPasswordValidTest() {
-
+	public void isPasswordValidTest()
+	{
 		MinLengthValidator validator = new MinLengthValidator("3");
 		Assert.isTrue(validator.isPasswordValid("123456"));
 		assertFalse(validator.isPasswordValid("12"));
-
 	}
 
 }

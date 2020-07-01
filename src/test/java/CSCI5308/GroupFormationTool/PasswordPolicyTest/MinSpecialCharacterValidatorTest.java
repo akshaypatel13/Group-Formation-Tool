@@ -9,16 +9,16 @@ import org.springframework.util.Assert;
 import CSCI5308.GroupFormationTool.PasswordPolicy.MinSpecialCharacterValidator;
 
 @SpringBootTest
-public class MinSpecialCharacterValidatorTest {
+public class MinSpecialCharacterValidatorTest
+{
 
 	@SuppressWarnings("deprecation")
 	@Test
-	public void isPasswordValidTest() {
-
+	public void isPasswordValidTest()
+	{
 		MinSpecialCharacterValidator validator = new MinSpecialCharacterValidator("1");
 		Assert.isTrue(validator.isPasswordValid("123@"));
 		assertFalse(validator.isPasswordValid("123"));
-
 	}
 
 }

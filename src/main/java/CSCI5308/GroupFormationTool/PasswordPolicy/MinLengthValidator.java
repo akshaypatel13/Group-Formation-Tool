@@ -1,6 +1,7 @@
 package CSCI5308.GroupFormationTool.PasswordPolicy;
 
-public class MinLengthValidator implements IPasswordPolicyValidator {
+public class MinLengthValidator implements IPasswordPolicyValidator
+{
 
 	private String value;
 
@@ -9,8 +10,10 @@ public class MinLengthValidator implements IPasswordPolicyValidator {
 	}
 
 	@Override
-	public boolean isPasswordValid(String password) {
-		if (password.length() < Integer.parseInt(this.value)) {
+	public boolean isPasswordValid(String password)
+	{
+		if (password.length() < Integer.parseInt(this.value))
+		{
 			return false;
 		}
 		return true;

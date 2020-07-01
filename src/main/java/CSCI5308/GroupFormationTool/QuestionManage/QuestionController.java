@@ -17,7 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
  * @author nieruize
  */
 @Controller
-public class QuestionController {
+public class QuestionController
+{
 
 	private static final String ID = "id";
 

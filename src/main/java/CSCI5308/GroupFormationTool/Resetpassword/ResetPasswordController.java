@@ -14,18 +14,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-public class ResetPasswordController {
+public class ResetPasswordController
+{
 
 	private IResetPasswordService resetPasswordService;
 	private IUserPersistence userDB;
-
 	private IEmailService emailService;
-
 	private IPasswordEncryption passwordEncryption;
 
-	public ResetPasswordController() {
+	public ResetPasswordController()
+	{
 		resetPasswordService = new DefaultResetPasswordService(new UserResetPasswordDAO(), new UserResetPasswordDB());
-
 		emailService = SystemConfig.instance().getEmailService();
 		passwordEncryption = SystemConfig.instance().getPasswordEncryption();
 	}
@@ -37,13 +36,17 @@ public class ResetPasswordController {
 
 	@PostMapping("/resetPassword")
 	public String resetPasswordPost(@RequestParam("bannerID") String bannerID, HttpServletRequest request,
-			Model theModel) {
+			Model theModel)
+	{
 		userDB = SystemConfig.instance().getUserDB();
 		User user = new User();
 		userDB.loadUserByBannerID(bannerID, user);
-		if (user.isInvalidUser()) {
+		if (user.isInvalidUser())
+		{
 			theModel.addAttribute("message", "We didn't find an account for that e-mail address.");
-		} else {
+		}
+		else
+		{
 			theModel.addAttribute("message", "Reset password email has been sent.");
 			resetPasswordService.setUserResetToken(user);
 			resetPasswordService.saveUserResetToken(user);
@@ -53,27 +56,35 @@ public class ResetPasswordController {
 	}
 
 	@GetMapping("/reset_token/{param}")
-	public String confirmPasswordGet(@PathVariable("param") String resetToken, Model theModel) {
+	public String confirmPasswordGet(@PathVariable("param") String resetToken, Model theModel)
+	{
 		theModel.addAttribute("resetToken", resetToken);
 		return "confirmPassword";
 	}
 
 	@PostMapping("/reset_token/{param}")
 	public String confirmPasswordPost(@PathVariable("param") String resetToken,
-			@RequestParam("password") String password, Model theModel) {
+			@RequestParam("password") String password, Model theModel)
+	{
 		User user = resetPasswordService.findUserByResetToken(resetToken);
-		if(user!=null) {
-			if (resetPasswordService.isPasswordValid(password, user)){
+		if(user!=null)
+		{
+			if (resetPasswordService.isPasswordValid(password, user))
+			{
 				password = passwordEncryption.encryptPassword(password);
 				user.setPassword(password);
 				resetPasswordService.saveUserPassword(user);
 				theModel.addAttribute("message", "Password reset success!");
-			} else {
+			}
+			else
+			{
 				theModel.addAttribute("errorMessage", "New Password cannot be equal to previous passwords");
 				theModel.addAttribute("resetToken", resetToken);
 				return "confirmPassword";
 			}
-		} else {
+		}
+		else
+		{
 			theModel.addAttribute("message", "Invalid Reset Token");
 		}
 		return "messageDisplay";

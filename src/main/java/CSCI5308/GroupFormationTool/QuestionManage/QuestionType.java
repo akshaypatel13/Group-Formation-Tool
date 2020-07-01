@@ -2,6 +2,7 @@ package CSCI5308.GroupFormationTool.QuestionManage;
 
 public enum QuestionType
 {
+
 	TEXT
 	{
 		public String toString()

@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Properties;
 
 
-public class DefaultEmailService implements IEmailService {
+public class DefaultEmailService implements IEmailService
+{
+
 	private static final String emailHost = "email_host";
 	private static final String emailUsername = "email_username";
 	private static final String emailPassword = "email_password";
@@ -19,27 +21,24 @@ public class DefaultEmailService implements IEmailService {
 	private static final String emailUrl = "support@group21.com";
 	private static final String emailSubject = "Password Reset Request";
 
-	private JavaMailSenderImpl setupMailSender(JavaMailSenderImpl mailSender) {
-		
+	private JavaMailSenderImpl setupMailSender(JavaMailSenderImpl mailSender)
+	{
 		mailSender.setHost(System.getenv(emailHost));
 		mailSender.setUsername(System.getenv(emailUsername));
 		mailSender.setPassword(System.getenv(emailPassword));
 		mailSender.setPort(Integer.parseInt(System.getenv(emailPort)));
-
 		Properties props = mailSender.getJavaMailProperties();
 		props.put("mail.transport.protocol", "smtp");
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
 		props.put("mail.debug", "true");
-
 		return mailSender;
 	}
 
 	@Async
-	public void sendEmail(User user, HttpServletRequest request) {
-
+	public void sendEmail(User user, HttpServletRequest request)
+	{
 		JavaMailSender mailSender = setupMailSender(SystemConfig.instance().getJavaMailSender());
-
 		String appUrl = request.getScheme() + "://" + request.getServerName();
 		SimpleMailMessage resetPasswordEmail = new SimpleMailMessage();
 		resetPasswordEmail.setFrom(emailUrl);

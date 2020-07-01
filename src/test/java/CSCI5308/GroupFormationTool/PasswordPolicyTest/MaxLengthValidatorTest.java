@@ -9,16 +9,16 @@ import org.springframework.util.Assert;
 import CSCI5308.GroupFormationTool.PasswordPolicy.MaxLengthValidator;
 
 @SpringBootTest
-public class MaxLengthValidatorTest {
+public class MaxLengthValidatorTest
+{
 
 	@SuppressWarnings("deprecation")
 	@Test
-	public void isPasswordValidTest() {
-
+	public void isPasswordValidTest()
+	{
 		MaxLengthValidator validator = new MaxLengthValidator("7");
 		Assert.isTrue(validator.isPasswordValid("123456"));
 		assertFalse(validator.isPasswordValid("1212121212"));
-
 	}
 
 }
