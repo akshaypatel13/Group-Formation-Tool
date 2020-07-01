@@ -44,23 +44,19 @@ public class DefaultResetPasswordService implements IResetPasswordService {
 		user.setResetToken(resetToken);
 	}
 
-
 	@Override
-	public void saveUserPassword(User user)
-	{
-		userResetPasswordDAO.saveUserPassword(userResetPasswordDB, user);
-	}
-
-	@Override
-	public boolean checkPasswordPolicies(User user, String rawPassword)
-	{
+	public boolean isPasswordValid(String rawPassword, User user) {
+		ArrayList<PasswordPolicy> policies = new ArrayList<PasswordPolicy>();
 		IPasswordPolicyList passwordPolicyList = SystemConfig.instance().getIPasswordPolicyList();
-		ArrayList<PasswordPolicy> policies = passwordPolicyList.getAllPasswordPolicies();
+		policies = passwordPolicyList.getAllPasswordPolicies(user);
 		boolean success = true;
 		for(PasswordPolicy policy: policies) {
 			if(Integer.parseInt(policy.getEnabled()) == 1) {
 				IPasswordPolicyValidator validator = policy.getValidator();
-				if(validator.isPasswordValid(rawPassword) == false) {
+				if(validator.isPasswordValid(rawPassword)) {
+					continue;
+				}
+				else {
 					success = false;
 					break;
 				}
@@ -68,5 +64,14 @@ public class DefaultResetPasswordService implements IResetPasswordService {
 		}
 		return success;
 	}
+
+
+	@Override
+	public void saveUserPassword(User user)
+	{
+		userResetPasswordDAO.saveUserPassword(userResetPasswordDB, user);
+	}
+
+
 
 }

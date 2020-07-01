@@ -1,5 +1,7 @@
 package CSCI5308.GroupFormationTool.PasswordPolicy;
 
+import CSCI5308.GroupFormationTool.AccessControl.User;
+
 import java.util.ArrayList;
 
 public class PasswordPolicyList implements IPasswordPolicyList {
@@ -22,6 +24,9 @@ public class PasswordPolicyList implements IPasswordPolicyList {
 	private final String CHARS_NOT_ALLOWED = "chars_not_allowed";
 	private final String CHARS_NOT_ALLOWED_ENABLED = "chars_not_allowed_enabled";
 
+	private static String PASSWORD_HISTORY_ENABLED = "password_history_enabled";
+	private static String PASSWORD_HISTORY_COUNT = "password_history_count";
+
 	private ArrayList<PasswordPolicy> policies = new ArrayList<PasswordPolicy>();
 
 	private PasswordPolicy createNewPolicy(String value, String enabled, IPasswordPolicyValidator validator) {
@@ -33,7 +38,7 @@ public class PasswordPolicyList implements IPasswordPolicyList {
 	}
 
 	@Override
-	public ArrayList<PasswordPolicy> getAllPasswordPolicies() {
+	public ArrayList<PasswordPolicy> getAllPasswordPolicies(User user) {
 
 		String minLengthVal = System.getenv(MIN_LENGTH);
 		String minLengthEnabled = System.getenv(MIN_LENGTH_ENABLED);
@@ -53,6 +58,9 @@ public class PasswordPolicyList implements IPasswordPolicyList {
 		String CharacterNotAllowedVal = System.getenv(CHARS_NOT_ALLOWED);
 		String CharacterNotAllowedEnabled = System.getenv(CHARS_NOT_ALLOWED_ENABLED);
 
+		String passwordHistoryEnabled = System.getenv(System.getenv("password_history_enabled"));
+		String passwordHistoryCount = System.getenv(System.getenv("password_history_count"));
+
 		IPasswordPolicyValidator minValidator = new MinLengthValidator(minLengthVal);
 		IPasswordPolicyValidator maxValidator = new MaxLengthValidator(maxLengthVal);
 		IPasswordPolicyValidator minUppercaseValidator = new MinUppercaseValidator(minUppercaseVal);
@@ -61,6 +69,8 @@ public class PasswordPolicyList implements IPasswordPolicyList {
 				minSpecialCharacterVal);
 		IPasswordPolicyValidator CharacterNotAllowedValidator = new CharacterNotAllowedValidator(
 				CharacterNotAllowedVal);
+
+		IPasswordPolicyValidator passwordHistoryValidator = new PasswordHistoryValidator(passwordHistoryCount, user);
 
 		PasswordPolicy minPasswordPolicy = createNewPolicy(minLengthVal, minLengthEnabled, minValidator);
 		PasswordPolicy maxPasswordPolicy = createNewPolicy(maxLengthVal, maxLengthEnabled, maxValidator);
@@ -72,6 +82,7 @@ public class PasswordPolicyList implements IPasswordPolicyList {
 				minSpecialCharacterEnabled, minSpecialCharacterValidator);
 		PasswordPolicy CharacterNotAllowedPasswordPolicy = createNewPolicy(CharacterNotAllowedVal,
 				CharacterNotAllowedEnabled, CharacterNotAllowedValidator);
+		PasswordPolicy HistoryPolicy = createNewPolicy(passwordHistoryCount, passwordHistoryEnabled, passwordHistoryValidator);
 
 		policies.add(maxPasswordPolicy);
 		policies.add(minPasswordPolicy);
@@ -79,6 +90,7 @@ public class PasswordPolicyList implements IPasswordPolicyList {
 		policies.add(minLowercasePasswordPolicy);
 		policies.add(minSpecialCharacterPasswordPolicy);
 		policies.add(CharacterNotAllowedPasswordPolicy);
+		policies.add(HistoryPolicy);
 
 		return policies;
 	}

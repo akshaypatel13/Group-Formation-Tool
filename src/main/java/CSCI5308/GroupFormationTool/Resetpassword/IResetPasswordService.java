@@ -9,6 +9,5 @@ public interface IResetPasswordService {
 	public User findUserByResetToken(String resetToken);
 	public void saveUserPassword(User user);
 	public void setUserResetToken(User user);
-	public boolean checkPasswordPolicies(User user, String rawPassword);
-
+	public boolean isPasswordValid(String password, User user);
 }

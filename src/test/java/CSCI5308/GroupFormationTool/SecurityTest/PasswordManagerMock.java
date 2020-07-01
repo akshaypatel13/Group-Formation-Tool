@@ -1,7 +1,7 @@
 package CSCI5308.GroupFormationTool.SecurityTest;
 
 import CSCI5308.GroupFormationTool.AccessControl.User;
-import CSCI5308.GroupFormationTool.Security.IPasswordManager;
+import CSCI5308.GroupFormationTool.PasswordPolicy.IPasswordManager;
 
 import java.util.ArrayList;
 import java.util.List;

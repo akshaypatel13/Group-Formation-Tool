@@ -3,7 +3,6 @@ package CSCI5308.GroupFormationTool.Resetpassword;
 import CSCI5308.GroupFormationTool.AccessControl.IUserPersistence;
 import CSCI5308.GroupFormationTool.AccessControl.User;
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
-import CSCI5308.GroupFormationTool.Security.IPasswordSecurityPolicy;
 import CSCI5308.GroupFormationTool.SystemConfig;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.UUID;
 
 @Controller
 public class ResetPasswordController {
@@ -22,8 +20,6 @@ public class ResetPasswordController {
 	private IUserPersistence userDB;
 
 	private IEmailService emailService;
-
-	private IPasswordSecurityPolicy passwordSecurityPolicy;
 
 	private IPasswordEncryption passwordEncryption;
 
@@ -34,7 +30,6 @@ public class ResetPasswordController {
 				new UserResetPasswordDB());
 
 		emailService = SystemConfig.instance().getEmailService();
-		passwordSecurityPolicy = SystemConfig.instance().getIPasswordSecurityPolicy();
 		passwordEncryption = SystemConfig.instance().getPasswordEncryption();
 	}
 	
@@ -78,14 +73,7 @@ public class ResetPasswordController {
 	{
 		User user = resetPasswordService.findUserByResetToken(resetToken);
 		if(user!=null) {
-
-			if (User.isNotFollowingSecurityRules(password)){
-				theModel.addAttribute("errorMessage", User.getError());
-				theModel.addAttribute("resetToken", resetToken);
-				return "confirmPassword";
-			}
-
-			if (passwordSecurityPolicy.checkPreviousPassword(user, password)){
+			if (resetPasswordService.isPasswordValid(password, user)){
 				password = passwordEncryption.encryptPassword(password);
 				user.setPassword(password);
 				resetPasswordService.saveUserPassword(user);

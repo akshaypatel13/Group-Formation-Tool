@@ -9,7 +9,6 @@ import CSCI5308.GroupFormationTool.PasswordPolicy.IPasswordPolicyList;
 import CSCI5308.GroupFormationTool.PasswordPolicy.IPasswordPolicyValidator;
 import CSCI5308.GroupFormationTool.PasswordPolicy.PasswordPolicy;
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
-import CSCI5308.GroupFormationTool.Security.IPasswordSecurityPolicy;
 
 public class User
 {
@@ -43,30 +42,7 @@ public class User
 		setDefaults();
 	}
 
-	public static boolean isFollowingSecurityRules(String password)
-	{	
-		IPasswordSecurityPolicy passwordSecurityPolicy = SystemConfig.instance().getIPasswordSecurityPolicy();
-		String result = passwordSecurityPolicy.isFollowingSecurityRules(password);
-		if(result != null)
-		{
-			setError(result);
-			return false;
-		}
-		return true;
-	}
-	
-	public static boolean isNotFollowingSecurityRules(String password)
-	{	
-		IPasswordSecurityPolicy passwordSecurityPolicy = SystemConfig.instance().getIPasswordSecurityPolicy();
-		String result = passwordSecurityPolicy.isFollowingSecurityRules(password);
-		if(result != null)
-		{
-			return true;
-		}
-		setError(result);
-		return false;
-	}
-	
+
 	public User(long id, IUserPersistence persistence)
 	{
 		setDefaults();
@@ -191,12 +167,15 @@ public class User
 		String rawPassword = password;
 		this.password = passwordEncryption.encryptPassword(this.password);
 		ArrayList<PasswordPolicy> policies = new ArrayList<PasswordPolicy>();
-		policies = passwordPolicyList.getAllPasswordPolicies(); 
+		policies = passwordPolicyList.getAllPasswordPolicies(this);
 		boolean success = true;
 		for(PasswordPolicy policy: policies) {
 			if(Integer.parseInt(policy.getEnabled()) == 1) {
 				IPasswordPolicyValidator validator = policy.getValidator();
-				if(validator.isPasswordValid(rawPassword) == false) {
+				if(validator.isPasswordValid(rawPassword)) {
+					continue;
+				}
+				else {
 					success = false;
 					break;
 				}
