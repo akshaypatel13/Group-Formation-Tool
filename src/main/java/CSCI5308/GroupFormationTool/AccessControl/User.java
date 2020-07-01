@@ -37,7 +37,9 @@ public class User {
 		setDefaults();
 	}
 
-	public User(long id, IUserPersistence persistence) {
+
+	public User(long id, IUserPersistence persistence)
+	{
 		setDefaults();
 		persistence.loadUserByID(id, this);
 	}
@@ -134,12 +136,15 @@ public class User {
 		String rawPassword = password;
 		this.password = passwordEncryption.encryptPassword(this.password);
 		ArrayList<PasswordPolicy> policies = new ArrayList<PasswordPolicy>();
-		policies = passwordPolicyList.getAllPasswordPolicies();
+		policies = passwordPolicyList.getAllPasswordPolicies(this);
 		boolean success = true;
 		for (PasswordPolicy policy : policies) {
 			if (Integer.parseInt(policy.getEnabled()) == 1) {
 				IPasswordPolicyValidator validator = policy.getValidator();
-				if (validator.isPasswordValid(rawPassword) == false) {
+				if(validator.isPasswordValid(rawPassword)) {
+					continue;
+				}
+				else {
 					success = false;
 					break;
 				}

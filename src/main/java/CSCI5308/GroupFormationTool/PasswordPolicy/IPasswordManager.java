@@ -1,4 +1,4 @@
-package CSCI5308.GroupFormationTool.Security;
+package CSCI5308.GroupFormationTool.PasswordPolicy;
 
 import CSCI5308.GroupFormationTool.AccessControl.User;
 

@@ -1,5 +1,7 @@
 package CSCI5308.GroupFormationTool;
 
+import CSCI5308.GroupFormationTool.PasswordPolicy.DefaultPasswordManager;
+import CSCI5308.GroupFormationTool.PasswordPolicy.IPasswordManager;
 import CSCI5308.GroupFormationTool.Security.*;
 import CSCI5308.GroupFormationTool.AccessControl.*;
 import CSCI5308.GroupFormationTool.Database.*;
@@ -34,8 +36,6 @@ public class SystemConfig {
 	private IEmailService emailService;
 	private JavaMailSenderImpl mailSender;
 	private IQuestionPersistence questionDB;
-	private IPasswordSecurityPolicyConfig passwordSecurityPolicyConfig;
-	private IPasswordSecurityPolicy passwordSecurityPolicy;
 	private IPasswordManager passwordManager;
 	private IPasswordPolicyList passwordPolicyList;
 
@@ -58,10 +58,8 @@ public class SystemConfig {
 		mailSender = new JavaMailSenderImpl();
 		questionDB = new QuestionDB();
 
-		passwordSecurityPolicyConfig =  new PasswordSecurityPolicyConfig();
 		passwordManager = new DefaultPasswordManager();
 
-		passwordSecurityPolicy = new PasswordSecurityPolicy(passwordManager, passwordSecurityPolicyConfig);
 		passwordPolicyList = new PasswordPolicyList();
 
 	}
@@ -78,14 +76,6 @@ public class SystemConfig {
 
 	public IPasswordPolicyList getIPasswordPolicyList() {
 		return passwordPolicyList;
-	}
-	
-	public IPasswordSecurityPolicy getIPasswordSecurityPolicy() {
-		return passwordSecurityPolicy;
-	}
-	
-	public IPasswordSecurityPolicyConfig getIPasswordSecurityPolicyConfig() {
-		return passwordSecurityPolicyConfig;
 	}
 
 	public IPasswordEncryption getPasswordEncryption() {
