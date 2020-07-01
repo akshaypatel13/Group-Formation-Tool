@@ -1,6 +1,9 @@
 package CSCI5308.GroupFormationTool.AccessControlTest;
 
 import CSCI5308.GroupFormationTool.AccessControl.*;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.util.Assert;
 
@@ -118,34 +121,34 @@ public class UserTest
 	public void isBannerIDValidTest()
 	{
 		Assert.isTrue(User.isBannerIDValid("B000000000"));
-		Assert.isTrue(User.isBannerIDInvalid(null));
-		Assert.isTrue(User.isBannerIDInvalid(""));
+		assertFalse(User.isBannerIDValid(null));
+		assertFalse(User.isBannerIDValid(""));
 	}
 		
 	@Test
 	public void isFirstNameValidTest()
 	{
 		Assert.isTrue(User.isFirstNameValid("rob"));
-		Assert.isTrue(User.isFirstNameInvalid(null));
-		Assert.isTrue(User.isFirstNameInvalid(""));
+		assertFalse(User.isFirstNameValid(null));
+		assertFalse(User.isFirstNameValid(""));
 	}
 	
 	@Test
 	public void isLastNameValidTest()
 	{
 		Assert.isTrue(User.isLastNameValid("hawkey"));
-		Assert.isTrue(User.isLastNameInvalid(null));
-		Assert.isTrue(User.isLastNameInvalid(""));
+		assertFalse(User.isLastNameValid(null));
+		assertFalse(User.isLastNameValid(""));
 	}
 	
 	@Test
 	public void isEmailValidTest()
 	{
 		Assert.isTrue(User.isEmailValid("rhawkey@dal.ca"));
-		Assert.isTrue(User.isEmailInvalid(null));
-		Assert.isTrue(User.isEmailInvalid(""));
-		Assert.isTrue(User.isEmailInvalid("@dal.ca"));
-		Assert.isTrue(User.isEmailInvalid("rhawkey@"));
+		assertFalse(User.isEmailValid(null));
+		assertFalse(User.isEmailValid(""));
+		assertFalse(User.isEmailValid("@dal.ca"));
+		assertFalse(User.isEmailValid("rhawkey@"));
 	}
 
 }
