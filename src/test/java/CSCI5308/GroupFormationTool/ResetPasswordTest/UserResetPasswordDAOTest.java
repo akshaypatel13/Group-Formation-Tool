@@ -9,13 +9,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
 @SpringBootTest
-public class UserResetPasswordDAOTest {
+public class UserResetPasswordDAOTest
+{
 
     IUserResetPasswordDAO userResetPasswordDAO;
     IUserResetPasswordDB userResetPasswordDB;
 
     @Test
-    public void saveUserResetTokenTest(){
+    public void saveUserResetTokenTest()
+    {
         userResetPasswordDAO = new UserResetPasswordDAO();
         userResetPasswordDB = new ResetPasswordDBMock();
         User user = new User();
@@ -24,7 +26,8 @@ public class UserResetPasswordDAOTest {
     }
 
     @Test
-    public void findUserByResetToken(){
+    public void findUserByResetToken()
+    {
         userResetPasswordDAO = new UserResetPasswordDAO();
         userResetPasswordDB = new ResetPasswordDBMock();
         User user = userResetPasswordDAO.findUserByResetToken(userResetPasswordDB, "12345");
@@ -32,11 +35,13 @@ public class UserResetPasswordDAOTest {
     }
 
     @Test
-    public void saveUserPassword(){
+    public void saveUserPassword()
+    {
         userResetPasswordDAO = new UserResetPasswordDAO();
         userResetPasswordDB = new ResetPasswordDBMock();
         User user = new User();
         userResetPasswordDAO.saveUserPassword(userResetPasswordDB, user);
         Assert.isTrue(user.getPassword().equals("password"));
     }
+
 }

@@ -23,7 +23,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  */
 @SpringBootTest
 @SuppressWarnings("deprecation")
-public class QuestionTest {
+public class QuestionTest
+{
+
+	private IQuestionPersistence questionDB;
 
 	@Test
 	public void ConstructorTests() 
@@ -124,14 +127,15 @@ public class QuestionTest {
 	@Test
 	public void delete()
 	{
-		IQuestionPersistence questionDB = new QuestionDBMock();
+		questionDB = new QuestionDBMock();
 		boolean status = questionDB.deleteQuestion(1);
 		Assert.isTrue(status);
 	}
 
 	@Test
-	public void insertQuestion(){
-		IQuestionPersistence questionDB = new QuestionDBMock();
+	public void insertQuestion()
+	{
+		questionDB = new QuestionDBMock();
 		Question question=new Question();
 		User user=new User();
 		questionDB.insertQuestion(question,user);
@@ -145,7 +149,7 @@ public class QuestionTest {
 	@Test
 	public void insertQuestionFalse()
 	{
-		IQuestionPersistence questionDB = new QuestionDBMock();
+		questionDB = new QuestionDBMock();
 		Question question=new Question();
 		User user=new User();
 		questionDB.insertQuestion(question,user);

@@ -6,7 +6,8 @@ import java.sql.SQLException;
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
 
 public class UserDB implements IUserPersistence
-{	
+{
+
 	public void loadUserByID(long id, User user)
 	{
 		CallStoredProcedure proc = null;
@@ -36,7 +37,7 @@ public class UserDB implements IUserPersistence
 		}
 		catch (SQLException e)
 		{
-			// Logging needed.
+			System.out.print(e);
 		}
 		finally
 		{
@@ -66,7 +67,7 @@ public class UserDB implements IUserPersistence
 		}
 		catch (SQLException e)
 		{
-			// Logging needed.
+			System.out.print(e);
 		}
 		finally
 		{
@@ -75,7 +76,6 @@ public class UserDB implements IUserPersistence
 				proc.cleanup();
 			}
 		}
-		// If we found the ID load the full details.
 		if (userID > -1)
 		{
 			loadUserByID(userID, user);
@@ -98,7 +98,7 @@ public class UserDB implements IUserPersistence
 		}
 		catch (SQLException e)
 		{
-			// Logging needed
+			System.out.print(e);
 			return false;
 		}
 		finally
@@ -113,7 +113,7 @@ public class UserDB implements IUserPersistence
 	
 	public boolean updateUser(User user)
 	{
-		// Coming in M2!
 		return false;
 	}
+
 }

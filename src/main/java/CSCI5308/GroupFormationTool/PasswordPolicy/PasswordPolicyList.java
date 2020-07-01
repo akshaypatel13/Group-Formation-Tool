@@ -29,7 +29,8 @@ public class PasswordPolicyList implements IPasswordPolicyList {
 
 	private ArrayList<PasswordPolicy> policies = new ArrayList<PasswordPolicy>();
 
-	private PasswordPolicy createNewPolicy(String value, String enabled, IPasswordPolicyValidator validator) {
+	private PasswordPolicy createNewPolicy(String value, String enabled, IPasswordPolicyValidator validator)
+	{
 		PasswordPolicy policy = new PasswordPolicy();
 		policy.setEnabled(enabled);
 		policy.setValidator(validator);
@@ -38,8 +39,8 @@ public class PasswordPolicyList implements IPasswordPolicyList {
 	}
 
 	@Override
-	public ArrayList<PasswordPolicy> getAllPasswordPolicies(User user) {
-
+	public ArrayList<PasswordPolicy> getAllPasswordPolicies(User user)
+	{
 		String minLengthVal = System.getenv(MIN_LENGTH);
 		String minLengthEnabled = System.getenv(MIN_LENGTH_ENABLED);
 

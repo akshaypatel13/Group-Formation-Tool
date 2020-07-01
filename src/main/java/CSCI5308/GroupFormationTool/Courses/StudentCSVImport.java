@@ -8,7 +8,9 @@ import CSCI5308.GroupFormationTool.AccessControl.*;
 import CSCI5308.GroupFormationTool.PasswordPolicy.IPasswordPolicyList;
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
 
-public class StudentCSVImport {
+public class StudentCSVImport
+{
+
 	private List<String> successResults;
 	private List<String> failureResults;
 	private Course course;
@@ -18,7 +20,8 @@ public class StudentCSVImport {
 	private IUserNotifications userNotifications;
 	private IPasswordPolicyList passwordPolicyList;
 
-	public StudentCSVImport(IStudentCSVParser parser, Course course) {
+	public StudentCSVImport(IStudentCSVParser parser, Course course)
+	{
 		this.course = course;
 		successResults = new ArrayList<String>();
 		failureResults = new ArrayList<String>();
@@ -26,12 +29,12 @@ public class StudentCSVImport {
 		passwordEncryption = SystemConfig.instance().getPasswordEncryption();
 		userNotifications = SystemConfig.instance().getUserNotifications();
 		passwordPolicyList = SystemConfig.instance().getIPasswordPolicyList();
-
 		this.parser = parser;
 		enrollStudentFromRecord();
 	}
 
-	private void enrollStudentFromRecord() {
+	private void enrollStudentFromRecord()
+	{
 		List<User> studentList = parser.parseCSVFile(failureResults);
 		for (User u : studentList) {
 			String bannerID = u.getBanner();

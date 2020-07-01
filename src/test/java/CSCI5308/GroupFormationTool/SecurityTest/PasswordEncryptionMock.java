@@ -4,6 +4,7 @@ import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
 
 public class PasswordEncryptionMock implements IPasswordEncryption
 {
+
 	public String encryptPassword(String rawPassword)
 	{
 		return "encrypted";
@@ -21,4 +22,5 @@ public class PasswordEncryptionMock implements IPasswordEncryption
 		}
 		return encryptedPassword.equals("encrypted");
 	}
+
 }

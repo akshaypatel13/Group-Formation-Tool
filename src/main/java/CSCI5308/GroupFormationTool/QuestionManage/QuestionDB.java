@@ -25,8 +25,10 @@ public class QuestionDB implements IQuestionPersistence {
 			proc = new CallStoredProcedure("spFindQuestionByID(?)");
 			proc.setParameter(1, id);
 			ResultSet results = proc.executeWithResults();
-			if (null != results) {
-				while (results.next()) {
+			if (null != results)
+			{
+				while (results.next())
+				{
 					String title = results.getString(2);
 					String description = results.getString(3);
 					String type = results.getString(4);
@@ -40,10 +42,15 @@ public class QuestionDB implements IQuestionPersistence {
 
 				}
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (null != proc) {
+		}
+		catch (SQLException e)
+		{
+			System.out.print(e);
+		}
+		finally
+		{
+			if (null != proc)
+			{
 				proc.cleanup();
 			}
 		}
@@ -54,12 +61,15 @@ public class QuestionDB implements IQuestionPersistence {
 	{
 		List<Question> questions = new ArrayList<Question>();
 		CallStoredProcedure proc = null;
-		try {
+		try
+		{
 			proc = new CallStoredProcedure("spLoadAllQuestions(?)");
 			proc.setParameter(1, user.getId());
 			ResultSet results = proc.executeWithResults();
-			if (null != results) {
-				while (results.next()) {
+			if (null != results)
+			{
+				while (results.next())
+				{
 					long id = results.getLong(1);
 					String title = results.getString(2);
 					String description = results.getString(3);
@@ -74,10 +84,15 @@ public class QuestionDB implements IQuestionPersistence {
 					questions.add(q);
 				}
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (null != proc) {
+		}
+		catch (SQLException e)
+		{
+			System.out.print(e);
+		}
+		finally
+		{
+			if (null != proc)
+			{
 				proc.cleanup();
 			}
 		}
@@ -85,15 +100,19 @@ public class QuestionDB implements IQuestionPersistence {
 	}
 
 	@Override
-	public List<Question> sortQuestionsByTitle(User user) {
+	public List<Question> sortQuestionsByTitle(User user)
+	{
 		List<Question> questions = new ArrayList<Question>();
 		CallStoredProcedure proc = null;
-		try {
+		try
+		{
 			proc = new CallStoredProcedure("spSortQuestionsByTitle(?)");
 			proc.setParameter(1, user.getId());
 			ResultSet results = proc.executeWithResults();
-			if (null != results) {
-				while (results.next()) {
+			if (null != results)
+			{
+				while (results.next())
+				{
 					long id = results.getLong(1);
 					String title = results.getString(2);
 					String description = results.getString(3);
@@ -108,27 +127,35 @@ public class QuestionDB implements IQuestionPersistence {
 					questions.add(q);
 				}
 			}
-		} catch (SQLException e) {
-			// Logging needed.
-		} finally {
-			if (null != proc) {
+		}
+		catch (SQLException e)
+		{
+			System.out.print(e);
+		}
+		finally
+		{
+			if (null != proc)
+			{
 				proc.cleanup();
 			}
 		}
-
 		return questions;
 	}
 	
 	@Override
-	public List<Question> sortQuestionsByCreated(User user) {
+	public List<Question> sortQuestionsByCreated(User user)
+	{
 		List<Question> questions = new ArrayList<Question>();
 		CallStoredProcedure proc = null;
-		try {
+		try
+		{
 			proc = new CallStoredProcedure("spSortQuestionsByCreated(?)");
 			proc.setParameter(1, user.getId());
 			ResultSet results = proc.executeWithResults();
-			if (null != results) {
-				while (results.next()) {
+			if (null != results)
+			{
+				while (results.next())
+				{
 					long id = results.getLong(1);
 					String title = results.getString(2);
 					String description = results.getString(3);
@@ -143,14 +170,18 @@ public class QuestionDB implements IQuestionPersistence {
 					questions.add(q);
 				}
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (null != proc) {
+		}
+		catch (SQLException e)
+		{
+			System.out.print(e);
+		}
+		finally
+		{
+			if (null != proc)
+			{
 				proc.cleanup();
 			}
 		}
-
 		return questions;
 	}
 
@@ -162,11 +193,16 @@ public class QuestionDB implements IQuestionPersistence {
 			proc = new CallStoredProcedure("spDeleteQuestion(?)");
 			proc.setParameter(1, id);
 			proc.execute();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		}
+		catch (SQLException e)
+		{
+			System.out.print(e);
 			return false;
-		} finally {
-			if (null != proc) {
+		}
+		finally
+		{
+			if (null != proc)
+			{
 				proc.cleanup();
 			}
 		}
@@ -185,11 +221,16 @@ public class QuestionDB implements IQuestionPersistence {
 			proc.setParameter(5, user.getID());
 			proc.registerOutputParameterLong(6);
 			proc.execute();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		}
+		catch (SQLException e)
+		{
+			System.out.print(e);
 			return false;
-		} finally {
-			if (null != proc) {
+		}
+		finally
+		{
+			if (null != proc)
+			{
 				proc.cleanup();
 			}
 		}
@@ -199,16 +240,22 @@ public class QuestionDB implements IQuestionPersistence {
 	public boolean insertOptions(Options options)
 	{
 		CallStoredProcedure proc = null;
-		try {
+		try
+		{
 			proc = new CallStoredProcedure("spInsertOptions(?, ?)");
 			proc.setParameter(1, options.getDescription());
 			proc.setParameter(2, options.getStoredAs());
 			proc.execute();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		}
+		catch (SQLException e)
+		{
+			System.out.print(e);
 			return false;
-		} finally {
-			if (null != proc) {
+		}
+		finally
+		{
+			if (null != proc)
+			{
 				proc.cleanup();
 			}
 		}

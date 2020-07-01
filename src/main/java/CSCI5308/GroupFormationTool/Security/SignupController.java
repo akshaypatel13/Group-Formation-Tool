@@ -10,7 +10,9 @@ import CSCI5308.GroupFormationTool.AccessControl.*;
 import CSCI5308.GroupFormationTool.PasswordPolicy.IPasswordPolicyList;
 
 @Controller
-public class SignupController {
+public class SignupController
+{
+
 	private final String USERNAME = "username";
 	private final String PASSWORD = "password";
 	private final String PASSWORD_CONFIRMATION = "passwordConfirmation";
@@ -34,7 +36,8 @@ public class SignupController {
 		boolean success = false;
 		ModelAndView m;
 		if (User.isBannerIDValid(bannerID) && User.isEmailValid(email) && User.isFirstNameValid(firstName)
-				&& User.isLastNameValid(lastName) && password.equals(passwordConfirm)) {
+				&& User.isLastNameValid(lastName) && password.equals(passwordConfirm))
+		{
 			User u = new User();
 			u.setBannerID(bannerID);
 			u.setPassword(password);
@@ -47,9 +50,12 @@ public class SignupController {
 			success = u.createUser(userDB, passwordEncryption, null, passwordPolicyList);
 		}
 
-		if (success) {
+		if (success)
+		{
 			m = new ModelAndView("login");
-		} else {
+		}
+		else
+		{
 			m = new ModelAndView("signup");
 			m.addObject("errorMessage", "Invalid data, please check your values.");
 		}

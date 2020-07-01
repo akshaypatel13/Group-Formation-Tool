@@ -6,7 +6,8 @@ import CSCI5308.GroupFormationTool.SystemConfig;
 
 import java.util.List;
 
-public class PasswordHistoryValidator implements IPasswordPolicyValidator{
+public class PasswordHistoryValidator implements IPasswordPolicyValidator
+{
 
     String value;
     User user;
@@ -25,7 +26,8 @@ public class PasswordHistoryValidator implements IPasswordPolicyValidator{
         List<String> previousPasswords = passwordManager.getPreviousPasswords(this.user, Integer.parseInt(value));
         IPasswordEncryption passwordEncryption = SystemConfig.instance().getPasswordEncryption();
 
-        for(int i=0;i<previousPasswords.size();i++){
+        for(int i=0;i<previousPasswords.size();i++)
+        {
             if (passwordEncryption.matches(password, previousPasswords.get(i)))
             {
                 return false;

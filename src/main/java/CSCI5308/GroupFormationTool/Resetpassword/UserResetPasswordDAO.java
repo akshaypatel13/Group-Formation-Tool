@@ -4,8 +4,8 @@ import CSCI5308.GroupFormationTool.AccessControl.User;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserResetPasswordDAO implements IUserResetPasswordDAO {
-
+public class UserResetPasswordDAO implements IUserResetPasswordDAO
+{
 
 	@Override
 	public void saveUserResetToken(IUserResetPasswordDB userResetPasswordDB, User user)
