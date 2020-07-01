@@ -2,7 +2,6 @@ package CSCI5308.GroupFormationTool.QuestionManage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -21,9 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class QuestionController {
 
 	private static final String ID = "id";
-	private static final String TITLE = "title";
-	private static final String DESCRIPTION = "description";
-	private static final String TYPE = "type";
 
 	@GetMapping("/question/question")
 	public String question(Model model)

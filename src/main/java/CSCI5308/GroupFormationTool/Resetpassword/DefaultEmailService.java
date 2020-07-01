@@ -12,14 +12,19 @@ import java.util.Properties;
 
 
 public class DefaultEmailService implements IEmailService {
-
+	private static final String emailHost = "email_host";
+	private static final String emailUsername = "email_username";
+	private static final String emailPassword = "email_password";
+	private static final String emailPort = "email_port";
+	private static final String emailUrl = "support@group21.com";
+	private static final String emailSubject = "Password Reset Request";
 
 	private JavaMailSenderImpl setupMailSender(JavaMailSenderImpl mailSender) {
-
-		mailSender.setHost(System.getenv("email_host"));
-		mailSender.setUsername(System.getenv("email_username"));
-		mailSender.setPassword(System.getenv("email_password"));
-		mailSender.setPort(Integer.parseInt(System.getenv("email_port")));
+		
+		mailSender.setHost(System.getenv(emailHost));
+		mailSender.setUsername(System.getenv(emailUsername));
+		mailSender.setPassword(System.getenv(emailPassword));
+		mailSender.setPort(Integer.parseInt(System.getenv(emailPort)));
 
 		Properties props = mailSender.getJavaMailProperties();
 		props.put("mail.transport.protocol", "smtp");
@@ -37,9 +42,9 @@ public class DefaultEmailService implements IEmailService {
 
 		String appUrl = request.getScheme() + "://" + request.getServerName();
 		SimpleMailMessage resetPasswordEmail = new SimpleMailMessage();
-		resetPasswordEmail.setFrom("support@group21.com");
+		resetPasswordEmail.setFrom(emailUrl);
 		resetPasswordEmail.setTo(user.getEmail());
-		resetPasswordEmail.setSubject("Password Reset Request");
+		resetPasswordEmail.setSubject(emailSubject);
 		resetPasswordEmail.setText("To reset your password, click the link below:\n" + appUrl + "/reset_token/" + user.getResetToken());
 		mailSender.send(resetPasswordEmail);
 	}
