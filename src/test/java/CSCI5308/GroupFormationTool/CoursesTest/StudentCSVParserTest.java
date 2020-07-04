@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 @SuppressWarnings("deprecation")
 class StudentCSVParserTest 
 {
+
 	@Test
 	public void parseCSVFile() 
 	{

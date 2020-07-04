@@ -9,16 +9,16 @@ import org.springframework.util.Assert;
 import CSCI5308.GroupFormationTool.PasswordPolicy.MinLowercaseValidator;
 
 @SpringBootTest
-public class MinLowercaseValidatorTest {
+public class MinLowercaseValidatorTest
+{
 	
 	@SuppressWarnings("deprecation")
 	@Test
-	public void isPasswordValidTest() {
-
+	public void isPasswordValidTest()
+	{
 		MinLowercaseValidator validator = new MinLowercaseValidator("1");
 		Assert.isTrue(validator.isPasswordValid("123a"));
 		assertFalse(validator.isPasswordValid("123"));
-
 	}
 
 

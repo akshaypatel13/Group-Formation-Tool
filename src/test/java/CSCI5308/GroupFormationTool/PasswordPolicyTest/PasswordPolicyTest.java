@@ -9,10 +9,12 @@ import org.junit.jupiter.api.Test;
 import CSCI5308.GroupFormationTool.PasswordPolicy.MaxLengthValidator;
 import CSCI5308.GroupFormationTool.PasswordPolicy.PasswordPolicy;
 
-public class PasswordPolicyTest {
+public class PasswordPolicyTest
+{
 
 	@Test
-	public void getValueTest() {
+	public void getValueTest()
+	{
 		PasswordPolicy policy = new PasswordPolicy();
 		assertNull(policy.getValue());
 		policy.setValue("1");
@@ -20,14 +22,16 @@ public class PasswordPolicyTest {
 	}
 
 	@Test
-	public void setValueTest() {
+	public void setValueTest()
+	{
 		PasswordPolicy policy = new PasswordPolicy();
 		policy.setValue("2");
 		assertEquals("2", policy.getValue());
 	}
 
 	@Test
-	public void getEnabledTest() {
+	public void getEnabledTest()
+	{
 		PasswordPolicy policy = new PasswordPolicy();
 		assertNull(policy.getEnabled());
 		policy.setEnabled("0");
@@ -36,7 +40,8 @@ public class PasswordPolicyTest {
 	}
 
 	@Test
-	public void setEnabledTest() {
+	public void setEnabledTest()
+	{
 		PasswordPolicy policy = new PasswordPolicy();
 		policy.setEnabled("4");
 		assertEquals("4", policy.getEnabled());
@@ -44,7 +49,8 @@ public class PasswordPolicyTest {
 	}
 
 	@Test
-	public void getValidatorTest() {
+	public void getValidatorTest()
+	{
 		PasswordPolicy policy = new PasswordPolicy();
 		assertNull(policy.getValidator());
 		policy.setValidator(new MaxLengthValidator("8"));
@@ -53,7 +59,8 @@ public class PasswordPolicyTest {
 	}
 
 	@Test
-	public void setValidatorTest() {
+	public void setValidatorTest()
+	{
 		PasswordPolicy policy = new PasswordPolicy();
 		policy.setValidator(new MaxLengthValidator("7"));
 		assertNotNull(policy.getValidator());

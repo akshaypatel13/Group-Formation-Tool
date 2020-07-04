@@ -15,13 +15,13 @@ import CSCI5308.GroupFormationTool.QuestionManage.Question;
  * @author nieruize
  *
  */
-public class QuestionDBMock implements IQuestionPersistence  {
+public class QuestionDBMock implements IQuestionPersistence
+{
 
 	@Override
-	public List<Question> loadAllQuestions(User user) {
-		
+	public List<Question> loadAllQuestions(User user)
+	{
 		List<Question> questionList = new ArrayList<>();
-		
 		Question question = new Question();
 		question.setId(1);
 		question.setTitle("Greeting");
@@ -42,21 +42,19 @@ public class QuestionDBMock implements IQuestionPersistence  {
 	}
 
 	@Override
-	public void loadQuestionByID(long id, Question question) {
-		
+	public void loadQuestionByID(long id, Question question)
+	{
 		question.setId(1);
 		question.setTitle("Greeting");
 		question.setCreated(new Date(0));
 		question.setType("text");
 		question.setDescription("How is going?");
-		
 	}
 
 	@Override
-	public List<Question> sortQuestionsByTitle(User user) {
-		
+	public List<Question> sortQuestionsByTitle(User user)
+	{
 		List<Question> questionList = new ArrayList<>();
-		
 		Question question1 = new Question();
 		question1.setId(1);
 		question1.setTitle("Greeting");
@@ -78,10 +76,9 @@ public class QuestionDBMock implements IQuestionPersistence  {
 	}
 	
 	@Override
-	public List<Question> sortQuestionsByCreated(User user) {
-		
+	public List<Question> sortQuestionsByCreated(User user)
+	{
 		List<Question> questionList = new ArrayList<>();
-		
 		Question question1 = new Question();
 		question1.setId(1);
 		question1.setTitle("Greeting");
@@ -104,8 +101,8 @@ public class QuestionDBMock implements IQuestionPersistence  {
 
 
 	@Override
-	public boolean deleteQuestion(long id) {
-		
+	public boolean deleteQuestion(long id)
+	{
 		Question question = new Question();
 		question.setId(1);
 		question.setTitle("Greeting");
@@ -113,12 +110,12 @@ public class QuestionDBMock implements IQuestionPersistence  {
 		question.setType("text");
 		question.setDescription("How is going?");
 		question.setDefaults();
-		
 		return true;
 	}
 
 	@Override
-	public boolean insertQuestion(Question question, User user) {
+	public boolean insertQuestion(Question question, User user)
+	{
 		question.setTitle("Hello");
 		question.setDescription("How are you?");
 		question.setType("Numeric");
@@ -128,7 +125,8 @@ public class QuestionDBMock implements IQuestionPersistence  {
 	}
 
 	@Override
-	public boolean insertOptions(Options options) {
+	public boolean insertOptions(Options options)
+	{
 		options.setStoredAs(1);
 		options.setDescription("Option1");
 		return true;

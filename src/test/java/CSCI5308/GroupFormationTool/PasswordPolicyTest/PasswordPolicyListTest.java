@@ -15,10 +15,12 @@ import CSCI5308.GroupFormationTool.PasswordPolicy.PasswordPolicy;
 import CSCI5308.GroupFormationTool.PasswordPolicy.PasswordPolicyList;
 
 @SpringBootTest
-public class PasswordPolicyListTest {
+public class PasswordPolicyListTest
+{
 
 	@Test
-	public void getAllPasswordPoliciesTest() {
+	public void getAllPasswordPoliciesTest()
+	{
 		User u = new User();
 		u.setId(0);
 		u.setPassword("password");

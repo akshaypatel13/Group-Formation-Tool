@@ -9,20 +9,17 @@ import CSCI5308.GroupFormationTool.PasswordPolicy.IPasswordPolicyValidator;
 import CSCI5308.GroupFormationTool.PasswordPolicy.PasswordPolicy;
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
 
-public class User {
-	// This regex comes from here:
-	// https://howtodoinjava.com/regex/java-regex-validate-email-address/
-	private static final String EMAIL_REGEX = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+public class User
+{
 
+	private static final String EMAIL_REGEX = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
 	private long id;
 	private String password;
 	private String bannerID;
 	private String firstName;
 	private String lastName;
 	private String email;
-
 	private String resetToken;
-
 	public static String error;
 
 	public static String getError() {
@@ -44,12 +41,14 @@ public class User {
 		persistence.loadUserByID(id, this);
 	}
 
-	public User(String bannerID, IUserPersistence persistence) {
+	public User(String bannerID, IUserPersistence persistence)
+	{
 		setDefaults();
 		persistence.loadUserByBannerID(bannerID, this);
 	}
 
-	public void setDefaults() {
+	public void setDefaults()
+	{
 		id = -1;
 		password = "";
 		bannerID = "";
@@ -132,28 +131,35 @@ public class User {
 	}
 
 	public boolean createUser(IUserPersistence userDB, IPasswordEncryption passwordEncryption,
-			IUserNotifications notification, IPasswordPolicyList passwordPolicyList) {
+			IUserNotifications notification, IPasswordPolicyList passwordPolicyList)
+	{
 		String rawPassword = password;
 		this.password = passwordEncryption.encryptPassword(this.password);
 		ArrayList<PasswordPolicy> policies = new ArrayList<PasswordPolicy>();
 		policies = passwordPolicyList.getAllPasswordPolicies(this);
 		boolean success = true;
-		for (PasswordPolicy policy : policies) {
-			if (Integer.parseInt(policy.getEnabled()) == 1) {
+		for (PasswordPolicy policy : policies)
+		{
+			if (Integer.parseInt(policy.getEnabled()) == 1)
+			{
 				IPasswordPolicyValidator validator = policy.getValidator();
-				if(validator.isPasswordValid(rawPassword)) {
+				if(validator.isPasswordValid(rawPassword))
+				{
 					continue;
 				}
-				else {
+				else
+				{
 					success = false;
 					break;
 				}
 			}
 		}
-		if (success) {
+		if (success)
+		{
 			success = userDB.createUser(this);
 		}
-		if (success && (null != notification)) {
+		if (success && (null != notification))
+		{
 			notification.sendUserLoginCredentials(this, rawPassword);
 		}
 		return success;
@@ -163,8 +169,10 @@ public class User {
 		return userDB.updateUser(this);
 	}
 
-	private static boolean isStringNullOrEmpty(String s) {
-		if (null == s) {
+	private static boolean isStringNullOrEmpty(String s)
+	{
+		if (null == s)
+		{
 			return true;
 		}
 		return s.isEmpty();
@@ -182,8 +190,10 @@ public class User {
 		return !isStringNullOrEmpty(name);
 	}
 
-	public static boolean isEmailValid(String email) {
-		if (isStringNullOrEmpty(email)) {
+	public static boolean isEmailValid(String email)
+	{
+		if (isStringNullOrEmpty(email))
+		{
 			return false;
 		}
 
@@ -191,4 +201,5 @@ public class User {
 		Matcher matcher = pattern.matcher(email);
 		return matcher.matches();
 	}
+
 }

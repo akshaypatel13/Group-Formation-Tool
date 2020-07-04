@@ -12,7 +12,8 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 @Service
-public class DefaultResetPasswordService implements IResetPasswordService {
+public class DefaultResetPasswordService implements IResetPasswordService
+{
 
 	private IUserResetPasswordDAO userResetPasswordDAO;
 	private IUserResetPasswordDB userResetPasswordDB;
@@ -39,24 +40,30 @@ public class DefaultResetPasswordService implements IResetPasswordService {
 	}
 
 	@Override
-	public void setUserResetToken(User user) {
+	public void setUserResetToken(User user)
+	{
 		String resetToken = UUID.randomUUID().toString().replace("-", "");
 		user.setResetToken(resetToken);
 	}
 
 	@Override
-	public boolean isPasswordValid(String rawPassword, User user) {
+	public boolean isPasswordValid(String rawPassword, User user)
+	{
 		ArrayList<PasswordPolicy> policies = new ArrayList<PasswordPolicy>();
 		IPasswordPolicyList passwordPolicyList = SystemConfig.instance().getIPasswordPolicyList();
 		policies = passwordPolicyList.getAllPasswordPolicies(user);
 		boolean success = true;
-		for(PasswordPolicy policy: policies) {
-			if(Integer.parseInt(policy.getEnabled()) == 1) {
+		for(PasswordPolicy policy: policies)
+		{
+			if(Integer.parseInt(policy.getEnabled()) == 1)
+			{
 				IPasswordPolicyValidator validator = policy.getValidator();
-				if(validator.isPasswordValid(rawPassword)) {
+				if(validator.isPasswordValid(rawPassword))
+				{
 					continue;
 				}
-				else {
+				else
+				{
 					success = false;
 					break;
 				}
@@ -71,7 +78,5 @@ public class DefaultResetPasswordService implements IResetPasswordService {
 	{
 		userResetPasswordDAO.saveUserPassword(userResetPasswordDB, user);
 	}
-
-
 
 }

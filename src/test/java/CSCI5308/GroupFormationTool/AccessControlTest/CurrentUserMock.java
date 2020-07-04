@@ -5,6 +5,7 @@ import CSCI5308.GroupFormationTool.AccessControl.User;
 
 public class CurrentUserMock 
 {
+
 	public User getCurrentAuthenticatedUser() 
 	{
 		IUserPersistence userDB = new UserDBMock();

@@ -11,14 +11,16 @@ import CSCI5308.GroupFormationTool.Courses.ICoursePersistence;
 @SuppressWarnings("deprecation")
 class CourseTest 
 {
+
+	private ICoursePersistence courseDB;
+
 	@Test
 	public void ConstructorTests() 
 	{
 		Course course = new Course();
 		Assert.isTrue(course.getId() == -1);
 		Assert.isTrue(course.getTitle().isEmpty());
-
-		ICoursePersistence courseDB = new CourseDBMock();
+		courseDB = new CourseDBMock();
 		course = new Course(0, courseDB);
 		Assert.isTrue(course.getId() == 0);
 		Assert.isTrue(course.getTitle().equals("Software Engineering"));
@@ -67,7 +69,7 @@ class CourseTest
 	@Test
 	public void createCourseTest() 
 	{
-		ICoursePersistence courseDB = new CourseDBMock();
+		courseDB = new CourseDBMock();
 		Course course = new Course();
 		course.setId(0);
 		course.setTitle("Software Engineering");

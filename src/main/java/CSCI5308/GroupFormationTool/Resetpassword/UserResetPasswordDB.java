@@ -8,7 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Repository
-public class UserResetPasswordDB implements IUserResetPasswordDB {
+public class UserResetPasswordDB implements IUserResetPasswordDB
+{
 
 	@Override
 	public void saveUserResetToken(User user)
@@ -25,7 +26,7 @@ public class UserResetPasswordDB implements IUserResetPasswordDB {
 		}
 		catch (SQLException e)
 		{
-			// Logging needed.
+			System.out.print(e);
 		}
 		finally
 		{
@@ -67,7 +68,7 @@ public class UserResetPasswordDB implements IUserResetPasswordDB {
 		}
 		catch (SQLException e)
 		{
-			// Logging needed.
+			System.out.print(e);
 		}
 		finally
 		{
@@ -94,7 +95,7 @@ public class UserResetPasswordDB implements IUserResetPasswordDB {
 		}
 		catch (SQLException e)
 		{
-			// Logging needed.
+			System.out.print(e);
 		}
 		finally
 		{
