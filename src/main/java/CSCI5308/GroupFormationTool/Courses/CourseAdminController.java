@@ -17,6 +17,7 @@ import CSCI5308.GroupFormationTool.AccessControl.User;
 @Controller
 public class CourseAdminController
 {
+
 	private static final String ID = "id";
 	private static final String TITLE = "title";
 	private static final String INSTRUCTOR = "instructor";
@@ -82,4 +83,5 @@ public class CourseAdminController
 		ModelAndView mav = new ModelAndView("redirect:/admin/course");
 		return mav;
    }
+
 }

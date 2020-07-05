@@ -8,6 +8,7 @@ import CSCI5308.GroupFormationTool.Courses.ICoursePersistence;
 
 public class CourseDBMock implements ICoursePersistence 
 {
+
 	public List<Course> loadAllCourses() 
 	{
 		List<Course> courseList = new ArrayList<>();

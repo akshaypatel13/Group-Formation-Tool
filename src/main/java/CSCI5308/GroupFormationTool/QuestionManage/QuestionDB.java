@@ -18,14 +18,17 @@ import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
 public class QuestionDB implements IQuestionPersistence {
 
 	@Override
-	public void loadQuestionByID(long id, Question question) {
+	public void loadQuestionByID(long id, Question question)
+	{
 		CallStoredProcedure proc = null;
 		try {
 			proc = new CallStoredProcedure("spFindQuestionByID(?)");
 			proc.setParameter(1, id);
 			ResultSet results = proc.executeWithResults();
-			if (null != results) {
-				while (results.next()) {
+			if (null != results)
+			{
+				while (results.next())
+				{
 					String title = results.getString(2);
 					String description = results.getString(3);
 					String type = results.getString(4);
@@ -39,25 +42,34 @@ public class QuestionDB implements IQuestionPersistence {
 
 				}
 			}
-		} catch (SQLException e) {
-			// Logging needed.
-		} finally {
-			if (null != proc) {
+		}
+		catch (SQLException e)
+		{
+			System.out.print(e);
+		}
+		finally
+		{
+			if (null != proc)
+			{
 				proc.cleanup();
 			}
 		}
 	}
 
 	@Override
-	public List<Question> loadAllQuestions(User user) {
+	public List<Question> loadAllQuestions(User user)
+	{
 		List<Question> questions = new ArrayList<Question>();
 		CallStoredProcedure proc = null;
-		try {
+		try
+		{
 			proc = new CallStoredProcedure("spLoadAllQuestions(?)");
 			proc.setParameter(1, user.getId());
 			ResultSet results = proc.executeWithResults();
-			if (null != results) {
-				while (results.next()) {
+			if (null != results)
+			{
+				while (results.next())
+				{
 					long id = results.getLong(1);
 					String title = results.getString(2);
 					String description = results.getString(3);
@@ -72,10 +84,15 @@ public class QuestionDB implements IQuestionPersistence {
 					questions.add(q);
 				}
 			}
-		} catch (SQLException e) {
-			// Logging needed.
-		} finally {
-			if (null != proc) {
+		}
+		catch (SQLException e)
+		{
+			System.out.print(e);
+		}
+		finally
+		{
+			if (null != proc)
+			{
 				proc.cleanup();
 			}
 		}
@@ -83,16 +100,19 @@ public class QuestionDB implements IQuestionPersistence {
 	}
 
 	@Override
-	public List<Question> sortAllQuestions(String sort, User user) {
+	public List<Question> sortQuestionsByTitle(User user)
+	{
 		List<Question> questions = new ArrayList<Question>();
 		CallStoredProcedure proc = null;
-		try {
-			proc = new CallStoredProcedure("spSortAllQuestions(?,?)");
-			proc.setParameter(1, sort);
-			proc.setParameter(2, user.getId());
+		try
+		{
+			proc = new CallStoredProcedure("spSortQuestionsByTitle(?)");
+			proc.setParameter(1, user.getId());
 			ResultSet results = proc.executeWithResults();
-			if (null != results) {
-				while (results.next()) {
+			if (null != results)
+			{
+				while (results.next())
+				{
 					long id = results.getLong(1);
 					String title = results.getString(2);
 					String description = results.getString(3);
@@ -107,36 +127,90 @@ public class QuestionDB implements IQuestionPersistence {
 					questions.add(q);
 				}
 			}
-		} catch (SQLException e) {
-			// Logging needed.
-		} finally {
-			if (null != proc) {
+		}
+		catch (SQLException e)
+		{
+			System.out.print(e);
+		}
+		finally
+		{
+			if (null != proc)
+			{
 				proc.cleanup();
 			}
 		}
-
+		return questions;
+	}
+	
+	@Override
+	public List<Question> sortQuestionsByCreated(User user)
+	{
+		List<Question> questions = new ArrayList<Question>();
+		CallStoredProcedure proc = null;
+		try
+		{
+			proc = new CallStoredProcedure("spSortQuestionsByCreated(?)");
+			proc.setParameter(1, user.getId());
+			ResultSet results = proc.executeWithResults();
+			if (null != results)
+			{
+				while (results.next())
+				{
+					long id = results.getLong(1);
+					String title = results.getString(2);
+					String description = results.getString(3);
+					String type = results.getString(4);
+					Date created = results.getDate(5);
+					Question q = new Question();
+					q.setId(id);
+					q.setTitle(title);
+					q.setCreated(created);
+					q.setType(type);
+					q.setDescription(description);
+					questions.add(q);
+				}
+			}
+		}
+		catch (SQLException e)
+		{
+			System.out.print(e);
+		}
+		finally
+		{
+			if (null != proc)
+			{
+				proc.cleanup();
+			}
+		}
 		return questions;
 	}
 
 	@Override
-	public boolean deleteQuestion(long id) {
+	public boolean deleteQuestion(long id)
+	{
 		CallStoredProcedure proc = null;
 		try {
 			proc = new CallStoredProcedure("spDeleteQuestion(?)");
 			proc.setParameter(1, id);
 			proc.execute();
-		} catch (SQLException e) {
-			// Logging needed
+		}
+		catch (SQLException e)
+		{
+			System.out.print(e);
 			return false;
-		} finally {
-			if (null != proc) {
+		}
+		finally
+		{
+			if (null != proc)
+			{
 				proc.cleanup();
 			}
 		}
 		return true;
 	}
 
-	public boolean insertQuestion(Question question, User user) {
+	public boolean insertQuestion(Question question, User user)
+	{
 		CallStoredProcedure proc = null;
 		try {
 			proc = new CallStoredProcedure("spInsertQuestion(?, ?, ?, ?, ?, ?)");
@@ -147,29 +221,41 @@ public class QuestionDB implements IQuestionPersistence {
 			proc.setParameter(5, user.getID());
 			proc.registerOutputParameterLong(6);
 			proc.execute();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		}
+		catch (SQLException e)
+		{
+			System.out.print(e);
 			return false;
-		} finally {
-			if (null != proc) {
+		}
+		finally
+		{
+			if (null != proc)
+			{
 				proc.cleanup();
 			}
 		}
 		return true;
 	}
 
-	public boolean insertOptions(Options options) {
+	public boolean insertOptions(Options options)
+	{
 		CallStoredProcedure proc = null;
-		try {
+		try
+		{
 			proc = new CallStoredProcedure("spInsertOptions(?, ?)");
 			proc.setParameter(1, options.getDescription());
-			proc.setParameter(2, options.getStoredas());
+			proc.setParameter(2, options.getStoredAs());
 			proc.execute();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		}
+		catch (SQLException e)
+		{
+			System.out.print(e);
 			return false;
-		} finally {
-			if (null != proc) {
+		}
+		finally
+		{
+			if (null != proc)
+			{
 				proc.cleanup();
 			}
 		}

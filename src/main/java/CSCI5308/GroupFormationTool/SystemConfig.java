@@ -1,13 +1,18 @@
 package CSCI5308.GroupFormationTool;
 
+import CSCI5308.GroupFormationTool.PasswordPolicy.DefaultPasswordManager;
+import CSCI5308.GroupFormationTool.PasswordPolicy.IPasswordManager;
 import CSCI5308.GroupFormationTool.Security.*;
 import CSCI5308.GroupFormationTool.AccessControl.*;
 import CSCI5308.GroupFormationTool.Database.*;
+import CSCI5308.GroupFormationTool.PasswordPolicy.IPasswordPolicyList;
+import CSCI5308.GroupFormationTool.PasswordPolicy.PasswordPolicyList;
 import CSCI5308.GroupFormationTool.QuestionManage.IQuestionPersistence;
 import CSCI5308.GroupFormationTool.QuestionManage.QuestionDB;
 import CSCI5308.GroupFormationTool.Courses.*;
 import CSCI5308.GroupFormationTool.Resetpassword.DefaultEmailService;
 import CSCI5308.GroupFormationTool.Resetpassword.IEmailService;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 /*
  * This is a singleton, we will learn about these when we learn design patterns.
@@ -29,12 +34,10 @@ public class SystemConfig {
 
 	private IUserNotifications userNotifications;
 	private IEmailService emailService;
-
-	
+	private JavaMailSenderImpl mailSender;
 	private IQuestionPersistence questionDB;
-	private IPasswordSecurityPolicyConfig passwordSecurityPolicyConfig;
-	private IPasswordSecurityPolicy passwordSecurityPolicy;
 	private IPasswordManager passwordManager;
+	private IPasswordPolicyList passwordPolicyList;
 
 
 	// This private constructor ensures that no class other than System can allocate
@@ -52,12 +55,12 @@ public class SystemConfig {
 		userNotifications = new UserNotifications();
 		emailService = new DefaultEmailService();
 
+		mailSender = new JavaMailSenderImpl();
 		questionDB = new QuestionDB();
 
-		passwordSecurityPolicyConfig =  new PasswordSecurityPolicyConfig();
 		passwordManager = new DefaultPasswordManager();
 
-		passwordSecurityPolicy = new PasswordSecurityPolicy(passwordManager, passwordSecurityPolicyConfig);
+		passwordPolicyList = new PasswordPolicyList();
 
 	}
 
@@ -71,12 +74,8 @@ public class SystemConfig {
 		return uniqueInstance;
 	}
 
-	public IPasswordSecurityPolicy getIPasswordSecurityPolicy() {
-		return passwordSecurityPolicy;
-	}
-	
-	public IPasswordSecurityPolicyConfig getIPasswordSecurityPolicyConfig() {
-		return passwordSecurityPolicyConfig;
+	public IPasswordPolicyList getIPasswordPolicyList() {
+		return passwordPolicyList;
 	}
 
 	public IPasswordEncryption getPasswordEncryption() {
@@ -121,6 +120,10 @@ public class SystemConfig {
 
 	public void setDatabaseConfiguration(IDatabaseConfiguration databaseConfiguration) {
 		this.databaseConfiguration = databaseConfiguration;
+	}
+
+	public JavaMailSenderImpl getJavaMailSender() {
+		return mailSender;
 	}
 
 	public void setCourseDB(ICoursePersistence courseDB) {

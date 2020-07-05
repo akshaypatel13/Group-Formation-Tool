@@ -11,30 +11,27 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-public class OptionsListTest {
+public class OptionsListTest
+{
+
+	private IQuestionPersistence questionDB;
 
 	@Test
 	public void insertOptions() {
-		IQuestionPersistence questionDB = new QuestionDBMock();
+		questionDB = new QuestionDBMock();
 		Options options = new Options();
 		questionDB.insertOptions(options);
 		Assert.isTrue(options.getDescription().equals("Option1"));
-		Assert.isTrue(options.getStoredas() == 1);
+		Assert.isTrue(options.getStoredAs() == 1);
 	}
 
 	@Test
 	public void insertOptionsFalse() {
-		IQuestionPersistence questionDB = new QuestionDBMock();
+		questionDB = new QuestionDBMock();
 		Options options = new Options();
 		questionDB.insertOptions(options);
 		assertFalse(options.getDescription().equals("Option2"));
-		assertFalse(options.getStoredas() == 2);
-	}
-
-	@Test
-	public void getOptionsTest() {
-		List<Options> options = new ArrayList<Options>();
-
+		assertFalse(options.getStoredAs() == 2);
 	}
 
 	@Test

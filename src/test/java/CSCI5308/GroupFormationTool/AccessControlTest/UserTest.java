@@ -2,14 +2,15 @@ package CSCI5308.GroupFormationTool.AccessControlTest;
 
 import CSCI5308.GroupFormationTool.AccessControl.*;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
-@SpringBootTest
 @SuppressWarnings("deprecation")
 public class UserTest
 {
+
 	@Test
 	public void ConstructorTests()
 	{
@@ -121,41 +122,34 @@ public class UserTest
 	public void isBannerIDValidTest()
 	{
 		Assert.isTrue(User.isBannerIDValid("B000000000"));
-		Assert.isTrue(!User.isBannerIDValid(null));
-		Assert.isTrue(!User.isBannerIDValid(""));
+		assertFalse(User.isBannerIDValid(null));
+		assertFalse(User.isBannerIDValid(""));
 	}
 		
 	@Test
 	public void isFirstNameValidTest()
 	{
 		Assert.isTrue(User.isFirstNameValid("rob"));
-		Assert.isTrue(!User.isFirstNameValid(null));
-		Assert.isTrue(!User.isFirstNameValid(""));
+		assertFalse(User.isFirstNameValid(null));
+		assertFalse(User.isFirstNameValid(""));
 	}
 	
 	@Test
 	public void isLastNameValidTest()
 	{
 		Assert.isTrue(User.isLastNameValid("hawkey"));
-		Assert.isTrue(!User.isLastNameValid(null));
-		Assert.isTrue(!User.isLastNameValid(""));
+		assertFalse(User.isLastNameValid(null));
+		assertFalse(User.isLastNameValid(""));
 	}
 	
 	@Test
 	public void isEmailValidTest()
 	{
 		Assert.isTrue(User.isEmailValid("rhawkey@dal.ca"));
-		Assert.isTrue(!User.isEmailValid(null));
-		Assert.isTrue(!User.isEmailValid(""));
-		Assert.isTrue(!User.isEmailValid("@dal.ca"));
-		Assert.isTrue(!User.isEmailValid("rhawkey@"));
+		assertFalse(User.isEmailValid(null));
+		assertFalse(User.isEmailValid(""));
+		assertFalse(User.isEmailValid("@dal.ca"));
+		assertFalse(User.isEmailValid("rhawkey@"));
 	}
-	
-	@Test
-	public void isFollowingSecurityRulesTest()
-	{
-		Assert.isTrue(!User.isFollowingSecurityRules("123"));
-		Assert.isTrue(!User.isFollowingSecurityRules("123iI"));
-		Assert.isTrue(!User.isFollowingSecurityRules("123I@"));
-	}
+
 }

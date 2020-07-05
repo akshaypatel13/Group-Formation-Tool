@@ -7,9 +7,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import CSCI5308.GroupFormationTool.SystemConfig;
 import CSCI5308.GroupFormationTool.AccessControl.*;
+import CSCI5308.GroupFormationTool.PasswordPolicy.IPasswordPolicyList;
 
 @Controller
-public class SignupController {
+public class SignupController
+{
+
 	private final String USERNAME = "username";
 	private final String PASSWORD = "password";
 	private final String PASSWORD_CONFIRMATION = "passwordConfirmation";
@@ -18,7 +21,8 @@ public class SignupController {
 	private final String EMAIL = "email";
 
 	@GetMapping("/signup")
-	public String displaySignup(Model model) {
+	public String displaySignup(Model model)
+	{
 		return "signup";
 	}
 
@@ -27,38 +31,34 @@ public class SignupController {
 			@RequestParam(name = PASSWORD) String password,
 			@RequestParam(name = PASSWORD_CONFIRMATION) String passwordConfirm,
 			@RequestParam(name = FIRST_NAME) String firstName, @RequestParam(name = LAST_NAME) String lastName,
-			@RequestParam(name = EMAIL) String email) {
+			@RequestParam(name = EMAIL) String email)
+	{
 		boolean success = false;
 		ModelAndView m;
-		if (User.isFollowingSecurityRules(password)) {
+		if (User.isBannerIDValid(bannerID) && User.isEmailValid(email) && User.isFirstNameValid(firstName)
+				&& User.isLastNameValid(lastName) && password.equals(passwordConfirm))
+		{
+			User u = new User();
+			u.setBannerID(bannerID);
+			u.setPassword(password);
+			u.setFirstName(firstName);
+			u.setLastName(lastName);
+			u.setEmail(email);
+			IUserPersistence userDB = SystemConfig.instance().getUserDB();
+			IPasswordEncryption passwordEncryption = SystemConfig.instance().getPasswordEncryption();
+			IPasswordPolicyList passwordPolicyList = SystemConfig.instance().getIPasswordPolicyList();
+			success = u.createUser(userDB, passwordEncryption, null, passwordPolicyList);
+		}
 
-			if (User.isBannerIDValid(bannerID) && User.isEmailValid(email) && User.isFirstNameValid(firstName)
-					&& User.isLastNameValid(lastName) && password.equals(passwordConfirm)) {
-				User u = new User();
-				u.setBannerID(bannerID);
-				u.setPassword(password);
-				u.setFirstName(firstName);
-				u.setLastName(lastName);
-				u.setEmail(email);
-				IUserPersistence userDB = SystemConfig.instance().getUserDB();
-				IPasswordEncryption passwordEncryption = SystemConfig.instance().getPasswordEncryption();
-				success = u.createUser(userDB, passwordEncryption, null);
-			}
-
-			if (success) {
-				// This is lame, I will improve this with auto-signin for M2.
-				m = new ModelAndView("login");
-			} else {
-				// Something wrong with the input data.
-				m = new ModelAndView("signup");
-				m.addObject("errorMessage", "Invalid data, please check your values.");
-			}
-		} else {
-			String err = User.getError();
+		if (success)
+		{
+			m = new ModelAndView("login");
+		}
+		else
+		{
 			m = new ModelAndView("signup");
-			m.addObject("errorMessage", err);
-
-		} 
+			m.addObject("errorMessage", "Invalid data, please check your values.");
+		}
 		return m;
 	}
 }

@@ -1,4 +1,4 @@
-package CSCI5308.GroupFormationTool.Security;
+package CSCI5308.GroupFormationTool.PasswordPolicy;
 
 import CSCI5308.GroupFormationTool.AccessControl.User;
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
@@ -8,9 +8,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DefaultPasswordManager implements IPasswordManager {
+public class DefaultPasswordManager implements IPasswordManager
+{
+
     @Override
-    public List<String> getPreviousPasswords(User u, int limit) {
+    public List<String> getPreviousPasswords(User u, int limit)
+    {
         List<String> passwords = new ArrayList<>();
         CallStoredProcedure proc = null;
         try
@@ -31,7 +34,7 @@ public class DefaultPasswordManager implements IPasswordManager {
         }
         catch (SQLException e)
         {
-            // Logging needed.
+            System.out.print(e);
         }
         finally
         {

@@ -10,6 +10,7 @@ import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
 
 public class CourseUserRelationshipDB implements ICourseUserRelationshipPersistence
 {
+	
 	public List<User> findAllUsersWithoutCourseRole(Role role, long courseID)
 	{
 		List<User> users = new ArrayList<User>();
@@ -39,7 +40,7 @@ public class CourseUserRelationshipDB implements ICourseUserRelationshipPersiste
 		}
 		catch (SQLException e)
 		{
-			// Logging needed.
+			System.out.print(e);
 		}
 		finally
 		{
@@ -74,7 +75,7 @@ public class CourseUserRelationshipDB implements ICourseUserRelationshipPersiste
 		}
 		catch (SQLException e)
 		{
-			// Logging needed.
+			System.out.print(e);
 		}
 		finally
 		{
@@ -99,7 +100,7 @@ public class CourseUserRelationshipDB implements ICourseUserRelationshipPersiste
 		}
 		catch (SQLException e)
 		{
-			// Logging needed
+			System.out.print(e);
 			return false;
 		}
 		finally
@@ -133,7 +134,7 @@ public class CourseUserRelationshipDB implements ICourseUserRelationshipPersiste
 		}
 		catch (SQLException e)
 		{
-			// Logging needed.
+			System.out.print(e);
 		}
 		finally
 		{
