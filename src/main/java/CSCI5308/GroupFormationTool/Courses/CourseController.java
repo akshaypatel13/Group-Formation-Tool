@@ -12,7 +12,6 @@ import CSCI5308.GroupFormationTool.SystemConfig;
 @Controller
 public class CourseController
 {
-
 	private static final String ID = "id";
 	
 	@GetMapping("/course/course")
@@ -22,9 +21,12 @@ public class CourseController
 		Course course = new Course();
 		courseDB.loadCourseByID(courseID, course);
 		model.addAttribute("course", course);
+		// This is likely something I would repeat elsewhere, I should come up with a generic solution
+		// for this in milestone 2.
 		List<Role> userRoles = course.getAllRolesForCurrentUserInCourse();
 		if (null == userRoles)
 		{
+			// Default is user is a guest.
 			model.addAttribute("instructor", false);
 			model.addAttribute("ta", false);
 			model.addAttribute("student", false);

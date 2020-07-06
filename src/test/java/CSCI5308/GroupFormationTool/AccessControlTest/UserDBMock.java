@@ -4,7 +4,6 @@ import CSCI5308.GroupFormationTool.AccessControl.*;
 
 public class UserDBMock implements IUserPersistence
 {
-
 	public void loadUserByID(long id, User user)
 	{
 		user.setID(id);
@@ -46,5 +45,4 @@ public class UserDBMock implements IUserPersistence
 		user.setEmail("rhawkey@dal.ca");
 		return true;
 	}
-
 }

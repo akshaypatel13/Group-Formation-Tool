@@ -23,6 +23,7 @@ public class StudentCSVParser implements IStudentCSVParser
 	public StudentCSVParser(MultipartFile file) 
 	{
 		this.uploadedFile = file;
+
 	}
 	
 	@Override
@@ -38,11 +39,12 @@ public class StudentCSVParser implements IStudentCSVParser
 			while (iter.hasNext())
 			{
 				String[] record = iter.next();
+				
 				String bannerID = record[0];
 				String firstName = record[1];
 				String lastName = record[2];
 				String email = record[3];
-
+				
 				u = new User();
 				u.setBannerID(bannerID);
 				u.setFirstName(firstName);
@@ -60,6 +62,7 @@ public class StudentCSVParser implements IStudentCSVParser
 		{
 			failureResults.add("Failure parsing CSV file: " + e.getMessage());
 		}
+
 		return studentList;
 	}
 

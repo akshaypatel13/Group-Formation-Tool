@@ -10,7 +10,6 @@ import CSCI5308.GroupFormationTool.Courses.Role;
 
 class CourseUserRelationshipDBMock implements ICourseUserRelationshipPersistence 
 {
-
 	public List<User> findAllUsersWithoutCourseRole(Role role, long courseID) 
 	{
 		List<User> userList = new ArrayList<>();
@@ -41,6 +40,7 @@ class CourseUserRelationshipDBMock implements ICourseUserRelationshipPersistence
 		course.setId(0);
 		course.setTitle("Software Engineering");
 		return true;
+
 	}
 
 	public List<Role> loadUserRolesForCourse(Course course, User user) 

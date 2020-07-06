@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import CSCI5308.GroupFormationTool.SystemConfig;
 
+// Singleton for retrieving connections.
 public class ConnectionManager
 {
 	private static ConnectionManager uniqueInstance = null;

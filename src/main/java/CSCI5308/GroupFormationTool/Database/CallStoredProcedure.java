@@ -45,7 +45,7 @@ public class CallStoredProcedure
 		}
 		catch (Exception e)
 		{
-			System.out.print(e);
+			// Logging needed.
 		}
 	}
 	

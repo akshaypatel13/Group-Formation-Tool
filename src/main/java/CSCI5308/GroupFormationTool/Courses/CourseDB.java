@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class CourseDB implements ICoursePersistence
 {
-
 	public List<Course> loadAllCourses()
 	{
 		List<Course> courses = new ArrayList<Course>();
@@ -34,7 +33,7 @@ public class CourseDB implements ICoursePersistence
 		}
 		catch (SQLException e)
 		{
-			System.out.print(e);
+			// Logging needed.
 		}
 		finally
 		{
@@ -66,7 +65,7 @@ public class CourseDB implements ICoursePersistence
 		}
 		catch (SQLException e)
 		{
-			System.out.print(e);
+			// Logging needed.
 		}
 		finally
 		{
@@ -89,7 +88,7 @@ public class CourseDB implements ICoursePersistence
 		}
 		catch (SQLException e)
 		{
-			System.out.print(e);
+			// Logging needed
 			return false;
 		}
 		finally
@@ -113,7 +112,7 @@ public class CourseDB implements ICoursePersistence
 		}
 		catch (SQLException e)
 		{
-			System.out.print(e);
+			// Logging needed
 			return false;
 		}
 		finally
@@ -125,5 +124,4 @@ public class CourseDB implements ICoursePersistence
 		}
 		return true;
 	}
-
 }

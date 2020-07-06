@@ -1,18 +1,14 @@
 package CSCI5308.GroupFormationTool;
 
-import CSCI5308.GroupFormationTool.PasswordPolicy.DefaultPasswordManager;
-import CSCI5308.GroupFormationTool.PasswordPolicy.IPasswordManager;
 import CSCI5308.GroupFormationTool.Security.*;
 import CSCI5308.GroupFormationTool.AccessControl.*;
 import CSCI5308.GroupFormationTool.Database.*;
-import CSCI5308.GroupFormationTool.PasswordPolicy.IPasswordPolicyList;
-import CSCI5308.GroupFormationTool.PasswordPolicy.PasswordPolicyList;
-import CSCI5308.GroupFormationTool.QuestionManage.IQuestionPersistence;
-import CSCI5308.GroupFormationTool.QuestionManage.QuestionDB;
+import CSCI5308.GroupFormationTool.QuestionManager.IQuestionPersistence;
+import CSCI5308.GroupFormationTool.QuestionManager.QuestionDB;
+import CSCI5308.GroupFormationTool.PasswordValidation.IPasswordValidatorEnumerator;
+import CSCI5308.GroupFormationTool.PasswordValidation.IPasswordValidatorPersistence;
+import CSCI5308.GroupFormationTool.PasswordValidation.PasswordValidatorDB;
 import CSCI5308.GroupFormationTool.Courses.*;
-import CSCI5308.GroupFormationTool.Resetpassword.DefaultEmailService;
-import CSCI5308.GroupFormationTool.Resetpassword.IEmailService;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 /*
  * This is a singleton, we will learn about these when we learn design patterns.
@@ -23,72 +19,50 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
  * dependency injection (for example classes that override or extend existing
  * library classes in the framework).
  */
-public class SystemConfig {
+public class SystemConfig
+{
 	private static SystemConfig uniqueInstance = null;
-
+	
 	private IPasswordEncryption passwordEncryption;
 	private IUserPersistence userDB;
 	private IDatabaseConfiguration databaseConfiguration;
 	private ICoursePersistence courseDB;
 	private ICourseUserRelationshipPersistence courseUserRelationshipDB;
-
-	private IUserNotifications userNotifications;
-	private IEmailService emailService;
-	private JavaMailSenderImpl mailSender;
 	private IQuestionPersistence questionDB;
-	private IPasswordManager passwordManager;
-	private IPasswordPolicyList passwordPolicyList;
-
-
+	private IPasswordValidatorPersistence validatorDB;
+	private IPasswordValidatorEnumerator passwordValidatorEnumerator;
+	
 	// This private constructor ensures that no class other than System can allocate
 	// the System object. The compiler would prevent it.
-	private SystemConfig() {
+	private SystemConfig()
+	{
 		// The default instantiations are the choices that would be used in the
 		// production application. These choices can all be overridden by test
 		// setup logic when necessary.
-
 		passwordEncryption = new BCryptPasswordEncryption();
 		userDB = new UserDB();
 		databaseConfiguration = new DefaultDatabaseConfiguration();
 		courseDB = new CourseDB();
 		courseUserRelationshipDB = new CourseUserRelationshipDB();
-		userNotifications = new UserNotifications();
-		emailService = new DefaultEmailService();
-
-		mailSender = new JavaMailSenderImpl();
 		questionDB = new QuestionDB();
-
-		passwordManager = new DefaultPasswordManager();
-
-		passwordPolicyList = new PasswordPolicyList();
-
+		validatorDB = new PasswordValidatorDB();
 	}
-
+	
 	// This is the way the rest of the application gets access to the System object.
-	public static SystemConfig instance() {
+	public static SystemConfig instance()
+	{
 		// Using lazy initialization, this is the one and only place that the System
 		// object will be instantiated.
-		if (null == uniqueInstance) {
+		if (null == uniqueInstance)
+		{
 			uniqueInstance = new SystemConfig();
 		}
 		return uniqueInstance;
 	}
-
-	public IPasswordPolicyList getIPasswordPolicyList() {
-		return passwordPolicyList;
-	}
-
-	public IPasswordEncryption getPasswordEncryption() {
-		return passwordEncryption;
-	}
-
-	public IUserNotifications getUserNotifications()
+	
+	public IPasswordEncryption getPasswordEncryption()
 	{
-		return userNotifications;
-	}
-
-	public void setUserNotifications(IUserNotifications userNotifications){
-		this.userNotifications = userNotifications;
+		return passwordEncryption;
 	}
 	
 	public void setPasswordEncryption(IPasswordEncryption passwordEncryption)
@@ -96,61 +70,73 @@ public class SystemConfig {
 		this.passwordEncryption = passwordEncryption;
 	}
 	
-	public IEmailService getEmailService(){
-		return emailService;
-	}
-
-	public void setEmailService(IEmailService emailService) {
-		this.emailService = emailService;
-	}
-
-
-	public IUserPersistence getUserDB() {
-
+	public IUserPersistence getUserDB()
+	{
 		return userDB;
 	}
-
-	public void setUserDB(IUserPersistence userDB) {
+	
+	public void setUserDB(IUserPersistence userDB)
+	{
 		this.userDB = userDB;
 	}
-
-	public IDatabaseConfiguration getDatabaseConfiguration() {
+	
+	public IDatabaseConfiguration getDatabaseConfiguration()
+	{
 		return databaseConfiguration;
 	}
-
-	public void setDatabaseConfiguration(IDatabaseConfiguration databaseConfiguration) {
+	
+	public void setDatabaseConfiguration(IDatabaseConfiguration databaseConfiguration)
+	{
 		this.databaseConfiguration = databaseConfiguration;
 	}
-
-	public JavaMailSenderImpl getJavaMailSender() {
-		return mailSender;
-	}
-
-	public void setCourseDB(ICoursePersistence courseDB) {
+	
+	public void setCourseDB(ICoursePersistence courseDB)
+	{
 		this.courseDB = courseDB;
 	}
-
-	public ICoursePersistence getCourseDB() {
+	
+	public ICoursePersistence getCourseDB()
+	{
 		return courseDB;
 	}
-
-	public void setCourseUserRelationshipDB(ICourseUserRelationshipPersistence courseUserRelationshipDB) {
+	
+	public void setCourseUserRelationshipDB(ICourseUserRelationshipPersistence courseUserRelationshipDB)
+	{
 		this.courseUserRelationshipDB = courseUserRelationshipDB;
 	}
-
-	public ICourseUserRelationshipPersistence getCourseUserRelationshipDB() {
+	
+	public ICourseUserRelationshipPersistence getCourseUserRelationshipDB()
+	{
 		return courseUserRelationshipDB;
 	}
-
-	public void setQuestionDB(IQuestionPersistence questionDB) {
+	
+	public void setQuestionDB(IQuestionPersistence questionDB)
+	{
 		this.questionDB = questionDB;
 	}
-
-	public IQuestionPersistence getQuestionDB() {
+	
+	public IQuestionPersistence getQuestionDB()
+	{
 		return questionDB;
 	}
-
-	public IPasswordManager getPasswordManager(){
-		return passwordManager;
+	public void setPasswordValidatorDB(IPasswordValidatorPersistence validatorDB)
+	{
+		this.validatorDB = validatorDB;
 	}
+	
+	public IPasswordValidatorPersistence getPasswordValidatorDB()
+	{
+		return validatorDB;
+	}
+	
+	public void setPasswordValidatorEnumerator(IPasswordValidatorEnumerator passwordValidatorEnumerator)
+	{
+		this.passwordValidatorEnumerator = passwordValidatorEnumerator;
+	}
+	
+	public IPasswordValidatorEnumerator getPasswordValidatorEnumerator()
+	{
+		return passwordValidatorEnumerator;
+	}
+	
 }

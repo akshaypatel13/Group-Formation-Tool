@@ -13,7 +13,6 @@ import org.springframework.util.Assert;
 @SuppressWarnings("deprecation")
 class StudentCSVParserTest 
 {
-
 	@Test
 	public void parseCSVFile() 
 	{
@@ -24,5 +23,4 @@ class StudentCSVParserTest
 		assertThat(records).isNotEmpty();
 		Assert.isTrue(records.size() > 0);
 	}
-
 }

@@ -1,14 +1,10 @@
 package CSCI5308.GroupFormationTool.CoursesTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import CSCI5308.GroupFormationTool.SystemConfig;
-import CSCI5308.GroupFormationTool.AccessControl.IUserNotifications;
-import CSCI5308.GroupFormationTool.AccessControlTest.UserNotificationsMock;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
@@ -17,8 +13,6 @@ import CSCI5308.GroupFormationTool.AccessControl.User;
 import CSCI5308.GroupFormationTool.AccessControlTest.UserDBMock;
 import CSCI5308.GroupFormationTool.Courses.Course;
 import CSCI5308.GroupFormationTool.Courses.Role;
-import CSCI5308.GroupFormationTool.PasswordPolicy.IPasswordPolicyList;
-import CSCI5308.GroupFormationTool.PasswordPolicy.PasswordPolicyList;
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
 import CSCI5308.GroupFormationTool.SecurityTest.PasswordEncryptionMock;
 
@@ -33,10 +27,8 @@ class StudentCSVImportTest
 		User user = new User();
 		Course course = new Course();
 		IUserPersistence userDB = new UserDBMock();
-		IUserNotifications userNotifications = new UserNotificationsMock();
 		IPasswordEncryption passwordEncryption = new PasswordEncryptionMock();
-		IPasswordPolicyList passwordPolicyList = mock(PasswordPolicyList.class);
-		Assert.isTrue(user.createUser(userDB, passwordEncryption, userNotifications, passwordPolicyList));
+		Assert.isTrue(user.createUser(userDB, passwordEncryption, null));
 		Assert.isTrue(course.enrollUserInCourse(Role.STUDENT, user) == false);
 	}
 
