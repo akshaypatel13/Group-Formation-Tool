@@ -9,6 +9,10 @@ import CSCI5308.GroupFormationTool.PasswordValidation.IPasswordValidatorEnumerat
 import CSCI5308.GroupFormationTool.PasswordValidation.IPasswordValidatorPersistence;
 import CSCI5308.GroupFormationTool.PasswordValidation.PasswordValidatorDB;
 import CSCI5308.GroupFormationTool.Courses.*;
+import CSCI5308.GroupFormationTool.Survey.ISurveyAdminPersistence;
+import CSCI5308.GroupFormationTool.Survey.ISurveyManagePersistence;
+import CSCI5308.GroupFormationTool.Survey.SurveyAdminDB;
+import CSCI5308.GroupFormationTool.Survey.SurveyManageDB;
 
 /*
  * This is a singleton, we will learn about these when we learn design patterns.
@@ -31,14 +35,11 @@ public class SystemConfig
 	private IQuestionPersistence questionDB;
 	private IPasswordValidatorPersistence validatorDB;
 	private IPasswordValidatorEnumerator passwordValidatorEnumerator;
-	
-	// This private constructor ensures that no class other than System can allocate
-	// the System object. The compiler would prevent it.
+	private ISurveyAdminPersistence surveyAdminDB;
+	private ISurveyManagePersistence surveyManageDB;
+
 	private SystemConfig()
 	{
-		// The default instantiations are the choices that would be used in the
-		// production application. These choices can all be overridden by test
-		// setup logic when necessary.
 		passwordEncryption = new BCryptPasswordEncryption();
 		userDB = new UserDB();
 		databaseConfiguration = new DefaultDatabaseConfiguration();
@@ -46,13 +47,12 @@ public class SystemConfig
 		courseUserRelationshipDB = new CourseUserRelationshipDB();
 		questionDB = new QuestionDB();
 		validatorDB = new PasswordValidatorDB();
+		surveyAdminDB = new SurveyAdminDB();
+		surveyManageDB = new SurveyManageDB();
 	}
 	
-	// This is the way the rest of the application gets access to the System object.
 	public static SystemConfig instance()
 	{
-		// Using lazy initialization, this is the one and only place that the System
-		// object will be instantiated.
 		if (null == uniqueInstance)
 		{
 			uniqueInstance = new SystemConfig();
@@ -138,5 +138,14 @@ public class SystemConfig
 	{
 		return passwordValidatorEnumerator;
 	}
-	
+
+
+	public ISurveyAdminPersistence getSurveyAdminDB() {
+		return surveyAdminDB;
+	}
+
+	public ISurveyManagePersistence getSurveyManageDB() {
+		return surveyManageDB;
+	}
+
 }

@@ -24,5 +24,9 @@
 			<br/>
 			<a th:href="@{/question/questionmanager/title(bannerID=${#httpServletRequest.remoteUser})}">Question Manager</a>
 		</div>
+		<div th:if="${instructor} or ${ta}">
+			<br/>
+			<a th:href="@{/survey/survey(courseID=${course.id})}">Survey Manager</a>
+		</div>
 	</body>
 </html>
