@@ -5,6 +5,8 @@ import CSCI5308.GroupFormationTool.AccessControl.*;
 import CSCI5308.GroupFormationTool.Database.*;
 import CSCI5308.GroupFormationTool.QuestionManager.IQuestionPersistence;
 import CSCI5308.GroupFormationTool.QuestionManager.QuestionDB;
+import CSCI5308.GroupFormationTool.Response.IResponsePersistence;
+import CSCI5308.GroupFormationTool.Response.ResponseDB;
 import CSCI5308.GroupFormationTool.PasswordValidation.IPasswordValidatorEnumerator;
 import CSCI5308.GroupFormationTool.PasswordValidation.IPasswordValidatorPersistence;
 import CSCI5308.GroupFormationTool.PasswordValidation.PasswordValidatorDB;
@@ -37,6 +39,7 @@ public class SystemConfig
 	private IPasswordValidatorEnumerator passwordValidatorEnumerator;
 	private ISurveyAdminPersistence surveyAdminDB;
 	private ISurveyManagePersistence surveyManageDB;
+	private IResponsePersistence responseDB;
 
 	private SystemConfig()
 	{
@@ -49,6 +52,7 @@ public class SystemConfig
 		validatorDB = new PasswordValidatorDB();
 		surveyAdminDB = new SurveyAdminDB();
 		surveyManageDB = new SurveyManageDB();
+		responseDB = new ResponseDB();
 	}
 	
 	public static SystemConfig instance()
@@ -146,6 +150,14 @@ public class SystemConfig
 
 	public ISurveyManagePersistence getSurveyManageDB() {
 		return surveyManageDB;
+	}
+
+	public IResponsePersistence getResponseDB() {
+		return responseDB;
+	}
+
+	public void setResponseDB(IResponsePersistence responseDB) {
+		this.responseDB = responseDB;
 	}
 
 }

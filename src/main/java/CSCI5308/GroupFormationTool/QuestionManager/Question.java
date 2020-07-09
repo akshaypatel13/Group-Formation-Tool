@@ -1,6 +1,7 @@
 package CSCI5308.GroupFormationTool.QuestionManager;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 public class Question 
 {
@@ -9,6 +10,7 @@ public class Question
 	private String text;
 	private QuestionType type;
 	private Timestamp timestamp;
+	private ArrayList<String> options;
 	
 	public Question() 
 	{
@@ -74,6 +76,14 @@ public class Question
 		this.type = type;
 	}
 	
+	public ArrayList<String> getOptions() {
+		return options;
+	}
+
+	public void setOptions(ArrayList<String> options) {
+		this.options = options;
+	}
+
 	public boolean deleteQuestion(IQuestionPersistence questionDB, long questionID) 
 	{
 		return questionDB.deleteQuestionByQuestionId(questionID);

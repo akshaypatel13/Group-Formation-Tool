@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+	<head>
+		<title>CSCI5308 - Group Formation Tool</title>
+	</head>
+	<body>
+		<!-- I got the idea for how to do this from https://www.thymeleaf.org/doc/articles/springsecurity.html -->
+	  	<div sec:authorize="isAuthenticated()">
+			<h4 th:inline="text">BannerID: [[${#httpServletRequest.remoteUser}]]</h4>
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="Sign Out"/>
+			</form>
+		</div>
+		<p>
+		<label>Survey Information</label>
+		</p>
+			<form th:action="@{/response/survey}" method="POST">
+			<table border="1" style="border-collapse: collapse;">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Text</th>
+					<th>Type</th>
+					<th>Response</th>
+				</tr>
+				<tr th:each="val: ${questionList}">
+					<td>
+						<span th:text="${val.title}"></span>
+					</td>
+					<td>
+						<span th:text="${val.text}"></span>
+					</td>
+					<td>
+						<span th:text="${val.type}"></span>
+					</td>
+					<td>	
+						<div th:if="${val.type.toString()}=='Text'">
+							<input type="text" th:name="${val.id}"></input>
+						</div>						
+						<div th:if="${val.type.toString()}=='Numeric'">
+							<input type="number" th:name="${val.id}">
+						</div>												
+					</td>
+				<tr>
+				<tr th:each="val: ${questionListWithOptions}">
+					<td>
+						<span th:text="${val.title}"></span>
+					</td>
+					<td>
+						<span th:text="${val.text}"></span>
+					</td>
+					<td>
+						<span th:text="${val.type}"></span>
+					</td>
+					<td>		
+						<div th:if="${val.type.toString()}=='MCQOne'">
+							<select th:name="${val.id}">
+	 							<option th:each="v: ${val.options}" th:value="${v}">
+								<span th:text="${v}"></span>
+							</option>
+							</select>				
+						</div>
+						<div th:if="${val.type.toString()}=='MCQMultiple'">
+							<span th:each="v: ${val.options}">
+								<input type="checkbox" th:name="${val.id}+':'+${v}" th:value="${v}" >
+								<label th:text="${v}"></label>
+							</span>
+						</div>													
+					</td>
+				<tr>
+				</table>
+				<br/>
+				<input type="hidden" name="id" id="id" th:value="${courseId}" />
+				<input type="hidden" name="bannerID" id="bannerID" th:value="${#httpServletRequest.remoteUser}" />
+				<button type="submit">Submit</button>
+			</form>		
+</body>
+</html>
