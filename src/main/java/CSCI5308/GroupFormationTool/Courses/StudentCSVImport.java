@@ -9,6 +9,7 @@ import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
 
 public class StudentCSVImport
 {
+	
 	private List<String> successResults;
 	private List<String> failureResults;
 	private Course course;
@@ -29,6 +30,7 @@ public class StudentCSVImport
 	
 	private void enrollStudentFromRecord()
 	{
+		IUserAbstractFactory userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
 		List<User> studentList = parser.parseCSVFile(failureResults);
 		for(User u : studentList)
 		{	
@@ -38,7 +40,7 @@ public class StudentCSVImport
 			String email = u.getEmail();
 			String userDetails = bannerID + " " + firstName + " " + lastName +" " + email;
 			
-			User user = new User();
+			User user = userAbstractFactory.createUserInstance();
 			userDB.loadUserByBannerID(bannerID, user);
 			
 			if (!user.isValidUser())

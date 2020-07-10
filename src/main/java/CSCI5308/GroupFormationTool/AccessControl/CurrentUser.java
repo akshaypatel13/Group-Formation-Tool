@@ -9,6 +9,7 @@ public class CurrentUser
 {
 	private static CurrentUser uniqueInstance = null;
 	
+	
 	private CurrentUser()
 	{
 		
@@ -25,12 +26,13 @@ public class CurrentUser
 	
 	public User getCurrentAuthenticatedUser()
 	{
+		IUserAbstractFactory userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
 		IUserPersistence userDB = SystemConfig.instance().getUserDB();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.isAuthenticated())
 		{
 			String bannerID = authentication.getPrincipal().toString();
-			User u = new User();
+			User u = userAbstractFactory.createUserInstance();
 			userDB.loadUserByBannerID(bannerID, u);
 			if (u.isValidUser())
 			{

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import CSCI5308.GroupFormationTool.SystemConfig;
+import CSCI5308.GroupFormationTool.AccessControl.IUserAbstractFactory;
 import CSCI5308.GroupFormationTool.AccessControl.User;
 
 @Controller
@@ -20,6 +21,7 @@ public class CourseAdminController
 	private static final String ID = "id";
 	private static final String TITLE = "title";
 	private static final String INSTRUCTOR = "instructor";
+
 	
 	@GetMapping("/admin/course")
 	public String course(Model model)
@@ -69,13 +71,14 @@ public class CourseAdminController
 	public ModelAndView assignInstructorToCourse(@RequestParam(name = INSTRUCTOR) List<Integer> instructor,
 		   @RequestParam(name = ID) long courseID)
 	{
+		IUserAbstractFactory userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
 		Course c = new Course();
 		c.setId(courseID);
 		Iterator<Integer> iter = instructor.iterator();
 		ICourseUserRelationshipPersistence courseUserRelationshipDB = SystemConfig.instance().getCourseUserRelationshipDB();
 		while (iter.hasNext())
 		{
-			User u = new User();
+			User u = userAbstractFactory.createUserInstance();
 			u.setId(iter.next().longValue());
 			courseUserRelationshipDB.enrollUser(c, u, Role.INSTRUCTOR);
 		}
