@@ -8,7 +8,7 @@ import CSCI5308.GroupFormationTool.SystemConfig;
 public class CurrentUser
 {
 	private static CurrentUser uniqueInstance = null;
-	private IUserAbstractFactory userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
+	
 	
 	private CurrentUser()
 	{
@@ -26,6 +26,7 @@ public class CurrentUser
 	
 	public User getCurrentAuthenticatedUser()
 	{
+		IUserAbstractFactory userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
 		IUserPersistence userDB = SystemConfig.instance().getUserDB();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.isAuthenticated())

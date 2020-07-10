@@ -12,9 +12,10 @@ import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
 
 public class CourseUserRelationshipDB implements ICourseUserRelationshipPersistence
 {
-	private IUserAbstractFactory userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
+	
 	public List<User> findAllUsersWithoutCourseRole(Role role, long courseID)
 	{
+		IUserAbstractFactory userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
 		List<User> users =userAbstractFactory.createUserArrayList();
 		CallStoredProcedure proc = null;
 		try
@@ -56,6 +57,7 @@ public class CourseUserRelationshipDB implements ICourseUserRelationshipPersiste
 
 	public List<User> findAllUsersWithCourseRole(Role role, long courseID)
 	{
+		IUserAbstractFactory userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
 		List<User> users =userAbstractFactory.createUserArrayList();
 		CallStoredProcedure proc = null;
 		try

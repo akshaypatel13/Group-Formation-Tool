@@ -18,8 +18,7 @@ import CSCI5308.GroupFormationTool.AccessControl.User;
 
 public class StudentCSVParser implements IStudentCSVParser
 {
-	private IUserAbstractFactory userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
-	private MultipartFile uploadedFile;
+    private MultipartFile uploadedFile;
 	private List<User> studentList = new ArrayList<>(); 
 
 	public StudentCSVParser(MultipartFile file) 
@@ -31,6 +30,8 @@ public class StudentCSVParser implements IStudentCSVParser
 	@Override
 	public List<User> parseCSVFile(List<String> failureResults) 
 	{
+		IUserAbstractFactory userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
+		
 		try
 		{
 			Reader reader = new InputStreamReader(uploadedFile.getInputStream());

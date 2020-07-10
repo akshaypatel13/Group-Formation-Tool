@@ -18,7 +18,7 @@ import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
 @Controller
 public class SignupController
 {
-	private IUserAbstractFactory userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
+	
 	private final String USERNAME = "username";
 	private final String PASSWORD = "password";
 	private final String PASSWORD_CONFIRMATION = "passwordConfirmation";
@@ -48,6 +48,7 @@ public class SignupController
    	@RequestParam(name = LAST_NAME) String lastName,
    	@RequestParam(name = EMAIL) String email)
 	{
+		IUserAbstractFactory userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
 		boolean success = false;
 		List<String> errorMessages = new ArrayList<String>();
 		if (User.isBannerIDValid(bannerID) &&
