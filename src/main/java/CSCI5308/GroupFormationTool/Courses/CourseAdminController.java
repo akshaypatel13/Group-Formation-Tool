@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import CSCI5308.GroupFormationTool.SystemConfig;
+import CSCI5308.GroupFormationTool.AccessControl.IUserAbstractFactory;
 import CSCI5308.GroupFormationTool.AccessControl.User;
 
 @Controller
@@ -20,6 +21,7 @@ public class CourseAdminController
 	private static final String ID = "id";
 	private static final String TITLE = "title";
 	private static final String INSTRUCTOR = "instructor";
+//	private IUserAbstractFactory userAbstractFactory = SystemConfig.instance().getUserAbstractFactory();
 	
 	@GetMapping("/admin/course")
 	public String course(Model model)

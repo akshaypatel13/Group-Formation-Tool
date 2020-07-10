@@ -8,6 +8,7 @@ import CSCI5308.GroupFormationTool.SystemConfig;
 public class CurrentUser
 {
 	private static CurrentUser uniqueInstance = null;
+	private IUserAbstractFactory userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
 	
 	private CurrentUser()
 	{
@@ -30,7 +31,7 @@ public class CurrentUser
 		if (authentication.isAuthenticated())
 		{
 			String bannerID = authentication.getPrincipal().toString();
-			User u = new User();
+			User u = userAbstractFactory.createUserInstance();
 			userDB.loadUserByBannerID(bannerID, u);
 			if (u.isValidUser())
 			{

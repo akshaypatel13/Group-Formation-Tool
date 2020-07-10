@@ -12,11 +12,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 
+import CSCI5308.GroupFormationTool.SystemConfig;
+import CSCI5308.GroupFormationTool.AccessControl.IUserAbstractFactory;
 import CSCI5308.GroupFormationTool.AccessControl.User;
 
 public class StudentCSVParser implements IStudentCSVParser
 {
-
+	private IUserAbstractFactory userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
 	private MultipartFile uploadedFile;
 	private List<User> studentList = new ArrayList<>(); 
 
@@ -45,7 +47,7 @@ public class StudentCSVParser implements IStudentCSVParser
 				String lastName = record[2];
 				String email = record[3];
 				
-				u = new User();
+				u = userAbstractFactory.createUserInstance();
 				u.setBannerID(bannerID);
 				u.setFirstName(firstName);
 				u.setLastName(lastName);

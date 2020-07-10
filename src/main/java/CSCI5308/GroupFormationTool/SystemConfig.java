@@ -29,6 +29,7 @@ public class SystemConfig
 {
 	private static SystemConfig uniqueInstance = null;
 	
+	private IUserAbstractFactory userAbstractFactory;
 	private IPasswordEncryption passwordEncryption;
 	private IUserPersistence userDB;
 	private IDatabaseConfiguration databaseConfiguration;
@@ -43,8 +44,9 @@ public class SystemConfig
 
 	private SystemConfig()
 	{
+		userAbstractFactory= new UserAbstractFactory();
 		passwordEncryption = new BCryptPasswordEncryption();
-		userDB = new UserDB();
+		userDB = userAbstractFactory.createUserDBInstance();
 		databaseConfiguration = new DefaultDatabaseConfiguration();
 		courseDB = new CourseDB();
 		courseUserRelationshipDB = new CourseUserRelationshipDB();
@@ -53,6 +55,7 @@ public class SystemConfig
 		surveyAdminDB = new SurveyAdminDB();
 		surveyManageDB = new SurveyManageDB();
 		responseDB = new ResponseDB();
+
 	}
 	
 	public static SystemConfig instance()
@@ -158,6 +161,14 @@ public class SystemConfig
 
 	public void setResponseDB(IResponsePersistence responseDB) {
 		this.responseDB = responseDB;
+	}
+
+	public IUserAbstractFactory getUserAbstractFactory() {
+		return userAbstractFactory;
+	}
+
+	public void setUserAbstractFactory(IUserAbstractFactory userAbstarctFactory) {
+		this.userAbstractFactory = userAbstarctFactory;
 	}
 
 }
