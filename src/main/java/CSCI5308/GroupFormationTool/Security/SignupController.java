@@ -16,9 +16,8 @@ import CSCI5308.GroupFormationTool.PasswordValidation.PasswordValidatorEnumerato
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
 
 @Controller
-public class SignupController
-{
-	
+public class SignupController {
+
 	private final String USERNAME = "username";
 	private final String PASSWORD = "password";
 	private final String PASSWORD_CONFIRMATION = "passwordConfirmation";
@@ -26,38 +25,32 @@ public class SignupController
 	private final String LAST_NAME = "lastName";
 	private final String EMAIL = "email";
 	private IPasswordValidatorEnumerator passwordValidatorEnumerator;
-	
+	private IUser userInstance;
+
 	public SignupController() {
 		IPasswordValidatorPersistence validatorDB = SystemConfig.instance().getPasswordValidatorDB();
 		passwordValidatorEnumerator = new PasswordValidatorEnumerator(validatorDB);
 		SystemConfig.instance().setPasswordValidatorEnumerator(passwordValidatorEnumerator);
+		userInstance =SystemConfig.instance().getUserAbstractFactory().createUserInstance();
 	}
-	
+
 	@GetMapping("/signup")
-	public String displaySignup(Model model)
-	{
+	public String displaySignup(Model model) {
 		return "signup";
 	}
-	
-	@RequestMapping(value = "/signup", method = RequestMethod.POST) 
-   public ModelAndView processSignup(
-   	@RequestParam(name = USERNAME) String bannerID,
-   	@RequestParam(name = PASSWORD) String password,
-   	@RequestParam(name = PASSWORD_CONFIRMATION) String passwordConfirm,
-   	@RequestParam(name = FIRST_NAME) String firstName,
-   	@RequestParam(name = LAST_NAME) String lastName,
-   	@RequestParam(name = EMAIL) String email)
-	{
-		IUserAbstractFactory userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
+
+	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	public ModelAndView processSignup(@RequestParam(name = USERNAME) String bannerID,
+			@RequestParam(name = PASSWORD) String password,
+			@RequestParam(name = PASSWORD_CONFIRMATION) String passwordConfirm,
+			@RequestParam(name = FIRST_NAME) String firstName, @RequestParam(name = LAST_NAME) String lastName,
+			@RequestParam(name = EMAIL) String email) {
+		IUserAbstractFactory userAbstractFactory = SystemConfig.instance().getUserAbstractFactory();
 		boolean success = false;
 		List<String> errorMessages = new ArrayList<String>();
-		if (User.isBannerIDValid(bannerID) &&
-			 User.isEmailValid(email) &&
-			 User.isFirstNameValid(firstName) &&
-			 User.isLastNameValid(lastName) &&
-			 password.equals(passwordConfirm))
-		{
-			User u = userAbstractFactory.createUserInstance();
+		if (userInstance.isBannerIDValid(bannerID) && userInstance.isEmailValid(email) && userInstance.isFirstNameValid(firstName)
+				&& userInstance.isLastNameValid(lastName) && password.equals(passwordConfirm)) {
+			IUser u = userAbstractFactory.createUserInstance();
 			u.setBannerID(bannerID);
 			u.setPassword(password);
 			u.setFirstName(firstName);
@@ -69,11 +62,10 @@ public class SignupController
 			success = u.createUser(userDB, passwordValidatorEnumerator, passwordEncryption, null, errorMessages);
 		}
 		ModelAndView m = new ModelAndView("login");
-		if (success == false)
-		{
+		if (success == false) {
 			m = new ModelAndView("signup");
 			m.addObject("errorMessage", "Invalid data, please check your values.");
-			m.addObject("passwordInvalid",errorMessages);
+			m.addObject("passwordInvalid", errorMessages);
 			System.out.println(errorMessages);
 		}
 		return m;

@@ -31,8 +31,8 @@ public class StudentCSVImport
 	private void enrollStudentFromRecord()
 	{
 		IUserAbstractFactory userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
-		List<User> studentList = parser.parseCSVFile(failureResults);
-		for(User u : studentList)
+		List<IUser> studentList = parser.parseCSVFile(failureResults);
+		for(IUser u : studentList)
 		{	
 			String bannerID = u.getBanner();
 			String firstName = u.getFirstName();
@@ -40,7 +40,7 @@ public class StudentCSVImport
 			String email = u.getEmail();
 			String userDetails = bannerID + " " + firstName + " " + lastName +" " + email;
 			
-			User user = userAbstractFactory.createUserInstance();
+			IUser user = userAbstractFactory.createUserInstance();
 			userDB.loadUserByBannerID(bannerID, user);
 			
 			if (!user.isValidUser())

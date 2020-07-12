@@ -6,17 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import CSCI5308.GroupFormationTool.SystemConfig;
+import CSCI5308.GroupFormationTool.AccessControl.IUser;
 import CSCI5308.GroupFormationTool.AccessControl.IUserAbstractFactory;
-import CSCI5308.GroupFormationTool.AccessControl.User;
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
 
 public class CourseUserRelationshipDB implements ICourseUserRelationshipPersistence
 {
-	
-	public List<User> findAllUsersWithoutCourseRole(Role role, long courseID)
+	@Override
+	public List<IUser> findAllUsersWithoutCourseRole(Role role, long courseID)
 	{
 		IUserAbstractFactory userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
-		List<User> users =userAbstractFactory.createUserArrayList();
+		List<IUser> users =userAbstractFactory.createUserArrayList();
 		CallStoredProcedure proc = null;
 		try
 		{
@@ -32,7 +32,7 @@ public class CourseUserRelationshipDB implements ICourseUserRelationshipPersiste
 					String bannerID = results.getString(2);
 					String firstName = results.getString(3);
 					String lastName = results.getString(4);
-					User u =userAbstractFactory.createUserInstance();
+					IUser u =userAbstractFactory.createUserInstance();
 					u.setID(userID);
 					u.setBannerID(bannerID);
 					u.setFirstName(firstName);
@@ -55,10 +55,11 @@ public class CourseUserRelationshipDB implements ICourseUserRelationshipPersiste
 		return users;
 	}
 
-	public List<User> findAllUsersWithCourseRole(Role role, long courseID)
+	@Override
+	public List<IUser> findAllUsersWithCourseRole(Role role, long courseID)
 	{
 		IUserAbstractFactory userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
-		List<User> users =userAbstractFactory.createUserArrayList();
+		List<IUser> users =userAbstractFactory.createUserArrayList();
 		CallStoredProcedure proc = null;
 		try
 		{
@@ -71,7 +72,7 @@ public class CourseUserRelationshipDB implements ICourseUserRelationshipPersiste
 				while (results.next())
 				{
 					long userID = results.getLong(1);
-					User u = userAbstractFactory.createUserInstance();
+					IUser u = userAbstractFactory.createUserInstance();
 					u.setID(userID);
 					users.add(u);
 				}
@@ -91,7 +92,8 @@ public class CourseUserRelationshipDB implements ICourseUserRelationshipPersiste
 		return users;
 	}
 	
-	public boolean enrollUser(Course course, User user, Role role)
+	@Override
+	public boolean enrollUser(Course course, IUser user, Role role)
 	{
 		CallStoredProcedure proc = null;
 		try
@@ -117,7 +119,8 @@ public class CourseUserRelationshipDB implements ICourseUserRelationshipPersiste
 		return true;
 	}
 
-	public List<Role> loadUserRolesForCourse(Course course, User user)
+	@Override
+	public List<Role> loadUserRolesForCourse(Course course, IUser user)
 	{
 		List<Role> roles = new ArrayList<Role>();
 		CallStoredProcedure proc = null;

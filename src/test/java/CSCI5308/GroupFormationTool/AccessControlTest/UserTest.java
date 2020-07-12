@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 @SuppressWarnings("deprecation")
 public class UserTest
 {
+  private IUser userInstance=new User();
 	@Test
 	public void ConstructorTests()
 	{
@@ -122,34 +123,34 @@ public class UserTest
 	@Test
 	public void isBannerIDValidTest()
 	{
-		Assert.isTrue(User.isBannerIDValid("B000000000"));
-		assertThat(User.isBannerIDValid(null)).isFalse();
-		assertThat(User.isBannerIDValid("")).isFalse();
+		Assert.isTrue(userInstance.isBannerIDValid("B000000000"));
+		assertThat(userInstance.isBannerIDValid(null)).isFalse();
+		assertThat(userInstance.isBannerIDValid("")).isFalse();
 	}
 		
 	@Test
 	public void isFirstNameValidTest()
 	{
-		Assert.isTrue(User.isFirstNameValid("rob"));
-		assertThat(User.isFirstNameValid(null)).isFalse();
-		assertThat(User.isFirstNameValid("")).isFalse();
+		Assert.isTrue(userInstance.isFirstNameValid("rob"));
+		assertThat(userInstance.isFirstNameValid(null)).isFalse();
+		assertThat(userInstance.isFirstNameValid("")).isFalse();
 	}
 	
 	@Test
 	public void isLastNameValidTest()
 	{
-		Assert.isTrue(User.isLastNameValid("hawkey"));
-		assertThat(User.isLastNameValid(null)).isFalse();
-		assertThat(User.isLastNameValid("")).isFalse();
+		Assert.isTrue(userInstance.isLastNameValid("hawkey"));
+		assertThat(userInstance.isLastNameValid(null)).isFalse();
+		assertThat(userInstance.isLastNameValid("")).isFalse();
 	}
 	
 	@Test
 	public void isEmailValidTest()
 	{
-		Assert.isTrue(User.isEmailValid("rhawkey@dal.ca"));
-		assertThat(User.isEmailValid(null)).isFalse();
-		assertThat(User.isEmailValid("")).isFalse();
-		assertThat(User.isEmailValid("@dal.ca")).isFalse();
-		assertThat(User.isEmailValid("rhawkey@")).isFalse();
+		Assert.isTrue(userInstance.isEmailValid("rhawkey@dal.ca"));
+		assertThat(userInstance.isEmailValid(null)).isFalse();
+		assertThat(userInstance.isEmailValid("")).isFalse();
+		assertThat(userInstance.isEmailValid("@dal.ca")).isFalse();
+		assertThat(userInstance.isEmailValid("rhawkey@")).isFalse();
 	}	
 }

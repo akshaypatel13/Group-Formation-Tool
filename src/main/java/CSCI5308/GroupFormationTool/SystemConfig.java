@@ -16,19 +16,9 @@ import CSCI5308.GroupFormationTool.Survey.ISurveyManagePersistence;
 import CSCI5308.GroupFormationTool.Survey.SurveyAdminDB;
 import CSCI5308.GroupFormationTool.Survey.SurveyManageDB;
 
-/*
- * This is a singleton, we will learn about these when we learn design patterns.
- * 
- * The single responsibility of this singleton is to store concrete classes
- * selected by the system for use in the rest of the system. This will allow
- * a form of dependency injection in places where we cannot use normal
- * dependency injection (for example classes that override or extend existing
- * library classes in the framework).
- */
-public class SystemConfig
-{
+public class SystemConfig {
 	private static SystemConfig uniqueInstance = null;
-	
+
 	private IUserAbstractFactory userAbstractFactory;
 	private IPasswordEncryption passwordEncryption;
 	private IUserPersistence userDB;
@@ -42,11 +32,10 @@ public class SystemConfig
 	private ISurveyManagePersistence surveyManageDB;
 	private IResponsePersistence responseDB;
 
-	private SystemConfig()
-	{
-		userAbstractFactory= new UserAbstractFactory();
+	private SystemConfig() {
+		userAbstractFactory = new UserAbstractFactory();
 		passwordEncryption = new BCryptPasswordEncryption();
-		userDB =userAbstractFactory.createUserDBInstance();
+		userDB = userAbstractFactory.createUserDBInstance();
 		databaseConfiguration = new DefaultDatabaseConfiguration();
 		courseDB = new CourseDB();
 		courseUserRelationshipDB = new CourseUserRelationshipDB();
@@ -57,95 +46,77 @@ public class SystemConfig
 		responseDB = new ResponseDB();
 
 	}
-	
-	public static SystemConfig instance()
-	{
-		if (null == uniqueInstance)
-		{
+
+	public static SystemConfig instance() {
+		if (null == uniqueInstance) {
 			uniqueInstance = new SystemConfig();
 		}
 		return uniqueInstance;
 	}
-	
-	public IPasswordEncryption getPasswordEncryption()
-	{
+
+	public IPasswordEncryption getPasswordEncryption() {
 		return passwordEncryption;
 	}
-	
-	public void setPasswordEncryption(IPasswordEncryption passwordEncryption)
-	{
+
+	public void setPasswordEncryption(IPasswordEncryption passwordEncryption) {
 		this.passwordEncryption = passwordEncryption;
 	}
-	
-	public IUserPersistence getUserDB()
-	{
+
+	public IUserPersistence getUserDB() {
 		return userDB;
 	}
-	
-	public void setUserDB(IUserPersistence userDB)
-	{
+
+	public void setUserDB(IUserPersistence userDB) {
 		this.userDB = userDB;
 	}
-	
-	public IDatabaseConfiguration getDatabaseConfiguration()
-	{
+
+	public IDatabaseConfiguration getDatabaseConfiguration() {
 		return databaseConfiguration;
 	}
-	
-	public void setDatabaseConfiguration(IDatabaseConfiguration databaseConfiguration)
-	{
+
+	public void setDatabaseConfiguration(IDatabaseConfiguration databaseConfiguration) {
 		this.databaseConfiguration = databaseConfiguration;
 	}
-	
-	public void setCourseDB(ICoursePersistence courseDB)
-	{
+
+	public void setCourseDB(ICoursePersistence courseDB) {
 		this.courseDB = courseDB;
 	}
-	
-	public ICoursePersistence getCourseDB()
-	{
+
+	public ICoursePersistence getCourseDB() {
 		return courseDB;
 	}
-	
-	public void setCourseUserRelationshipDB(ICourseUserRelationshipPersistence courseUserRelationshipDB)
-	{
+
+	public void setCourseUserRelationshipDB(ICourseUserRelationshipPersistence courseUserRelationshipDB) {
 		this.courseUserRelationshipDB = courseUserRelationshipDB;
 	}
-	
-	public ICourseUserRelationshipPersistence getCourseUserRelationshipDB()
-	{
+
+	public ICourseUserRelationshipPersistence getCourseUserRelationshipDB() {
 		return courseUserRelationshipDB;
 	}
-	
-	public void setQuestionDB(IQuestionPersistence questionDB)
-	{
+
+	public void setQuestionDB(IQuestionPersistence questionDB) {
 		this.questionDB = questionDB;
 	}
-	
-	public IQuestionPersistence getQuestionDB()
-	{
+
+	public IQuestionPersistence getQuestionDB() {
 		return questionDB;
 	}
-	public void setPasswordValidatorDB(IPasswordValidatorPersistence validatorDB)
-	{
+
+	public void setPasswordValidatorDB(IPasswordValidatorPersistence validatorDB) {
 		this.validatorDB = validatorDB;
 	}
-	
-	public IPasswordValidatorPersistence getPasswordValidatorDB()
-	{
+
+	public IPasswordValidatorPersistence getPasswordValidatorDB() {
 		return validatorDB;
 	}
-	
-	public void setPasswordValidatorEnumerator(IPasswordValidatorEnumerator passwordValidatorEnumerator)
-	{
+
+	public void setPasswordValidatorEnumerator(IPasswordValidatorEnumerator passwordValidatorEnumerator) {
 		this.passwordValidatorEnumerator = passwordValidatorEnumerator;
 	}
-	
-	public IPasswordValidatorEnumerator getPasswordValidatorEnumerator()
-	{
+
+	public IPasswordValidatorEnumerator getPasswordValidatorEnumerator() {
 		return passwordValidatorEnumerator;
 	}
-
 
 	public ISurveyAdminPersistence getSurveyAdminDB() {
 		return surveyAdminDB;
