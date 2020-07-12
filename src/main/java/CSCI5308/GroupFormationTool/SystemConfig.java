@@ -20,6 +20,7 @@ public class SystemConfig {
 	private static SystemConfig uniqueInstance = null;
 
 	private IUserAbstractFactory userAbstractFactory;
+	private ISecurityAbstractFactory securityAbstractFactory;
 	private IPasswordEncryption passwordEncryption;
 	private IUserPersistence userDB;
 	private IDatabaseConfiguration databaseConfiguration;
@@ -31,10 +32,12 @@ public class SystemConfig {
 	private ISurveyAdminPersistence surveyAdminDB;
 	private ISurveyManagePersistence surveyManageDB;
 	private IResponsePersistence responseDB;
+	
 
 	private SystemConfig() {
 		userAbstractFactory = new UserAbstractFactory();
-		passwordEncryption = new BCryptPasswordEncryption();
+		securityAbstractFactory=new SecurityAbstractFactory();
+		passwordEncryption = securityAbstractFactory.createBCryptPasswordEncryption();
 		userDB = userAbstractFactory.createUserDBInstance();
 		databaseConfiguration = new DefaultDatabaseConfiguration();
 		courseDB = new CourseDB();
@@ -140,6 +143,14 @@ public class SystemConfig {
 
 	public void setUserAbstractFactory(IUserAbstractFactory userAbstarctFactory) {
 		this.userAbstractFactory = userAbstarctFactory;
+	}
+
+	public ISecurityAbstractFactory getSecurityAbstractFactory() {
+		return securityAbstractFactory;
+	}
+
+	public void setSecurityAbstractFactory(ISecurityAbstractFactory securityAbstractFactory) {
+		this.securityAbstractFactory = securityAbstractFactory;
 	}
 
 }

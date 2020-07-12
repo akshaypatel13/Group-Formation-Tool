@@ -13,7 +13,6 @@ import CSCI5308.GroupFormationTool.AccessControl.*;
 import CSCI5308.GroupFormationTool.PasswordValidation.IPasswordValidatorEnumerator;
 import CSCI5308.GroupFormationTool.PasswordValidation.IPasswordValidatorPersistence;
 import CSCI5308.GroupFormationTool.PasswordValidation.PasswordValidatorEnumerator;
-import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
 
 @Controller
 public class SignupController {

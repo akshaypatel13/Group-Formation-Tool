@@ -10,8 +10,6 @@ import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
 
 public class User implements IUser
 {
-	// This regex comes from here:
-	// https://howtodoinjava.com/regex/java-regex-validate-email-address/
 	private static final String EMAIL_REGEX = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
 	
 	private long id;
