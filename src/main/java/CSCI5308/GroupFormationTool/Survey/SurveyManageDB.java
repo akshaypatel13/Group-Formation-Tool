@@ -139,5 +139,4 @@ public class SurveyManageDB implements ISurveyManagePersistence {
             }
         }
     }
-
 }
