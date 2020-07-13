@@ -1,17 +1,18 @@
-package CSCI5308.GroupFormationTool.Courses;
+package CSCI5308.GroupFormationTool.Survey;
 
 import java.util.*;
 
 public class DefaultGroupCreator implements IGroupCreator {
     @Override
-    public Map<Integer, List<Integer>> createGroups(int courseID, int size) {
+    public Map<Integer, List<Long>> createGroups(Map<Long, Map<Long, String>> responses, long size) {
 
-        int noOfStudents = 60;
-        Map<Integer, List<Integer>> groups = new HashMap<>();
-        List<Integer> students = new LinkedList<>();
-        for(int i=0;i<noOfStudents;i++){
-            students.add(i);
-        }
+        Map <Long, String> oneResponse = responses.get(responses.keySet().toArray()[0]);
+        Set<Long> studentsSet = oneResponse.keySet();
+
+        int noOfStudents = studentsSet.size();
+        Map<Integer, List<Long>> groups = new HashMap<>();
+
+        List<Long> students = new LinkedList<>(studentsSet);
 
         int groupNumber = 0;
         int studentCount = 0;
@@ -20,7 +21,7 @@ public class DefaultGroupCreator implements IGroupCreator {
 
         while(groupNumber < noOfGroups){
 
-            List<Integer> studentsInGroup = new ArrayList<>();
+            List<Long> studentsInGroup = new ArrayList<>();
             for(int i=0;i<size;i++){
                 int index = (int) (Math.random() * students.size());
                 studentsInGroup.add(students.get(index));
@@ -30,10 +31,9 @@ public class DefaultGroupCreator implements IGroupCreator {
             groupNumber++;
 
         }
-        List<Integer> studentsInGroup = new ArrayList<>();
-        for (int student : students){
-            studentsInGroup.add(student);
-        }
+        List<Long> studentsInGroup = new ArrayList<>();
+        studentsInGroup.addAll(students);
+
         groups.put(groupNumber, studentsInGroup);
 
         return groups;
