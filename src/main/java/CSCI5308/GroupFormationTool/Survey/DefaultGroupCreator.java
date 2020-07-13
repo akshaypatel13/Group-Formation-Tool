@@ -15,11 +15,10 @@ public class DefaultGroupCreator implements IGroupCreator {
         List<Long> students = new LinkedList<>(studentsSet);
 
         int groupNumber = 0;
-        int studentCount = 0;
 
         int noOfGroups = (int) Math.ceil(noOfStudents / size);
 
-        while(groupNumber < noOfGroups){
+        while(groupNumber < noOfGroups - 1){
 
             List<Long> studentsInGroup = new ArrayList<>();
             for(int i=0;i<size;i++){
