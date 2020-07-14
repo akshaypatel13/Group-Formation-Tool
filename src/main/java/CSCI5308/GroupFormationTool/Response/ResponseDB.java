@@ -115,10 +115,10 @@ public class ResponseDB implements IResponsePersistence{
 		try
 		{
 
-			for(Question q : quesions) {
+			for(Question question : quesions) {
 				
 				proc = new CallStoredProcedure("spLoadQuestionsOptions(?)");
-				proc.setParameter(1, q.getId());
+				proc.setParameter(1, question.getId());
 				
 				ResultSet results = proc.executeWithResults();
 				ArrayList<String> options = new ArrayList<String>();
@@ -127,12 +127,12 @@ public class ResponseDB implements IResponsePersistence{
 				{
 					while (results.next())
 					{
-						String displayText = results.getString(6);
+						String displayText = results.getString(5);
 						options.add(displayText);
 
 					}
-					q.setOptions(options);
-					questionList.add(q);
+					question.setOptions(options);
+					questionList.add(question);
 				}
 			}
 			
@@ -221,7 +221,7 @@ public class ResponseDB implements IResponsePersistence{
                 if (results.next())
                 {
                 	String type = results.getString(1);
-                	if(type.equals("MCQMultiple")) {
+                	if(type.equals(QuestionType.MCQMULTIPLE.toString())) {
                 		result = true;
                 	}
                 }

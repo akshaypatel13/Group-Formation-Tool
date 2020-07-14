@@ -13,20 +13,11 @@ import CSCI5308.GroupFormationTool.PasswordValidation.PasswordValidatorDB;
 import CSCI5308.GroupFormationTool.Courses.*;
 import CSCI5308.GroupFormationTool.Survey.*;
 
-/*
- * This is a singleton, we will learn about these when we learn design patterns.
- * 
- * The single responsibility of this singleton is to store concrete classes
- * selected by the system for use in the rest of the system. This will allow
- * a form of dependency injection in places where we cannot use normal
- * dependency injection (for example classes that override or extend existing
- * library classes in the framework).
- */
-public class SystemConfig
-{
+public class SystemConfig {
 	private static SystemConfig uniqueInstance = null;
-	
+
 	private IUserAbstractFactory userAbstractFactory;
+	private ISecurityAbstractFactory securityAbstractFactory;
 	private IPasswordEncryption passwordEncryption;
 	private IUserPersistence userDB;
 	private IDatabaseConfiguration databaseConfiguration;
@@ -40,11 +31,13 @@ public class SystemConfig
 	private IResponsePersistence responseDB;
 	private IGroupCreator groupCreator;
 
-	private SystemConfig()
-	{
-		userAbstractFactory= new UserAbstractFactory();
-		passwordEncryption = new BCryptPasswordEncryption();
-		userDB =new UserDB();
+	
+
+	private SystemConfig() {
+		userAbstractFactory = new UserAbstractFactory();
+		securityAbstractFactory=new SecurityAbstractFactory();
+		passwordEncryption = securityAbstractFactory.createBCryptPasswordEncryption();
+		userDB = userAbstractFactory.createUserDBInstance();
 		databaseConfiguration = new DefaultDatabaseConfiguration();
 		courseDB = new CourseDB();
 		courseUserRelationshipDB = new CourseUserRelationshipDB();
@@ -56,60 +49,50 @@ public class SystemConfig
 		groupCreator = new DefaultGroupCreator();
 
 	}
-	
-	public static SystemConfig instance()
-	{
-		if (null == uniqueInstance)
-		{
+
+	public static SystemConfig instance() {
+		if (null == uniqueInstance) {
 			uniqueInstance = new SystemConfig();
 		}
 		return uniqueInstance;
 	}
-	
-	public IPasswordEncryption getPasswordEncryption()
-	{
+
+	public IPasswordEncryption getPasswordEncryption() {
 		return passwordEncryption;
 	}
-	
-	public void setPasswordEncryption(IPasswordEncryption passwordEncryption)
-	{
+
+	public void setPasswordEncryption(IPasswordEncryption passwordEncryption) {
 		this.passwordEncryption = passwordEncryption;
 	}
-	
-	public IUserPersistence getUserDB()
-	{
+
+	public IUserPersistence getUserDB() {
 		return userDB;
 	}
-	
-	public void setUserDB(IUserPersistence userDB)
-	{
+
+	public void setUserDB(IUserPersistence userDB) {
 		this.userDB = userDB;
 	}
-	
-	public IDatabaseConfiguration getDatabaseConfiguration()
-	{
+
+	public IDatabaseConfiguration getDatabaseConfiguration() {
 		return databaseConfiguration;
 	}
-	
-	public void setDatabaseConfiguration(IDatabaseConfiguration databaseConfiguration)
-	{
+
+	public void setDatabaseConfiguration(IDatabaseConfiguration databaseConfiguration) {
 		this.databaseConfiguration = databaseConfiguration;
 	}
-	
-	public void setCourseDB(ICoursePersistence courseDB)
-	{
+
+	public void setCourseDB(ICoursePersistence courseDB) {
 		this.courseDB = courseDB;
 	}
-	
-	public ICoursePersistence getCourseDB()
-	{
+
+	public ICoursePersistence getCourseDB() {
 		return courseDB;
 	}
-	
-	public void setCourseUserRelationshipDB(ICourseUserRelationshipPersistence courseUserRelationshipDB)
-	{
+
+	public void setCourseUserRelationshipDB(ICourseUserRelationshipPersistence courseUserRelationshipDB) {
 		this.courseUserRelationshipDB = courseUserRelationshipDB;
 	}
+
 
 	public IGroupCreator getGroupCreator(){
 		return groupCreator;
@@ -119,36 +102,30 @@ public class SystemConfig
 	{
 		return courseUserRelationshipDB;
 	}
-	
-	public void setQuestionDB(IQuestionPersistence questionDB)
-	{
+
+	public void setQuestionDB(IQuestionPersistence questionDB) {
 		this.questionDB = questionDB;
 	}
-	
-	public IQuestionPersistence getQuestionDB()
-	{
+
+	public IQuestionPersistence getQuestionDB() {
 		return questionDB;
 	}
-	public void setPasswordValidatorDB(IPasswordValidatorPersistence validatorDB)
-	{
+
+	public void setPasswordValidatorDB(IPasswordValidatorPersistence validatorDB) {
 		this.validatorDB = validatorDB;
 	}
-	
-	public IPasswordValidatorPersistence getPasswordValidatorDB()
-	{
+
+	public IPasswordValidatorPersistence getPasswordValidatorDB() {
 		return validatorDB;
 	}
-	
-	public void setPasswordValidatorEnumerator(IPasswordValidatorEnumerator passwordValidatorEnumerator)
-	{
+
+	public void setPasswordValidatorEnumerator(IPasswordValidatorEnumerator passwordValidatorEnumerator) {
 		this.passwordValidatorEnumerator = passwordValidatorEnumerator;
 	}
-	
-	public IPasswordValidatorEnumerator getPasswordValidatorEnumerator()
-	{
+
+	public IPasswordValidatorEnumerator getPasswordValidatorEnumerator() {
 		return passwordValidatorEnumerator;
 	}
-
 
 	public ISurveyAdminPersistence getSurveyAdminDB() {
 		return surveyAdminDB;
@@ -172,6 +149,14 @@ public class SystemConfig
 
 	public void setUserAbstractFactory(IUserAbstractFactory userAbstarctFactory) {
 		this.userAbstractFactory = userAbstarctFactory;
+	}
+
+	public ISecurityAbstractFactory getSecurityAbstractFactory() {
+		return securityAbstractFactory;
+	}
+
+	public void setSecurityAbstractFactory(ISecurityAbstractFactory securityAbstractFactory) {
+		this.securityAbstractFactory = securityAbstractFactory;
 	}
 
 }

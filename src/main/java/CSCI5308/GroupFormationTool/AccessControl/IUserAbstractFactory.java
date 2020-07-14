@@ -3,9 +3,9 @@ package CSCI5308.GroupFormationTool.AccessControl;
 import java.util.ArrayList;
 
 public interface IUserAbstractFactory {
-	public User createUserInstance();
+	public IUser createUserInstance();
 
-	public ArrayList<User> createUserArrayList();
+	public ArrayList<IUser> createUserArrayList();
 
 	public IUserPersistence createUserDBInstance();
 

@@ -13,13 +13,14 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 
 import CSCI5308.GroupFormationTool.SystemConfig;
+import CSCI5308.GroupFormationTool.AccessControl.IUser;
 import CSCI5308.GroupFormationTool.AccessControl.IUserAbstractFactory;
 import CSCI5308.GroupFormationTool.AccessControl.User;
 
 public class StudentCSVParser implements IStudentCSVParser
 {
     private MultipartFile uploadedFile;
-	private List<User> studentList = new ArrayList<>(); 
+	private List<IUser> studentList = new ArrayList<>(); 
 
 	public StudentCSVParser(MultipartFile file) 
 	{
@@ -28,7 +29,7 @@ public class StudentCSVParser implements IStudentCSVParser
 	}
 	
 	@Override
-	public List<User> parseCSVFile(List<String> failureResults) 
+	public List<IUser> parseCSVFile(List<String> failureResults) 
 	{
 		IUserAbstractFactory userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
 		
@@ -38,7 +39,7 @@ public class StudentCSVParser implements IStudentCSVParser
 			CSVReader csvReader = new CSVReaderBuilder(reader).build();
 			List<String[]> records = csvReader.readAll();
 			Iterator<String[]> iter = records.iterator();
-			User u;
+			IUser u;
 			while (iter.hasNext())
 			{
 				String[] record = iter.next();

@@ -2,11 +2,12 @@ package CSCI5308.GroupFormationTool.Courses;
 
 import java.util.List;
 
-import CSCI5308.GroupFormationTool.AccessControl.User;
+import CSCI5308.GroupFormationTool.AccessControl.IUser;
 
-public interface ICourseUserRelationship
-{
-	public boolean userHasRoleInCourse(User user, Role role, Course course);
-	public List<Role> loadAllRoluesForUserInCourse(User user, Course course);
-	public boolean enrollUserInCourse(User user, Course course, Role role);
+public interface ICourseUserRelationship {
+	public boolean userHasRoleInCourse(IUser user, Role role, Course course);
+
+	public List<Role> loadAllRoluesForUserInCourse(IUser user, Course course);
+
+	public boolean enrollUserInCourse(IUser user, Course course, Role role);
 }

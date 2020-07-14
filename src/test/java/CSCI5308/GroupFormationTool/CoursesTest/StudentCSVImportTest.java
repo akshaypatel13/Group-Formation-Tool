@@ -18,12 +18,10 @@ import CSCI5308.GroupFormationTool.SecurityTest.PasswordEncryptionMock;
 
 @SpringBootTest
 @SuppressWarnings("deprecation")
-class StudentCSVImportTest 
-{
+class StudentCSVImportTest {
 
 	@Test
-	public void enrollStudentFromRecord() 
-	{
+	public void enrollStudentFromRecord() {
 		User user = new User();
 		Course course = new Course();
 		IUserPersistence userDB = new UserDBMock();
@@ -33,8 +31,7 @@ class StudentCSVImportTest
 	}
 
 	@Test
-	public void getSuccessResults() 
-	{
+	public void getSuccessResults() {
 		List<String> successResults = new ArrayList<String>();
 		successResults.add("Created record");
 		assertThat(successResults).isNotNull();
@@ -43,8 +40,7 @@ class StudentCSVImportTest
 	}
 
 	@Test
-	public void getFailureResults() 
-	{
+	public void getFailureResults() {
 		List<String> failureResults = new ArrayList<String>();
 		failureResults.add("Created record");
 		assertThat(failureResults).isNotNull();

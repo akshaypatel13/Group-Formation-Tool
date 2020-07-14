@@ -1,10 +1,13 @@
 package CSCI5308.GroupFormationTool.Survey;
 
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
+import CSCI5308.GroupFormationTool.QuestionManager.Question;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class SurveyAdminDB implements ISurveyAdminPersistence
 {
@@ -135,6 +138,23 @@ public class SurveyAdminDB implements ISurveyAdminPersistence
                 proc.cleanup();
             }
         }
+    }
+    
+    @Override
+    public List<Question> sortQuestionByDateCreated(List<Question> quesionsWithoutOptions, List<Question> quesionsWithOptions)
+    {
+		List<Question> questions = new ArrayList<>();
+		
+		for(Question question : quesionsWithoutOptions) {
+			questions.add(question);
+		}
+		for(Question question : quesionsWithOptions) {
+			questions.add(question);
+		}
+		
+		Collections.sort(questions);
+		
+    	return questions;
     }
 
 }

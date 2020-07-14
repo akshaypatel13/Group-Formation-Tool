@@ -8,11 +8,13 @@ import CSCI5308.GroupFormationTool.SystemConfig;
 public class CurrentUser
 {
 	private static CurrentUser uniqueInstance = null;
-	
+	IUserPersistence userDB;	
+	IUserAbstractFactory userAbstractFactory;
 	
 	private CurrentUser()
 	{
-		
+	 userDB = SystemConfig.instance().getUserDB();
+	 userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
 	}
 	
 	public static CurrentUser instance()
@@ -24,15 +26,15 @@ public class CurrentUser
 		return uniqueInstance;
 	}
 	
-	public User getCurrentAuthenticatedUser()
+	public IUser getCurrentAuthenticatedUser()
 	{
-		IUserAbstractFactory userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
-		IUserPersistence userDB = SystemConfig.instance().getUserDB();
+	
+
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.isAuthenticated())
 		{
 			String bannerID = authentication.getPrincipal().toString();
-			User u = userAbstractFactory.createUserInstance();
+			IUser u = userAbstractFactory.createUserInstance();
 			userDB.loadUserByBannerID(bannerID, u);
 			if (u.isValidUser())
 			{

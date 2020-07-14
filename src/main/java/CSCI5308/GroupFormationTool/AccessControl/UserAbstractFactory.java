@@ -5,14 +5,13 @@ import java.util.ArrayList;
 public class UserAbstractFactory implements IUserAbstractFactory {
 
 	@Override
-	public User createUserInstance()
-	{
+	public IUser createUserInstance() {
 		return new User();
 	}
 
 	@Override
-	public ArrayList<User> createUserArrayList() {
-		return new ArrayList<User>();
+	public ArrayList<IUser> createUserArrayList() {
+		return new ArrayList<IUser>();
 	}
 
 	@Override
