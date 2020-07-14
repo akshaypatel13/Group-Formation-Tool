@@ -3,6 +3,7 @@ package CSCI5308.GroupFormationTool.Courses;
 import java.util.ArrayList;
 import java.util.List;
 
+import CSCI5308.GroupFormationTool.Security.SecurityAbstractFactory;
 import CSCI5308.GroupFormationTool.SystemConfig;
 import CSCI5308.GroupFormationTool.AccessControl.*;
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
@@ -25,7 +26,7 @@ public class StudentCSVImport implements IStudentCSVImport
 		successResults = new ArrayList<String>();
 		failureResults = new ArrayList<String>();
 		userDB = UserAbstractFactory.instance().createUserDBInstance();
-		passwordEncryption = SystemConfig.instance().getPasswordEncryption();
+		passwordEncryption = SecurityAbstractFactory.instance().createBCryptPasswordEncryption();
 		this.parser = parser;
 		enrollStudentFromRecord();
 	}
@@ -43,6 +44,7 @@ public class StudentCSVImport implements IStudentCSVImport
 			
 			IUser user = UserAbstractFactory.instance().createUserInstance();
 			userDB.loadUserByBannerID(bannerID, user);
+			//////////////////////////////////////////////////////////////////
 			///////////////////////////////////////////////////////////////////
 			if (!user.isValidUser()) //////////////////////////////////////////
 			{

@@ -28,14 +28,11 @@ public class SignupController {
 	private IUser userInstance;
 
 	public SignupController() {
-		/*
-		IPasswordValidatorPersistence validatorDB = SystemConfig.instance().getPasswordValidatorDB();
-		passwordValidatorEnumerator = new PasswordValidatorEnumerator(validatorDB);
-		SystemConfig.instance().setPasswordValidatorEnumerator(passwordValidatorEnumerator);*/
-		IPasswordValidatorPersistence validatorDB = PasswordValidationAbstractFactory.instance().createPasswordValidatorDBInstance();
-		passwordValidatorEnumerator = PasswordValidationAbstractFactory.instance().createPasswordEnumerator(validatorDB);
-		PasswordValidationAbstractFactory.instance().setPasswordEnumeratorInstance(passwordValidatorEnumerator);
-		userInstance =UserAbstractFactory.instance().createUserInstance();
+
+//		IPasswordValidatorPersistence validatorDB = SystemConfig.instance().getPasswordValidatorDB();
+//		passwordValidatorEnumerator = new PasswordValidatorEnumerator(validatorDB);
+//		SystemConfig.instance().setPasswordValidatorEnumerator(passwordValidatorEnumerator);
+
 	}
 
 	@GetMapping("/signup")
@@ -49,6 +46,10 @@ public class SignupController {
 									  @RequestParam(name = PASSWORD_CONFIRMATION) String passwordConfirm,
 									  @RequestParam(name = FIRST_NAME) String firstName, @RequestParam(name = LAST_NAME) String lastName,
 									  @RequestParam(name = EMAIL) String email) {
+		IPasswordValidatorPersistence validatorDB = PasswordValidationAbstractFactory.instance().createPasswordValidatorDBInstance();
+		passwordValidatorEnumerator = PasswordValidationAbstractFactory.instance().createPasswordEnumerator(validatorDB);
+		PasswordValidationAbstractFactory.instance().setPasswordEnumeratorInstance(passwordValidatorEnumerator);
+		userInstance =UserAbstractFactory.instance().createUserInstance();
 		boolean success = false;
 		List<String> errorMessages = new ArrayList<String>();
 		if (userInstance.isBannerIDValid(bannerID) && userInstance.isEmailValid(email) && userInstance.isFirstNameValid(firstName)
@@ -60,8 +61,8 @@ public class SignupController {
 			u.setLastName(lastName);
 			u.setEmail(email);
 			IUserPersistence userDB = UserAbstractFactory.instance().createUserDBInstance();
-			IPasswordEncryption passwordEncryption = SystemConfig.instance().getPasswordEncryption();
-			passwordValidatorEnumerator = SystemConfig.instance().getPasswordValidatorEnumerator();
+			IPasswordEncryption passwordEncryption = SecurityAbstractFactory.instance().createBCryptPasswordEncryption();
+			passwordValidatorEnumerator = PasswordValidationAbstractFactory.instance().getPasswordValidatorEnumerator();
 			success = u.createUser(userDB, passwordValidatorEnumerator, passwordEncryption, null, errorMessages);
 		}
 		ModelAndView m = new ModelAndView("login");

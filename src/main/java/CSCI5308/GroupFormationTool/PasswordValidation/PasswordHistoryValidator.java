@@ -2,6 +2,7 @@ package CSCI5308.GroupFormationTool.PasswordValidation;
 
 import java.util.List;
 
+import CSCI5308.GroupFormationTool.Security.SecurityAbstractFactory;
 import CSCI5308.GroupFormationTool.SystemConfig;
 import CSCI5308.GroupFormationTool.AccessControl.User;
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
@@ -17,7 +18,7 @@ public class PasswordHistoryValidator extends PasswordValidator
 		this.constraint = constraint;
 		this.user = user;
 		validatorDB = PasswordValidationAbstractFactory.instance().createPasswordValidatorDBInstance();
-		passwordEncryption = SystemConfig.instance().getPasswordEncryption();
+		passwordEncryption = SecurityAbstractFactory.instance().createBCryptPasswordEncryption();
 
 	}
 	

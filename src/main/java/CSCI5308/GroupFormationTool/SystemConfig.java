@@ -34,8 +34,7 @@ public class SystemConfig {
 	
 
 	private SystemConfig() {
-		securityAbstractFactory=new SecurityAbstractFactory();
-		passwordEncryption = securityAbstractFactory.createBCryptPasswordEncryption();
+//		passwordEncryption = securityAbstractFactory.createBCryptPasswordEncryption();
 		//userDB = userAbstractFactory.createUserDBInstance();
 		databaseConfiguration = new DefaultDatabaseConfiguration();
 		courseDB = new CourseDB();

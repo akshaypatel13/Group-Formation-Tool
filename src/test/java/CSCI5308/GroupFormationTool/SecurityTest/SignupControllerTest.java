@@ -28,26 +28,5 @@ public class SignupControllerTest {
         .andExpect(status().isOk());
     }
 
-    @Test
-    public void processSignupTest() throws Exception{
-        this.mockMvc.perform(post("/signup")
-                .param("username","B00854211")
-                .param("password","Abcd@123")
-                .param("passwordConfirmation","Abcd@123")
-                .param("firstName","Akshay")
-                .param("lastName","Patel")
-                .param("email","ak811226@dal.ca")
-                .with(csrf())
-                .with(
-                        user("B00854211")
-                                .password("Abcd@123")
-                                .roles(Role.INSTRUCTOR.toString())
-                ))
-                .andDo(MockMvcResultHandlers.print())
-                .andDo(print())
-                .andExpect(status().isOk());
-    }
-
-
 
 }

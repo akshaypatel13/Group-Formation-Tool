@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import CSCI5308.GroupFormationTool.Survey.SurveyAbstractFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,7 @@ import CSCI5308.GroupFormationTool.Survey.ISurveyAdminPersistence;
 
 @Controller
 public class ResponseController {
-
+/*
 	private static final String ID = "id";
 	private static final String BannerID = "bannerID";
 	private IResponsePersistence responseDB;
@@ -26,7 +27,7 @@ public class ResponseController {
 	public ResponseController() 
 	{
 		responseDB = SystemConfig.instance().getResponseDB();
-        surveyAdminDB = SystemConfig.instance().getSurveyAdminDB();
+        surveyAdminDB = SurveyAbstractFactory.instance().createSurveyAdminDBInstance();
 	}
 	
 	@RequestMapping("/response/takingsurvey")
@@ -79,5 +80,5 @@ public class ResponseController {
 		responseDB.saveResponse(answer, bannerId);
 		
 		return "redirect:/course/course?id="+courseId;
-	}
+	}*/
 }

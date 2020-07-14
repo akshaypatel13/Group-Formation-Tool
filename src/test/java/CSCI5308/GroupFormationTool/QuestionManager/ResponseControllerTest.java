@@ -39,34 +39,4 @@ public class ResponseControllerTest {
                 .build();
     }
 
-    @Test
-    public void loadQuestionsTest() throws Exception{
-        this.mockMvc.perform(get("/response/response")
-                .param("id","121")
-                .with(csrf())
-                .with(
-                        user("B-009911")
-                                .password("Abcd@11")
-                                .roles(Role.INSTRUCTOR.toString())
-                ))
-                .andDo(print())
-                .andExpect(model().attributeExists("courseId","questionList","questionListWithOptions"));
-    }
-
-    @Test
-    public void submitSurveyTest() throws Exception{
-        this.mockMvc.perform(get("/response/response")
-                .param("id","121")
-                .param("bannerID","B00854211")
-                .with(csrf())
-                .with(
-                        user("B00854211")
-                                .password("Abcd@11")
-                                .roles(Role.INSTRUCTOR.toString())
-                ))
-                .andDo(print())
-                .andExpect(status().isOk());
-    }
-
-
 }

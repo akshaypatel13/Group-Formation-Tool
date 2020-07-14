@@ -1,7 +1,9 @@
 package CSCI5308.GroupFormationTool.Security;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import CSCI5308.GroupFormationTool.Courses.Role;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -12,51 +14,54 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 
 import CSCI5308.GroupFormationTool.SystemConfig;
 import CSCI5308.GroupFormationTool.AccessControl.*;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 public class CustomAuthenticationManager implements AuthenticationManager {
 	private static final String ADMIN_BANNER_ID = "B-000000";
-	ISecurityAbstractFactory securityAbstractFactory;
-
+	private static final String BADCREDENTIALEXCEPTION = "1001";
 	public CustomAuthenticationManager() {
-		securityAbstractFactory = SystemConfig.instance().getSecurityAbstractFactory();
 	}
 
 	private Authentication checkAdmin(String password, User u, Authentication authentication)
 			throws AuthenticationException {
 
-		if (password.equals(u.getPassword())) {
-
-			List<GrantedAuthority> rights = securityAbstractFactory.createArrayList();
-			rights.add(securityAbstractFactory.createSimpleGrantedAuthority("ADMIN"));
-
+		if (password.equals(u.getPassword()))
+		{
+			List<GrantedAuthority> rights = new ArrayList<GrantedAuthority>();
+			rights.add(new SimpleGrantedAuthority(Role.ADMIN.toString().toUpperCase()));
 			UsernamePasswordAuthenticationToken token;
-			token = securityAbstractFactory.createUsernamePasswordAuthenticationToken(authentication, rights);
+			token = new UsernamePasswordAuthenticationToken(authentication.getPrincipal(),
+					authentication.getCredentials(),
+					rights);
 			return token;
-		} else {
-			throw new BadCredentialsException("1000");
+		}
+		else
+		{
+			throw new BadCredentialsException(BADCREDENTIALEXCEPTION);
 		}
 	}
-
 	private Authentication checkNormal(String password, User u, Authentication authentication)
 			throws AuthenticationException {
-		IPasswordEncryption passwordEncryption = SystemConfig.instance().getPasswordEncryption();
+		IPasswordEncryption passwordEncryption = SecurityAbstractFactory.instance().createBCryptPasswordEncryption();
 		if (passwordEncryption.matches(password, u.getPassword())) {
 
-			List<GrantedAuthority> rights = securityAbstractFactory.createArrayList();
-			rights.add(securityAbstractFactory.createSimpleGrantedAuthority("USER"));
+			List<GrantedAuthority> rights = new ArrayList<GrantedAuthority>();
+			rights.add(new SimpleGrantedAuthority("USER"));
 
 			UsernamePasswordAuthenticationToken token;
-			token = securityAbstractFactory.createUsernamePasswordAuthenticationToken(authentication, rights);
+			token = new UsernamePasswordAuthenticationToken(authentication.getPrincipal(),
+					authentication.getCredentials(),
+					rights);
 			return token;
 		} else {
-			throw new BadCredentialsException("1000");
+			throw new BadCredentialsException(BADCREDENTIALEXCEPTION);
 		}
 	}
 
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String bannerID = authentication.getPrincipal().toString();
 		String password = authentication.getCredentials().toString();
-		IUserPersistence userDB = SystemConfig.instance().getUserDB();
+		IUserPersistence userDB = UserAbstractFactory.instance().createUserDBInstance();
 		User u;
 		try {
 			u = new User(bannerID, userDB);
@@ -71,7 +76,7 @@ public class CustomAuthenticationManager implements AuthenticationManager {
 			}
 		} else {
 
-			throw new BadCredentialsException("1001");
+			throw new BadCredentialsException(BADCREDENTIALEXCEPTION);
 		}
 	}
 }

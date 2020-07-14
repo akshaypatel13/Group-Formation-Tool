@@ -18,7 +18,7 @@ public class QuestionManagerAbstractFactory{
     }
 
 
-    public QuestionManagerAbstractFactory(){
+    private QuestionManagerAbstractFactory(){
         questionDB = new QuestionDB();
     }
 

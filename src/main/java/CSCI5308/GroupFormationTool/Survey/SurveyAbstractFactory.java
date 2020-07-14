@@ -7,6 +7,7 @@ public class SurveyAbstractFactory implements ISurveyAbstractFactory {
     private static SurveyAbstractFactory uniqueInstance = null;
     private SurveyAdminDB surveyAdminDB;
     private SurveyManageDB surveyManageDB;
+    private IGroupCreator groupCreator;
 
     public static SurveyAbstractFactory instance() {
         if (null == uniqueInstance) {
@@ -15,9 +16,10 @@ public class SurveyAbstractFactory implements ISurveyAbstractFactory {
         return uniqueInstance;
     }
 
-    public SurveyAbstractFactory(){
+    private SurveyAbstractFactory(){
         surveyAdminDB = new SurveyAdminDB();
         surveyManageDB = new SurveyManageDB();
+        groupCreator = new DefaultGroupCreator();
     }
 
     @Override
@@ -29,4 +31,6 @@ public class SurveyAbstractFactory implements ISurveyAbstractFactory {
     public SurveyManageDB createSurveyManageDBInstance() {
         return surveyManageDB;
     }
+
+    public IGroupCreator createGroupCreatorInstance(){ return groupCreator; }
 }

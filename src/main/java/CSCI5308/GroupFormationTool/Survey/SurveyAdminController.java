@@ -28,7 +28,7 @@ public class SurveyAdminController
         questionDB = QuestionManagerAbstractFactory.instance().createQuestionDBInstance();
         surveyAdminDB = SurveyAbstractFactory.instance().createSurveyAdminDBInstance();
         surveyManageDB = SurveyAbstractFactory.instance().createSurveyManageDBInstance();
-        groupCreator = SystemConfig.instance().getGroupCreator();
+        groupCreator = SurveyAbstractFactory.instance().createGroupCreatorInstance();
 
     }
 
