@@ -11,4 +11,5 @@ public interface IResponsePersistence {
 	public List<Question> loadQuestionsOptions(List<Question> quesions);
 	public void saveResponse(HashMap<String, String> answer, String bannerId);
 	public boolean checkIsMCQMultiple(String questionId);
+
 }

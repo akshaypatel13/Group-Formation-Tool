@@ -11,10 +11,7 @@ import CSCI5308.GroupFormationTool.PasswordValidation.IPasswordValidatorEnumerat
 import CSCI5308.GroupFormationTool.PasswordValidation.IPasswordValidatorPersistence;
 import CSCI5308.GroupFormationTool.PasswordValidation.PasswordValidatorDB;
 import CSCI5308.GroupFormationTool.Courses.*;
-import CSCI5308.GroupFormationTool.Survey.ISurveyAdminPersistence;
-import CSCI5308.GroupFormationTool.Survey.ISurveyManagePersistence;
-import CSCI5308.GroupFormationTool.Survey.SurveyAdminDB;
-import CSCI5308.GroupFormationTool.Survey.SurveyManageDB;
+import CSCI5308.GroupFormationTool.Survey.*;
 
 public class SystemConfig {
 	private static SystemConfig uniqueInstance = null;
@@ -32,6 +29,8 @@ public class SystemConfig {
 	private ISurveyAdminPersistence surveyAdminDB;
 	private ISurveyManagePersistence surveyManageDB;
 	private IResponsePersistence responseDB;
+	private IGroupCreator groupCreator;
+
 	
 
 	private SystemConfig() {
@@ -47,6 +46,7 @@ public class SystemConfig {
 		surveyAdminDB = new SurveyAdminDB();
 		surveyManageDB = new SurveyManageDB();
 		responseDB = new ResponseDB();
+		groupCreator = new DefaultGroupCreator();
 
 	}
 
@@ -93,7 +93,13 @@ public class SystemConfig {
 		this.courseUserRelationshipDB = courseUserRelationshipDB;
 	}
 
-	public ICourseUserRelationshipPersistence getCourseUserRelationshipDB() {
+
+	public IGroupCreator getGroupCreator(){
+		return groupCreator;
+	}
+	
+	public ICourseUserRelationshipPersistence getCourseUserRelationshipDB()
+	{
 		return courseUserRelationshipDB;
 	}
 
