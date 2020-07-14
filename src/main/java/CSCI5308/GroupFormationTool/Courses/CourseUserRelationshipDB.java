@@ -5,18 +5,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import CSCI5308.GroupFormationTool.AccessControl.UserAbstractFactory;
 import CSCI5308.GroupFormationTool.SystemConfig;
 import CSCI5308.GroupFormationTool.AccessControl.IUser;
 import CSCI5308.GroupFormationTool.AccessControl.IUserAbstractFactory;
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class CourseUserRelationshipDB implements ICourseUserRelationshipPersistence
 {
+	private static final Logger LOG = LogManager.getLogger();
+
 	@Override
 	public List<IUser> findAllUsersWithoutCourseRole(Role role, long courseID)
 	{
-		IUserAbstractFactory userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
-		List<IUser> users =userAbstractFactory.createUserArrayList();
+		List<IUser> users =new ArrayList<>();
 		CallStoredProcedure proc = null;
 		try
 		{
@@ -32,18 +36,20 @@ public class CourseUserRelationshipDB implements ICourseUserRelationshipPersiste
 					String bannerID = results.getString(2);
 					String firstName = results.getString(3);
 					String lastName = results.getString(4);
-					IUser u =userAbstractFactory.createUserInstance();
+					IUser u = UserAbstractFactory.instance().createUserInstance();
 					u.setID(userID);
 					u.setBannerID(bannerID);
 					u.setFirstName(firstName);
 					u.setLastName(lastName);
 					users.add(u);
 				}
+				results.last();
+				LOG.info("Operation = FindUsersWithoutCourseRole, Status = Success, RowCount="+results.getRow());
 			}
 		}
 		catch (SQLException e)
 		{
-			// Logging needed.
+			LOG.error("Status = Failed, Error Message="+e.getMessage());
 		}
 		finally
 		{
@@ -58,8 +64,7 @@ public class CourseUserRelationshipDB implements ICourseUserRelationshipPersiste
 	@Override
 	public List<IUser> findAllUsersWithCourseRole(Role role, long courseID)
 	{
-		IUserAbstractFactory userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
-		List<IUser> users =userAbstractFactory.createUserArrayList();
+		List<IUser> users =new ArrayList<>();
 		CallStoredProcedure proc = null;
 		try
 		{
@@ -72,15 +77,17 @@ public class CourseUserRelationshipDB implements ICourseUserRelationshipPersiste
 				while (results.next())
 				{
 					long userID = results.getLong(1);
-					IUser u = userAbstractFactory.createUserInstance();
+					IUser u = UserAbstractFactory.instance().createUserInstance();
 					u.setID(userID);
 					users.add(u);
 				}
+				results.last();
+				LOG.info("Operation = FindUsersWithCourseRole, Status = Success, RowCount="+results.getRow());
 			}
 		}
 		catch (SQLException e)
 		{
-			// Logging needed.
+			LOG.error("Status = Failed, Error Message="+e.getMessage());
 		}
 		finally
 		{
@@ -93,7 +100,7 @@ public class CourseUserRelationshipDB implements ICourseUserRelationshipPersiste
 	}
 	
 	@Override
-	public boolean enrollUser(Course course, IUser user, Role role)
+	public boolean enrollUser(ICourse course, IUser user, Role role)
 	{
 		CallStoredProcedure proc = null;
 		try
@@ -106,7 +113,7 @@ public class CourseUserRelationshipDB implements ICourseUserRelationshipPersiste
 		}
 		catch (SQLException e)
 		{
-			// Logging needed
+			LOG.error("Status = Failed, Error Message="+e.getMessage());
 			return false;
 		}
 		finally
@@ -120,7 +127,7 @@ public class CourseUserRelationshipDB implements ICourseUserRelationshipPersiste
 	}
 
 	@Override
-	public List<Role> loadUserRolesForCourse(Course course, IUser user)
+	public List<Role> loadUserRolesForCourse(ICourse course, IUser user)
 	{
 		List<Role> roles = new ArrayList<Role>();
 		CallStoredProcedure proc = null;
@@ -137,11 +144,13 @@ public class CourseUserRelationshipDB implements ICourseUserRelationshipPersiste
 					Role role = Role.valueOf(results.getString(1).toUpperCase());
 					roles.add(role);
 				}
+				results.last();
+				LOG.info("Operation = LoadUserRoleForCourse, Status = Success, RowCount="+results.getRow());
 			}
 		}
 		catch (SQLException e)
 		{
-			// Logging needed.
+			LOG.error("Status = Failed, Error Message="+e.getMessage());
 		}
 		finally
 		{

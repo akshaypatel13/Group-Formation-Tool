@@ -1,0 +1,72 @@
+2020-07-14 14:07:26,199 INFO o.s.b.StartupInfoLogger [restartedMain] Starting GroupFormationToolApplication on DESKTOP-FS0KFH1 with PID 17756 (started by DELL in D:\Term 2\Adv. Software Dev\M3\group21)
+2020-07-14 14:07:26,215 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-07-14 14:07:26,361 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-07-14 14:07:26,363 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-07-14 14:07:28,053 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2020-07-14 14:07:28,084 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-14 14:07:28,084 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2020-07-14 14:07:28,084 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.30]
+2020-07-14 14:07:28,225 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2020-07-14 14:07:28,225 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1861 ms
+2020-07-14 14:07:28,373 WARN o.a.j.l.DirectJDKLog [restartedMain] Unable to delete [C:\Users\DELL\AppData\Local\Temp\A512508F2105223F3B90F2C4A2A8991B6AAFE5A5\servlet-sessions\SESSIONS.ser] after reading the persisted sessions. The continued presence of this file may cause future attempts to persist sessions to fail.
+2020-07-14 14:07:28,374 ERROR o.a.j.l.DirectJDKLog [restartedMain] Exception loading sessions from persistent storage
+java.io.EOFException: null
+	at java.io.ObjectInputStream$PeekInputStream.readFully(ObjectInputStream.java:2681) ~[?:1.8.0_201]
+	at java.io.ObjectInputStream$BlockDataInputStream.readShort(ObjectInputStream.java:3156) ~[?:1.8.0_201]
+	at java.io.ObjectInputStream.readStreamHeader(ObjectInputStream.java:862) ~[?:1.8.0_201]
+	at java.io.ObjectInputStream.<init>(ObjectInputStream.java:358) ~[?:1.8.0_201]
+	at org.apache.catalina.util.CustomObjectInputStream.<init>(CustomObjectInputStream.java:95) ~[tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.session.StandardManager.doLoad(StandardManager.java:211) ~[tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.session.StandardManager.load(StandardManager.java:162) ~[tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.session.StandardManager.startInternal(StandardManager.java:354) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5163) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1384) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1374) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [?:1.8.0_201]
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:134) [?:1.8.0_201]
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:909) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:841) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1384) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1374) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [?:1.8.0_201]
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:134) [?:1.8.0_201]
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:909) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:262) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:421) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:930) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:459) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:107) [spring-boot-2.2.4.RELEASE.jar:2.2.4.RELEASE]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:88) [spring-boot-2.2.4.RELEASE.jar:2.2.4.RELEASE]
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:438) [spring-boot-2.2.4.RELEASE.jar:2.2.4.RELEASE]
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:191) [spring-boot-2.2.4.RELEASE.jar:2.2.4.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:180) [spring-boot-2.2.4.RELEASE.jar:2.2.4.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:153) [spring-boot-2.2.4.RELEASE.jar:2.2.4.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:544) [spring-context-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141) [spring-boot-2.2.4.RELEASE.jar:2.2.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:747) [spring-boot-2.2.4.RELEASE.jar:2.2.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) [spring-boot-2.2.4.RELEASE.jar:2.2.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315) [spring-boot-2.2.4.RELEASE.jar:2.2.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) [spring-boot-2.2.4.RELEASE.jar:2.2.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) [spring-boot-2.2.4.RELEASE.jar:2.2.4.RELEASE]
+	at CSCI5308.GroupFormationTool.GroupFormationToolApplication.main(GroupFormationToolApplication.java:14) [main/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_201]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_201]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_201]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_201]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) [spring-boot-devtools-2.2.4.RELEASE.jar:2.2.4.RELEASE]
+2020-07-14 14:07:29,692 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Creating filter chain: Ant [pattern='/resources/**'], []
+2020-07-14 14:07:29,728 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@10c067fa, org.springframework.security.web.context.SecurityContextPersistenceFilter@714d13f8, org.springframework.security.web.header.HeaderWriterFilter@5b4c7cb6, org.springframework.security.web.csrf.CsrfFilter@17f93055, org.springframework.security.web.authentication.logout.LogoutFilter@1c8f210f, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@74b18875, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5c83dda5, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@129a1f35, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@394e1a56, org.springframework.security.web.session.SessionManagementFilter@6f767e93, org.springframework.security.web.access.ExceptionTranslationFilter@19bb50b5, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5d676094]
+2020-07-14 14:07:29,870 INFO o.s.s.c.ExecutorConfigurationSupport [restartedMain] Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-14 14:07:30,020 INFO o.s.b.a.w.s.WelcomePageHandlerMapping [restartedMain] Adding welcome page template: index
+2020-07-14 14:07:30,256 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2020-07-14 14:07:30,313 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2020-07-14 14:07:30,442 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-14 14:07:30,450 INFO o.s.b.StartupInfoLogger [restartedMain] Started GroupFormationToolApplication in 4.642 seconds (JVM running for 7.164)

@@ -1,7 +1,9 @@
 package CSCI5308.GroupFormationTool.Survey;
 
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
+import CSCI5308.GroupFormationTool.QuestionManager.IQuestion;
 import CSCI5308.GroupFormationTool.QuestionManager.Question;
+import CSCI5308.GroupFormationTool.QuestionManager.QuestionManagerAbstractFactory;
 import CSCI5308.GroupFormationTool.QuestionManager.QuestionType;
 
 import java.sql.ResultSet;
@@ -36,14 +38,14 @@ public class SurveyManageDB implements ISurveyManagePersistence {
     }
 
     @Override
-    public List<Question> findSurveyQuestions(long courseID) {
-        List<Question> questionList = new ArrayList<Question>();
+    public List<IQuestion> findSurveyQuestions(long courseID) {
+        List<IQuestion> questionList = new ArrayList<>();
         CallStoredProcedure proc = null;
         try {
             proc = new CallStoredProcedure("spFindSurveyQuestions(?)");
             proc.setParameter(1, courseID);
             ResultSet results = proc.executeWithResults();
-            Question question;
+            IQuestion question;
             if (null != results) {
                 while (results.next()) {
                     long id = results.getLong(1);
@@ -52,7 +54,7 @@ public class SurveyManageDB implements ISurveyManagePersistence {
                     QuestionType type = QuestionType.valueOf(results.getString(4).toUpperCase());
                     Timestamp timestamp = results.getTimestamp(5);
 
-                    question = new Question();
+                    question = QuestionManagerAbstractFactory.instance().createQuestionInstance();
                     question.setId(id);
                     question.setTitle(title);
                     question.setText(text);
@@ -72,14 +74,14 @@ public class SurveyManageDB implements ISurveyManagePersistence {
     }
 
     @Override
-    public List<Question> findQuestionsNotInSurvey(long userID) {
-        List<Question> questionList = new ArrayList<Question>();
+    public List<IQuestion> findQuestionsNotInSurvey(long userID) {
+        List<IQuestion> questionList = new ArrayList<>();
         CallStoredProcedure proc = null;
         try {
             proc = new CallStoredProcedure("spFindQuestionsNotInSurvey(?)");
             proc.setParameter(1, userID);
             ResultSet results = proc.executeWithResults();
-            Question question;
+            IQuestion question;
             if (null != results) {
                 while (results.next()) {
                     long id = results.getLong(1);
@@ -88,7 +90,7 @@ public class SurveyManageDB implements ISurveyManagePersistence {
                     QuestionType type = QuestionType.valueOf(results.getString(4).toUpperCase());
                     Timestamp timestamp = results.getTimestamp(5);
 
-                    question = new Question();
+                    question = QuestionManagerAbstractFactory.instance().createQuestionInstance();
                     question.setId(id);
                     question.setTitle(title);
                     question.setText(text);

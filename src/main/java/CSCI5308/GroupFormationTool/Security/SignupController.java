@@ -3,6 +3,7 @@ package CSCI5308.GroupFormationTool.Security;
 import java.util.ArrayList;
 import java.util.List;
 
+import CSCI5308.GroupFormationTool.PasswordValidation.PasswordValidationAbstractFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,10 +28,10 @@ public class SignupController {
 	private IUser userInstance;
 
 	public SignupController() {
-		IPasswordValidatorPersistence validatorDB = SystemConfig.instance().getPasswordValidatorDB();
-		passwordValidatorEnumerator = new PasswordValidatorEnumerator(validatorDB);
-		SystemConfig.instance().setPasswordValidatorEnumerator(passwordValidatorEnumerator);
-		userInstance =SystemConfig.instance().getUserAbstractFactory().createUserInstance();
+		IPasswordValidatorPersistence validatorDB = PasswordValidationAbstractFactory.instance().createPasswordValidatorDBInstance();
+		passwordValidatorEnumerator = PasswordValidationAbstractFactory.instance().createPasswordValidatorInstance(validatorDB);
+		PasswordValidationAbstractFactory.instance().setPasswordEnumeratorInstance(passwordValidatorEnumerator);
+		userInstance = UserAbstractFactory.instance().createUserInstance();
 	}
 
 	@GetMapping("/signup")
@@ -44,12 +45,11 @@ public class SignupController {
 			@RequestParam(name = PASSWORD_CONFIRMATION) String passwordConfirm,
 			@RequestParam(name = FIRST_NAME) String firstName, @RequestParam(name = LAST_NAME) String lastName,
 			@RequestParam(name = EMAIL) String email) {
-		IUserAbstractFactory userAbstractFactory = SystemConfig.instance().getUserAbstractFactory();
 		boolean success = false;
 		List<String> errorMessages = new ArrayList<String>();
 		if (userInstance.isBannerIDValid(bannerID) && userInstance.isEmailValid(email) && userInstance.isFirstNameValid(firstName)
 				&& userInstance.isLastNameValid(lastName) && password.equals(passwordConfirm)) {
-			IUser u = userAbstractFactory.createUserInstance();
+			IUser u = UserAbstractFactory.instance().createUserInstance();
 			u.setBannerID(bannerID);
 			u.setPassword(password);
 			u.setFirstName(firstName);

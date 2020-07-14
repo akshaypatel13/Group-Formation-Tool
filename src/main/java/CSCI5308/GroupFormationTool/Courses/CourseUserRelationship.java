@@ -7,9 +7,16 @@ import CSCI5308.GroupFormationTool.SystemConfig;
 
 public class CourseUserRelationship implements ICourseUserRelationship
 {
+
+	private ICourseUserRelationshipPersistence userCourseRelationshipDB;
+
+	public CourseUserRelationship(){
+	}
+
 	@Override
-	public boolean userHasRoleInCourse(IUser user, Role role, Course course)
+	public boolean userHasRoleInCourse(IUser user, Role role, ICourse course)
 	{
+		userCourseRelationshipDB = CourseAbstractFactory.instance().courseUserRelationshipDBInstance();
 		if (null == user || !user.isValidUser())
 		{
 			return false;
@@ -22,7 +29,6 @@ public class CourseUserRelationship implements ICourseUserRelationship
 		{
 			return false;
 		}
-		ICourseUserRelationshipPersistence userCourseRelationshipDB = SystemConfig.instance().getCourseUserRelationshipDB();
 		List<Role> roles = userCourseRelationshipDB.loadUserRolesForCourse(course, user);
 		if (null != roles && roles.contains(role))
 		{
@@ -32,17 +38,17 @@ public class CourseUserRelationship implements ICourseUserRelationship
 	}
 
 	@Override
-	public List<Role> loadAllRoluesForUserInCourse(IUser user, Course course)
+	public List<Role> loadAllRoluesForUserInCourse(IUser user, ICourse course)
 	{
-		ICourseUserRelationshipPersistence userCourseRelationshipDB = SystemConfig.instance().getCourseUserRelationshipDB();
+		userCourseRelationshipDB = CourseAbstractFactory.instance().courseUserRelationshipDBInstance();
 		List<Role> roles = userCourseRelationshipDB.loadUserRolesForCourse(course, user);
 		return roles;
 	}
 
 	@Override
-	public boolean enrollUserInCourse(IUser user, Course course, Role role)
+	public boolean enrollUserInCourse(IUser user, ICourse course, Role role)
 	{
-		ICourseUserRelationshipPersistence userCourseRelationshipDB = SystemConfig.instance().getCourseUserRelationshipDB();
+		userCourseRelationshipDB = CourseAbstractFactory.instance().courseUserRelationshipDBInstance();
 		return userCourseRelationshipDB.enrollUser(course, user, role);
 	}
 }

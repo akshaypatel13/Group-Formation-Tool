@@ -108,17 +108,17 @@ public class ResponseDB implements IResponsePersistence{
 	}
 
 	@Override
-	public List<Question> loadQuestionsOptions(List<Question> quesions) {
+	public List<Question> loadQuestionsOptions(List<Question> questions) {
 		
 		List<Question> questionList = new ArrayList<Question>();
 		CallStoredProcedure proc = null;
 		try
 		{
 
-			for(Question q : quesions) {
+			for(Question question : questions) {
 				
 				proc = new CallStoredProcedure("spLoadQuestionsOptions(?)");
-				proc.setParameter(1, q.getId());
+				proc.setParameter(1, question.getId());
 				
 				ResultSet results = proc.executeWithResults();
 				ArrayList<String> options = new ArrayList<String>();
@@ -131,8 +131,8 @@ public class ResponseDB implements IResponsePersistence{
 						options.add(displayText);
 
 					}
-					q.setOptions(options);
-					questionList.add(q);
+					question.setOptions(options);
+					questionList.add(question);
 				}
 			}
 			

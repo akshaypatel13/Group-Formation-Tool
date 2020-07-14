@@ -6,18 +6,20 @@ import java.util.List;
 import CSCI5308.GroupFormationTool.SystemConfig;
 import CSCI5308.GroupFormationTool.AccessControl.*;
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public class StudentCSVImport
+public class StudentCSVImport implements IStudentCSVImport
 {
-	
+	private static final Logger LOG = LogManager.getLogger();
 	private List<String> successResults;
 	private List<String> failureResults;
-	private Course course;
+	private ICourse course;
 	private IUserPersistence userDB;
 	private IPasswordEncryption passwordEncryption;
 	private IStudentCSVParser parser;
 	
-	public StudentCSVImport(IStudentCSVParser parser, Course course)
+	public StudentCSVImport(IStudentCSVParser parser, ICourse course)
 	{
 		this.course = course;
 		successResults = new ArrayList<String>();
@@ -28,7 +30,7 @@ public class StudentCSVImport
 		enrollStudentFromRecord();
 	}
 	
-	private void enrollStudentFromRecord()
+	public void enrollStudentFromRecord()
 	{
 		IUserAbstractFactory userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
 		List<IUser> studentList = parser.parseCSVFile(failureResults);
@@ -42,8 +44,8 @@ public class StudentCSVImport
 			
 			IUser user = userAbstractFactory.createUserInstance();
 			userDB.loadUserByBannerID(bannerID, user);
-			
-			if (!user.isValidUser())
+			///////////////////////////////////////////////////////////////////
+			if (!user.isValidUser()) //////////////////////////////////////////
 			{
 				user.setBannerID(bannerID);
 				user.setFirstName(firstName);
@@ -67,6 +69,13 @@ public class StudentCSVImport
 			{
 				failureResults.add("Unable to enroll user in course: " + userDetails);
 			}
+		}
+		if(failureResults.size() >= 1)
+		{
+			LOG.error("Failure to Enroll Users Count: "+failureResults.size()+" , Course: "+course.getId());
+		}
+		else{
+			LOG.info("Users Enrolled Count: "+successResults.size()+" , Course: "+course.getId());
 		}
 	}
 	

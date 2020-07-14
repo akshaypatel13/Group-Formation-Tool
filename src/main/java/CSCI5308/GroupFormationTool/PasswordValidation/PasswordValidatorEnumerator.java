@@ -12,6 +12,12 @@ public class PasswordValidatorEnumerator implements IPasswordValidatorEnumerator
 	private IPasswordValidatorPersistence validatorDB;
 	private List<PasswordValidator> activeValidators;
 	private HashMap<Long, String> validators;
+	private PasswordValidator maximumLengthValidator;
+	private PasswordValidator minimumLengthValidator;
+	private PasswordValidator minimumLowercaseValidator;
+	private PasswordValidator minimumSymbolValidator;
+	private PasswordValidator minimumUppercaseValidator;
+	private PasswordValidator passwordHistoryValidator;
 	
 	public PasswordValidatorEnumerator(IPasswordValidatorPersistence validatorDB) 
 	{
@@ -32,25 +38,25 @@ public class PasswordValidatorEnumerator implements IPasswordValidatorEnumerator
 	        
 			if(value.equals(PasswordValidatorType.MINLENGTH.toString())) 
 	        {
-	        	activeValidators.add(new MinimumLengthValidator(constraint));
+	        	activeValidators.add(PasswordValidationAbstractFactory.instance().createMinimumLengthValidatorInstance());
 	        }else if(value.equals(PasswordValidatorType.MAXLENGTH.toString())) 
 	        {
-	        	activeValidators.add(new MaximumLengthValidator(constraint));
+	        	activeValidators.add(PasswordValidationAbstractFactory.instance(constraint).createMaximumLengthValidatorInstance());
 	        }else if(value.equals(PasswordValidatorType.MINUPPERCASE.toString())) 
 	        {
-	        	activeValidators.add(new MinimumUppercaseValidator(constraint));
+	        	activeValidators.add(PasswordValidationAbstractFactory.instance(constraint).createMinimumUppercaseValidatorInstance());
 	        }else if(value.equals(PasswordValidatorType.MINLOWERCASE.toString())) 
 	        {
-	        	activeValidators.add(new MinimumLowercaseValidator(constraint));
+	        	activeValidators.add(PasswordValidationAbstractFactory.instance(constraint).createMinimumLowercaseValidatorInstance());
 	        }else if(value.equals(PasswordValidatorType.MINSYMBOLS.toString())) 
 	        {
-	        	activeValidators.add(new MinimumSymbolValidator(constraint));
+	        	activeValidators.add(PasswordValidationAbstractFactory.instance(constraint).createMinimumSymbolValidatorInstance());
 	        }else if(value.equals(PasswordValidatorType.RESTRICTEDCHAR.toString())) 
 	        {
-	        	activeValidators.add(new RestrictedCharacterValidator(constraint));
+	        	activeValidators.add(PasswordValidationAbstractFactory.instance(constraint).createRestrictedCharacterValidatorInstance());
 	        }else if(value.equals(PasswordValidatorType.PASSWORDHISTORY.toString())) 
 	        {
-	        	activeValidators.add(new PasswordHistoryValidator(constraint, user));
+	        	activeValidators.add(PasswordValidationAbstractFactory.instance(constraint,user).createPasswordHistoryValidator());
 	        }   
 		}
 		

@@ -9,19 +9,21 @@ import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
 public class PasswordHistoryValidator extends PasswordValidator
 {
 	User user;
-	
+	private IPasswordValidatorPersistence validatorDB;
+	private IPasswordEncryption passwordEncryption;
+
 	public PasswordHistoryValidator(String constraint, User user) 
 	{
 		this.constraint = constraint;
 		this.user = user;
+		validatorDB = PasswordValidationAbstractFactory.instance().createPasswordValidatorDBInstance();
+		passwordEncryption = SystemConfig.instance().getPasswordEncryption();
+
 	}
 	
 	@Override
 	public boolean isValid(String password) 
 	{
-		IPasswordValidatorPersistence validatorDB = new PasswordValidatorDB();
-		IPasswordEncryption passwordEncryption = SystemConfig.instance().getPasswordEncryption();
-		
 		List<String> previousPass = validatorDB.fetchPreviousPasswordsByBannerID(user.getBannerID(), Integer.parseInt(constraint));
 		for(int i=0; i<previousPass.size(); i++)
 		{

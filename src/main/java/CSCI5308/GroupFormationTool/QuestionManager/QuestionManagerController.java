@@ -14,16 +14,17 @@ public class QuestionManagerController
 {
 	private static final String BannerID = "bannerID";
 	private IQuestionPersistence questionDB;
+	private List<IQuestion> questionList;
 	
 	public QuestionManagerController() 
 	{
-		questionDB = SystemConfig.instance().getQuestionDB();
+		questionDB = QuestionManagerAbstractFactory.instance().createQuestionDBInstance();
 	}
 
 	@RequestMapping("/question/questionmanager/title")
 	public String questionsByTitle(Model model, @RequestParam(name = BannerID) String bannerID) 
 	{
-		List<Question> questionList = questionDB.loadQuestionsSortedByTitle(bannerID);
+		questionList = questionDB.loadQuestionsSortedByTitle(bannerID);
 		model.addAttribute("questionList", questionList);
 		return "question/questions";
 	}
@@ -31,7 +32,7 @@ public class QuestionManagerController
 	@RequestMapping("/question/questionmanager/date")
 	public String questionsByDate(Model model, @RequestParam(name = BannerID) String bannerID) 
 	{
-		List<Question> questionList = questionDB.loadSortedQuestionsSortedByDate(bannerID);
+		questionList = questionDB.loadSortedQuestionsSortedByDate(bannerID);
 		model.addAttribute("questionList", questionList);
 		return "question/questions";
 	}

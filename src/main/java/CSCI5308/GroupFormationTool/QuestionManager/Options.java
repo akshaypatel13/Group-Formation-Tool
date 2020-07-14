@@ -2,8 +2,8 @@ package CSCI5308.GroupFormationTool.QuestionManager;
 
 import java.util.ArrayList;
 import java.util.List;
-//wrapper class to pass lists from thymeleaf to controllers
-public class Options 
+
+public class Options implements IOptions
 {
 	public List<OptionValue> optionList;
 	
@@ -12,17 +12,17 @@ public class Options
 		setDefault();
 	}
 	
-	public void setDefault() 
+	public void setDefault()
 	{
-		optionList = new ArrayList<OptionValue>();
+		optionList = new ArrayList<>();
 	}
 	
-	public List<OptionValue> getOptionList() 
+	public List<OptionValue> getOptionList()
 	{
 		return optionList;
 	}
 
-	public void setOptionList(List<OptionValue> optionList) 
+	public void setOptionList(List<OptionValue> optionList)
 	{
 		this.optionList = optionList;
 	}
@@ -30,14 +30,15 @@ public class Options
 	public void addOption() 
 	{
 		String index = String.valueOf(optionList.size()+1);
-		optionList.add(new OptionValue(index, index));
+		///////////////////////////////////////////////////
+		optionList.add(QuestionManagerAbstractFactory.instance().createOptionValueParamInstance(index,index));
 	}
 	
 	public void saveOptions(IQuestionPersistence questionDB, long questionID) 
 	{
 		int order=1;
 		if(questionID!=-1) {
-			for (OptionValue option: optionList) 
+			for (OptionValue option: optionList)
 			{
 				String text = option.getText();
 		        String storedAs = option.getStoredAs();
