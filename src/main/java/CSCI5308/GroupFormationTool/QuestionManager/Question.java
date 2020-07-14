@@ -3,7 +3,7 @@ package CSCI5308.GroupFormationTool.QuestionManager;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-public class Question implements IQuestion
+public class Question implements IQuestion,Comparable<Question>
 {
 	private long id;
 	private String title;
@@ -94,4 +94,8 @@ public class Question implements IQuestion
 		return questionDB.createQuestion(this, bannerID);
 	}
 	
+	@Override
+	public int compareTo(Question o) {
+	  return getTimestamp().compareTo(o.getTimestamp());
+	}
 }

@@ -2,13 +2,14 @@ package CSCI5308.GroupFormationTool.Survey;
 
 import CSCI5308.GroupFormationTool.AccessControl.CurrentUser;
 import CSCI5308.GroupFormationTool.QuestionManager.IQuestionPersistence;
-import CSCI5308.GroupFormationTool.QuestionManager.QuestionManagerAbstractFactory;
 import CSCI5308.GroupFormationTool.SystemConfig;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Map;
 
 @Controller
 public class SurveyAdminController
@@ -19,12 +20,18 @@ public class SurveyAdminController
     private IQuestionPersistence questionDB;
     private ISurveyAdminPersistence surveyAdminDB;
     private ISurveyManagePersistence surveyManageDB;
+    private IGroupCreator groupCreator;
 
     public SurveyAdminController()
     {
         questionDB = QuestionManagerAbstractFactory.instance().createQuestionDBInstance();
         surveyAdminDB = SurveyAbstractFactory.instance().createSurveyAdminDBInstance();
         surveyManageDB = SurveyAbstractFactory.instance().createSurveyManageDBInstance();
+        questionDB = SystemConfig.instance().getQuestionDB();
+        surveyAdminDB = SystemConfig.instance().getSurveyAdminDB();
+        surveyManageDB = SystemConfig.instance().getSurveyManageDB();
+        groupCreator = SystemConfig.instance().getGroupCreator();
+
     }
 
     @GetMapping("/survey/survey")
@@ -42,7 +49,7 @@ public class SurveyAdminController
     }
 
     @PostMapping("/survey/insertquestion")
-    public String insertQuestionSurvey(Model model,@RequestParam("questionID") long questionID, @RequestParam("courseID") long courseID)
+    public String insertQuestionSurvey(Model model,@RequestParam("questionID") long questionID, @RequestParam("courseID") long courseID, @RequestParam long algo )
     {
         long surveyID = surveyManageDB.findSurveyByCourseID(courseID);
         surveyAdminDB.insertSurveyQuestion(surveyID,questionID);
@@ -56,10 +63,26 @@ public class SurveyAdminController
         return "redirect:/survey/survey?courseID="+courseId;
     }
 
-    @GetMapping("/survey/publish")
-    public String publishSurvey(Model model, @RequestParam("courseID") long courseId)
+    @PostMapping("/survey/creategroups")
+    public String createGroups(Model model,@RequestParam("courseID") long courseId)
     {
-        surveyAdminDB.publishSurvey(courseId);
+        long surveyID = surveyManageDB.findSurveyByCourseID(courseId);
+        System.out.println(surveyID);
+        System.out.println(surveyManageDB.getSurveyResponses(surveyID));
+        //surveyManageDB.getSurveyGroupAlgo(surveyID);
+        Map<Long, Map<Long, String>> responses = surveyManageDB.getSurveyResponses(surveyID);
+        long groupSize = surveyManageDB.getSurveyGroupSize(surveyID);
+
+        System.out.println(groupCreator.createGroups(responses, groupSize));
+        //change link to show groups
+        return "redirect:/survey/survey?courseID="+courseId;
+    }
+
+    @PostMapping("/survey/publish")
+    public String publishSurvey(Model model, @RequestParam("courseID") long courseId, @RequestParam("groupSize") long groupSize)
+    {
+        System.out.println("GroupSize: " + groupSize);
+        surveyAdminDB.publishSurvey(courseId, groupSize);
         return "redirect:/survey/survey?courseID="+courseId;
     }
 
@@ -67,6 +90,7 @@ public class SurveyAdminController
     public String disableSurvey(Model model, @RequestParam("courseID") long courseId)
     {
         surveyAdminDB.disableSurvey(courseId);
+        System.out.print("Hiiiii");
         return "redirect:/survey/survey?courseID="+courseId;
     }
 

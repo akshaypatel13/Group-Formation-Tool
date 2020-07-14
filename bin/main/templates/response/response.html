@@ -37,26 +37,13 @@
 					<td>
 						<span th:text="${val.type}"></span>
 					</td>
-					<td>	
+					<td>		
 						<div th:if="${val.type.toString()}=='Text'">
 							<input type="text" th:name="${val.id}"></input>
 						</div>						
 						<div th:if="${val.type.toString()}=='Numeric'">
 							<input type="number" th:name="${val.id}">
-						</div>												
-					</td>
-				<tr>
-				<tr th:each="val: ${questionListWithOptions}">
-					<td>
-						<span th:text="${val.title}"></span>
-					</td>
-					<td>
-						<span th:text="${val.text}"></span>
-					</td>
-					<td>
-						<span th:text="${val.type}"></span>
-					</td>
-					<td>		
+						</div>	
 						<div th:if="${val.type.toString()}=='MCQOne'">
 							<select th:name="${val.id}">
 	 							<option th:each="v: ${val.options}" th:value="${v}">

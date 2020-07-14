@@ -1,10 +1,13 @@
 package CSCI5308.GroupFormationTool.Survey;
 
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
+import CSCI5308.GroupFormationTool.QuestionManager.Question;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class SurveyAdminDB implements ISurveyAdminPersistence
 {
@@ -34,15 +37,16 @@ public class SurveyAdminDB implements ISurveyAdminPersistence
     }
 
     @Override
-    public boolean insertSurveyQuestion(long surveyID, long questionID)
+    public boolean insertSurveyQuestion(long surveyID, long questionID, long algo)
     {
         CallStoredProcedure proc = null;
         try
         {
-            proc = new CallStoredProcedure("spInsertSurveyQuestion(?, ?, ?)");
+            proc = new CallStoredProcedure("spInsertSurveyQuestion(?, ?, ?, ?)");
             proc.setParameter(1,surveyID);
             proc.setParameter(2,questionID);
             proc.setParameter(3, LocalDate.now().toString());
+            proc.setParameter(4, algo);
             proc.execute();
             return true;
         }
@@ -86,13 +90,14 @@ public class SurveyAdminDB implements ISurveyAdminPersistence
     }
 
     @Override
-    public boolean publishSurvey(long courseID)
+    public boolean publishSurvey(long courseID, long groupSize)
     {
         CallStoredProcedure proc = null;
         try
         {
-            proc = new CallStoredProcedure("spPublishSurvey(?)");
+            proc = new CallStoredProcedure("spPublishSurvey(?,?)");
             proc.setParameter(1,courseID);
+            proc.setParameter(2,groupSize);
             proc.execute();
             return true;
         }
@@ -133,6 +138,23 @@ public class SurveyAdminDB implements ISurveyAdminPersistence
                 proc.cleanup();
             }
         }
+    }
+    
+    @Override
+    public List<Question> sortQuestionByDateCreated(List<Question> quesionsWithoutOptions, List<Question> quesionsWithOptions)
+    {
+		List<Question> questions = new ArrayList<>();
+		
+		for(Question question : quesionsWithoutOptions) {
+			questions.add(question);
+		}
+		for(Question question : quesionsWithOptions) {
+			questions.add(question);
+		}
+		
+		Collections.sort(questions);
+		
+    	return questions;
     }
 
 }

@@ -127,7 +127,7 @@ public class ResponseDB implements IResponsePersistence{
 				{
 					while (results.next())
 					{
-						String displayText = results.getString(6);
+						String displayText = results.getString(5);
 						options.add(displayText);
 
 					}
@@ -221,7 +221,7 @@ public class ResponseDB implements IResponsePersistence{
                 if (results.next())
                 {
                 	String type = results.getString(1);
-                	if(type.equals("MCQMultiple")) {
+                	if(type.equals(QuestionType.MCQMULTIPLE.toString())) {
                 		result = true;
                 	}
                 }

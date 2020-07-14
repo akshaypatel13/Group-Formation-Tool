@@ -24,7 +24,13 @@
     <a th:href="@{/course/course(courseID=${courseID})}">Continue Editing Later</a>
     <br/>
     <br/>
-    <a th:href="@{/survey/publish(courseID=${courseID})}" th:if="${surveyCheck}">Publish</a>
+    <form th:action="@{/survey/publish}" th:if="${surveyCheck}" method="post">
+        <input type="hidden" name="courseID" th:value="${courseID}"/>
+        <label for="groupSize">Group Size:</label>
+        <input type="number" id="groupSize" name="groupSize" required/>
+        <input type="submit" value="Publish Survey" />
+    </form>
+
     <a th:href="@{/survey/disable(courseID=${courseID})}" th:unless="${surveyCheck}">Disable</a>
 </div>
 
@@ -40,7 +46,7 @@
                 <th>Title</th>
                 <th>Description</th>
                 <th>Type</th>
-                <th>Action</th>
+                <th>Algorithm</th>
             </tr>
             <tr th:each="question : ${questionsNotInSurvey}">
                 <td><a th:text="${question.title}"></a></td>
@@ -50,6 +56,11 @@
                     <form th:action="@{/survey/insertquestion}" method="post">
                         <input type="hidden" name="questionID" th:value="${question.id}"/>
                         <input type="hidden" name="courseID" th:value="${courseID}"/>
+                        <select name="algo">
+                            <option disabled>Select Algo..</option>
+                            <option th:value="'1'" th:text="Similar"></option>
+                            <option th:value="'2'" th:text="Dissimilar"></option>
+                        </select>
                         <input type="submit" value="Add Question to Survey" th:if="${surveyCheck}"/>
                     </form>
                 </td>
