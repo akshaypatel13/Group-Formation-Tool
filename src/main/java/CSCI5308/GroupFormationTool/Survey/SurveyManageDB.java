@@ -39,12 +39,12 @@ public class SurveyManageDB implements ISurveyManagePersistence {
     }
 
     @Override
-    public List<Question> findSurveyQuestions(long courseID) {
+    public List<Question> findSurveyQuestions(long surveyID) {
         List<Question> questionList = new ArrayList<Question>();
         CallStoredProcedure proc = null;
         try {
             proc = new CallStoredProcedure("spFindSurveyQuestions(?)");
-            proc.setParameter(1, courseID);
+            proc.setParameter(1, surveyID);
             ResultSet results = proc.executeWithResults();
             Question question;
             if (null != results) {

@@ -39,7 +39,8 @@ public class SurveyAdminController
         System.out.print("Survey:"+check);
         model.addAttribute("surveyCheck", check);
         model.addAttribute("courseID",courseID);
-        model.addAttribute("surveyQuestions",surveyManageDB.findSurveyQuestions(courseID));
+        long surveyID = surveyManageDB.findSurveyByCourseID(courseID);
+        model.addAttribute("surveyQuestions",surveyManageDB.findSurveyQuestions(surveyID));
         model.addAttribute("questionsNotInSurvey",surveyManageDB.findQuestionsNotInSurvey(CurrentUser.instance().getCurrentAuthenticatedUser().getID()));
         return "survey/surveyquestions";
     }
@@ -49,7 +50,6 @@ public class SurveyAdminController
     {
         long surveyID = surveyManageDB.findSurveyByCourseID(courseID);
         surveyAdminDB.insertSurveyQuestion(surveyID,questionID,algo);
-        System.out.print("Akash " + algo);
         return "redirect:/survey/survey?courseID="+courseID;
     }
 
