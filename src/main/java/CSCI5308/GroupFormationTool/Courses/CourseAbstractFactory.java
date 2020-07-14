@@ -10,8 +10,6 @@ public class CourseAbstractFactory{
     private ICoursePersistence courseDB;
     private ICourseUserRelationship courseUserRelationship;
     private ICourseUserRelationshipPersistence courseUserRelationshipDB;
-    private IStudentCSVImport studentCSVImport;
-    private IStudentCSVParser studentCSVParser;
 
     public static CourseAbstractFactory instance() {
         if (null == uniqueInstance) {
@@ -20,7 +18,7 @@ public class CourseAbstractFactory{
         return uniqueInstance;
     }
 
-    public CourseAbstractFactory(){
+    private CourseAbstractFactory(){
         courseDB = new CourseDB();
         courseUserRelationship = new CourseUserRelationship();
         courseUserRelationshipDB = new CourseUserRelationshipDB();

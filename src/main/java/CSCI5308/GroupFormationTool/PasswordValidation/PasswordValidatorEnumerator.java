@@ -35,29 +35,29 @@ public class PasswordValidatorEnumerator implements IPasswordValidatorEnumerator
 			long key = (long) item.getKey();
 			String value = (String) item.getValue();
 			String constraint = validatorDB.loadConstraintByValidatorId(key);
-	        
-			if(value.equals(PasswordValidatorType.MINLENGTH.toString())) 
-	        {
-	        	activeValidators.add(PasswordValidationAbstractFactory.instance().createMinimumLengthValidatorInstance());
-	        }else if(value.equals(PasswordValidatorType.MAXLENGTH.toString())) 
-	        {
-	        	activeValidators.add(PasswordValidationAbstractFactory.instance(constraint).createMaximumLengthValidatorInstance());
-	        }else if(value.equals(PasswordValidatorType.MINUPPERCASE.toString())) 
-	        {
-	        	activeValidators.add(PasswordValidationAbstractFactory.instance(constraint).createMinimumUppercaseValidatorInstance());
-	        }else if(value.equals(PasswordValidatorType.MINLOWERCASE.toString())) 
-	        {
-	        	activeValidators.add(PasswordValidationAbstractFactory.instance(constraint).createMinimumLowercaseValidatorInstance());
-	        }else if(value.equals(PasswordValidatorType.MINSYMBOLS.toString())) 
-	        {
-	        	activeValidators.add(PasswordValidationAbstractFactory.instance(constraint).createMinimumSymbolValidatorInstance());
-	        }else if(value.equals(PasswordValidatorType.RESTRICTEDCHAR.toString())) 
-	        {
-	        	activeValidators.add(PasswordValidationAbstractFactory.instance(constraint).createRestrictedCharacterValidatorInstance());
-	        }else if(value.equals(PasswordValidatorType.PASSWORDHISTORY.toString())) 
-	        {
-	        	activeValidators.add(PasswordValidationAbstractFactory.instance(constraint,user).createPasswordHistoryValidator());
-	        }   
+
+			if(value.equals(PasswordValidatorType.MINLENGTH.toString()))
+			{
+				activeValidators.add(PasswordValidationAbstractFactory.instance().createMinimumLengthValidatorInstance(constraint));
+			}else if(value.equals(PasswordValidatorType.MAXLENGTH.toString()))
+			{
+				activeValidators.add(PasswordValidationAbstractFactory.instance().createMaximumLengthValidatorInstance(constraint));
+			}else if(value.equals(PasswordValidatorType.MINUPPERCASE.toString()))
+			{
+				activeValidators.add(PasswordValidationAbstractFactory.instance().createMinimumUppercaseValidatorInstance(constraint));
+			}else if(value.equals(PasswordValidatorType.MINLOWERCASE.toString()))
+			{
+				activeValidators.add(PasswordValidationAbstractFactory.instance().createMinimumLowercaseValidatorInstance(constraint));
+			}else if(value.equals(PasswordValidatorType.MINSYMBOLS.toString()))
+			{
+				activeValidators.add(PasswordValidationAbstractFactory.instance().createMinimumSymbolValidatorInstance(constraint));
+			}else if(value.equals(PasswordValidatorType.RESTRICTEDCHAR.toString()))
+			{
+				activeValidators.add(PasswordValidationAbstractFactory.instance().createRestrictedCharacterValidatorInstance(constraint));
+			}else if(value.equals(PasswordValidatorType.PASSWORDHISTORY.toString()))
+			{
+				activeValidators.add(PasswordValidationAbstractFactory.instance().createPasswordHistoryValidator(constraint,user));
+			}
 		}
 		
 		return activeValidators;

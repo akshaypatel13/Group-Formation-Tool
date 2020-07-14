@@ -24,7 +24,7 @@ public class StudentCSVImport implements IStudentCSVImport
 		this.course = course;
 		successResults = new ArrayList<String>();
 		failureResults = new ArrayList<String>();
-		userDB = SystemConfig.instance().getUserDB();
+		userDB = UserAbstractFactory.instance().createUserDBInstance();
 		passwordEncryption = SystemConfig.instance().getPasswordEncryption();
 		this.parser = parser;
 		enrollStudentFromRecord();
@@ -32,7 +32,6 @@ public class StudentCSVImport implements IStudentCSVImport
 	
 	public void enrollStudentFromRecord()
 	{
-		IUserAbstractFactory userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
 		List<IUser> studentList = parser.parseCSVFile(failureResults);
 		for(IUser u : studentList)
 		{	
@@ -42,7 +41,7 @@ public class StudentCSVImport implements IStudentCSVImport
 			String email = u.getEmail();
 			String userDetails = bannerID + " " + firstName + " " + lastName +" " + email;
 			
-			IUser user = userAbstractFactory.createUserInstance();
+			IUser user = UserAbstractFactory.instance().createUserInstance();
 			userDB.loadUserByBannerID(bannerID, user);
 			///////////////////////////////////////////////////////////////////
 			if (!user.isValidUser()) //////////////////////////////////////////

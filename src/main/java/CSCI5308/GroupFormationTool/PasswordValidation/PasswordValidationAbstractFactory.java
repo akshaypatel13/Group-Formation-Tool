@@ -5,33 +5,14 @@ import CSCI5308.GroupFormationTool.AccessControl.User;
 public class PasswordValidationAbstractFactory {
 
     private static PasswordValidationAbstractFactory uniqueInstance = null;
-    public IPasswordValidatorPersistence passwordValidatorPersistence;
-    public IPasswordValidatorEnumerator passwordValidatorEnumerator;
-    public PasswordValidator maximumLengthValidator;
-    public PasswordValidator minimumLengthValidator;
-    public PasswordValidator minimumLowercaseValidator;
-    public PasswordValidator minimumSymbolValidator;
-    public PasswordValidator minimumUppercaseValidator;
-    public PasswordValidator passwordHistoryValidator;
-    public PasswordValidator restrictedCharacterValidator;
+    private static IPasswordValidatorPersistence passwordValidatorPersistence;
+    private IPasswordValidatorEnumerator passwordValidatorEnumerator;
 
-    public PasswordValidationAbstractFactory(){
+
+    private PasswordValidationAbstractFactory(){
         passwordValidatorPersistence = new PasswordValidatorDB();
     }
 
-    public PasswordValidationAbstractFactory(String constraint){
-        maximumLengthValidator = new MaximumLengthValidator(constraint);
-        minimumLengthValidator = new MinimumLengthValidator(constraint);
-        minimumLowercaseValidator = new MinimumLowercaseValidator(constraint);
-        minimumSymbolValidator = new MinimumSymbolValidator(constraint);
-        minimumUppercaseValidator = new MinimumUppercaseValidator(constraint);
-        restrictedCharacterValidator = new RestrictedCharacterValidator(constraint);
-
-    }
-
-    public PasswordValidationAbstractFactory(String constraint, User user){
-        passwordHistoryValidator = new PasswordHistoryValidator(constraint,user);
-    }
 
     public static PasswordValidationAbstractFactory instance() {
         if (null == uniqueInstance) {
@@ -40,51 +21,39 @@ public class PasswordValidationAbstractFactory {
         return uniqueInstance;
     }
 
-    public static PasswordValidationAbstractFactory instance(String constraint) {
-        if (null == uniqueInstance) {
-            uniqueInstance = new PasswordValidationAbstractFactory(constraint);
-        }
-        return uniqueInstance;
-    }
-
-    public static PasswordValidationAbstractFactory instance(String constraint, User user) {
-        if (null == uniqueInstance) {
-            uniqueInstance = new PasswordValidationAbstractFactory(constraint,user);
-        }
-        return uniqueInstance;
-    }
 
     public IPasswordValidatorPersistence createPasswordValidatorDBInstance(){
         return passwordValidatorPersistence;
     }
 
 
-    public PasswordValidator createMaximumLengthValidatorInstance(){
-        return maximumLengthValidator;
+    public PasswordValidator createMaximumLengthValidatorInstance(String constraint){
+        return new MaximumLengthValidator(constraint);
     }
 
-    public PasswordValidator createMinimumLengthValidatorInstance(){
-        return minimumLengthValidator;
+    public PasswordValidator createMinimumLengthValidatorInstance(String constraint){
+        return new MinimumLengthValidator(constraint);
     }
 
-    public PasswordValidator createMinimumLowercaseValidatorInstance(){
-        return minimumLowercaseValidator;
+    public PasswordValidator createMinimumLowercaseValidatorInstance(String constraint){
+        return new MinimumLowercaseValidator(constraint);
     }
 
-    public PasswordValidator createMinimumUppercaseValidatorInstance(){
-        return minimumUppercaseValidator;
+    public PasswordValidator createMinimumUppercaseValidatorInstance(String constraint){
+        return new MinimumUppercaseValidator(constraint);
     }
 
-    public PasswordValidator createMinimumSymbolValidatorInstance(){
-        return minimumSymbolValidator;
+    public PasswordValidator createMinimumSymbolValidatorInstance(String constraint){
+
+        return new MinimumSymbolValidator(constraint);
     }
 
-    public PasswordValidator createPasswordHistoryValidator(){
-        return passwordHistoryValidator;
+    public PasswordValidator createPasswordHistoryValidator(String constraint, User user){
+        return new PasswordHistoryValidator(constraint,user);
     }
 
-    public PasswordValidator createRestrictedCharacterValidatorInstance(){
-        return restrictedCharacterValidator;
+    public PasswordValidator createRestrictedCharacterValidatorInstance(String constraint){
+        return new RestrictedCharacterValidator(constraint);
     }
 
     public void setPasswordEnumeratorInstance(IPasswordValidatorEnumerator passwordValidatorEnumerator){
@@ -95,8 +64,9 @@ public class PasswordValidationAbstractFactory {
         return passwordValidatorEnumerator;
     }
 
-    public IPasswordValidatorEnumerator createPasswordValidatorInstance(IPasswordValidatorPersistence validatorDB){
+    public PasswordValidatorEnumerator createPasswordEnumerator(IPasswordValidatorPersistence validatorDB){
         return new PasswordValidatorEnumerator(validatorDB);
     }
+
 
 }

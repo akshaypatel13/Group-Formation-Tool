@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import CSCI5308.GroupFormationTool.AccessControl.UserAbstractFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,8 +35,6 @@ public class StudentCSVParser implements IStudentCSVParser
 	@Override
 	public List<IUser> parseCSVFile(List<String> failureResults) 
 	{
-		IUserAbstractFactory userAbstractFactory =SystemConfig.instance().getUserAbstractFactory();
-		
 		try
 		{
 			Reader reader = new InputStreamReader(uploadedFile.getInputStream());
@@ -52,7 +51,7 @@ public class StudentCSVParser implements IStudentCSVParser
 				String lastName = record[2];
 				String email = record[3];
 				
-				u = userAbstractFactory.createUserInstance();
+				u = UserAbstractFactory.instance().createUserInstance();
 				u.setBannerID(bannerID);
 				u.setFirstName(firstName);
 				u.setLastName(lastName);

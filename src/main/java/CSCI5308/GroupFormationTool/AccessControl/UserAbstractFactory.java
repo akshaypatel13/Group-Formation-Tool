@@ -1,13 +1,10 @@
 package CSCI5308.GroupFormationTool.AccessControl;
 
-import CSCI5308.GroupFormationTool.SystemConfig;
 
-import java.util.ArrayList;
-
-public class UserAbstractFactory implements IUserAbstractFactory {
+public class UserAbstractFactory {
 
 	private static UserAbstractFactory uniqueInstance = null;
-	private IUserPersistence userDB;
+	private static IUserPersistence userDB;
 
 	public static UserAbstractFactory instance() {
 		if (null == uniqueInstance) {
@@ -18,15 +15,16 @@ public class UserAbstractFactory implements IUserAbstractFactory {
 
 	public UserAbstractFactory(){
 		userDB = new UserDB();
+		System.out.print("INIT USERDB: "+userDB.toString());
 	}
 
-	@Override
+
 	public IUser createUserInstance() {
 		return new User();
 	}
 
-	@Override
 	public IUserPersistence createUserDBInstance() {
+		System.out.print("USERDB: "+userDB.toString());
 		return userDB;
 	}
 }

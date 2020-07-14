@@ -10,9 +10,6 @@ public class CourseUserRelationship implements ICourseUserRelationship
 
 	private ICourseUserRelationshipPersistence userCourseRelationshipDB;
 
-	public CourseUserRelationship(){
-	}
-
 	@Override
 	public boolean userHasRoleInCourse(IUser user, Role role, ICourse course)
 	{

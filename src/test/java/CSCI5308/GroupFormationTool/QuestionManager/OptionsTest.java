@@ -20,7 +20,7 @@ class OptionsTest
 	public void getOptionList() 
 	{
 		IOptions options = new Options();
-		List<IOptionValue> list = new ArrayList<>();
+		List<OptionValue> list = new ArrayList<>();
 		list.add(new OptionValue("test","test"));
 		options.setOptionList(list);
 		Assert.isTrue(options.getOptionList() == list);
@@ -32,7 +32,7 @@ class OptionsTest
 	{
 
 		IOptions options = new Options();
-		List<IOptionValue> list = new ArrayList<>();
+		List<OptionValue> list = new ArrayList<>();
 		list.add(new OptionValue("test","test"));
 		options.setOptionList(list);
 		Assert.isTrue(options.getOptionList() == list);

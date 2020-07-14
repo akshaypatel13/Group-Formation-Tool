@@ -46,7 +46,7 @@ public class SurveyManageDB implements ISurveyManagePersistence {
         CallStoredProcedure proc = null;
         try {
             proc = new CallStoredProcedure("spFindSurveyQuestions(?)");
-            proc.setParameter(1, surveyID);
+            proc.setParameter(1, courseID);
             ResultSet results = proc.executeWithResults();
             IQuestion question;
             if (null != results) {

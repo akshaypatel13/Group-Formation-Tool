@@ -2,6 +2,7 @@ package CSCI5308.GroupFormationTool.Survey;
 
 import CSCI5308.GroupFormationTool.AccessControl.CurrentUser;
 import CSCI5308.GroupFormationTool.QuestionManager.IQuestionPersistence;
+import CSCI5308.GroupFormationTool.QuestionManager.QuestionManagerAbstractFactory;
 import CSCI5308.GroupFormationTool.SystemConfig;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,9 +28,6 @@ public class SurveyAdminController
         questionDB = QuestionManagerAbstractFactory.instance().createQuestionDBInstance();
         surveyAdminDB = SurveyAbstractFactory.instance().createSurveyAdminDBInstance();
         surveyManageDB = SurveyAbstractFactory.instance().createSurveyManageDBInstance();
-        questionDB = SystemConfig.instance().getQuestionDB();
-        surveyAdminDB = SystemConfig.instance().getSurveyAdminDB();
-        surveyManageDB = SystemConfig.instance().getSurveyManageDB();
         groupCreator = SystemConfig.instance().getGroupCreator();
 
     }
@@ -52,7 +50,7 @@ public class SurveyAdminController
     public String insertQuestionSurvey(Model model,@RequestParam("questionID") long questionID, @RequestParam("courseID") long courseID, @RequestParam long algo )
     {
         long surveyID = surveyManageDB.findSurveyByCourseID(courseID);
-        surveyAdminDB.insertSurveyQuestion(surveyID,questionID);
+        surveyAdminDB.insertSurveyQuestion(surveyID,questionID,algo);
         return "redirect:/survey/survey?courseID="+courseID;
     }
 
