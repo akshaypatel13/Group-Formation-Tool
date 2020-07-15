@@ -18,11 +18,13 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 public class CustomAuthenticationManager implements AuthenticationManager {
 	private static final String ADMIN_BANNER_ID = "B-000000";
-	private static final String BADCREDENTIALEXCEPTION = "1001";
+	private static final String BAD_CREDENTIAL_EXCEPTION = "1001";
+	private static final String AUTH_SERVICE_EXCEPTION = "1000";
+	private static final String USER = "USER";
 	public CustomAuthenticationManager() {
 	}
 
-	private Authentication checkAdmin(String password, User u, Authentication authentication)
+	private Authentication checkAdmin(String password, IUser u, Authentication authentication)
 			throws AuthenticationException {
 
 		if (password.equals(u.getPassword()))
@@ -37,16 +39,16 @@ public class CustomAuthenticationManager implements AuthenticationManager {
 		}
 		else
 		{
-			throw new BadCredentialsException(BADCREDENTIALEXCEPTION);
+			throw new BadCredentialsException(BAD_CREDENTIAL_EXCEPTION);
 		}
 	}
-	private Authentication checkNormal(String password, User u, Authentication authentication)
+	private Authentication checkNormal(String password, IUser u, Authentication authentication)
 			throws AuthenticationException {
 		IPasswordEncryption passwordEncryption = SecurityAbstractFactory.instance().createBCryptPasswordEncryption();
 		if (passwordEncryption.matches(password, u.getPassword())) {
 
 			List<GrantedAuthority> rights = new ArrayList<GrantedAuthority>();
-			rights.add(new SimpleGrantedAuthority("USER"));
+			rights.add(new SimpleGrantedAuthority(USER));
 
 			UsernamePasswordAuthenticationToken token;
 			token = new UsernamePasswordAuthenticationToken(authentication.getPrincipal(),
@@ -54,7 +56,7 @@ public class CustomAuthenticationManager implements AuthenticationManager {
 					rights);
 			return token;
 		} else {
-			throw new BadCredentialsException(BADCREDENTIALEXCEPTION);
+			throw new BadCredentialsException(BAD_CREDENTIAL_EXCEPTION);
 		}
 	}
 
@@ -62,11 +64,11 @@ public class CustomAuthenticationManager implements AuthenticationManager {
 		String bannerID = authentication.getPrincipal().toString();
 		String password = authentication.getCredentials().toString();
 		IUserPersistence userDB = UserAbstractFactory.instance().createUserDBInstance();
-		User u;
+		IUser u;
 		try {
-			u = new User(bannerID, userDB);
+			u = UserAbstractFactory.instance().createUserParamInstance(bannerID,userDB);
 		} catch (Exception e) {
-			throw new AuthenticationServiceException("1000");
+			throw new AuthenticationServiceException(AUTH_SERVICE_EXCEPTION);
 		}
 		if (u.isValidUser()) {
 			if (bannerID.toUpperCase().equals(ADMIN_BANNER_ID)) {
@@ -76,7 +78,7 @@ public class CustomAuthenticationManager implements AuthenticationManager {
 			}
 		} else {
 
-			throw new BadCredentialsException(BADCREDENTIALEXCEPTION);
+			throw new BadCredentialsException(BAD_CREDENTIAL_EXCEPTION);
 		}
 	}
 }

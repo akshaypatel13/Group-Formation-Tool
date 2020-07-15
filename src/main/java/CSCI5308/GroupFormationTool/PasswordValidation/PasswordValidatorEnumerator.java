@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import CSCI5308.GroupFormationTool.AccessControl.IUser;
 import CSCI5308.GroupFormationTool.AccessControl.User;
 
 public class PasswordValidatorEnumerator implements IPasswordValidatorEnumerator
@@ -12,12 +13,6 @@ public class PasswordValidatorEnumerator implements IPasswordValidatorEnumerator
 	private IPasswordValidatorPersistence validatorDB;
 	private List<PasswordValidator> activeValidators;
 	private HashMap<Long, String> validators;
-	private PasswordValidator maximumLengthValidator;
-	private PasswordValidator minimumLengthValidator;
-	private PasswordValidator minimumLowercaseValidator;
-	private PasswordValidator minimumSymbolValidator;
-	private PasswordValidator minimumUppercaseValidator;
-	private PasswordValidator passwordHistoryValidator;
 	
 	public PasswordValidatorEnumerator(IPasswordValidatorPersistence validatorDB) 
 	{
@@ -26,7 +21,7 @@ public class PasswordValidatorEnumerator implements IPasswordValidatorEnumerator
 		validators = validatorDB.loadActivePasswordValidators();
 	}
 
-	public List<PasswordValidator> getActiveValidators(User user)
+	public List<PasswordValidator> getActiveValidators(IUser user)
 	{
 		System.out.println("Validators active: \n"+validators.values());
 		activeValidators = new ArrayList<PasswordValidator>();

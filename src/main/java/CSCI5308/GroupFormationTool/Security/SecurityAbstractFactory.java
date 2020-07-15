@@ -27,30 +27,6 @@ public class SecurityAbstractFactory {
 	}
 
 
-	public BCryptPasswordEncoder createBCryptPasswordEncoderInstance() {
-		return new BCryptPasswordEncoder();
-	}
-
-	public UsernamePasswordAuthenticationToken createUsernamePasswordAuthenticationToken(Authentication authentication,
-			List<GrantedAuthority> rights) {
-		return new UsernamePasswordAuthenticationToken(authentication.getPrincipal(), authentication.getCredentials(),
-				rights);
-	}
-
-	public ArrayList<GrantedAuthority> createArrayList() {
-		return new ArrayList<GrantedAuthority>();
-	}
-
-	public SimpleGrantedAuthority createSimpleGrantedAuthority(String role) {
-		return new SimpleGrantedAuthority(role);
-	}
-
-
-	public CustomAuthenticationManager createCustomAuthenticationManager() {
-		return new CustomAuthenticationManager();
-	}
-
-
 	public IPasswordEncryption createBCryptPasswordEncryption(){ return passwordEncryption;}
 
 

@@ -7,9 +7,9 @@ import org.springframework.web.multipart.MultipartFile;
 public class CourseAbstractFactory{
 
     private static CourseAbstractFactory uniqueInstance = null;
-    private ICoursePersistence courseDB;
-    private ICourseUserRelationship courseUserRelationship;
-    private ICourseUserRelationshipPersistence courseUserRelationshipDB;
+    private static ICoursePersistence courseDB;
+    private static ICourseUserRelationship courseUserRelationship;
+    private static ICourseUserRelationshipPersistence courseUserRelationshipDB;
 
     public static CourseAbstractFactory instance() {
         if (null == uniqueInstance) {

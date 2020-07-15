@@ -1,6 +1,6 @@
 package CSCI5308.GroupFormationTool.PasswordValidation;
 
-import CSCI5308.GroupFormationTool.AccessControl.User;
+import CSCI5308.GroupFormationTool.AccessControl.IUser;
 
 public class PasswordValidationAbstractFactory {
 
@@ -48,7 +48,7 @@ public class PasswordValidationAbstractFactory {
         return new MinimumSymbolValidator(constraint);
     }
 
-    public PasswordValidator createPasswordHistoryValidator(String constraint, User user){
+    public PasswordValidator createPasswordHistoryValidator(String constraint, IUser user){
         return new PasswordHistoryValidator(constraint,user);
     }
 

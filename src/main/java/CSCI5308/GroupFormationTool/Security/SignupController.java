@@ -27,14 +27,6 @@ public class SignupController {
 	private IPasswordValidatorEnumerator passwordValidatorEnumerator;
 	private IUser userInstance;
 
-	public SignupController() {
-
-//		IPasswordValidatorPersistence validatorDB = SystemConfig.instance().getPasswordValidatorDB();
-//		passwordValidatorEnumerator = new PasswordValidatorEnumerator(validatorDB);
-//		SystemConfig.instance().setPasswordValidatorEnumerator(passwordValidatorEnumerator);
-
-	}
-
 	@GetMapping("/signup")
 	public String displaySignup(Model model) {
 		return "signup";

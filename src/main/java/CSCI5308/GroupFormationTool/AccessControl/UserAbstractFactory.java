@@ -13,18 +13,17 @@ public class UserAbstractFactory {
 		return uniqueInstance;
 	}
 
-	public UserAbstractFactory(){
+	private UserAbstractFactory(){
 		userDB = new UserDB();
-		System.out.print("INIT USERDB: "+userDB.toString());
 	}
-
 
 	public IUser createUserInstance() {
 		return new User();
 	}
 
 	public IUserPersistence createUserDBInstance() {
-		System.out.print("USERDB: "+userDB.toString());
 		return userDB;
 	}
+
+	public IUser createUserParamInstance(String bannerID, IUserPersistence persistence) { return new User(bannerID,persistence);}
 }

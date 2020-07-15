@@ -3,9 +3,7 @@ package CSCI5308.GroupFormationTool.Courses;
 import java.util.List;
 
 import CSCI5308.GroupFormationTool.AccessControl.CurrentUser;
-import CSCI5308.GroupFormationTool.AccessControl.IUserAbstractFactory;
 import CSCI5308.GroupFormationTool.Survey.SurveyAbstractFactory;
-import CSCI5308.GroupFormationTool.WelcomePage.IndexController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -13,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import CSCI5308.GroupFormationTool.SystemConfig;
 import CSCI5308.GroupFormationTool.Survey.ISurveyManagePersistence;
 
 @Controller

@@ -1,58 +1,214 @@
-2020-07-14 20:49:21,567 INFO o.s.b.StartupInfoLogger [restartedMain] Starting GroupFormationToolApplication on DESKTOP-FS0KFH1 with PID 12048 (started by DELL in D:\Term 2\Adv. Software Dev\M3\group21)
-2020-07-14 20:49:21,598 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2020-07-14 20:49:21,817 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2020-07-14 20:49:21,817 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2020-07-14 20:49:24,170 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
-2020-07-14 20:49:24,201 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
-2020-07-14 20:49:24,201 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
-2020-07-14 20:49:24,201 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.30]
-2020-07-14 20:49:24,390 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
-2020-07-14 20:49:24,390 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 2573 ms
-2020-07-14 20:49:24,803 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Creating filter chain: Ant [pattern='/resources/**'], []
-2020-07-14 20:49:24,841 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4ecc4dd9, org.springframework.security.web.context.SecurityContextPersistenceFilter@7c43dbf0, org.springframework.security.web.header.HeaderWriterFilter@3511a63, org.springframework.security.web.csrf.CsrfFilter@62011104, org.springframework.security.web.authentication.logout.LogoutFilter@68e1f600, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@5006b1c2, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1a1e99ce, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7bca7c74, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@70ddc80e, org.springframework.security.web.session.SessionManagementFilter@26b03a57, org.springframework.security.web.access.ExceptionTranslationFilter@3c6b57b3, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7357da84]
-2020-07-14 20:49:24,977 INFO o.s.s.c.ExecutorConfigurationSupport [restartedMain] Initializing ExecutorService 'applicationTaskExecutor'
-2020-07-14 20:49:25,122 INFO o.s.b.a.w.s.WelcomePageHandlerMapping [restartedMain] Adding welcome page template: index
-2020-07-14 20:49:25,357 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
-2020-07-14 20:49:25,385 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
-2020-07-14 20:49:25,417 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
-2020-07-14 20:49:25,421 INFO o.s.b.StartupInfoLogger [restartedMain] Started GroupFormationToolApplication in 4.451 seconds (JVM running for 7.516)
-2020-07-14 20:49:25,661 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-07-14 20:49:25,662 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
-2020-07-14 20:49:25,677 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 15 ms
-2020-07-14 20:49:25,754 INFO C.G.W.IndexController [http-nio-8080-exec-1] Welcome to Group Formation Tool !!!! :- 
-2020-07-14 20:49:26,364 INFO C.G.C.CourseDB [http-nio-8080-exec-1] Operation = FetchAllCourses, Status = Success, RowCount=11
-2020-07-14 20:49:30,151 INFO C.G.W.IndexController [http-nio-8080-exec-8] Welcome to Group Formation Tool !!!! :- 
-2020-07-14 20:49:30,492 INFO C.G.C.CourseDB [http-nio-8080-exec-8] Operation = FetchAllCourses, Status = Success, RowCount=11
-2020-07-14 20:49:33,423 INFO C.G.C.CourseController [http-nio-8080-exec-1] Username:-Akshay, login = Success
-2020-07-14 20:49:33,784 ERROR C.G.C.CourseDB [http-nio-8080-exec-1] Status = Failed, Error Message=null
-2020-07-14 20:49:34,278 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-1] Operation = LoadUserRoleForCourse, Status = Success, RowCount=0
-2020-07-14 20:50:12,554 INFO C.G.W.IndexController [http-nio-8080-exec-7] Welcome to Group Formation Tool !!!! :- 
-2020-07-14 20:50:12,868 INFO C.G.C.CourseDB [http-nio-8080-exec-7] Operation = FetchAllCourses, Status = Success, RowCount=11
-2020-07-14 20:50:14,477 INFO C.G.C.CourseController [http-nio-8080-exec-10] Username:-Akshay, login = Success
-2020-07-14 20:50:14,818 ERROR C.G.C.CourseDB [http-nio-8080-exec-10] Status = Failed, Error Message=null
-2020-07-14 20:50:15,381 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-10] Operation = LoadUserRoleForCourse, Status = Success, RowCount=0
-2020-07-14 20:50:16,840 INFO C.G.W.IndexController [http-nio-8080-exec-1] Welcome to Group Formation Tool !!!! :- 
-2020-07-14 20:50:17,008 INFO C.G.C.CourseDB [http-nio-8080-exec-1] Operation = FetchAllCourses, Status = Success, RowCount=11
-2020-07-14 20:50:23,332 INFO C.G.W.IndexController [http-nio-8080-exec-9] Welcome to Group Formation Tool !!!! :- 
-2020-07-14 20:50:23,512 INFO C.G.C.CourseDB [http-nio-8080-exec-9] Operation = FetchAllCourses, Status = Success, RowCount=11
-2020-07-14 20:50:31,585 INFO C.G.C.CourseDB [http-nio-8080-exec-3] Operation = FetchAllCourses, Status = Success, RowCount=11
-2020-07-14 20:50:32,344 INFO C.G.C.CourseDB [http-nio-8080-exec-5] Operation = FetchAllCourses, Status = Success, RowCount=11
-2020-07-14 20:50:46,022 INFO C.G.W.IndexController [http-nio-8080-exec-10] Welcome to Group Formation Tool !!!! :- 
-2020-07-14 20:50:46,238 INFO C.G.C.CourseDB [http-nio-8080-exec-10] Operation = FetchAllCourses, Status = Success, RowCount=11
-2020-07-14 20:50:50,349 INFO C.G.C.CourseDB [http-nio-8080-exec-3] Operation = FetchAllCourses, Status = Success, RowCount=11
-2020-07-14 20:50:50,611 INFO C.G.C.CourseDB [http-nio-8080-exec-5] Operation = FetchAllCourses, Status = Success, RowCount=11
-2020-07-14 20:50:54,658 ERROR C.G.C.CourseDB [http-nio-8080-exec-4] Status = Failed, Error Message=null
-2020-07-14 20:50:54,829 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-4] Operation = FindUsersWithoutCourseRole, Status = Success, RowCount=22
-2020-07-14 20:51:00,555 INFO C.G.C.CourseAdminController [http-nio-8080-exec-6] Instructor Assigned:[21]for Course: 76
-2020-07-14 20:51:00,737 INFO C.G.C.CourseDB [http-nio-8080-exec-7] Operation = FetchAllCourses, Status = Success, RowCount=11
-2020-07-14 20:51:05,598 INFO C.G.W.IndexController [http-nio-8080-exec-3] Welcome to Group Formation Tool !!!! :- 
-2020-07-14 20:51:05,768 INFO C.G.C.CourseDB [http-nio-8080-exec-3] Operation = FetchAllCourses, Status = Success, RowCount=11
-2020-07-14 20:51:07,873 INFO C.G.C.CourseController [http-nio-8080-exec-6] Username:-Akshay, login = Success
-2020-07-14 20:51:08,232 ERROR C.G.C.CourseDB [http-nio-8080-exec-6] Status = Failed, Error Message=null
-2020-07-14 20:51:08,765 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-6] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
-2020-07-14 20:51:14,383 INFO C.G.C.CourseController [http-nio-8080-exec-8] Username:-Akshay, login = Success
-2020-07-14 20:51:14,733 ERROR C.G.C.CourseDB [http-nio-8080-exec-8] Status = Failed, Error Message=null
-2020-07-14 20:51:15,261 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-8] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
-2020-07-14 20:51:18,271 INFO C.G.C.CourseController [http-nio-8080-exec-10] Username:-Akshay, login = Success
-2020-07-14 20:51:18,623 ERROR C.G.C.CourseDB [http-nio-8080-exec-10] Status = Failed, Error Message=null
-2020-07-14 20:51:19,130 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-10] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 21:18:36,391 INFO o.s.b.StartupInfoLogger [restartedMain] Starting GroupFormationToolApplication on DESKTOP-FS0KFH1 with PID 2808 (started by DELL in D:\Term 2\Adv. Software Dev\M3\group21)
+2020-07-14 21:18:36,406 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-07-14 21:18:36,687 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-07-14 21:18:36,687 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-07-14 21:18:39,085 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2020-07-14 21:18:39,147 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-14 21:18:39,147 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2020-07-14 21:18:39,147 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.30]
+2020-07-14 21:18:39,331 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2020-07-14 21:18:39,331 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 2643 ms
+2020-07-14 21:18:39,761 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Creating filter chain: Ant [pattern='/resources/**'], []
+2020-07-14 21:18:39,803 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1a9dca00, org.springframework.security.web.context.SecurityContextPersistenceFilter@d53c035, org.springframework.security.web.header.HeaderWriterFilter@62011104, org.springframework.security.web.csrf.CsrfFilter@20d790f2, org.springframework.security.web.authentication.logout.LogoutFilter@3f5a6ee0, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@71115caa, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@509547fa, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1c63cb5c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6fcfae9b, org.springframework.security.web.session.SessionManagementFilter@162edc41, org.springframework.security.web.access.ExceptionTranslationFilter@59b4496d, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@612930d0]
+2020-07-14 21:18:39,944 INFO o.s.s.c.ExecutorConfigurationSupport [restartedMain] Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-14 21:18:40,086 INFO o.s.b.a.w.s.WelcomePageHandlerMapping [restartedMain] Adding welcome page template: index
+2020-07-14 21:18:40,347 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2020-07-14 21:18:40,370 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2020-07-14 21:18:40,401 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-14 21:18:40,401 INFO o.s.b.StartupInfoLogger [restartedMain] Started GroupFormationToolApplication in 4.602 seconds (JVM running for 7.194)
+2020-07-14 21:18:47,636 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-14 21:18:47,637 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2020-07-14 21:18:47,646 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 9 ms
+2020-07-14 21:18:47,707 INFO C.G.W.IndexController [http-nio-8080-exec-1] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 21:18:48,181 INFO C.G.C.CourseDB [http-nio-8080-exec-1] Operation = FetchAllCourses, Status = Success, RowCount=12
+2020-07-14 21:18:51,323 INFO C.G.W.IndexController [http-nio-8080-exec-8] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 21:18:51,501 INFO C.G.C.CourseDB [http-nio-8080-exec-8] Operation = FetchAllCourses, Status = Success, RowCount=12
+2020-07-14 21:18:53,354 INFO C.G.C.CourseController [http-nio-8080-exec-1] Username:-Akshay, login = Success
+2020-07-14 21:18:53,758 ERROR C.G.C.CourseDB [http-nio-8080-exec-1] Status = Failed, Error Message=null
+2020-07-14 21:18:54,317 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-1] Operation = LoadUserRoleForCourse, Status = Success, RowCount=0
+2020-07-14 21:19:00,573 INFO C.G.W.IndexController [http-nio-8080-exec-7] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 21:19:00,733 INFO C.G.C.CourseDB [http-nio-8080-exec-7] Operation = FetchAllCourses, Status = Success, RowCount=12
+2020-07-14 21:19:02,395 INFO C.G.C.CourseController [http-nio-8080-exec-10] Username:-Akshay, login = Success
+2020-07-14 21:19:02,736 ERROR C.G.C.CourseDB [http-nio-8080-exec-10] Status = Failed, Error Message=null
+2020-07-14 21:19:03,250 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-10] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 21:19:07,656 INFO C.G.C.CourseController [http-nio-8080-exec-3] Username:-Akshay, login = Success
+2020-07-14 21:19:07,985 ERROR C.G.C.CourseDB [http-nio-8080-exec-3] Status = Failed, Error Message=null
+2020-07-14 21:19:08,483 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-3] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 21:23:12,935 INFO C.G.W.IndexController [http-nio-8080-exec-2] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 21:23:13,118 INFO C.G.C.CourseDB [http-nio-8080-exec-2] Operation = FetchAllCourses, Status = Success, RowCount=12
+2020-07-14 21:23:13,256 INFO C.G.W.IndexController [http-nio-8080-exec-6] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 21:23:13,416 INFO C.G.C.CourseDB [http-nio-8080-exec-6] Operation = FetchAllCourses, Status = Success, RowCount=12
+2020-07-14 21:23:17,913 INFO C.G.C.CourseController [http-nio-8080-exec-9] Username:-Akshay, login = Success
+2020-07-14 21:23:18,263 ERROR C.G.C.CourseDB [http-nio-8080-exec-9] Status = Failed, Error Message=null
+2020-07-14 21:23:18,802 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-9] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 21:25:05,416 INFO C.G.W.IndexController [http-nio-8080-exec-9] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 21:25:05,582 INFO C.G.C.CourseDB [http-nio-8080-exec-9] Operation = FetchAllCourses, Status = Success, RowCount=12
+2020-07-14 21:25:05,654 INFO C.G.W.IndexController [http-nio-8080-exec-3] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 21:25:05,814 INFO C.G.C.CourseDB [http-nio-8080-exec-3] Operation = FetchAllCourses, Status = Success, RowCount=12
+2020-07-14 21:25:07,781 INFO C.G.C.CourseController [http-nio-8080-exec-5] Username:-Akshay, login = Success
+2020-07-14 21:25:08,150 ERROR C.G.C.CourseDB [http-nio-8080-exec-5] Status = Failed, Error Message=null
+2020-07-14 21:25:08,649 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-5] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 21:42:10,703 INFO C.G.W.IndexController [http-nio-8080-exec-5] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 21:42:10,858 INFO C.G.C.CourseDB [http-nio-8080-exec-5] Operation = FetchAllCourses, Status = Success, RowCount=12
+2020-07-14 21:42:10,911 INFO C.G.W.IndexController [http-nio-8080-exec-8] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 21:42:11,070 INFO C.G.C.CourseDB [http-nio-8080-exec-8] Operation = FetchAllCourses, Status = Success, RowCount=12
+2020-07-14 21:42:13,565 INFO C.G.C.CourseController [http-nio-8080-exec-10] Username:-Akshay, login = Success
+2020-07-14 21:42:13,913 ERROR C.G.C.CourseDB [http-nio-8080-exec-10] Status = Failed, Error Message=null
+2020-07-14 21:42:14,423 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-10] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 21:54:47,545 INFO C.G.W.IndexController [http-nio-8080-exec-4] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 21:54:47,712 INFO C.G.C.CourseDB [http-nio-8080-exec-4] Operation = FetchAllCourses, Status = Success, RowCount=12
+2020-07-14 21:54:50,118 INFO C.G.C.CourseController [http-nio-8080-exec-6] Username:-ins, login = Success
+2020-07-14 21:54:50,479 ERROR C.G.C.CourseDB [http-nio-8080-exec-6] Status = Failed, Error Message=null
+2020-07-14 21:54:50,988 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-6] Operation = LoadUserRoleForCourse, Status = Success, RowCount=0
+2020-07-14 21:54:52,038 INFO C.G.W.IndexController [http-nio-8080-exec-8] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 21:54:52,202 INFO C.G.C.CourseDB [http-nio-8080-exec-8] Operation = FetchAllCourses, Status = Success, RowCount=12
+2020-07-14 21:54:53,262 INFO C.G.C.CourseController [http-nio-8080-exec-1] Username:-ins, login = Success
+2020-07-14 21:54:53,649 ERROR C.G.C.CourseDB [http-nio-8080-exec-1] Status = Failed, Error Message=null
+2020-07-14 21:54:54,142 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-1] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 21:55:17,061 INFO C.G.W.IndexController [http-nio-8080-exec-1] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 21:55:17,221 INFO C.G.C.CourseDB [http-nio-8080-exec-1] Operation = FetchAllCourses, Status = Success, RowCount=12
+2020-07-14 21:55:17,274 INFO C.G.W.IndexController [http-nio-8080-exec-3] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 21:55:17,460 INFO C.G.C.CourseDB [http-nio-8080-exec-3] Operation = FetchAllCourses, Status = Success, RowCount=12
+2020-07-14 21:55:19,789 INFO C.G.C.CourseController [http-nio-8080-exec-7] Username:-ins, login = Success
+2020-07-14 21:55:20,106 ERROR C.G.C.CourseDB [http-nio-8080-exec-7] Status = Failed, Error Message=null
+2020-07-14 21:55:20,615 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-7] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 21:57:15,370 INFO C.G.W.IndexController [http-nio-8080-exec-2] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 21:57:15,556 INFO C.G.C.CourseDB [http-nio-8080-exec-2] Operation = FetchAllCourses, Status = Success, RowCount=12
+2020-07-14 21:57:15,574 INFO C.G.W.IndexController [http-nio-8080-exec-4] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 21:57:15,731 INFO C.G.C.CourseDB [http-nio-8080-exec-4] Operation = FetchAllCourses, Status = Success, RowCount=12
+2020-07-14 21:57:18,321 INFO C.G.C.CourseController [http-nio-8080-exec-1] Username:-ins, login = Success
+2020-07-14 21:57:18,656 ERROR C.G.C.CourseDB [http-nio-8080-exec-1] Status = Failed, Error Message=null
+2020-07-14 21:57:19,194 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-1] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 21:57:43,366 INFO C.G.C.CourseController [http-nio-8080-exec-10] Username:-ins, login = Success
+2020-07-14 21:57:43,689 ERROR C.G.C.CourseDB [http-nio-8080-exec-10] Status = Failed, Error Message=null
+2020-07-14 21:57:44,182 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-10] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 21:58:13,847 INFO C.G.W.IndexController [http-nio-8080-exec-2] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 21:58:14,004 INFO C.G.C.CourseDB [http-nio-8080-exec-2] Operation = FetchAllCourses, Status = Success, RowCount=12
+2020-07-14 21:58:19,560 INFO C.G.W.IndexController [http-nio-8080-exec-3] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 21:58:19,732 INFO C.G.C.CourseDB [http-nio-8080-exec-3] Operation = FetchAllCourses, Status = Success, RowCount=12
+2020-07-14 21:58:39,611 INFO C.G.C.CourseDB [http-nio-8080-exec-1] Operation = FetchAllCourses, Status = Success, RowCount=12
+2020-07-14 21:58:44,662 INFO C.G.C.CourseDB [http-nio-8080-exec-9] Operation = DeleteCourse, Status = Success, RowCount=84
+2020-07-14 21:58:44,662 INFO C.G.C.CourseAdminController [http-nio-8080-exec-9] Course Deleted :84
+2020-07-14 21:58:44,835 INFO C.G.C.CourseDB [http-nio-8080-exec-10] Operation = FetchAllCourses, Status = Success, RowCount=11
+2020-07-14 21:58:45,770 INFO C.G.C.CourseDB [http-nio-8080-exec-3] Operation = DeleteCourse, Status = Success, RowCount=83
+2020-07-14 21:58:45,771 INFO C.G.C.CourseAdminController [http-nio-8080-exec-3] Course Deleted :83
+2020-07-14 21:58:45,939 INFO C.G.C.CourseDB [http-nio-8080-exec-2] Operation = FetchAllCourses, Status = Success, RowCount=10
+2020-07-14 21:58:48,757 INFO C.G.C.CourseDB [http-nio-8080-exec-7] Operation = DeleteCourse, Status = Success, RowCount=82
+2020-07-14 21:58:48,758 INFO C.G.C.CourseAdminController [http-nio-8080-exec-7] Course Deleted :82
+2020-07-14 21:58:48,930 INFO C.G.C.CourseDB [http-nio-8080-exec-5] Operation = FetchAllCourses, Status = Success, RowCount=9
+2020-07-14 21:58:51,906 ERROR C.G.C.CourseDB [http-nio-8080-exec-4] Status = Failed, Error Message=null
+2020-07-14 21:58:52,073 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-4] Operation = FindUsersWithoutCourseRole, Status = Success, RowCount=23
+2020-07-14 21:59:03,662 INFO C.G.C.CourseAdminController [http-nio-8080-exec-8] Instructor Assigned:[26]for Course: 2
+2020-07-14 21:59:03,816 INFO C.G.C.CourseDB [http-nio-8080-exec-6] Operation = FetchAllCourses, Status = Success, RowCount=9
+2020-07-14 21:59:09,837 INFO C.G.W.IndexController [http-nio-8080-exec-7] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 21:59:09,991 INFO C.G.C.CourseDB [http-nio-8080-exec-7] Operation = FetchAllCourses, Status = Success, RowCount=9
+2020-07-14 21:59:12,546 INFO C.G.C.CourseController [http-nio-8080-exec-8] Username:-Akshay, login = Success
+2020-07-14 21:59:12,856 ERROR C.G.C.CourseDB [http-nio-8080-exec-8] Status = Failed, Error Message=null
+2020-07-14 21:59:13,344 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-8] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 21:59:41,790 INFO C.G.W.IndexController [http-nio-8080-exec-6] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 21:59:41,951 INFO C.G.C.CourseDB [http-nio-8080-exec-6] Operation = FetchAllCourses, Status = Success, RowCount=9
+2020-07-14 21:59:42,032 INFO C.G.W.IndexController [http-nio-8080-exec-10] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 21:59:42,187 INFO C.G.C.CourseDB [http-nio-8080-exec-10] Operation = FetchAllCourses, Status = Success, RowCount=9
+2020-07-14 21:59:46,593 INFO C.G.C.CourseController [http-nio-8080-exec-7] Username:-Akshay, login = Success
+2020-07-14 21:59:46,930 ERROR C.G.C.CourseDB [http-nio-8080-exec-7] Status = Failed, Error Message=null
+2020-07-14 21:59:47,414 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-7] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 22:00:45,829 INFO C.G.C.CourseController [http-nio-8080-exec-8] Username:-Akshay, login = Success
+2020-07-14 22:00:46,186 ERROR C.G.C.CourseDB [http-nio-8080-exec-8] Status = Failed, Error Message=null
+2020-07-14 22:00:46,750 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-8] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 22:00:50,891 INFO C.G.W.IndexController [http-nio-8080-exec-6] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 22:00:51,056 INFO C.G.C.CourseDB [http-nio-8080-exec-6] Operation = FetchAllCourses, Status = Success, RowCount=9
+2020-07-14 22:00:51,423 INFO C.G.W.IndexController [http-nio-8080-exec-10] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 22:00:51,574 INFO C.G.C.CourseDB [http-nio-8080-exec-10] Operation = FetchAllCourses, Status = Success, RowCount=9
+2020-07-14 22:00:53,706 INFO C.G.C.CourseController [http-nio-8080-exec-7] Username:-Akshay, login = Success
+2020-07-14 22:00:54,037 ERROR C.G.C.CourseDB [http-nio-8080-exec-7] Status = Failed, Error Message=null
+2020-07-14 22:00:54,533 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-7] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 22:00:59,143 INFO C.G.C.CourseController [http-nio-8080-exec-4] Username:-Akshay, login = Success
+2020-07-14 22:00:59,492 ERROR C.G.C.CourseDB [http-nio-8080-exec-4] Status = Failed, Error Message=null
+2020-07-14 22:01:00,031 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-4] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 22:01:09,441 INFO C.G.C.CourseController [http-nio-8080-exec-6] Username:-Akshay, login = Success
+2020-07-14 22:01:09,759 ERROR C.G.C.CourseDB [http-nio-8080-exec-6] Status = Failed, Error Message=null
+2020-07-14 22:01:10,261 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-6] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 22:01:14,102 INFO C.G.C.CourseController [http-nio-8080-exec-9] Username:-Akshay, login = Success
+2020-07-14 22:01:14,439 ERROR C.G.C.CourseDB [http-nio-8080-exec-9] Status = Failed, Error Message=null
+2020-07-14 22:01:14,965 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-9] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 22:01:51,945 INFO C.G.W.IndexController [http-nio-8080-exec-9] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 22:01:52,113 INFO C.G.C.CourseDB [http-nio-8080-exec-9] Operation = FetchAllCourses, Status = Success, RowCount=9
+2020-07-14 22:01:52,168 INFO C.G.W.IndexController [http-nio-8080-exec-2] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 22:01:52,362 INFO C.G.C.CourseDB [http-nio-8080-exec-2] Operation = FetchAllCourses, Status = Success, RowCount=9
+2020-07-14 22:01:55,778 INFO C.G.C.CourseController [http-nio-8080-exec-4] Username:-Akshay, login = Success
+2020-07-14 22:01:56,126 ERROR C.G.C.CourseDB [http-nio-8080-exec-4] Status = Failed, Error Message=null
+2020-07-14 22:01:56,641 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-4] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 22:02:01,448 INFO C.G.C.CourseController [http-nio-8080-exec-6] Username:-Akshay, login = Success
+2020-07-14 22:02:01,808 ERROR C.G.C.CourseDB [http-nio-8080-exec-6] Status = Failed, Error Message=null
+2020-07-14 22:02:02,281 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-6] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 22:02:07,011 INFO C.G.W.IndexController [http-nio-8080-exec-7] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 22:02:07,185 INFO C.G.C.CourseDB [http-nio-8080-exec-7] Operation = FetchAllCourses, Status = Success, RowCount=9
+2020-07-14 22:02:15,261 INFO C.G.C.CourseDB [http-nio-8080-exec-8] Operation = FetchAllCourses, Status = Success, RowCount=9
+2020-07-14 22:02:16,904 INFO C.G.C.CourseDB [http-nio-8080-exec-6] Operation = FetchAllCourses, Status = Success, RowCount=9
+2020-07-14 22:02:23,779 INFO C.G.C.CourseDB [http-nio-8080-exec-1] Operation = Course Created, Status = Success, CourseID=-1
+2020-07-14 22:02:23,780 INFO C.G.C.CourseAdminController [http-nio-8080-exec-1] Course Created :test
+2020-07-14 22:02:23,934 INFO C.G.C.CourseDB [http-nio-8080-exec-9] Operation = FetchAllCourses, Status = Success, RowCount=10
+2020-07-14 22:02:25,986 ERROR C.G.C.CourseDB [http-nio-8080-exec-3] Status = Failed, Error Message=null
+2020-07-14 22:02:26,146 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-3] Operation = FindUsersWithoutCourseRole, Status = Success, RowCount=26
+2020-07-14 22:02:36,052 INFO C.G.C.CourseAdminController [http-nio-8080-exec-10] Instructor Assigned:[26]for Course: 85
+2020-07-14 22:02:36,219 INFO C.G.C.CourseDB [http-nio-8080-exec-2] Operation = FetchAllCourses, Status = Success, RowCount=10
+2020-07-14 22:02:40,997 INFO C.G.W.IndexController [http-nio-8080-exec-1] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 22:02:41,192 INFO C.G.C.CourseDB [http-nio-8080-exec-1] Operation = FetchAllCourses, Status = Success, RowCount=10
+2020-07-14 22:02:43,627 INFO C.G.C.CourseController [http-nio-8080-exec-10] Username:-Akshay, login = Success
+2020-07-14 22:02:43,934 ERROR C.G.C.CourseDB [http-nio-8080-exec-10] Status = Failed, Error Message=null
+2020-07-14 22:02:44,425 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-10] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 22:02:50,072 INFO C.G.C.CourseController [http-nio-8080-exec-7] Username:-Akshay, login = Success
+2020-07-14 22:02:50,408 ERROR C.G.C.CourseDB [http-nio-8080-exec-7] Status = Failed, Error Message=null
+2020-07-14 22:02:50,904 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-7] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 22:15:04,808 INFO C.G.W.IndexController [http-nio-8080-exec-7] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 22:15:04,976 INFO C.G.C.CourseDB [http-nio-8080-exec-7] Operation = FetchAllCourses, Status = Success, RowCount=10
+2020-07-14 22:15:05,823 INFO C.G.W.IndexController [http-nio-8080-exec-5] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 22:15:05,977 INFO C.G.C.CourseDB [http-nio-8080-exec-5] Operation = FetchAllCourses, Status = Success, RowCount=10
+2020-07-14 22:15:09,171 INFO C.G.C.CourseController [http-nio-8080-exec-9] Username:-Akshay, login = Success
+2020-07-14 22:15:09,520 ERROR C.G.C.CourseDB [http-nio-8080-exec-9] Status = Failed, Error Message=null
+2020-07-14 22:15:10,024 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-9] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 22:21:08,548 INFO C.G.W.IndexController [http-nio-8080-exec-4] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 22:21:08,716 INFO C.G.C.CourseDB [http-nio-8080-exec-4] Operation = FetchAllCourses, Status = Success, RowCount=10
+2020-07-14 22:21:13,196 INFO C.G.C.CourseDB [http-nio-8080-exec-1] Operation = FetchAllCourses, Status = Success, RowCount=10
+2020-07-14 22:21:14,225 INFO C.G.C.CourseDB [http-nio-8080-exec-9] Operation = FetchAllCourses, Status = Success, RowCount=10
+2020-07-14 22:21:18,145 ERROR C.G.C.CourseDB [http-nio-8080-exec-3] Status = Failed, Error Message=null
+2020-07-14 22:21:18,301 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-3] Operation = FindUsersWithoutCourseRole, Status = Success, RowCount=27
+2020-07-14 22:21:26,723 INFO C.G.C.CourseAdminController [http-nio-8080-exec-10] Instructor Assigned:[27]for Course: 55
+2020-07-14 22:21:26,883 INFO C.G.C.CourseDB [http-nio-8080-exec-2] Operation = FetchAllCourses, Status = Success, RowCount=10
+2020-07-14 22:21:34,718 INFO C.G.W.IndexController [http-nio-8080-exec-1] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 22:21:34,874 INFO C.G.C.CourseDB [http-nio-8080-exec-1] Operation = FetchAllCourses, Status = Success, RowCount=10
+2020-07-14 22:21:40,490 INFO C.G.C.CourseController [http-nio-8080-exec-10] Username:-abbc, login = Success
+2020-07-14 22:21:40,867 ERROR C.G.C.CourseDB [http-nio-8080-exec-10] Status = Failed, Error Message=null
+2020-07-14 22:21:41,357 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-10] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 22:21:57,661 INFO C.G.C.CourseController [http-nio-8080-exec-7] Username:-abbc, login = Success
+2020-07-14 22:21:57,961 ERROR C.G.C.CourseDB [http-nio-8080-exec-7] Status = Failed, Error Message=null
+2020-07-14 22:21:58,446 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-7] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 22:22:03,462 INFO C.G.W.IndexController [http-nio-8080-exec-9] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 22:22:03,627 INFO C.G.C.CourseDB [http-nio-8080-exec-9] Operation = FetchAllCourses, Status = Success, RowCount=10
+2020-07-14 22:22:12,811 INFO C.G.C.CourseDB [http-nio-8080-exec-2] Operation = FetchAllCourses, Status = Success, RowCount=10
+2020-07-14 22:22:12,997 INFO C.G.C.CourseDB [http-nio-8080-exec-7] Operation = FetchAllCourses, Status = Success, RowCount=10
+2020-07-14 22:22:17,852 INFO C.G.C.CourseDB [http-nio-8080-exec-8] Operation = Course Created, Status = Success, CourseID=-1
+2020-07-14 22:22:17,853 INFO C.G.C.CourseAdminController [http-nio-8080-exec-8] Course Created :testfinal
+2020-07-14 22:22:18,007 INFO C.G.C.CourseDB [http-nio-8080-exec-4] Operation = FetchAllCourses, Status = Success, RowCount=11
+2020-07-14 22:22:20,022 ERROR C.G.C.CourseDB [http-nio-8080-exec-5] Status = Failed, Error Message=null
+2020-07-14 22:22:20,264 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-5] Operation = FindUsersWithoutCourseRole, Status = Success, RowCount=27
+2020-07-14 22:22:23,927 INFO C.G.C.CourseAdminController [http-nio-8080-exec-6] Instructor Assigned:[27]for Course: 86
+2020-07-14 22:22:24,079 INFO C.G.C.CourseDB [http-nio-8080-exec-1] Operation = FetchAllCourses, Status = Success, RowCount=11
+2020-07-14 22:22:29,302 INFO C.G.W.IndexController [http-nio-8080-exec-8] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 22:22:29,455 INFO C.G.C.CourseDB [http-nio-8080-exec-8] Operation = FetchAllCourses, Status = Success, RowCount=11
+2020-07-14 22:22:32,376 INFO C.G.C.CourseController [http-nio-8080-exec-6] Username:-abbc, login = Success
+2020-07-14 22:22:32,707 ERROR C.G.C.CourseDB [http-nio-8080-exec-6] Status = Failed, Error Message=null
+2020-07-14 22:22:33,191 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-6] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 22:22:37,004 INFO C.G.C.CourseController [http-nio-8080-exec-9] Username:-abbc, login = Success
+2020-07-14 22:22:37,348 ERROR C.G.C.CourseDB [http-nio-8080-exec-9] Status = Failed, Error Message=null
+2020-07-14 22:22:37,848 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-9] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 22:28:58,816 INFO C.G.C.CourseController [http-nio-8080-exec-8] Username:-abbc, login = Success
+2020-07-14 22:28:59,150 ERROR C.G.C.CourseDB [http-nio-8080-exec-8] Status = Failed, Error Message=null
+2020-07-14 22:28:59,683 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-8] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-14 22:29:15,060 INFO C.G.W.IndexController [http-nio-8080-exec-3] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 22:29:15,223 INFO C.G.C.CourseDB [http-nio-8080-exec-3] Operation = FetchAllCourses, Status = Success, RowCount=11
+2020-07-14 22:29:15,297 INFO C.G.W.IndexController [http-nio-8080-exec-7] Welcome to Group Formation Tool !!!! :- 
+2020-07-14 22:29:15,454 INFO C.G.C.CourseDB [http-nio-8080-exec-7] Operation = FetchAllCourses, Status = Success, RowCount=11
+2020-07-14 22:29:18,242 INFO C.G.C.CourseController [http-nio-8080-exec-5] Username:-abbc, login = Success
+2020-07-14 22:29:18,571 ERROR C.G.C.CourseDB [http-nio-8080-exec-5] Status = Failed, Error Message=null
+2020-07-14 22:29:19,071 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-5] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1

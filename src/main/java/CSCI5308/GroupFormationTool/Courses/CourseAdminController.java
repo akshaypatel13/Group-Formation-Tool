@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import CSCI5308.GroupFormationTool.AccessControl.UserAbstractFactory;
-import CSCI5308.GroupFormationTool.WelcomePage.IndexController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -15,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import CSCI5308.GroupFormationTool.SystemConfig;
 import CSCI5308.GroupFormationTool.AccessControl.IUser;
-import CSCI5308.GroupFormationTool.AccessControl.IUserAbstractFactory;
 
 @Controller
 public class CourseAdminController
