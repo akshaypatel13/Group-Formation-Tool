@@ -5,6 +5,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.ArrayList;
 import java.util.List;
 
+import CSCI5308.GroupFormationTool.AccessControl.IUser;
+import CSCI5308.GroupFormationTool.AccessControl.UserAbstractFactory;
+import CSCI5308.GroupFormationTool.AccessControlTest.IUserDBMock;
+import CSCI5308.GroupFormationTool.AccessControlTest.IUserTest;
+import CSCI5308.GroupFormationTool.AccessControlTest.UserAbstractFactoryMock;
+import CSCI5308.GroupFormationTool.Courses.CourseAbstractFactory;
+import CSCI5308.GroupFormationTool.Courses.ICourse;
+import CSCI5308.GroupFormationTool.SecurityTest.SecurityTestAbstarctFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
@@ -22,11 +30,12 @@ class StudentCSVImportTest {
 
 	@Test
 	public void enrollStudentFromRecord() {
-		User user = new User();
-		Course course = new Course();
-		IUserPersistence userDB = new UserDBMock();
-		IPasswordEncryption passwordEncryption = new PasswordEncryptionMock();
-		Assert.isTrue(user.createUser(userDB, passwordEncryption, null));
+		IUserTest userTest = UserAbstractFactoryMock.instance().getUser();
+		IUser user = UserAbstractFactory.instance().createUserInstance();
+		ICourse course = CourseAbstractFactory.instance().createCourseInstance();
+		IUserDBMock userDB = UserAbstractFactoryMock.instance().getUserDBMock();
+		IPasswordEncryption passwordEncryption = SecurityTestAbstarctFactory.instance().getPasswordEncryption();
+		Assert.isTrue(userTest.createUserTest(userDB, null,user));
 		Assert.isTrue(course.enrollUserInCourse(Role.STUDENT, user) == false);
 	}
 

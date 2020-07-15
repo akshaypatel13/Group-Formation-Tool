@@ -4,36 +4,39 @@ import CSCI5308.GroupFormationTool.AccessControl.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
 @SpringBootTest
 @SuppressWarnings("deprecation")
-public class UserTest
+public class UserTest implements IUserTest
 {
-  private IUser userInstance=new User();
+
 	@Test
 	public void ConstructorTests()
 	{
-		User u = new User();
+		IUser u = UserAbstractFactory.instance().createUserInstance();
 		Assert.isTrue(u.getBannerID().isEmpty());
 		Assert.isTrue(u.getFirstName().isEmpty());
 		Assert.isTrue(u.getLastName().isEmpty());
 		Assert.isTrue(u.getEmail().isEmpty());
-		
-		IUserPersistence userDBMock = new UserDBMock();
-		u = new User(1, userDBMock);
-		Assert.isTrue(u.getBannerID().equals("B00000000"));
-		
-		u = new User("B00000000", userDBMock);
-		Assert.isTrue(u.getBannerID().equals("B00000000"));
+		IUser user = UserAbstractFactory.instance().createUserInstance();
+		IUserDBMock userDBMock = UserAbstractFactoryMock.instance().getUserDBMock();
+		user.setBannerID("B00000000");
+		user.setPassword("Pass@123");
+		user.setFirstName("Rob");
+		user.setLastName("Hawkey");
+		user.setEmail("rhawkey@dal.ca");
+		Assert.isTrue(userDBMock.createUser(user));
+		assertThat(user.equals("Z000000")).isFalse();
 	}
 	
 	@Test
 	public void setIDTest()
 	{
-		User u = new User();
+		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setID(10);
 		Assert.isTrue(10 == u.getID());
 	}
@@ -41,7 +44,7 @@ public class UserTest
 	@Test
 	public void getIDTest()
 	{
-		User u = new User();
+		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setID(10);
 		Assert.isTrue(10 == u.getID());
 	}
@@ -49,7 +52,7 @@ public class UserTest
 	@Test
 	public void setBannerIDTest()
 	{
-		User u = new User();
+		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setBannerID("B00000000");
 		Assert.isTrue(u.getBannerID().equals("B00000000"));
 	}
@@ -57,7 +60,7 @@ public class UserTest
 	@Test
 	public void getBannerIDTest()
 	{
-		User u = new User();
+		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setBannerID("B00000000");
 		Assert.isTrue(u.getBannerID().equals("B00000000"));
 	}
@@ -65,7 +68,7 @@ public class UserTest
 	@Test
 	public void setFirstNameTest()
 	{
-		User u = new User();
+		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setFirstName("Rob");
 		Assert.isTrue(u.getFirstName().equals("Rob"));
 	}
@@ -73,7 +76,7 @@ public class UserTest
 	@Test
 	public void getFirstNameTest()
 	{
-		User u = new User();
+		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setFirstName("Rob");
 		Assert.isTrue(u.getFirstName().equals("Rob"));
 	}
@@ -81,7 +84,7 @@ public class UserTest
 	@Test
 	public void setLastNameTest()
 	{
-		User u = new User();
+		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setLastName("Hawkey");
 		Assert.isTrue(u.getLastName().equals("Hawkey"));
 	}
@@ -89,7 +92,7 @@ public class UserTest
 	@Test
 	public void getLastNameTest()
 	{
-		User u = new User();
+		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setLastName("Hawkey");
 		Assert.isTrue(u.getLastName().equals("Hawkey"));
 	}
@@ -97,7 +100,7 @@ public class UserTest
 	@Test
 	public void setEmailTest()
 	{
-		User u = new User();
+		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setEmail("rhawkey@dal.ca");
 		Assert.isTrue(u.getEmail().equals("rhawkey@dal.ca"));
 	}
@@ -105,7 +108,7 @@ public class UserTest
 	@Test
 	public void getEmailTest()
 	{
-		User u = new User();
+		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setEmail("rhawkey@dal.ca");
 		Assert.isTrue(u.getEmail().equals("rhawkey@dal.ca"));
 	}
@@ -113,8 +116,8 @@ public class UserTest
 	@Test
 	public void createUser()
 	{		
-		IUserPersistence userDB = new UserDBMock();
-		User user = new User();
+		IUserDBMock userDB = UserAbstractFactoryMock.instance().getUserDBMock();
+		IUser user = UserAbstractFactory.instance().createUserInstance();
 		userDB.createUser(user);
 		Assert.isTrue(user.getId() == 0);
 		Assert.isTrue(user.getBannerID().equals("B00000000"));
@@ -123,6 +126,7 @@ public class UserTest
 	@Test
 	public void isBannerIDValidTest()
 	{
+		IUser userInstance = UserAbstractFactory.instance().createUserInstance();
 		Assert.isTrue(userInstance.isBannerIDValid("B000000000"));
 		assertThat(userInstance.isBannerIDValid(null)).isFalse();
 		assertThat(userInstance.isBannerIDValid("")).isFalse();
@@ -131,6 +135,7 @@ public class UserTest
 	@Test
 	public void isFirstNameValidTest()
 	{
+		IUser userInstance = UserAbstractFactory.instance().createUserInstance();
 		Assert.isTrue(userInstance.isFirstNameValid("rob"));
 		assertThat(userInstance.isFirstNameValid(null)).isFalse();
 		assertThat(userInstance.isFirstNameValid("")).isFalse();
@@ -139,6 +144,7 @@ public class UserTest
 	@Test
 	public void isLastNameValidTest()
 	{
+		IUser userInstance = UserAbstractFactory.instance().createUserInstance();
 		Assert.isTrue(userInstance.isLastNameValid("hawkey"));
 		assertThat(userInstance.isLastNameValid(null)).isFalse();
 		assertThat(userInstance.isLastNameValid("")).isFalse();
@@ -147,10 +153,26 @@ public class UserTest
 	@Test
 	public void isEmailValidTest()
 	{
+		IUser userInstance = UserAbstractFactory.instance().createUserInstance();
 		Assert.isTrue(userInstance.isEmailValid("rhawkey@dal.ca"));
 		assertThat(userInstance.isEmailValid(null)).isFalse();
 		assertThat(userInstance.isEmailValid("")).isFalse();
 		assertThat(userInstance.isEmailValid("@dal.ca")).isFalse();
 		assertThat(userInstance.isEmailValid("rhawkey@")).isFalse();
-	}	
+	}
+
+	public boolean createUserTest(
+			IUserDBMock userDB,
+			IUserNotifications notification,
+			IUser user
+	)
+	{
+		String rawPassword = "password";
+		boolean success = userDB.createUser(user);
+		if (success && (null != notification))
+		{
+			notification.sendUserLoginCredentials(user, rawPassword);
+		}
+		return success;
+	}
 }
