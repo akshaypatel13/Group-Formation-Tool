@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import CSCI5308.GroupFormationTool.SystemConfig;
 
 import CSCI5308.GroupFormationTool.Survey.ISurveyManagePersistence;
+import CSCI5308.GroupFormationTool.Survey.SurveyManageDB;
 
 @Controller
 public class GroupFormationController {
@@ -21,7 +22,7 @@ public class GroupFormationController {
 	private IGroupCreator groupCreator = new DefaultGroupCreator();
 
 	public GroupFormationController() {
-		surveyManageDB = SystemConfig.instance().getSurveyManageDB();
+		surveyManageDB = new SurveyManageDB();
 	}
 
 	@GetMapping("/formgroups")

@@ -2,6 +2,7 @@ package CSCI5308.GroupFormationTool.Survey;
 
 import CSCI5308.GroupFormationTool.AccessControl.CurrentUser;
 import CSCI5308.GroupFormationTool.QuestionManager.IQuestionPersistence;
+import CSCI5308.GroupFormationTool.QuestionManager.QuestionManagerAbstractFactory;
 import CSCI5308.GroupFormationTool.SystemConfig;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,26 +22,30 @@ public class SurveyAdminController {
 	private ISurveyManagePersistence surveyManageDB;
 	
 
-	public SurveyAdminController() {
-		questionDB = SystemConfig.instance().getQuestionDB();
-		surveyAdminDB = SystemConfig.instance().getSurveyAdminDB();
-		surveyManageDB = SystemConfig.instance().getSurveyManageDB();
+    public SurveyAdminController()
+    {
+        questionDB = QuestionManagerAbstractFactory.instance().createQuestionDBInstance();
+        surveyAdminDB = SurveyAbstractFactory.instance().createSurveyAdminDBInstance();
+        surveyManageDB = SurveyAbstractFactory.instance().createSurveyManageDBInstance();
 
 	}
 
-	@GetMapping("/survey/survey")
-	public String survey(Model model, @RequestParam("courseID") long courseID) {
-		surveyAdminDB.createSurvey(courseID);
-		boolean check = surveyManageDB.surveyPublishedOrNot(courseID);
-		System.out.print("Survey:" + check);
-		model.addAttribute("surveyCheck", check);
-		model.addAttribute("courseID", courseID);
-		long surveyID = surveyManageDB.findSurveyByCourseID(courseID);
-		model.addAttribute("surveyQuestions", surveyManageDB.findSurveyQuestions(surveyID));
-		model.addAttribute("questionsNotInSurvey",
-				surveyManageDB.findQuestionsNotInSurvey(CurrentUser.instance().getCurrentAuthenticatedUser().getID()));
-		return "survey/surveyquestions";
-	}
+
+
+    @GetMapping("/survey/survey")
+    public String survey(Model model, @RequestParam("courseID") long courseID)
+    {
+        surveyAdminDB.createSurvey(courseID);
+        boolean check = surveyManageDB.surveyPublishedOrNot(courseID);
+        long surveyID = surveyManageDB.findSurveyByCourseID(courseID);
+        System.out.print(surveyID);
+        model.addAttribute("surveyCheck", check);
+        model.addAttribute("courseID",courseID);
+        model.addAttribute("surveyQuestions",surveyManageDB.findSurveyQuestions(surveyID));
+        model.addAttribute("questionsNotInSurvey",surveyManageDB.findQuestionsNotInSurvey(CurrentUser.instance().getCurrentAuthenticatedUser().getID()));
+        return "survey/surveyquestions";
+    }
+
 
 	@PostMapping("/survey/insertquestion")
 	public String insertQuestionSurvey(Model model, @RequestParam("questionID") long questionID,
@@ -50,20 +55,13 @@ public class SurveyAdminController {
 		return "redirect:/survey/survey?courseID=" + courseID;
 	}
 
-	@PostMapping("/surveyQuestion/delete")
-	public String deleteSurveyQuestion(Model model, @RequestParam("questionID") long questionId,
-			@RequestParam("courseID") long courseId) {
-		surveyAdminDB.deleteSurveyQuestion(questionId);
-		return "redirect:/survey/survey?courseID=" + courseId;
-	}
 
-	@PostMapping("/survey/publish")
-	public String publishSurvey(Model model, @RequestParam("courseID") long courseId,
-			@RequestParam("groupSize") long groupSize) {
-		System.out.println("GroupSize: " + groupSize);
-		surveyAdminDB.publishSurvey(courseId, groupSize);
-		return "redirect:/survey/survey?courseID=" + courseId;
-	}
+    @PostMapping("/surveyQuestion/delete")
+    public String deleteSurveyQuestion(Model model,@RequestParam("questionID") long questionId, @RequestParam("courseID") long courseId)
+    {
+        surveyAdminDB.deleteSurveyQuestion(questionId);
+        return "redirect:/survey/survey?courseID="+courseId;
+    }
 
 	@GetMapping("/survey/disable")
 	public String disableSurvey(Model model, @RequestParam("courseID") long courseId) {

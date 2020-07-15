@@ -5,7 +5,7 @@ import java.util.List;
 import CSCI5308.GroupFormationTool.AccessControl.CurrentUser;
 import CSCI5308.GroupFormationTool.AccessControl.IUser;
 
-public class Course {
+public class Course implements ICourse {
 	private long id;
 	private String title;
 	private ICourseUserRelationship userRoleDecider;
@@ -19,10 +19,11 @@ public class Course {
 		courseDB.loadCourseByID(id, this);
 	}
 
+
 	public void setDefaults() {
 		id = -1;
 		title = "";
-		userRoleDecider = new CourseUserRelationship();
+		userRoleDecider = CourseAbstractFactory.instance().courseUserInstance();
 	}
 
 	public void setId(long id) {

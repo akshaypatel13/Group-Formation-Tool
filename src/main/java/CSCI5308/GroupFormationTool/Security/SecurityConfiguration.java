@@ -12,11 +12,6 @@ import CSCI5308.GroupFormationTool.SystemConfig;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-	ISecurityAbstractFactory securityAbstractFactory;
-
-	public SecurityConfiguration() {
-		securityAbstractFactory = SystemConfig.instance().getSecurityAbstractFactory();
-	}
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -32,6 +27,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected AuthenticationManager authenticationManager() throws Exception {
-		return securityAbstractFactory.createCustomAuthenticationManager();
+		return new CustomAuthenticationManager();
 	}
 }

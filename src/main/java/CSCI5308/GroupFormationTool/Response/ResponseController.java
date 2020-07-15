@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import CSCI5308.GroupFormationTool.Survey.SurveyAbstractFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,7 @@ public class ResponseController {
 	public ResponseController() 
 	{
 		responseDB = SystemConfig.instance().getResponseDB();
-        surveyAdminDB = SystemConfig.instance().getSurveyAdminDB();
+        surveyAdminDB = SurveyAbstractFactory.instance().createSurveyAdminDBInstance();
 	}
 	
 	@RequestMapping("/response/takingsurvey")
