@@ -12,15 +12,15 @@ class OptionsTest
 	@Test
 	public void ConstructorTests() 
 	{
-		Options options = new Options();
+		IOptions options = new Options();
 		Assert.isTrue(options.getOptionList().size() == 0);
 	}
 	
 	@Test
 	public void getOptionList() 
 	{
-		Options options = new Options();
-		List<OptionValue> list = new ArrayList<OptionValue>();
+		IOptions options = new Options();
+		List<OptionValue> list = new ArrayList<>();
 		list.add(new OptionValue("test","test"));
 		options.setOptionList(list);
 		Assert.isTrue(options.getOptionList() == list);
@@ -30,8 +30,9 @@ class OptionsTest
 	@Test
 	public void setOptionList() 
 	{
-		Options options = new Options();
-		List<OptionValue> list = new ArrayList<OptionValue>();
+
+		IOptions options = new Options();
+		List<OptionValue> list = new ArrayList<>();
 		list.add(new OptionValue("test","test"));
 		options.setOptionList(list);
 		Assert.isTrue(options.getOptionList() == list);

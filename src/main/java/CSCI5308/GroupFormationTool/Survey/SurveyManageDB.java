@@ -1,14 +1,17 @@
 package CSCI5308.GroupFormationTool.Survey;
 
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
-import CSCI5308.GroupFormationTool.QuestionManager.Question;
+import CSCI5308.GroupFormationTool.QuestionManager.IQuestion;
+import CSCI5308.GroupFormationTool.QuestionManager.QuestionManagerAbstractFactory;
 import CSCI5308.GroupFormationTool.QuestionManager.QuestionType;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SurveyManageDB implements ISurveyManagePersistence {
 
@@ -36,14 +39,14 @@ public class SurveyManageDB implements ISurveyManagePersistence {
     }
 
     @Override
-    public List<Question> findSurveyQuestions(long courseID) {
-        List<Question> questionList = new ArrayList<Question>();
+    public List<IQuestion> findSurveyQuestions(long courseID) {
+        List<IQuestion> questionList = new ArrayList<>();
         CallStoredProcedure proc = null;
         try {
             proc = new CallStoredProcedure("spFindSurveyQuestions(?)");
             proc.setParameter(1, courseID);
             ResultSet results = proc.executeWithResults();
-            Question question;
+            IQuestion question;
             if (null != results) {
                 while (results.next()) {
                     long id = results.getLong(1);
@@ -52,7 +55,7 @@ public class SurveyManageDB implements ISurveyManagePersistence {
                     QuestionType type = QuestionType.valueOf(results.getString(4).toUpperCase());
                     Timestamp timestamp = results.getTimestamp(5);
 
-                    question = new Question();
+                    question = QuestionManagerAbstractFactory.instance().createQuestionInstance();
                     question.setId(id);
                     question.setTitle(title);
                     question.setText(text);
@@ -72,14 +75,14 @@ public class SurveyManageDB implements ISurveyManagePersistence {
     }
 
     @Override
-    public List<Question> findQuestionsNotInSurvey(long userID) {
-        List<Question> questionList = new ArrayList<Question>();
+    public List<IQuestion> findQuestionsNotInSurvey(long userID) {
+        List<IQuestion> questionList = new ArrayList<>();
         CallStoredProcedure proc = null;
         try {
             proc = new CallStoredProcedure("spFindQuestionsNotInSurvey(?)");
             proc.setParameter(1, userID);
             ResultSet results = proc.executeWithResults();
-            Question question;
+            IQuestion question;
             if (null != results) {
                 while (results.next()) {
                     long id = results.getLong(1);
@@ -88,7 +91,7 @@ public class SurveyManageDB implements ISurveyManagePersistence {
                     QuestionType type = QuestionType.valueOf(results.getString(4).toUpperCase());
                     Timestamp timestamp = results.getTimestamp(5);
 
-                    question = new Question();
+                    question = QuestionManagerAbstractFactory.instance().createQuestionInstance();
                     question.setId(id);
                     question.setTitle(title);
                     question.setText(text);
@@ -139,5 +142,117 @@ public class SurveyManageDB implements ISurveyManagePersistence {
             }
         }
     }
+
+    @Override
+    public Map<Long, Map<Long, String>> getSurveyResponses(long surveyID) {
+        CallStoredProcedure proc = null;
+        Map<Long, Map<Long, String>> responses = new HashMap<>();
+        try
+        {
+            proc = new CallStoredProcedure("spFindSurveyResponsesBySurveyID(?)");
+            proc.setParameter(1,surveyID);
+            ResultSet results = proc.executeWithResults();
+            if (null != results)
+            {
+                while (results.next())
+                {
+                    long questionID = results.getLong(1);
+                    long UserID = results.getLong(2);
+                    String Response = results.getString(3);
+                    System.out.print(questionID);
+                    Map<Long, String> questionResponse = responses.getOrDefault(questionID, new HashMap<>());
+                    questionResponse.put(UserID, Response);
+
+                    responses.put(questionID, questionResponse);
+                }
+            }
+
+        }
+        catch (SQLException e)
+        {
+            System.out.print(e);
+
+        }
+        finally
+        {
+            if (null != proc)
+            {
+                proc.cleanup();
+            }
+        }
+
+        return responses;
+    }
+
+    @Override
+    public Map<Long, Long> getSurveyGroupAlgo(long surveyID) {
+        CallStoredProcedure proc = null;
+        Map<Long, Long> groupAlgo = new HashMap<>();
+        try
+        {
+            proc = new CallStoredProcedure("spFetchSurveyGroupAlgo(?)");
+            proc.setParameter(1,surveyID);
+            ResultSet results = proc.executeWithResults();
+            if (null != results)
+            {
+                while (results.next())
+                {
+                    long questionID = results.getLong(1);
+                    long algo = results.getLong(2);
+                    groupAlgo.put(questionID, algo);
+
+                }
+            }
+
+        }
+        catch (SQLException e)
+        {
+            System.out.print(e);
+
+        }
+        finally
+        {
+            if (null != proc)
+            {
+                proc.cleanup();
+            }
+        }
+
+        return groupAlgo;
+    }
+    @Override
+    public long getSurveyGroupSize(long surveyID)
+    {
+        long groupSize = 0;
+        CallStoredProcedure proc = null;
+        try
+        {
+            proc = new CallStoredProcedure("spFetchSurveyGroupSize(?)");
+            proc.setParameter(1, surveyID);
+            ResultSet results = proc.executeWithResults();
+            if (null != results)
+            {
+                if (results.next())
+                {
+                    groupSize = results.getLong(1);
+                }
+            }
+
+        }
+        catch (SQLException e)
+        {
+            System.out.print(e);
+
+        }
+        finally
+        {
+            if (null != proc)
+            {
+                proc.cleanup();
+            }
+        }
+        return groupSize;
+    }
+
 
 }

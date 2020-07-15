@@ -20,10 +20,12 @@ public class QuestionAdminController
 	private static final String ID = "id";
 	private static final String BannerID = "bannerID";
 	private IQuestionPersistence questionDB;
+	private IQuestion question;
+	private IOptions options;
 	
 	public QuestionAdminController() 
 	{
-		questionDB = SystemConfig.instance().getQuestionDB();
+		questionDB = QuestionManagerAbstractFactory.instance().createQuestionDBInstance();
 	}
 	
 	@RequestMapping("/question/delete")
@@ -35,10 +37,10 @@ public class QuestionAdminController
 		return mav;
 	}
 	
-	@RequestMapping("/question/add") 
+	@RequestMapping("question/add")
 	public String addQuestion(Model model) 
 	{
-		Question question = new Question();
+		question = QuestionManagerAbstractFactory.instance().createQuestionInstance();
 		List<QuestionType> questionType = new ArrayList<QuestionType>();
 		questionType = Arrays.asList(QuestionType.values());
 		model.addAttribute("question", question);
@@ -50,12 +52,12 @@ public class QuestionAdminController
 	public ModelAndView addOptions(Model model,@RequestParam(name = BannerID) String bannerId, 
 											@ModelAttribute Question question) 
 	{	
-		Options options = new Options();
+		options = QuestionManagerAbstractFactory.instance().createOptionsInstance();
 		options.addOption();
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("question", question);
 		mav.addObject("options", options);
-		mav.setViewName("/question/reviewquestion");
+		mav.setViewName("question/reviewquestion");
 		return mav;
 	}
 	
@@ -77,7 +79,7 @@ public class QuestionAdminController
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("question", question);
 		mav.addObject("options", options);
-		mav.setViewName("/question/reviewquestion");
+		mav.setViewName("question/reviewquestion");
 		return mav;
     }
 	

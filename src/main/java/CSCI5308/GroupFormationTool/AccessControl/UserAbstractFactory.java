@@ -1,21 +1,30 @@
 package CSCI5308.GroupFormationTool.AccessControl;
 
-import java.util.ArrayList;
 
-public class UserAbstractFactory implements IUserAbstractFactory {
+public class UserAbstractFactory {
 
-	@Override
+	private static UserAbstractFactory uniqueInstance = null;
+	private static IUserPersistence userDB;
+
+	public static UserAbstractFactory instance() {
+		if (null == uniqueInstance) {
+			uniqueInstance = new UserAbstractFactory();
+		}
+		return uniqueInstance;
+	}
+
+	private UserAbstractFactory(){
+		userDB = new UserDB();
+	}
+
 	public IUser createUserInstance() {
 		return new User();
 	}
 
-	@Override
-	public ArrayList<IUser> createUserArrayList() {
-		return new ArrayList<IUser>();
+	public IUserPersistence createUserDBInstance() {
+		return userDB;
 	}
 
-	@Override
-	public IUserPersistence createUserDBInstance() {
-		return new UserDB();
-	}
+	public IUser createUserParamInstance(String bannerID, IUserPersistence persistence) 
+	{ return new User(bannerID,persistence);}
 }

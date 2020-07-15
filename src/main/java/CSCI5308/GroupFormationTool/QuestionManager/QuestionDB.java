@@ -11,16 +11,16 @@ import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
 public class QuestionDB implements IQuestionPersistence 
 {
 	@Override
-	public List<Question> loadQuestionsSortedByTitle(String bannerID) 
+	public List<IQuestion> loadQuestionsSortedByTitle(String bannerID)
 	{
-		List<Question> questionList = new ArrayList<Question>();
+		List<IQuestion> questionList = new ArrayList<>();
 		CallStoredProcedure proc = null;
 		try
 		{
 			proc = new CallStoredProcedure("spFindSortedQuestionsByTitle(?)");
 			proc.setParameter(1, bannerID);
 			ResultSet results = proc.executeWithResults();
-			Question question;
+			IQuestion question;
 			
 			if (null != results)
 			{
@@ -31,8 +31,8 @@ public class QuestionDB implements IQuestionPersistence
 					String text = results.getString(3);
 					QuestionType type = QuestionType.valueOf(results.getString(4).toUpperCase());
 					Timestamp timestamp = results.getTimestamp(5);
-					
-					question = new Question();
+
+					question = QuestionManagerAbstractFactory.instance().createQuestionInstance();
 					question.setId(id);
 					question.setTitle(title);
 					question.setText(text);
@@ -58,16 +58,16 @@ public class QuestionDB implements IQuestionPersistence
 	}
 	
 	@Override
-	public List<Question> loadSortedQuestionsSortedByDate(String bannerID) 
+	public List<IQuestion> loadSortedQuestionsSortedByDate(String bannerID)
 	{
-		List<Question> questionList = new ArrayList<Question>();
+		List<IQuestion> questionList = new ArrayList<>();
 		CallStoredProcedure proc = null;
 		try
 		{
 			proc = new CallStoredProcedure("spFindSortedQuestionsByDate(?)");
 			proc.setParameter(1, bannerID);
 			ResultSet results = proc.executeWithResults();
-			Question question;
+			IQuestion question;
 			
 			if (null != results)
 			{
@@ -78,9 +78,8 @@ public class QuestionDB implements IQuestionPersistence
 					String text = results.getString(3);
 					QuestionType type = QuestionType.valueOf(results.getString(4).toUpperCase());
 					Timestamp timestamp = results.getTimestamp(5);
-					
-					question = new Question();
-					question.setId(id);
+
+					question = QuestionManagerAbstractFactory.instance().createQuestionInstance();					question.setId(id);
 					question.setTitle(title);
 					question.setText(text);
 					question.setType(type);
@@ -130,7 +129,7 @@ public class QuestionDB implements IQuestionPersistence
 	}
 	
 	@Override
-	public long createQuestion(Question question, String bannerID) 
+	public long createQuestion(IQuestion question, String bannerID)
 	{
 		long id=-1;
 		CallStoredProcedure proc = null;
@@ -167,7 +166,7 @@ public class QuestionDB implements IQuestionPersistence
 	}
 	
 	@Override
-	public boolean createQuestionOption(OptionValue option, int order, long questionID) 
+	public boolean createQuestionOption(IOptionValue option, int order, long questionID)
 	{
 		CallStoredProcedure proc = null;
 		try
