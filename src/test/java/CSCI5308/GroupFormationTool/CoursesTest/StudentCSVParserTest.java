@@ -17,7 +17,7 @@ class StudentCSVParserTest
 	public void parseCSVFile() 
 	{
 		Reader reader = null;
-		CSVReaderMock csvReader = new CSVReaderMock();
+		ICSVReaderMock csvReader = CourseAbstractFactoryTest.instance().getCsvReaderMock();
 		List<String[]> records = csvReader.readAll(reader);
 		assertThat(records).isNotNull();
 		assertThat(records).isNotEmpty();

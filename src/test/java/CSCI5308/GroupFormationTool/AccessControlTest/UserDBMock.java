@@ -1,8 +1,7 @@
 package CSCI5308.GroupFormationTool.AccessControlTest;
 
 import CSCI5308.GroupFormationTool.AccessControl.*;
-
-public class UserDBMock implements IUserPersistence
+public class UserDBMock implements IUserDBMock
 {
 	public void loadUserByID(long id, IUser user)
 	{

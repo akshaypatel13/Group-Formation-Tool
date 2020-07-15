@@ -1,6 +1,5 @@
 package CSCI5308.GroupFormationTool.AccessControl;
 
-
 public class UserAbstractFactory {
 
 	private static UserAbstractFactory uniqueInstance = null;

@@ -5,6 +5,7 @@ import java.util.List;
 
 import CSCI5308.GroupFormationTool.AccessControl.IUser;
 import CSCI5308.GroupFormationTool.AccessControl.User;
+import CSCI5308.GroupFormationTool.AccessControl.UserAbstractFactory;
 import CSCI5308.GroupFormationTool.Courses.Course;
 import CSCI5308.GroupFormationTool.Courses.ICourse;
 import CSCI5308.GroupFormationTool.Courses.ICourseUserRelationshipPersistence;
@@ -16,10 +17,10 @@ class CourseUserRelationshipDBMock implements ICourseUserRelationshipPersistence
 	public List<IUser> findAllUsersWithoutCourseRole(Role role, long courseID) 
 	{
 		List<IUser> userList = new ArrayList<>();
-		IUser u = new User();
+		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setId(0);
 		userList.add(u);
-		u = new User();
+		u = UserAbstractFactory.instance().createUserInstance();
 		u.setId(1);
 		userList.add(u);
 		return userList;
@@ -28,10 +29,10 @@ class CourseUserRelationshipDBMock implements ICourseUserRelationshipPersistence
 	public List<IUser> findAllUsersWithCourseRole(Role role, long courseID) 
 	{
 		List<IUser> userList = new ArrayList<>();
-		IUser u = new User();
+		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setId(0);
 		userList.add(u);
-		u = new User();
+		u = UserAbstractFactory.instance().createUserInstance();
 		u.setId(1);
 		userList.add(u);
 		return userList;

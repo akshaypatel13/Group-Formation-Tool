@@ -4,7 +4,7 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CSVReaderMock 
+public class CSVReaderMock implements ICSVReaderMock
 {
 	public List<String[]> readAll(Reader reader) {
 		List<String[]> recordList = new ArrayList<String[]>();
