@@ -58,6 +58,13 @@ public class SurveyAdminController {
 		return "redirect:/survey/survey?courseID=" + courseID;
 	}
 
+    @PostMapping("/surveyQuestion/delete")
+    public String deleteSurveyQuestion(Model model,@RequestParam("questionID") long questionId, @RequestParam("courseID") long courseId)
+    {
+        surveyAdminDB.deleteSurveyQuestion(questionId);
+        return "redirect:/survey/survey?courseID="+courseId;
+    }
+
 
     @PostMapping("/survey/publish")
     public String publishSurvey(Model model, @RequestParam("courseID") long courseId, @RequestParam("groupSize") long groupSize)
