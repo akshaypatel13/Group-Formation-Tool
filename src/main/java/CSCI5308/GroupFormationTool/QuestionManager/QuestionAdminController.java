@@ -37,7 +37,7 @@ public class QuestionAdminController
 		return mav;
 	}
 	
-	@RequestMapping("/question/add") 
+	@RequestMapping("question/add")
 	public String addQuestion(Model model) 
 	{
 		question = QuestionManagerAbstractFactory.instance().createQuestionInstance();
@@ -57,7 +57,7 @@ public class QuestionAdminController
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("question", question);
 		mav.addObject("options", options);
-		mav.setViewName("/question/reviewquestion");
+		mav.setViewName("question/reviewquestion");
 		return mav;
 	}
 	
@@ -79,7 +79,7 @@ public class QuestionAdminController
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("question", question);
 		mav.addObject("options", options);
-		mav.setViewName("/question/reviewquestion");
+		mav.setViewName("question/reviewquestion");
 		return mav;
     }
 	

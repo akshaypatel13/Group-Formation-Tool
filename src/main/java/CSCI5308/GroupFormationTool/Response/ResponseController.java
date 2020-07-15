@@ -18,7 +18,7 @@ import CSCI5308.GroupFormationTool.Survey.ISurveyAdminPersistence;
 
 @Controller
 public class ResponseController {
-/*
+
 	private static final String ID = "id";
 	private static final String BannerID = "bannerID";
 	private IResponsePersistence responseDB;
@@ -80,5 +80,5 @@ public class ResponseController {
 		responseDB.saveResponse(answer, bannerId);
 		
 		return "redirect:/course/course?id="+courseId;
-	}*/
+	}
 }
