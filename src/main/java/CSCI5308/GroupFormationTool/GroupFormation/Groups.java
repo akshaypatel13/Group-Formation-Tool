@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import CSCI5308.GroupFormationTool.Survey.ISurveyManagePersistence;
 
 public class Groups implements IGroups {
@@ -16,6 +19,7 @@ public class Groups implements IGroups {
 	private String firstName;
 	private String lastName;
 	private String bannerId;
+	private static final Logger LOG = LogManager.getLogger();
 
 	public long getSurveyId() {
 		return surveyId;
@@ -57,6 +61,7 @@ public class Groups implements IGroups {
 		Map<Integer, List<Long>> groups = new HashMap<Integer, List<Long>>();
 
 		groups = groupCreator.createGroups(responses, groupSize);
+		LOG.info("Groups created and fetched");
 		System.out.println(groups.size());
 		ArrayList<IGroups> groupsList = GroupsAbstractFactory.instance().createArrayListGroups();
 

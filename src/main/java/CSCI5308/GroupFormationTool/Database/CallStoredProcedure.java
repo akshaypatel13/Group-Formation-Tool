@@ -2,11 +2,15 @@ package CSCI5308.GroupFormationTool.Database;
 
 import java.sql.*;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class CallStoredProcedure
 {
 	private String storedProcedureName;
 	private Connection connection;
 	private CallableStatement statement;
+	private static final Logger LOG = LogManager.getLogger();
 	
 	public CallStoredProcedure(String storedProcedureName) throws SQLException
 	{
@@ -45,7 +49,7 @@ public class CallStoredProcedure
 		}
 		catch (Exception e)
 		{
-			// Logging needed.
+			 LOG.error("Operation = Connection closing, Status = Failed");
 		}
 	}
 	

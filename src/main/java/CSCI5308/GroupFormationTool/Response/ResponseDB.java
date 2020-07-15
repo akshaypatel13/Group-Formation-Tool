@@ -7,16 +7,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
+import CSCI5308.GroupFormationTool.QuestionManager.IQuestion;
 import CSCI5308.GroupFormationTool.QuestionManager.Question;
 import CSCI5308.GroupFormationTool.QuestionManager.QuestionType;
 
 public class ResponseDB implements IResponsePersistence{
 
+    private static final Logger LOG = LogManager.getLogger();
+	
 	@Override
-	public List<Question> loadQuestionsWithoutOptions(long courseId) {
+	public List<IQuestion> loadQuestionsWithoutOptions(long courseId) {
 		
-		List<Question> questionList = new ArrayList<Question>();
+		List<IQuestion> questionList = new ArrayList<IQuestion>();
 		CallStoredProcedure proc = null;
 		try
 		{
@@ -47,8 +53,8 @@ public class ResponseDB implements IResponsePersistence{
 		}
 		catch (SQLException e)
 		{
-			System.out.println(e);
-			// Logging needed.
+			LOG.error("Status = Failed, Error Message="+e.getMessage());
+			return null;
 		}
 		finally
 		{
@@ -61,9 +67,9 @@ public class ResponseDB implements IResponsePersistence{
 	}
 
 	@Override
-	public List<Question> loadQuestionsWithOptions(long courseId) {
+	public List<IQuestion> loadQuestionsWithOptions(long courseId) {
 		
-		List<Question> questionList = new ArrayList<Question>();
+		List<IQuestion> questionList = new ArrayList<IQuestion>();
 		CallStoredProcedure proc = null;
 		try
 		{
@@ -94,8 +100,8 @@ public class ResponseDB implements IResponsePersistence{
 		}
 		catch (SQLException e)
 		{
-			System.out.println(e);
-			// Logging needed.
+			LOG.error("Status = Failed, Error Message="+e.getMessage());
+			return null;
 		}
 		finally
 		{
@@ -108,14 +114,14 @@ public class ResponseDB implements IResponsePersistence{
 	}
 
 	@Override
-	public List<Question> loadQuestionsOptions(List<Question> questions) {
+	public List<IQuestion> loadQuestionsOptions(List<IQuestion> questions) {
 		
-		List<Question> questionList = new ArrayList<Question>();
+		List<IQuestion> questionList = new ArrayList<IQuestion>();
 		CallStoredProcedure proc = null;
 		try
 		{
 
-			for(Question question : questions) {
+			for(IQuestion question : questions) {
 				
 				proc = new CallStoredProcedure("spLoadQuestionsOptions(?)");
 				proc.setParameter(1, question.getId());
@@ -139,8 +145,8 @@ public class ResponseDB implements IResponsePersistence{
 		}
 		catch (SQLException e)
 		{
-			System.out.println(e);
-			// Logging needed.
+			LOG.error("Status = Failed, Error Message="+e.getMessage());
+			return null;
 		}
 		finally
 		{
@@ -153,7 +159,7 @@ public class ResponseDB implements IResponsePersistence{
 	}
 
 	@Override
-	public void saveResponse(HashMap<String, String> answer, String bannerId) {
+	public boolean saveResponse(HashMap<String, String> answer, String bannerId) {
 		
 		CallStoredProcedure proc = null;
 		try
@@ -190,11 +196,13 @@ public class ResponseDB implements IResponsePersistence{
 				}
 			}
 			
+			return true;
+			
 		}
 		catch (SQLException e)
 		{
-			System.out.println(e);
-			// Logging needed.
+			LOG.error("Status = Failed, Error Message="+e.getMessage());
+			return false;
 		}
 		finally
 		{
@@ -229,7 +237,7 @@ public class ResponseDB implements IResponsePersistence{
         }
         catch (SQLException e)
         {
-            System.out.print(e);
+        	LOG.error("Status = Failed, Error Message="+e.getMessage());
             return false;
         }
         finally
