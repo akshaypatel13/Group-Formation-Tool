@@ -2,6 +2,8 @@ package CSCI5308.GroupFormationTool.Survey;
 
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
 import CSCI5308.GroupFormationTool.QuestionManager.Question;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -11,7 +13,7 @@ import java.util.List;
 
 public class SurveyAdminDB implements ISurveyAdminPersistence
 {
-
+    private static final Logger LOG = LogManager.getLogger();
     @Override
     public boolean createSurvey(long courseID) {
         CallStoredProcedure proc = null;
@@ -24,7 +26,7 @@ public class SurveyAdminDB implements ISurveyAdminPersistence
         }
         catch (SQLException e)
         {
-            System.out.print(e);
+            LOG.error("Status = Failed, Error Message="+e.getMessage());
             return false;
         }
         finally
@@ -52,7 +54,7 @@ public class SurveyAdminDB implements ISurveyAdminPersistence
         }
         catch (SQLException e)
         {
-            System.out.print(e);
+            LOG.error("Status = Failed, Error Message="+e.getMessage());
             return false;
         }
         finally
@@ -77,7 +79,7 @@ public class SurveyAdminDB implements ISurveyAdminPersistence
         }
         catch (SQLException e)
         {
-            System.out.print(e);
+            LOG.error("Status = Failed, Error Message="+e.getMessage());
             return false;
         }
         finally
@@ -103,7 +105,7 @@ public class SurveyAdminDB implements ISurveyAdminPersistence
         }
         catch (SQLException e)
         {
-            System.out.print(e);
+            LOG.error("Status = Failed, Error Message="+e.getMessage());
             return false;
         }
         finally
@@ -128,7 +130,7 @@ public class SurveyAdminDB implements ISurveyAdminPersistence
         }
         catch (SQLException e)
         {
-            System.out.print(e);
+            LOG.error("Status = Failed, Error Message="+e.getMessage());
             return false;
         }
         finally

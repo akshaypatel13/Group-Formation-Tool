@@ -45,7 +45,7 @@ public class QuestionAdminController
 		questionType = Arrays.asList(QuestionType.values());
 		model.addAttribute("question", question);
 		model.addAttribute("questionTypes",questionType);
-		return "/question/addquestion";
+		return "question/addquestion";
 	}
 
 	@RequestMapping("/question/reviewQuestion")
