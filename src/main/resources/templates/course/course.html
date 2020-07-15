@@ -28,6 +28,9 @@
 			<br/>
 			<a th:href="@{/survey/survey(courseID=${course.id})}">Survey Manager</a>
 		</div>
+		<div th:if="${instructor}">
+			<br/>
+			<a th:href="@{/formgroups(courseID=${course.id})}">FormGroups</a>
 		<div th:if="${instructor} or ${ta}">
 			<br/>
 			<br/>
@@ -35,6 +38,7 @@
 				<input type="hidden" name="courseID"  th:value="${course.id}" />
 				<button type="submit" >Create Groups</button>
 			</form>
+
 		</div>
 		<div th:if="${student} and ${survey}">
 			<br/>

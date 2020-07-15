@@ -1,7 +1,6 @@
 package CSCI5308.GroupFormationTool.Survey;
 
 import CSCI5308.GroupFormationTool.AccessControl.CurrentUser;
-import CSCI5308.GroupFormationTool.Courses.CourseAdminController;
 import CSCI5308.GroupFormationTool.QuestionManager.IQuestionPersistence;
 import CSCI5308.GroupFormationTool.QuestionManager.QuestionManagerAbstractFactory;
 import CSCI5308.GroupFormationTool.SystemConfig;
@@ -17,8 +16,7 @@ import sun.rmi.runtime.Log;
 import java.util.Map;
 
 @Controller
-public class SurveyAdminController
-{
+public class SurveyAdminController {
 
     private static final String courseID = "courseID";
     private static final String questionID = "questionID";
@@ -33,9 +31,10 @@ public class SurveyAdminController
         questionDB = QuestionManagerAbstractFactory.instance().createQuestionDBInstance();
         surveyAdminDB = SurveyAbstractFactory.instance().createSurveyAdminDBInstance();
         surveyManageDB = SurveyAbstractFactory.instance().createSurveyManageDBInstance();
-        groupCreator = SurveyAbstractFactory.instance().createGroupCreatorInstance();
 
-    }
+	}
+
+
 
     @GetMapping("/survey/survey")
     public String survey(Model model, @RequestParam("courseID") long courseID)
@@ -51,13 +50,15 @@ public class SurveyAdminController
         return "survey/surveyquestions";
     }
 
-    @PostMapping("/survey/insertquestion")
-    public String insertQuestionSurvey(Model model,@RequestParam("questionID") long questionID, @RequestParam("courseID") long courseID, @RequestParam long algo )
-    {
-        long surveyID = surveyManageDB.findSurveyByCourseID(courseID);
-        surveyAdminDB.insertSurveyQuestion(surveyID,questionID,algo);
-        return "redirect:/survey/survey?courseID="+courseID;
-    }
+
+	@PostMapping("/survey/insertquestion")
+	public String insertQuestionSurvey(Model model, @RequestParam("questionID") long questionID,
+			@RequestParam("courseID") long courseID, @RequestParam long algo) {
+		long surveyID = surveyManageDB.findSurveyByCourseID(courseID);
+		surveyAdminDB.insertSurveyQuestion(surveyID, questionID, algo);
+		return "redirect:/survey/survey?courseID=" + courseID;
+	}
+
 
     @PostMapping("/surveyQuestion/delete")
     public String deleteSurveyQuestion(Model model,@RequestParam("questionID") long questionId, @RequestParam("courseID") long courseId)
@@ -66,36 +67,11 @@ public class SurveyAdminController
         return "redirect:/survey/survey?courseID="+courseId;
     }
 
-    @PostMapping("/survey/creategroups")
-    public String createGroups(Model model,@RequestParam("courseID") long courseId)
-    {
-        long surveyID = surveyManageDB.findSurveyByCourseID(courseId);
-        System.out.println(surveyID);
-        System.out.println(surveyManageDB.getSurveyResponses(surveyID));
-        //surveyManageDB.getSurveyGroupAlgo(surveyID);
-        Map<Long, Map<Long, String>> responses = surveyManageDB.getSurveyResponses(surveyID);
-        long groupSize = surveyManageDB.getSurveyGroupSize(surveyID);
-
-        System.out.println(groupCreator.createGroups(responses, groupSize));
-        //change link to show groups
-        return "redirect:/survey/survey?courseID="+courseId;
-    }
-
-    @PostMapping("/survey/publish")
-    public String publishSurvey(Model model, @RequestParam("courseID") long courseId, @RequestParam("groupSize") long groupSize)
-    {
-        System.out.println("GroupSize: " + groupSize);
-        LOG.info("Operation = Survey Published, Status = Success, Course ="+courseID);
-        surveyAdminDB.publishSurvey(courseId, groupSize);
-        return "redirect:/survey/survey?courseID="+courseId;
-    }
-
-    @GetMapping("/survey/disable")
-    public String disableSurvey(Model model, @RequestParam("courseID") long courseId)
-    {
-        LOG.info("Operation = Survey Disabled, Status = Success, Course ="+courseID);
-        surveyAdminDB.disableSurvey(courseId);
-        return "redirect:/survey/survey?courseID="+courseId;
-    }
+	@GetMapping("/survey/disable")
+	public String disableSurvey(Model model, @RequestParam("courseID") long courseId) {
+		surveyAdminDB.disableSurvey(courseId);
+		System.out.print("Hiiiii");
+		return "redirect:/survey/survey?courseID=" + courseId;
+	}
 
 }

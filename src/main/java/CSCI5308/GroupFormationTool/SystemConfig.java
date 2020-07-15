@@ -3,6 +3,8 @@ package CSCI5308.GroupFormationTool;
 import CSCI5308.GroupFormationTool.Security.*;
 import CSCI5308.GroupFormationTool.AccessControl.*;
 import CSCI5308.GroupFormationTool.Database.*;
+import CSCI5308.GroupFormationTool.GroupFormation.DefaultGroupCreator;
+import CSCI5308.GroupFormationTool.GroupFormation.IGroupCreator;
 import CSCI5308.GroupFormationTool.QuestionManager.IQuestionPersistence;
 import CSCI5308.GroupFormationTool.QuestionManager.QuestionDB;
 import CSCI5308.GroupFormationTool.Response.IResponsePersistence;
@@ -29,8 +31,6 @@ public class SystemConfig {
 	private ISurveyManagePersistence surveyManageDB;
 	private IResponsePersistence responseDB;
 	private IGroupCreator groupCreator;
-
-	
 
 	private SystemConfig() {
 //		passwordEncryption = securityAbstractFactory.createBCryptPasswordEncryption();

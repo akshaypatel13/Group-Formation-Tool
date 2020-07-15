@@ -24,5 +24,6 @@ public class UserAbstractFactory {
 		return userDB;
 	}
 
-	public IUser createUserParamInstance(String bannerID, IUserPersistence persistence) { return new User(bannerID,persistence);}
+	public IUser createUserParamInstance(String bannerID, IUserPersistence persistence) 
+	{ return new User(bannerID,persistence);}
 }
