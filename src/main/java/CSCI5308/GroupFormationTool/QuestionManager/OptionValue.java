@@ -1,6 +1,6 @@
 package CSCI5308.GroupFormationTool.QuestionManager;
 
-public class OptionValue 
+public class OptionValue implements IOptionValue
 {
 	String text;
 	String storedAs;
@@ -41,11 +41,12 @@ public class OptionValue
 		this.storedAs = storedAs;
 	}
 	
-	public OptionValue createOption(String text, String storedAs) 
+	public OptionValue createOption(String text, String storedAs)
 	{
 		this.text = text;
 		this.storedAs = storedAs;
 		return this;
 	}
-	
+
+
 }

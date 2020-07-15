@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
 
 public class UserDB implements IUserPersistence
-{	
+{
 	public void loadUserByID(long id, IUser user)
 	{
 		CallStoredProcedure proc = null;
@@ -81,7 +81,7 @@ public class UserDB implements IUserPersistence
 			loadUserByID(userID, user);
 		}
 	}
-	
+
 	public boolean createUser(IUser user)
 	{
 		CallStoredProcedure proc = null;
@@ -110,7 +110,7 @@ public class UserDB implements IUserPersistence
 		}
 		return true;
 	}
-	
+
 	public boolean updateUser(IUser user)
 	{
 		return false;

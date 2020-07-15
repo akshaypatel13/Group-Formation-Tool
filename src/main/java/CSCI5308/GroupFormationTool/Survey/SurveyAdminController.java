@@ -2,6 +2,7 @@ package CSCI5308.GroupFormationTool.Survey;
 
 import CSCI5308.GroupFormationTool.AccessControl.CurrentUser;
 import CSCI5308.GroupFormationTool.QuestionManager.IQuestionPersistence;
+import CSCI5308.GroupFormationTool.QuestionManager.QuestionManagerAbstractFactory;
 import CSCI5308.GroupFormationTool.SystemConfig;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,10 +25,10 @@ public class SurveyAdminController
 
     public SurveyAdminController()
     {
-        questionDB = SystemConfig.instance().getQuestionDB();
-        surveyAdminDB = SystemConfig.instance().getSurveyAdminDB();
-        surveyManageDB = SystemConfig.instance().getSurveyManageDB();
-        groupCreator = SystemConfig.instance().getGroupCreator();
+        questionDB = QuestionManagerAbstractFactory.instance().createQuestionDBInstance();
+        surveyAdminDB = SurveyAbstractFactory.instance().createSurveyAdminDBInstance();
+        surveyManageDB = SurveyAbstractFactory.instance().createSurveyManageDBInstance();
+        groupCreator = SurveyAbstractFactory.instance().createGroupCreatorInstance();
 
     }
 
@@ -36,10 +37,10 @@ public class SurveyAdminController
     {
         surveyAdminDB.createSurvey(courseID);
         boolean check = surveyManageDB.surveyPublishedOrNot(courseID);
-        System.out.print("Survey:"+check);
+        long surveyID = surveyManageDB.findSurveyByCourseID(courseID);
+        System.out.print(surveyID);
         model.addAttribute("surveyCheck", check);
         model.addAttribute("courseID",courseID);
-        long surveyID = surveyManageDB.findSurveyByCourseID(courseID);
         model.addAttribute("surveyQuestions",surveyManageDB.findSurveyQuestions(surveyID));
         model.addAttribute("questionsNotInSurvey",surveyManageDB.findQuestionsNotInSurvey(CurrentUser.instance().getCurrentAuthenticatedUser().getID()));
         return "survey/surveyquestions";
@@ -52,7 +53,6 @@ public class SurveyAdminController
         surveyAdminDB.insertSurveyQuestion(surveyID,questionID,algo);
         return "redirect:/survey/survey?courseID="+courseID;
     }
-
 
     @PostMapping("/surveyQuestion/delete")
     public String deleteSurveyQuestion(Model model,@RequestParam("questionID") long questionId, @RequestParam("courseID") long courseId)
