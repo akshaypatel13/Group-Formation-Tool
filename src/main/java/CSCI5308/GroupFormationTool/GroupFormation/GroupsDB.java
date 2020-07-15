@@ -34,13 +34,15 @@ public class GroupsDB implements IGroupsPersistence {
 	@Override
 	public ArrayList<IGroups> fetchGroups() {
 		CallStoredProcedure proc = null;
-		ArrayList<IGroups> groupsInfo = new ArrayList<IGroups>();
+		ArrayList<IGroups> groupsInfo =GroupsAbstractFactory
+				.instance().createArrayListGroups();
 		try {
 			proc = new CallStoredProcedure("spFetchGroupsInfo()");
 			ResultSet results = proc.executeWithResults();
 			if (null != results) {
 				while (results.next()) {
-					IGroups group = new Groups();
+					IGroups group =GroupsAbstractFactory.
+							instance().createGroupsInstance();
 					int groupid = results.getInt(1);
 					String bannerID = results.getString(4);
 

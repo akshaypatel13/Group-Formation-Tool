@@ -9,27 +9,28 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import CSCI5308.GroupFormationTool.SystemConfig;
-
 import CSCI5308.GroupFormationTool.Survey.ISurveyManagePersistence;
-import CSCI5308.GroupFormationTool.Survey.SurveyManageDB;
+import CSCI5308.GroupFormationTool.Survey.SurveyAbstractFactory;
 
 @Controller
 public class GroupFormationController {
 
 	private static final String courseID = "courseID";
 	private ISurveyManagePersistence surveyManageDB;
-	private IGroupCreator groupCreator = new DefaultGroupCreator();
+	private IGroupCreator groupCreator;
+	private IGroupsPersistence groupDB;
 
 	public GroupFormationController() {
-		surveyManageDB = new SurveyManageDB();
+		surveyManageDB = SurveyAbstractFactory.instance().createSurveyManageDBInstance();
+		groupDB = GroupsAbstractFactory.instance().createGroupsDBInstance();
+		groupCreator = GroupsAbstractFactory.instance().createDefaultGroupCreator();
+
 	}
 
 	@GetMapping("/formgroups")
 	public String loadGroups(Model model, @RequestParam(name = courseID) long courseId) {
 		long surveyId = surveyManageDB.findSurveyByCourseID(courseId);
-		IGroups groups = new Groups();
-		IGroupsPersistence groupDB = new GroupsDB();
+		IGroups groups = GroupsAbstractFactory.instance().createGroupsInstance();
 		boolean check = false;
 		// surveyManageDB.getSurveyGroupAlgo(surveyID);
 
@@ -40,10 +41,10 @@ public class GroupFormationController {
 		} else {
 
 			check = surveyManageDB.surveyPublishedOrNot(courseId);
-			System.out.println(check);
 		}
 		if (check) {
 			model.addAttribute("errorMsg", "Survey not published");
+			return "groupFormation/notpublished";
 
 		} else {
 			groups.insertGroups(groupDB, surveyId, groupCreator, surveyManageDB);

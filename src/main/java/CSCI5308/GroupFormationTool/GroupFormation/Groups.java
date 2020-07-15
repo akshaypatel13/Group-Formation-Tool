@@ -58,21 +58,21 @@ public class Groups implements IGroups {
 
 		groups = groupCreator.createGroups(responses, groupSize);
 		System.out.println(groups.size());
-		ArrayList<IGroups> groups1 = new ArrayList<IGroups>();
+		ArrayList<IGroups> groupsList = GroupsAbstractFactory.instance().createArrayListGroups();
 
 		for (Entry<Integer, List<Long>> entry : groups.entrySet()) {
 			Integer key = entry.getKey();
 			List<Long> value = entry.getValue();
 			for (Long a : value) {
-				Groups g = new Groups();
-				g.setGroupId(key);
-				g.setSurveyId(surveyId);
-				g.setStudentId(a);
-				groups1.add(g);
+				IGroups group = GroupsAbstractFactory.instance().createGroupsInstance();
+				group.setGroupId(key);
+				group.setSurveyId(surveyId);
+				group.setStudentId(a);
+				groupsList.add(group);
 			}
 
 		}
-		groupDB.insertGroups(groups1);
+		groupDB.insertGroups(groupsList);
 		return false;
 	}
 
@@ -97,25 +97,25 @@ public class Groups implements IGroups {
 		this.bannerId = bannerId;
 	}
 
-	public  Map<Integer, ArrayList<IGroups>> fetchGroups(IGroupsPersistence groupDB) {
-		
+	public Map<Integer, ArrayList<IGroups>> fetchGroups(IGroupsPersistence groupDB) {
+
 		ArrayList<IGroups> groups = groupDB.fetchGroups();
 		Map<Integer, ArrayList<IGroups>> mapGroups = new HashMap<Integer, ArrayList<IGroups>>();
 		ArrayList<Integer> uniqueGroups = new ArrayList<Integer>();
-		
-		for (IGroups group: groups) {
+
+		for (IGroups group : groups) {
 			int groupId = group.getGroupId();
 			if (uniqueGroups.contains(groupId)) {
-				ArrayList<IGroups> existingGroupValues = new ArrayList<IGroups>();
+				ArrayList<IGroups> existingGroupValues = GroupsAbstractFactory.instance().createArrayListGroups();
 				existingGroupValues = mapGroups.get(groupId);
 				existingGroupValues.add(group);
-				mapGroups.replace(groupId, existingGroupValues); 
+				mapGroups.replace(groupId, existingGroupValues);
 			} else {
 				uniqueGroups.add(groupId);
-				ArrayList<IGroups> uniqueGroupValues = new ArrayList<IGroups>();
+				ArrayList<IGroups> uniqueGroupValues = GroupsAbstractFactory.instance().createArrayListGroups();
 				uniqueGroupValues.add(group);
 				mapGroups.put(groupId, uniqueGroupValues);
-				
+
 			}
 		}
 
