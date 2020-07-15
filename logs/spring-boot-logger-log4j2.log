@@ -1,151 +1,50 @@
-2020-07-15 14:04:53,912 INFO o.s.b.StartupInfoLogger [restartedMain] Starting GroupFormationToolApplication on Manpreets-MacBook-Pro.local with PID 16546 (/Users/manpreetsingh/Documents/gitASDC/group21/build/classes/java/main started by manpreetsingh in /Users/manpreetsingh/Documents/gitASDC/group21)
-2020-07-15 14:04:53,920 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2020-07-15 14:04:53,968 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2020-07-15 14:04:53,968 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2020-07-15 14:04:55,074 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
-2020-07-15 14:04:55,098 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
-2020-07-15 14:04:55,099 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
-2020-07-15 14:04:55,099 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.30]
-2020-07-15 14:04:55,185 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
-2020-07-15 14:04:55,185 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1217 ms
-2020-07-15 14:04:55,421 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Creating filter chain: Ant [pattern='/resources/**'], []
-2020-07-15 14:04:55,445 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4a8ab8ad, org.springframework.security.web.context.SecurityContextPersistenceFilter@48321555, org.springframework.security.web.header.HeaderWriterFilter@62659b6f, org.springframework.security.web.csrf.CsrfFilter@7bb75767, org.springframework.security.web.authentication.logout.LogoutFilter@3393473b, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@63f9e921, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@def35fb, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4756b120, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4655b02a, org.springframework.security.web.session.SessionManagementFilter@4c6487b7, org.springframework.security.web.access.ExceptionTranslationFilter@5b661f0b, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@40167f36]
-2020-07-15 14:04:55,526 INFO o.s.s.c.ExecutorConfigurationSupport [restartedMain] Initializing ExecutorService 'applicationTaskExecutor'
-2020-07-15 14:04:55,605 INFO o.s.b.a.w.s.WelcomePageHandlerMapping [restartedMain] Adding welcome page template: index
-2020-07-15 14:04:55,729 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
-2020-07-15 14:04:55,744 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
-2020-07-15 14:04:55,762 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
-2020-07-15 14:04:55,766 INFO o.s.b.StartupInfoLogger [restartedMain] Started GroupFormationToolApplication in 2.105 seconds (JVM running for 3.049)
-2020-07-15 14:05:01,374 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-07-15 14:05:01,375 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
-2020-07-15 14:05:01,380 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 5 ms
-2020-07-15 14:05:01,419 INFO C.G.W.IndexController [http-nio-8080-exec-1] Welcome to Group Formation Tool !!!! :- 
-2020-07-15 14:05:01,920 INFO C.G.C.CourseDB [http-nio-8080-exec-1] Operation = FetchAllCourses, Status = Success, RowCount=25
-2020-07-15 14:05:10,711 INFO C.G.A.UserDB [http-nio-8080-exec-7] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:05:11,537 INFO C.G.A.UserDB [http-nio-8080-exec-7] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:05:11,538 INFO C.G.S.CustomAuthenticationManager [http-nio-8080-exec-7] Operation = UserAuthentication, Status=Success, BannerId:B-739439
-2020-07-15 14:05:11,544 INFO C.G.S.BCryptPasswordEncryption [http-nio-8080-exec-7] Check if password plain text matches wit encrypted password
-2020-07-15 14:05:11,636 INFO C.G.S.CustomAuthenticationManager [http-nio-8080-exec-7] Operation =EncryptedPasswordAuthentication, Status = Success 
-2020-07-15 14:05:11,643 INFO C.G.W.IndexController [http-nio-8080-exec-8] Welcome to Group Formation Tool !!!! :- 
-2020-07-15 14:05:12,408 INFO C.G.C.CourseDB [http-nio-8080-exec-8] Operation = FetchAllCourses, Status = Success, RowCount=25
-2020-07-15 14:05:14,079 INFO C.G.A.UserDB [http-nio-8080-exec-1] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:05:14,331 INFO C.G.A.UserDB [http-nio-8080-exec-1] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:05:14,333 INFO C.G.C.CourseController [http-nio-8080-exec-1] Username:-ins, login = Success
-2020-07-15 14:05:14,811 ERROR C.G.C.CourseDB [http-nio-8080-exec-1] Status = Failed, Error Message=null
-2020-07-15 14:05:15,025 INFO C.G.A.UserDB [http-nio-8080-exec-1] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:05:15,249 INFO C.G.A.UserDB [http-nio-8080-exec-1] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:05:15,502 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-1] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
-2020-07-15 14:05:16,839 INFO C.G.S.SurveyManageDB [http-nio-8080-exec-3] Operation = FetchSurvey, Status = Success, ID:24
-2020-07-15 14:05:17,534 INFO C.G.S.SurveyManageDB [http-nio-8080-exec-3] Operation = FetchGroupSize, Status = Success 
-2020-07-15 14:05:20,147 INFO C.G.A.UserDB [http-nio-8080-exec-2] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:05:20,373 INFO C.G.A.UserDB [http-nio-8080-exec-2] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:05:20,374 INFO C.G.C.CourseController [http-nio-8080-exec-2] Username:-ins, login = Success
-2020-07-15 14:05:21,239 ERROR C.G.C.CourseDB [http-nio-8080-exec-2] Status = Failed, Error Message=null
-2020-07-15 14:05:21,498 INFO C.G.A.UserDB [http-nio-8080-exec-2] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:05:21,728 INFO C.G.A.UserDB [http-nio-8080-exec-2] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:05:22,083 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-2] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
-2020-07-15 14:05:24,324 ERROR C.G.S.SurveyAdminDB [http-nio-8080-exec-4] Status = Failed, Error Message=Duplicate entry '2' for key 'courseId_UNIQUE'
-2020-07-15 14:05:24,799 INFO C.G.S.SurveyManageDB [http-nio-8080-exec-4] Operation = FetchSurvey, Status = Success, ID:24
-2020-07-15 14:05:24,800 INFO C.G.S.SurveyAdminController [http-nio-8080-exec-4] Operation = Suvrey Creation, SurveyID = 24, Course =2
-2020-07-15 14:05:25,047 INFO C.G.S.SurveyManageDB [http-nio-8080-exec-4] Operation = FetchSurveyQuestion, Status = Success, RowCount=2
-2020-07-15 14:05:25,261 INFO C.G.A.UserDB [http-nio-8080-exec-4] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:05:25,483 INFO C.G.A.UserDB [http-nio-8080-exec-4] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:05:25,714 INFO C.G.S.SurveyManageDB [http-nio-8080-exec-4] Operation = FetchQuestionsNotInSurvey, Status = Success, RowCount=2
-2020-07-15 14:06:03,541 INFO C.G.A.UserDB [http-nio-8080-exec-6] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:06:03,781 INFO C.G.A.UserDB [http-nio-8080-exec-6] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:06:03,782 INFO C.G.C.CourseController [http-nio-8080-exec-6] Username:-ins, login = Success
-2020-07-15 14:06:04,256 ERROR C.G.C.CourseDB [http-nio-8080-exec-6] Status = Failed, Error Message=null
-2020-07-15 14:06:04,465 INFO C.G.A.UserDB [http-nio-8080-exec-6] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:06:04,695 INFO C.G.A.UserDB [http-nio-8080-exec-6] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:06:04,921 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-6] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
-2020-07-15 14:06:24,720 INFO C.G.A.UserDB [http-nio-8080-exec-3] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:06:24,946 INFO C.G.A.UserDB [http-nio-8080-exec-3] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:06:24,946 INFO C.G.C.CourseController [http-nio-8080-exec-3] Username:-ins, login = Success
-2020-07-15 14:06:25,436 ERROR C.G.C.CourseDB [http-nio-8080-exec-3] Status = Failed, Error Message=null
-2020-07-15 14:06:25,667 INFO C.G.A.UserDB [http-nio-8080-exec-3] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:06:25,867 INFO C.G.A.UserDB [http-nio-8080-exec-3] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:06:26,112 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-3] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
-2020-07-15 14:06:32,099 ERROR C.G.S.SurveyAdminDB [http-nio-8080-exec-2] Status = Failed, Error Message=Duplicate entry '2' for key 'courseId_UNIQUE'
-2020-07-15 14:06:32,590 INFO C.G.S.SurveyManageDB [http-nio-8080-exec-2] Operation = FetchSurvey, Status = Success, ID:24
-2020-07-15 14:06:32,591 INFO C.G.S.SurveyAdminController [http-nio-8080-exec-2] Operation = Suvrey Creation, SurveyID = 24, Course =2
-2020-07-15 14:06:32,822 INFO C.G.S.SurveyManageDB [http-nio-8080-exec-2] Operation = FetchSurveyQuestion, Status = Success, RowCount=2
-2020-07-15 14:06:33,057 INFO C.G.A.UserDB [http-nio-8080-exec-2] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:06:33,286 INFO C.G.A.UserDB [http-nio-8080-exec-2] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:06:33,516 INFO C.G.S.SurveyManageDB [http-nio-8080-exec-2] Operation = FetchQuestionsNotInSurvey, Status = Success, RowCount=2
-2020-07-15 14:06:36,106 INFO C.G.A.UserDB [http-nio-8080-exec-5] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:06:36,342 INFO C.G.A.UserDB [http-nio-8080-exec-5] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:06:36,343 INFO C.G.C.CourseController [http-nio-8080-exec-5] Username:-ins, login = Success
-2020-07-15 14:06:36,773 ERROR C.G.C.CourseDB [http-nio-8080-exec-5] Status = Failed, Error Message=null
-2020-07-15 14:06:37,003 INFO C.G.A.UserDB [http-nio-8080-exec-5] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:06:37,239 INFO C.G.A.UserDB [http-nio-8080-exec-5] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:06:37,485 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-5] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
-2020-07-15 14:07:09,785 ERROR C.G.S.SurveyAdminDB [http-nio-8080-exec-7] Status = Failed, Error Message=Duplicate entry '2' for key 'courseId_UNIQUE'
-2020-07-15 14:07:10,262 INFO C.G.S.SurveyManageDB [http-nio-8080-exec-7] Operation = FetchSurvey, Status = Success, ID:24
-2020-07-15 14:07:10,263 INFO C.G.S.SurveyAdminController [http-nio-8080-exec-7] Operation = Suvrey Creation, SurveyID = 24, Course =2
-2020-07-15 14:07:10,480 INFO C.G.S.SurveyManageDB [http-nio-8080-exec-7] Operation = FetchSurveyQuestion, Status = Success, RowCount=2
-2020-07-15 14:07:10,694 INFO C.G.A.UserDB [http-nio-8080-exec-7] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:07:10,942 INFO C.G.A.UserDB [http-nio-8080-exec-7] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:07:11,186 INFO C.G.S.SurveyManageDB [http-nio-8080-exec-7] Operation = FetchQuestionsNotInSurvey, Status = Success, RowCount=2
-2020-07-15 14:07:30,590 INFO C.G.A.UserDB [http-nio-8080-exec-9] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:07:30,800 INFO C.G.A.UserDB [http-nio-8080-exec-9] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:07:30,800 INFO C.G.C.CourseController [http-nio-8080-exec-9] Username:-ins, login = Success
-2020-07-15 14:07:31,246 ERROR C.G.C.CourseDB [http-nio-8080-exec-9] Status = Failed, Error Message=null
-2020-07-15 14:07:31,457 INFO C.G.A.UserDB [http-nio-8080-exec-9] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:07:31,684 INFO C.G.A.UserDB [http-nio-8080-exec-9] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:07:31,920 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-9] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
-2020-07-15 14:07:38,300 INFO C.G.A.UserDB [http-nio-8080-exec-1] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:07:38,545 INFO C.G.A.UserDB [http-nio-8080-exec-1] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:07:38,546 INFO C.G.C.CourseController [http-nio-8080-exec-1] Username:-ins, login = Success
-2020-07-15 14:07:39,111 ERROR C.G.C.CourseDB [http-nio-8080-exec-1] Status = Failed, Error Message=null
-2020-07-15 14:07:39,380 INFO C.G.A.UserDB [http-nio-8080-exec-1] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:07:39,615 INFO C.G.A.UserDB [http-nio-8080-exec-1] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:07:39,814 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-1] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
-2020-07-15 14:08:55,979 ERROR C.G.S.SurveyAdminDB [http-nio-8080-exec-4] Status = Failed, Error Message=Duplicate entry '2' for key 'courseId_UNIQUE'
-2020-07-15 14:08:56,422 INFO C.G.S.SurveyManageDB [http-nio-8080-exec-4] Operation = FetchSurvey, Status = Success, ID:24
-2020-07-15 14:08:56,422 INFO C.G.S.SurveyAdminController [http-nio-8080-exec-4] Operation = Suvrey Creation, SurveyID = 24, Course =2
-2020-07-15 14:08:56,647 INFO C.G.S.SurveyManageDB [http-nio-8080-exec-4] Operation = FetchSurveyQuestion, Status = Success, RowCount=2
-2020-07-15 14:08:56,888 INFO C.G.A.UserDB [http-nio-8080-exec-4] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:08:57,105 INFO C.G.A.UserDB [http-nio-8080-exec-4] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:08:57,332 INFO C.G.S.SurveyManageDB [http-nio-8080-exec-4] Operation = FetchQuestionsNotInSurvey, Status = Success, RowCount=2
-2020-07-15 14:09:10,486 INFO C.G.A.UserDB [http-nio-8080-exec-6] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:09:10,731 INFO C.G.A.UserDB [http-nio-8080-exec-6] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:09:10,732 INFO C.G.C.CourseController [http-nio-8080-exec-6] Username:-ins, login = Success
-2020-07-15 14:09:11,178 ERROR C.G.C.CourseDB [http-nio-8080-exec-6] Status = Failed, Error Message=null
-2020-07-15 14:09:11,412 INFO C.G.A.UserDB [http-nio-8080-exec-6] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:09:11,629 INFO C.G.A.UserDB [http-nio-8080-exec-6] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:09:11,869 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-6] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
-2020-07-15 14:09:14,680 ERROR C.G.C.CourseDB [http-nio-8080-exec-7] Status = Failed, Error Message=null
-2020-07-15 14:09:15,356 INFO C.G.A.UserDB [http-nio-8080-exec-7] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:09:15,590 INFO C.G.A.UserDB [http-nio-8080-exec-7] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:09:15,814 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-7] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
-2020-07-15 14:09:18,582 INFO C.G.A.UserDB [http-nio-8080-exec-8] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:09:18,813 INFO C.G.A.UserDB [http-nio-8080-exec-8] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:09:18,814 INFO C.G.C.CourseController [http-nio-8080-exec-8] Username:-ins, login = Success
-2020-07-15 14:09:19,269 ERROR C.G.C.CourseDB [http-nio-8080-exec-8] Status = Failed, Error Message=null
-2020-07-15 14:09:19,499 INFO C.G.A.UserDB [http-nio-8080-exec-8] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:09:19,717 INFO C.G.A.UserDB [http-nio-8080-exec-8] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:09:19,939 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-8] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
-2020-07-15 14:09:25,877 INFO C.G.A.UserDB [http-nio-8080-exec-1] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:09:26,076 INFO C.G.A.UserDB [http-nio-8080-exec-1] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:09:26,077 INFO C.G.C.CourseController [http-nio-8080-exec-1] Username:-ins, login = Success
-2020-07-15 14:09:26,517 ERROR C.G.C.CourseDB [http-nio-8080-exec-1] Status = Failed, Error Message=null
-2020-07-15 14:09:26,741 INFO C.G.A.UserDB [http-nio-8080-exec-1] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:09:26,960 INFO C.G.A.UserDB [http-nio-8080-exec-1] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:09:27,188 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-1] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
-2020-07-15 14:09:28,771 ERROR C.G.S.SurveyAdminDB [http-nio-8080-exec-3] Status = Failed, Error Message=Duplicate entry '2' for key 'courseId_UNIQUE'
-2020-07-15 14:09:29,226 INFO C.G.S.SurveyManageDB [http-nio-8080-exec-3] Operation = FetchSurvey, Status = Success, ID:24
-2020-07-15 14:09:29,226 INFO C.G.S.SurveyAdminController [http-nio-8080-exec-3] Operation = Suvrey Creation, SurveyID = 24, Course =2
-2020-07-15 14:09:29,442 INFO C.G.S.SurveyManageDB [http-nio-8080-exec-3] Operation = FetchSurveyQuestion, Status = Success, RowCount=2
-2020-07-15 14:09:29,653 INFO C.G.A.UserDB [http-nio-8080-exec-3] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:09:29,883 INFO C.G.A.UserDB [http-nio-8080-exec-3] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:09:30,120 INFO C.G.S.SurveyManageDB [http-nio-8080-exec-3] Operation = FetchQuestionsNotInSurvey, Status = Success, RowCount=2
-2020-07-15 14:09:36,502 INFO C.G.A.UserDB [http-nio-8080-exec-4] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:09:36,727 INFO C.G.A.UserDB [http-nio-8080-exec-4] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:09:36,728 INFO C.G.C.CourseController [http-nio-8080-exec-4] Username:-ins, login = Success
-2020-07-15 14:09:37,171 ERROR C.G.C.CourseDB [http-nio-8080-exec-4] Status = Failed, Error Message=null
-2020-07-15 14:09:37,391 INFO C.G.A.UserDB [http-nio-8080-exec-4] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-15 14:09:37,601 INFO C.G.A.UserDB [http-nio-8080-exec-4] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-15 14:09:37,814 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-4] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
-2020-07-15 14:09:38,549 INFO C.G.W.IndexController [http-nio-8080-exec-5] Welcome to Group Formation Tool !!!! :- 
-2020-07-15 14:09:38,779 INFO C.G.C.CourseDB [http-nio-8080-exec-5] Operation = FetchAllCourses, Status = Success, RowCount=25
-2020-07-15 14:10:10,303 INFO o.s.s.c.ExecutorConfigurationSupport [SpringContextShutdownHook] Shutting down ExecutorService 'applicationTaskExecutor'
+2020-07-15 16:58:49,076 INFO o.s.b.StartupInfoLogger [restartedMain] Starting GroupFormationToolApplication on Manpreets-MacBook-Pro.local with PID 16946 (/Users/manpreetsingh/Documents/gitASDC/group21/build/classes/java/main started by manpreetsingh in /Users/manpreetsingh/Documents/gitASDC/group21)
+2020-07-15 16:58:49,084 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-07-15 16:58:49,132 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-07-15 16:58:49,132 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-07-15 16:58:50,179 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2020-07-15 16:58:50,202 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-15 16:58:50,202 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2020-07-15 16:58:50,203 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.30]
+2020-07-15 16:58:50,279 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2020-07-15 16:58:50,280 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1147 ms
+2020-07-15 16:58:50,502 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Creating filter chain: Ant [pattern='/resources/**'], []
+2020-07-15 16:58:50,528 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2fe0d148, org.springframework.security.web.context.SecurityContextPersistenceFilter@7bb75767, org.springframework.security.web.header.HeaderWriterFilter@3eb7d5fb, org.springframework.security.web.csrf.CsrfFilter@1cfc1259, org.springframework.security.web.authentication.logout.LogoutFilter@19797617, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7e430fb2, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@a021b54, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@707a0d7a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@382bc3e8, org.springframework.security.web.session.SessionManagementFilter@5aaad270, org.springframework.security.web.access.ExceptionTranslationFilter@54d81618, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@f02e949]
+2020-07-15 16:58:50,609 INFO o.s.s.c.ExecutorConfigurationSupport [restartedMain] Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-15 16:58:50,682 INFO o.s.b.a.w.s.WelcomePageHandlerMapping [restartedMain] Adding welcome page template: index
+2020-07-15 16:58:50,797 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2020-07-15 16:58:50,814 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2020-07-15 16:58:50,829 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-15 16:58:50,833 INFO o.s.b.StartupInfoLogger [restartedMain] Started GroupFormationToolApplication in 2.01 seconds (JVM running for 2.915)
+2020-07-15 16:58:57,121 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-15 16:58:57,123 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2020-07-15 16:58:57,128 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 5 ms
+2020-07-15 16:58:57,162 INFO C.G.W.IndexController [http-nio-8080-exec-1] Welcome to Group Formation Tool !!!! :- 
+2020-07-15 16:58:58,740 INFO C.G.C.CourseDB [http-nio-8080-exec-1] Operation = FetchAllCourses, Status = Success, RowCount=26
+2020-07-15 16:59:08,594 INFO C.G.A.UserDB [http-nio-8080-exec-7] Operation = LoadUserByBannerID, Status = Success, RowCount:0
+2020-07-15 16:59:08,855 INFO C.G.A.UserDB [http-nio-8080-exec-7] Operation = LoadUser, Status = Success, RowCount:0
+2020-07-15 16:59:08,856 INFO C.G.S.CustomAuthenticationManager [http-nio-8080-exec-7] Operation = UserAuthentication, Status=Success, BannerId:B-739439
+2020-07-15 16:59:08,861 INFO C.G.S.BCryptPasswordEncryption [http-nio-8080-exec-7] Check if password plain text matches wit encrypted password
+2020-07-15 16:59:08,956 INFO C.G.S.CustomAuthenticationManager [http-nio-8080-exec-7] Operation =EncryptedPasswordAuthentication, Status = Success 
+2020-07-15 16:59:40,476 INFO C.G.A.UserDB [http-nio-8080-exec-5] Operation = LoadUserByBannerID, Status = Success, RowCount:0
+2020-07-15 16:59:41,472 INFO C.G.A.UserDB [http-nio-8080-exec-5] Operation = LoadUser, Status = Success, RowCount:0
+2020-07-15 16:59:41,473 INFO C.G.S.CustomAuthenticationManager [http-nio-8080-exec-5] Operation = UserAuthentication, Status=Success, BannerId:B-739439
+2020-07-15 16:59:41,473 INFO C.G.S.BCryptPasswordEncryption [http-nio-8080-exec-5] Check if password plain text matches wit encrypted password
+2020-07-15 16:59:41,568 INFO C.G.S.CustomAuthenticationManager [http-nio-8080-exec-5] Operation =EncryptedPasswordAuthentication, Status = Success 
+2020-07-15 16:59:41,573 INFO C.G.W.IndexController [http-nio-8080-exec-6] Welcome to Group Formation Tool !!!! :- 
+2020-07-15 16:59:42,893 INFO C.G.C.CourseDB [http-nio-8080-exec-6] Operation = FetchAllCourses, Status = Success, RowCount=26
+2020-07-15 16:59:46,589 INFO C.G.A.UserDB [http-nio-8080-exec-9] Operation = LoadUserByBannerID, Status = Success, RowCount:0
+2020-07-15 16:59:46,827 INFO C.G.A.UserDB [http-nio-8080-exec-9] Operation = LoadUser, Status = Success, RowCount:0
+2020-07-15 16:59:46,828 INFO C.G.C.CourseController [http-nio-8080-exec-9] Username:-ins, login = Success
+2020-07-15 16:59:47,280 ERROR C.G.C.CourseDB [http-nio-8080-exec-9] Status = Failed, Error Message=null
+2020-07-15 16:59:48,374 INFO C.G.A.UserDB [http-nio-8080-exec-9] Operation = LoadUserByBannerID, Status = Success, RowCount:0
+2020-07-15 16:59:48,670 INFO C.G.A.UserDB [http-nio-8080-exec-9] Operation = LoadUser, Status = Success, RowCount:0
+2020-07-15 16:59:48,902 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-9] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-15 16:59:51,188 INFO C.G.S.SurveyManageDB [http-nio-8080-exec-10] Operation = FetchSurvey, Status = Success, ID:24
+2020-07-15 16:59:51,192 INFO C.G.G.GroupFormationController [http-nio-8080-exec-10] check if published or not
+2020-07-15 16:59:53,272 INFO C.G.S.SurveyManageDB [http-nio-8080-exec-10] Operation = FetchGroupSize, Status = Success 
+2020-07-15 16:59:53,274 INFO C.G.G.Groups [http-nio-8080-exec-10] Groups created and fetched
+2020-07-15 16:59:53,496 ERROR C.G.G.GroupsDB [http-nio-8080-exec-10] Status = Failed, Error Message=Duplicate entry '0-24-10' for key 'PRIMARY'
+2020-07-15 16:59:53,722 INFO C.G.G.GroupsDB [http-nio-8080-exec-10] Operation = Groups info fetched, Status = Success, RowCount:0
+2020-07-15 16:59:53,723 INFO C.G.G.GroupFormationController [http-nio-8080-exec-10] Operation: SurveyPublished and Groups Created,Status=success,surveyId:24
+2020-07-15 17:08:22,650 INFO o.s.s.c.ExecutorConfigurationSupport [SpringContextShutdownHook] Shutting down ExecutorService 'applicationTaskExecutor'

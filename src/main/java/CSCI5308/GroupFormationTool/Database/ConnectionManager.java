@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import CSCI5308.GroupFormationTool.SystemConfig;
-
 public class ConnectionManager {
 	private static ConnectionManager uniqueInstance = null;
 
@@ -14,7 +12,7 @@ public class ConnectionManager {
 	private String dbPassword;
 
 	public ConnectionManager() {
-		IDatabaseConfiguration config = SystemConfig.instance().getDatabaseConfiguration();
+		IDatabaseConfiguration config = DatabaseAbstractFactory.instance().createDatabaseConfigurationInstance();
 		dbURL = config.getDatabaseURL();
 		dbUserName = config.getDatabaseUserName();
 		dbPassword = config.getDatabasePassword();

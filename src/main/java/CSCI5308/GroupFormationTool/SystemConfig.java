@@ -35,15 +35,7 @@ public class SystemConfig {
 	private SystemConfig() {
 //		passwordEncryption = securityAbstractFactory.createBCryptPasswordEncryption();
 		//userDB = userAbstractFactory.createUserDBInstance();
-		databaseConfiguration = new DefaultDatabaseConfiguration();
-		courseDB = new CourseDB();
-		courseUserRelationshipDB = new CourseUserRelationshipDB();
-		questionDB = new QuestionDB();
-		validatorDB = new PasswordValidatorDB();
-		surveyAdminDB = new SurveyAdminDB();
-		surveyManageDB = new SurveyManageDB();
-		responseDB = new ResponseDB();
-		groupCreator = new DefaultGroupCreator();
+//		databaseConfiguration = new DefaultDatabaseConfiguration();
 
 	}
 
@@ -63,14 +55,14 @@ public class SystemConfig {
 	/*public void setUserDB(IUserPersistence userDB) {
 		this.userDB = userDB;
 	}*/
-
-	public IDatabaseConfiguration getDatabaseConfiguration() {
-		return databaseConfiguration;
-	}
-
-	public void setDatabaseConfiguration(IDatabaseConfiguration databaseConfiguration) {
-		this.databaseConfiguration = databaseConfiguration;
-	}
+//
+//	public IDatabaseConfiguration getDatabaseConfiguration() {
+//		return databaseConfiguration;
+//	}
+//
+//	public void setDatabaseConfiguration(IDatabaseConfiguration databaseConfiguration) {
+//		this.databaseConfiguration = databaseConfiguration;
+//	}
 
 //	public void setCourseDB(ICoursePersistence courseDB) {
 //		this.courseDB = courseDB;
