@@ -1,5 +1,10 @@
 package CSCI5308.GroupFormationTool.GroupFormation;
 
+import java.util.ArrayList;
+import java.util.Map;
+
+import CSCI5308.GroupFormationTool.Survey.ISurveyManagePersistence;
+
 public interface IGroups {
 
 	public long getSurveyId();
@@ -10,9 +15,9 @@ public interface IGroups {
 
 	public void setGroupId(int groupId);
 
-	public int getStudentId();
+	public long getStudentId();
 
-	public void setStudentId(int studentId);
+	public void setStudentId(long studentId);
 
 	public String getFirstName();
 
@@ -24,5 +29,13 @@ public interface IGroups {
 
 	public boolean createGroups();
 
-	public boolean insertGroups(IGroupsPersistence groupDB,long surveyId);
+	public boolean insertGroups(IGroupsPersistence groupDB, long surveyId, IGroupCreator groupCreator,
+			ISurveyManagePersistence surveyManageDB);
+
+	public String getBannerId();
+
+	public void setBannerId(String bannerId);
+
+	public Map<Integer, ArrayList<IGroups>> fetchGroups(IGroupsPersistence groupDB);
+
 }

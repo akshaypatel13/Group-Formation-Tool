@@ -3,7 +3,6 @@ package CSCI5308.GroupFormationTool.Survey;
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
 import CSCI5308.GroupFormationTool.QuestionManager.Question;
 import CSCI5308.GroupFormationTool.QuestionManager.QuestionType;
-import CSCI5308.GroupFormationTool.Response.Response;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

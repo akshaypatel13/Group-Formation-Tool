@@ -2,15 +2,20 @@ package CSCI5308.GroupFormationTool.GroupFormation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+
+import CSCI5308.GroupFormationTool.Survey.ISurveyManagePersistence;
 
 public class Groups implements IGroups {
 
 	private long surveyId;
 	private int groupId;
-	private int studentId;
+	private long studentId;
 	private String firstName;
 	private String lastName;
+	private String bannerId;
 
 	public long getSurveyId() {
 		return surveyId;
@@ -28,12 +33,13 @@ public class Groups implements IGroups {
 		this.groupId = groupId;
 	}
 
-	public int getStudentId() {
+	public long getStudentId() {
 		return studentId;
 	}
 
-	public void setStudentId(int studentId) {
-		this.studentId = studentId;
+	@Override
+	public void setStudentId(long a) {
+		this.studentId = a;
 	}
 
 	public String getFirstName() {
@@ -44,24 +50,20 @@ public class Groups implements IGroups {
 		this.firstName = firstName;
 	}
 
-	public boolean insertGroups(IGroupsPersistence groupDB, long surveyId) {
-		Map<Integer, ArrayList<Integer>> groups = new HashMap<Integer, ArrayList<Integer>>();
-		ArrayList<Integer> students1 = new ArrayList<Integer>();
-		ArrayList<Integer> students2 = new ArrayList<Integer>();
-		students1.add(1);
-		students1.add(2);
-		students1.add(3);
-		students2.add(4);
-		students2.add(5);
-		students2.add(6);
-		groups.put(1, students1);
-		groups.put(2, students2);
+	public boolean insertGroups(IGroupsPersistence groupDB, long surveyId, IGroupCreator groupCreator,
+			ISurveyManagePersistence surveyManageDB) {
+		Map<Long, Map<Long, String>> responses = surveyManageDB.getSurveyResponses(surveyId);
+		long groupSize = surveyManageDB.getSurveyGroupSize(surveyId);
+		Map<Integer, List<Long>> groups = new HashMap<Integer, List<Long>>();
+
+		groups = groupCreator.createGroups(responses, groupSize);
+		System.out.println(groups.size());
 		ArrayList<IGroups> groups1 = new ArrayList<IGroups>();
 
-		for (Map.Entry<Integer, ArrayList<Integer>> entry : groups.entrySet()) {
+		for (Entry<Integer, List<Long>> entry : groups.entrySet()) {
 			Integer key = entry.getKey();
-			ArrayList<Integer> value = entry.getValue();
-			for (Integer a : value) {
+			List<Long> value = entry.getValue();
+			for (Long a : value) {
 				Groups g = new Groups();
 				g.setGroupId(key);
 				g.setSurveyId(surveyId);
@@ -85,6 +87,39 @@ public class Groups implements IGroups {
 	public boolean createGroups() {
 
 		return false;
+	}
+
+	public String getBannerId() {
+		return bannerId;
+	}
+
+	public void setBannerId(String bannerId) {
+		this.bannerId = bannerId;
+	}
+
+	public  Map<Integer, ArrayList<IGroups>> fetchGroups(IGroupsPersistence groupDB) {
+		
+		ArrayList<IGroups> groups = groupDB.fetchGroups();
+		Map<Integer, ArrayList<IGroups>> mapGroups = new HashMap<Integer, ArrayList<IGroups>>();
+		ArrayList<Integer> uniqueGroups = new ArrayList<Integer>();
+		
+		for (IGroups group: groups) {
+			int groupId = group.getGroupId();
+			if (uniqueGroups.contains(groupId)) {
+				ArrayList<IGroups> existingGroupValues = new ArrayList<IGroups>();
+				existingGroupValues = mapGroups.get(groupId);
+				existingGroupValues.add(group);
+				mapGroups.replace(groupId, existingGroupValues); 
+			} else {
+				uniqueGroups.add(groupId);
+				ArrayList<IGroups> uniqueGroupValues = new ArrayList<IGroups>();
+				uniqueGroupValues.add(group);
+				mapGroups.put(groupId, uniqueGroupValues);
+				
+			}
+		}
+
+		return mapGroups;
 	}
 
 }

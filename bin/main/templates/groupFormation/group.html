@@ -9,5 +9,35 @@
 	</head>
 	<body>
 	<p>Welcomeeeeee!</p>
+	<div>
+	<h1>Groups</h1>
+	<table class="table table-bordered">
+                <tr class="bg-primary">
+                    <th>Group</th>
+                    <th>Allocated Students</th>
+                </tr>
+                <tr th:each="entry: ${groupInfo}">
+                    <td th:text="'Group ' + ${entry.key}"></td>
+                    <td>
+                        <table class="table table-bordered">
+                        <tr>
+	  		<th scope="col">GroupId</th>
+	  		<th scope="col">BannerId</th>
+	  		<th scope="col">FirstName</th>
+	  		<th scope="col">LastName</th>
+	  		</tr>
+			<tr th:each="group : ${entry.value}">
+				<td th:text="${group.groupId}"></td>
+				<td th:text="${group.bannerId}"></td>
+				<td th:text="${group.firstName}"></td>
+				<td th:text="${group.lastName}"></td>
+				<td></td>
+				<td></td>
+			</tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
 	</body>
 </html>
