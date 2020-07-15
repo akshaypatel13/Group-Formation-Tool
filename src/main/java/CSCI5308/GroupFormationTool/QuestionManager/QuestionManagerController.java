@@ -7,34 +7,28 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import CSCI5308.GroupFormationTool.SystemConfig;
-
 @Controller
-public class QuestionManagerController 
-{
+public class QuestionManagerController {
 	private static final String BannerID = "bannerID";
 	private IQuestionPersistence questionDB;
 	private List<IQuestion> questionList;
-	
-	public QuestionManagerController() 
-	{
+
+	public QuestionManagerController() {
 		questionDB = QuestionManagerAbstractFactory.instance().createQuestionDBInstance();
 	}
 
 	@RequestMapping("/question/questionmanager/title")
-	public String questionsByTitle(Model model, @RequestParam(name = BannerID) String bannerID) 
-	{
+	public String questionsByTitle(Model model, @RequestParam(name = BannerID) String bannerID) {
 		questionList = questionDB.loadQuestionsSortedByTitle(bannerID);
 		model.addAttribute("questionList", questionList);
 		return "question/questions";
 	}
-	
+
 	@RequestMapping("/question/questionmanager/date")
-	public String questionsByDate(Model model, @RequestParam(name = BannerID) String bannerID) 
-	{
+	public String questionsByDate(Model model, @RequestParam(name = BannerID) String bannerID) {
 		questionList = questionDB.loadSortedQuestionsSortedByDate(bannerID);
 		model.addAttribute("questionList", questionList);
 		return "question/questions";
 	}
-	
+
 }

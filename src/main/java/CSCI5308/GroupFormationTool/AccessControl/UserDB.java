@@ -80,6 +80,7 @@ public class UserDB implements IUserPersistence {
 			proc.setParameter(5, user.getEmail());
 			proc.registerOutputParameterLong(6);
 			proc.execute();
+			LOG.info("Operation = User Created, Status = Success, UserID=" + user.getId());
 		} catch (SQLException e) {
 			LOG.error("Status = Failed, Error Message=" + e.getMessage());
 			return false;

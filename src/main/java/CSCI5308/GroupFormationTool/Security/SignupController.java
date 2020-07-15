@@ -40,7 +40,7 @@ public class SignupController {
 			@RequestParam(name = PASSWORD_CONFIRMATION) String passwordConfirm,
 			@RequestParam(name = FIRST_NAME) String firstName, @RequestParam(name = LAST_NAME) String lastName,
 			@RequestParam(name = EMAIL) String email) {
-		
+
 		IPasswordValidatorPersistence validatorDB = PasswordValidationAbstractFactory.instance()
 				.createPasswordValidatorDBInstance();
 		passwordValidatorEnumerator = PasswordValidationAbstractFactory.instance()
@@ -52,7 +52,7 @@ public class SignupController {
 		if (userInstance.isBannerIDValid(bannerID) && userInstance.isEmailValid(email)
 				&& userInstance.isFirstNameValid(firstName) && userInstance.isLastNameValid(lastName)
 				&& password.equals(passwordConfirm)) {
-			  LOG.info("Operation = User meets Criteria for registration, Status = Success");
+			LOG.info("Operation = User meets Criteria for registration, Status = Success");
 			IUser u = UserAbstractFactory.instance().createUserInstance();
 			u.setBannerID(bannerID);
 			u.setPassword(password);
@@ -63,13 +63,13 @@ public class SignupController {
 			IPasswordEncryption passwordEncryption = SecurityAbstractFactory.instance()
 					.createBCryptPasswordEncryption();
 			passwordValidatorEnumerator = PasswordValidationAbstractFactory.instance().getPasswordValidatorEnumerator();
-		
+
 			success = u.createUser(userDB, passwordValidatorEnumerator, passwordEncryption, null, errorMessages);
-			  LOG.info("Operation = User Registerd in DB, Status = Success, Id ="+u.getID());
+			LOG.info("Operation = User Registerd in DB, Status = Success, Id =" + u.getID());
 		}
 		ModelAndView m = new ModelAndView("login");
 		if (success == false) {
-			 LOG.error("Operation = Invalid data, password Invalid, Status = Failed");
+			LOG.error("Operation = Invalid data, password Invalid, Status = Failed");
 			m = new ModelAndView("signup");
 			m.addObject("errorMessage", "Invalid data, please check your values.");
 			m.addObject("passwordInvalid", errorMessages);
