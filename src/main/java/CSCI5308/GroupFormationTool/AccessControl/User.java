@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import CSCI5308.GroupFormationTool.PasswordValidation.IPasswordValidatorEnumerator;
 import CSCI5308.GroupFormationTool.PasswordValidation.PasswordValidator;
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
@@ -11,7 +14,7 @@ import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
 public class User implements IUser
 {
 	private static final String EMAIL_REGEX = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
-
+	private static final Logger LOG = LogManager.getLogger();
 	private long id;
 	private String password;
 	private String bannerID;
@@ -160,16 +163,18 @@ public class User implements IUser
 		List<PasswordValidator> passwordValidators = passwordEnumerator.getActiveValidators(this);
 		for(int i=0;i<passwordValidators.size();i++)
 		{
+			LOG.info("check for password validation");
 			PasswordValidator validator = passwordValidators.get(i);
 			if(validator.isValid(rawPassword) == false)
 			{
-				System.out.println("Password criteria not met!");
+				LOG.warn("Password criteria is not met");
 				errorMessages.add(validator.getValidatorName() + " - " + validator.constraint);
 				success = false;
 			}
 		}
 		if (success)
 		{
+			LOG.info("User created successfully");
 			success = this.createUser(userDB, passwordEncryption, notification);
 		}
 		return success;

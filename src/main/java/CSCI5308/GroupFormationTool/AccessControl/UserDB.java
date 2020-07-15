@@ -3,22 +3,22 @@ package CSCI5308.GroupFormationTool.AccessControl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
 
-public class UserDB implements IUserPersistence
-{
-	public void loadUserByID(long id, IUser user)
-	{
+public class UserDB implements IUserPersistence {
+	private static final Logger LOG = LogManager.getLogger();
+
+	public void loadUserByID(long id, IUser user) {
 		CallStoredProcedure proc = null;
-		try
-		{
+		try {
 			proc = new CallStoredProcedure("spLoadUser(?)");
 			proc.setParameter(1, id);
 			ResultSet results = proc.executeWithResults();
-			if (null != results)
-			{
-				while (results.next())
-				{
+			if (null != results) {
+				while (results.next()) {
 					long userID = results.getLong(1);
 					String bannerID = results.getString(2);
 					String password = results.getString(3);
@@ -33,60 +33,45 @@ public class UserDB implements IUserPersistence
 					user.setEmail(email);
 				}
 			}
-		}
-		catch (SQLException e)
-		{
-			// Logging needed.
-		}
-		finally
-		{
-			if (null != proc)
-			{
+			LOG.info("Operation = LoadUser, Status = Success, RowCount:" + results.getRow());
+		} catch (SQLException e) {
+			LOG.error("Status = Failed, Error Message=" + e.getMessage());
+		} finally {
+			if (null != proc) {
 				proc.cleanup();
 			}
 		}
 	}
 
-	public void loadUserByBannerID(String bannerID, IUser user)
-	{
+	public void loadUserByBannerID(String bannerID, IUser user) {
 		CallStoredProcedure proc = null;
 		long userID = -1;
-		try
-		{
+		try {
 			proc = new CallStoredProcedure("spFindUserByBannerID(?)");
 			proc.setParameter(1, bannerID);
 			ResultSet results = proc.executeWithResults();
-			if (null != results)
-			{
-				while (results.next())
-				{
+			if (null != results) {
+				while (results.next()) {
 					userID = results.getLong(1);
 				}
 			}
-		}
-		catch (SQLException e)
-		{
-			// Logging needed.
-		}
-		finally
-		{
-			if (null != proc)
-			{
+			LOG.info("Operation = LoadUserByBannerID, Status = Success, RowCount:" + results.getRow());
+		} catch (SQLException e) {
+			LOG.error("Status = Failed, Error Message=" + e.getMessage());
+		} finally {
+			if (null != proc) {
 				proc.cleanup();
 			}
 		}
-		// If we found the ID load the full details.
-		if (userID > -1)
-		{
+
+		if (userID > -1) {
 			loadUserByID(userID, user);
 		}
 	}
 
-	public boolean createUser(IUser user)
-	{
+	public boolean createUser(IUser user) {
 		CallStoredProcedure proc = null;
-		try
-		{
+		try {
 			proc = new CallStoredProcedure("spCreateUser(?, ?, ?, ?, ?, ?)");
 			proc.setParameter(1, user.getBannerID());
 			proc.setParameter(2, user.getPassword());
@@ -95,24 +80,18 @@ public class UserDB implements IUserPersistence
 			proc.setParameter(5, user.getEmail());
 			proc.registerOutputParameterLong(6);
 			proc.execute();
-		}
-		catch (SQLException e)
-		{
-			// Logging needed
+		} catch (SQLException e) {
+			LOG.error("Status = Failed, Error Message=" + e.getMessage());
 			return false;
-		}
-		finally
-		{
-			if (null != proc)
-			{
+		} finally {
+			if (null != proc) {
 				proc.cleanup();
 			}
 		}
 		return true;
 	}
 
-	public boolean updateUser(IUser user)
-	{
+	public boolean updateUser(IUser user) {
 		return false;
 	}
 }

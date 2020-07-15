@@ -3,7 +3,6 @@ package CSCI5308.GroupFormationTool.Survey;
 import CSCI5308.GroupFormationTool.AccessControl.CurrentUser;
 import CSCI5308.GroupFormationTool.QuestionManager.IQuestionPersistence;
 import CSCI5308.GroupFormationTool.QuestionManager.QuestionManagerAbstractFactory;
-import CSCI5308.GroupFormationTool.SystemConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -11,9 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import sun.rmi.runtime.Log;
 
-import java.util.Map;
 
 @Controller
 public class SurveyAdminController {
