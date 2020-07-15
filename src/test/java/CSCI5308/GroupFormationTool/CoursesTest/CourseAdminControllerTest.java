@@ -1,6 +1,5 @@
 package CSCI5308.GroupFormationTool.CoursesTest;
 
-import CSCI5308.GroupFormationTool.Courses.ICoursePersistence;
 import CSCI5308.GroupFormationTool.Courses.Role;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -34,7 +34,7 @@ public class CourseAdminControllerTest {
     @Test
     public void assignInstructorTest() throws Exception {
         this.mockMvc.perform(get("/admin/course")
-                .param("id","1")
+                .param("id", "1")
         )
                 .andDo(print())
                 .andExpect(status().isOk());
@@ -43,7 +43,7 @@ public class CourseAdminControllerTest {
     @Test
     public void deleteCourseTest() throws Exception {
         this.mockMvc.perform(get("/admin/deletecourse")
-                .param("id","121")
+                .param("id", "121")
                 .with(csrf())
                 .with(
                         user("B-000000")
@@ -59,12 +59,12 @@ public class CourseAdminControllerTest {
     @Test
     public void createCourseTest() throws Exception {
         this.mockMvc.perform(post("/admin/createcourse")
-                .param("title","Abcd")
+                .param("title", "Abcd")
                 .with(csrf())
                 .with(
                         user("B-000000")
-                        .password("1234")
-                        .roles(Role.ADMIN.toString())
+                                .password("1234")
+                                .roles(Role.ADMIN.toString())
                 )
         )
                 .andDo(MockMvcResultHandlers.print())
@@ -77,8 +77,8 @@ public class CourseAdminControllerTest {
     @Test
     public void assignInstructorToCourseTest() throws Exception {
         this.mockMvc.perform(post("/admin/assigninstructor")
-                .param("instructor","1")
-                .param("id","1")
+                .param("instructor", "1")
+                .param("id", "1")
                 .with(csrf())
                 .with(
                         user("B-000000")
