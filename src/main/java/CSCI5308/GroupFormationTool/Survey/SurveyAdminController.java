@@ -24,7 +24,6 @@ public class SurveyAdminController {
     private IQuestionPersistence questionDB;
     private ISurveyAdminPersistence surveyAdminDB;
     private ISurveyManagePersistence surveyManageDB;
-    private IGroupCreator groupCreator;
 
     public SurveyAdminController()
     {
@@ -60,18 +59,21 @@ public class SurveyAdminController {
 	}
 
 
-    @PostMapping("/surveyQuestion/delete")
-    public String deleteSurveyQuestion(Model model,@RequestParam("questionID") long questionId, @RequestParam("courseID") long courseId)
+    @PostMapping("/survey/publish")
+    public String publishSurvey(Model model, @RequestParam("courseID") long courseId, @RequestParam("groupSize") long groupSize)
     {
-        surveyAdminDB.deleteSurveyQuestion(questionId);
+        System.out.println("GroupSize: " + groupSize);
+        LOG.info("Operation = Survey Published, Status = Success, Course ="+courseID);
+        surveyAdminDB.publishSurvey(courseId, groupSize);
         return "redirect:/survey/survey?courseID="+courseId;
     }
 
-	@GetMapping("/survey/disable")
-	public String disableSurvey(Model model, @RequestParam("courseID") long courseId) {
-		surveyAdminDB.disableSurvey(courseId);
-		System.out.print("Hiiiii");
-		return "redirect:/survey/survey?courseID=" + courseId;
-	}
+    @GetMapping("/survey/disable")
+    public String disableSurvey(Model model, @RequestParam("courseID") long courseId)
+    {
+        LOG.info("Operation = Survey Disabled, Status = Success, Course ="+courseID);
+        surveyAdminDB.disableSurvey(courseId);
+        return "redirect:/survey/survey?courseID="+courseId;
+    }
 
 }
