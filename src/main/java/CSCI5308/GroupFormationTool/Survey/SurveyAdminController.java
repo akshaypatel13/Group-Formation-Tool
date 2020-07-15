@@ -1,14 +1,18 @@
 package CSCI5308.GroupFormationTool.Survey;
 
 import CSCI5308.GroupFormationTool.AccessControl.CurrentUser;
+import CSCI5308.GroupFormationTool.Courses.CourseAdminController;
 import CSCI5308.GroupFormationTool.QuestionManager.IQuestionPersistence;
 import CSCI5308.GroupFormationTool.QuestionManager.QuestionManagerAbstractFactory;
 import CSCI5308.GroupFormationTool.SystemConfig;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import sun.rmi.runtime.Log;
 
 import java.util.Map;
 
@@ -18,6 +22,7 @@ public class SurveyAdminController
 
     private static final String courseID = "courseID";
     private static final String questionID = "questionID";
+    private static final Logger LOG = LogManager.getLogger(SurveyAdminController.class);
     private IQuestionPersistence questionDB;
     private ISurveyAdminPersistence surveyAdminDB;
     private ISurveyManagePersistence surveyManageDB;
@@ -38,7 +43,7 @@ public class SurveyAdminController
         surveyAdminDB.createSurvey(courseID);
         boolean check = surveyManageDB.surveyPublishedOrNot(courseID);
         long surveyID = surveyManageDB.findSurveyByCourseID(courseID);
-        System.out.print(surveyID);
+        LOG.info("Operation = Suvrey Creation, SurveyID = "+surveyID+", Course ="+courseID);
         model.addAttribute("surveyCheck", check);
         model.addAttribute("courseID",courseID);
         model.addAttribute("surveyQuestions",surveyManageDB.findSurveyQuestions(surveyID));
@@ -80,6 +85,7 @@ public class SurveyAdminController
     public String publishSurvey(Model model, @RequestParam("courseID") long courseId, @RequestParam("groupSize") long groupSize)
     {
         System.out.println("GroupSize: " + groupSize);
+        LOG.info("Operation = Survey Published, Status = Success, Course ="+courseID);
         surveyAdminDB.publishSurvey(courseId, groupSize);
         return "redirect:/survey/survey?courseID="+courseId;
     }
@@ -87,8 +93,8 @@ public class SurveyAdminController
     @GetMapping("/survey/disable")
     public String disableSurvey(Model model, @RequestParam("courseID") long courseId)
     {
+        LOG.info("Operation = Survey Disabled, Status = Success, Course ="+courseID);
         surveyAdminDB.disableSurvey(courseId);
-        System.out.print("Hiiiii");
         return "redirect:/survey/survey?courseID="+courseId;
     }
 
