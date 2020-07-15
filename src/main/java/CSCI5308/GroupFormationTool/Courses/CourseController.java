@@ -33,17 +33,18 @@ public class CourseController
 		LOG.info("Username:-"+ CurrentUser.instance().getCurrentAuthenticatedUser().getFirstName()
 		+ ", login = Success");
 		ICourse course = CourseAbstractFactory.instance().createCourseInstance();
-		boolean check = surveyManageDB.surveyPublishedOrNot(courseID);
+		boolean surveyNotPublished = surveyManageDB.surveyPublishedOrNot(courseID);
 		courseDB.loadCourseByID(courseID, course);
+		model.addAttribute("survey", surveyNotPublished);
 		model.addAttribute("course", course);
 		List<Role> userRoles = course.getAllRolesForCurrentUserInCourse();
+		
 		if (null == userRoles)
 		{
 			model.addAttribute("instructor", false);
 			model.addAttribute("ta", false);
 			model.addAttribute("student", false);
 			model.addAttribute("guest", true);
-			model.addAttribute("survey", !check);
 		}
 		else
 		{
@@ -51,7 +52,6 @@ public class CourseController
 			model.addAttribute("ta", userRoles.contains(Role.TA));
 			model.addAttribute("student", userRoles.contains(Role.STUDENT));
 			model.addAttribute("guest", userRoles.isEmpty());
-			model.addAttribute("survey", !check);
 		}
 		return "course/course";
 	}

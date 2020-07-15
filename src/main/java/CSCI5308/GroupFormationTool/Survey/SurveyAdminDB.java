@@ -108,21 +108,4 @@ public class SurveyAdminDB implements ISurveyAdminPersistence {
 		}
 	}
 
-	@Override
-	public List<Question> sortQuestionByDateCreated(List<Question> quesionsWithoutOptions,
-			List<Question> quesionsWithOptions) {
-		List<Question> questions = new ArrayList<>();
-
-		for (Question question : quesionsWithoutOptions) {
-			questions.add(question);
-		}
-		for (Question question : quesionsWithOptions) {
-			questions.add(question);
-		}
-
-		Collections.sort(questions);
-
-		return questions;
-	}
-
 }
