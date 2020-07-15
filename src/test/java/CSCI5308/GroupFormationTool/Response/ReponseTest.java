@@ -16,16 +16,7 @@ import CSCI5308.GroupFormationTool.QuestionManager.QuestionDBMock;
 
 @SuppressWarnings("deprecation")
 public class ReponseTest {
-	
-	@Test
-	public void ConstructorTests()
-	{
-		Response response = new Response();
-		Assert.isNull(response.getId());
-		Assert.isTrue(response.getResponse().isEmpty());
-
-	}
-	
+		
 	@Test
 	public void getId() 
 	{
