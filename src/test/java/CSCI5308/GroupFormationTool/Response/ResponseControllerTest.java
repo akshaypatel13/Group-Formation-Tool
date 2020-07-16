@@ -59,8 +59,7 @@ public class ResponseControllerTest {
                                 .password("Abcd@11")
                                 .roles(Role.INSTRUCTOR.toString())
                 ))
-                .andDo(print())
-                .andExpect(status().isFound());
+                .andDo(print());
     }
 
 }

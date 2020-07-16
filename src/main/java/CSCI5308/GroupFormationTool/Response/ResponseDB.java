@@ -23,6 +23,7 @@ public class ResponseDB implements IResponsePersistence {
 	@Override
 	public List<IQuestion> loadQuestionsWithoutOptions(long courseId) {
 
+
 		List<IQuestion> questionList = new ArrayList<IQuestion>();
 		CallStoredProcedure proc = null;
 		try {
@@ -80,6 +81,7 @@ public class ResponseDB implements IResponsePersistence {
 					String text = results.getString(3);
 					QuestionType type = QuestionType.valueOf(results.getString(4).toUpperCase());
 					Timestamp timestamp = results.getTimestamp(5);
+
 					question = new Question();
 					question.setId(id);
 					question.setTitle(title);
@@ -102,45 +104,43 @@ public class ResponseDB implements IResponsePersistence {
 	}
 
 	@Override
-	public List<IQuestion> loadQuestionsOptions(List<IQuestion> questions) {
+	public IQuestion loadQuestionsOptions(IQuestion question) {
 
-		List<IQuestion> questionList = new ArrayList<IQuestion>();
 		CallStoredProcedure proc = null;
-		try {
-
-			for (IQuestion question : questions) {
-
-				proc = DatabaseAbstractFactory.instance()
-						.createCallStoredProcedureInstance("spLoadQuestionsOptions(?)");
-				proc.setParameter(1, question.getId());
-
-				ResultSet results = proc.executeWithResults();
-				ArrayList<String> options = new ArrayList<String>();
-
-				if (null != results) {
-					while (results.next()) {
-						String displayText = results.getString(5);
-						options.add(displayText);
-
-					}
-					question.setOptions(options);
-					questionList.add(question);
+		try
+		{
+			proc = new CallStoredProcedure("spLoadQuestionsOptions(?)");
+			proc.setParameter(1, question.getId());
+			ResultSet results = proc.executeWithResults();
+			ArrayList<String> options = new ArrayList<String>();
+			if (null != results)
+			{
+				while (results.next())
+				{
+					String displayText = results.getString(5);
+					options.add(displayText);
 				}
+				question.setOptions(options);
 			}
 			LOG.info("Operation = Load Question options, Status = Success");
-		} catch (SQLException e) {
-			LOG.error("Status = Failed, Error Message=" + e.getMessage());
+		}
+		catch (SQLException e)
+		{
+			LOG.error("Status = Failed, Error Message="+e.getMessage());
 			return null;
-		} finally {
-			if (null != proc) {
+		}
+		finally
+		{
+			if (null != proc)
+			{
 				proc.cleanup();
 			}
 		}
-		return questionList;
+		return question;
 	}
 
 	@Override
-	public boolean saveResponse(String questionId, String bannerId, String option) {
+	public boolean saveResponse(String questionId, String bannerId, String option) throws SQLException {
 
 		CallStoredProcedure proc = null;
 		try {
@@ -156,7 +156,7 @@ public class ResponseDB implements IResponsePersistence {
 			proc.execute();
 			LOG.info("Operation = Save Responses for user:"+bannerId+", Status = Success");
 			return true;
-			
+
 
 		} catch (SQLException e) {
 			LOG.error("Status = Failed, Error Message=" + e.getMessage());
@@ -178,6 +178,7 @@ public class ResponseDB implements IResponsePersistence {
 			proc = DatabaseAbstractFactory.instance().createCallStoredProcedureInstance("spCheckIsMCQMultiple(?)");
 			proc.setParameter(1, questionId);
 			ResultSet results = proc.executeWithResults();
+
 			if (null != results) {
 				if (results.next()) {
 					String type = results.getString(1);

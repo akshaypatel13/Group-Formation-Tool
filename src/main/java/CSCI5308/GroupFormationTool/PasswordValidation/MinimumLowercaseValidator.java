@@ -27,7 +27,7 @@ public class MinimumLowercaseValidator extends PasswordValidator
 		
 		if(passLower<minLower) 
 		{
-			LOG.error("Password is violating Minimum Lowecase Letters equired policy");
+			LOG.error("Password is violating Minimum Lowercase Letters required policy");
 			return false;
 		}
 		

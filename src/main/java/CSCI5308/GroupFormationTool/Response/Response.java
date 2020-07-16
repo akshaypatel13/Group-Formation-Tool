@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.Response;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -98,10 +99,10 @@ public class Response implements IResponse {
 
 		return answer;
 	}
-	
+
 	public boolean saveResponse(HashMap<String, String> answer, String bannerId) {
 		IResponsePersistence responseDB = ResponseAbstractFactory.instance().createResponseDBInstance();
-		boolean status = true;
+		boolean status = false;
 		for (String questionId : answer.keySet()) {
 			if (responseDB.checkIsMCQMultiple(questionId)) {
 				String[] options = answer.get(questionId).split(":");
@@ -109,13 +110,32 @@ public class Response implements IResponse {
 					if (option.equals("")) {
 
 					} else {
-						status = responseDB.saveResponse(questionId, bannerId, option);
+						try {
+							status = responseDB.saveResponse(questionId, bannerId, option);
+						} catch (SQLException e) {
+							return false;
+						}
 					}
 				}
 			} else {
-				status = responseDB.saveResponse(questionId, bannerId, answer.get(questionId));
+				try {
+					status = responseDB.saveResponse(questionId, bannerId, answer.get(questionId));
+				} catch (SQLException e) {
+					return false;
+				}
 			}
 		}
 		return status;
 	}
+
+	public List<IQuestion> loadQuestionOptions(List<IQuestion> questions, IResponsePersistence responsePersistence){
+		List<IQuestion> questionList = new ArrayList<IQuestion>();
+		for(IQuestion question : questions) {
+			ArrayList<String> options = new ArrayList<String>();
+			IQuestion loadOptions = responsePersistence.loadQuestionsOptions(question);
+			questionList.add(loadOptions);
+		}
+		return questionList;
+	}
+
 }
