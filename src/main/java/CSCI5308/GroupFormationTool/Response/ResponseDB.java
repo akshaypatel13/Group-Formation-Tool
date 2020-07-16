@@ -141,7 +141,7 @@ public class ResponseDB implements IResponsePersistence {
 	}
 
 	@Override
-	public boolean saveResponse(HashMap<String, String> answer, String bannerId) {
+	public boolean saveResponse(HashMap<String, String> answer, String bannerId) throws SQLException {
 
 		CallStoredProcedure proc = null;
 		try {

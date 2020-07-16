@@ -23,4 +23,6 @@ public interface IResponse {
 
 	public HashMap<String, String> saveResponseAnswer(HttpServletRequest request, List<IQuestion> questionList,
 			List<IQuestion> loadQuestionsOptions);
+
+	public boolean saveResponse(IResponsePersistence responsePersistence,HashMap<String, String> answer,String bannerId);
 }

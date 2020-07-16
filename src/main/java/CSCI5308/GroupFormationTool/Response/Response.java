@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.Response;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -96,5 +97,16 @@ public class Response implements IResponse {
 		}
 
 		return answer;
+	}
+
+	@Override
+	public boolean saveResponse(IResponsePersistence responsePersistence, HashMap<String, String> answer, String bannerId) {
+		boolean status = false;
+		try {
+			status = responsePersistence.saveResponse(answer,bannerId);
+		} catch (SQLException e) {
+			return false;
+		}
+		return status;
 	}
 }

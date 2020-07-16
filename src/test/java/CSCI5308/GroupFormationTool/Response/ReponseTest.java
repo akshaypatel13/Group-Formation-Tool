@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.Response;
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -76,7 +77,12 @@ public class ReponseTest {
 		answer.put("Question", "Response");
 
 		IResponsePersistence responseDB = new ResponseDBMock();
-		boolean status = responseDB.saveResponse(answer, "B-000000");
+		boolean status = false;
+		try {
+			status = responseDB.saveResponse(answer, "B-000000");
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
 		Assert.isTrue(status == true);
 
 	}
