@@ -78,8 +78,8 @@ public class ResponseDBMock implements IResponsePersistence
         return questions;    }
 
     @Override
-    public boolean saveResponse(HashMap<String, String> answer, String bannerId) {
-        if(answer.isEmpty())
+    public boolean saveResponse(String questionId, String bannerId, String option) {
+        if(questionId == null)
         {
             return false;
         }

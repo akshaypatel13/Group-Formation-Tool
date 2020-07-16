@@ -76,7 +76,7 @@ public class ReponseTest {
 		answer.put("Question", "Response");
 
 		IResponsePersistence responseDB = new ResponseDBMock();
-		boolean status = responseDB.saveResponse(answer, "B-000000");
+		boolean status = responseDB.saveResponse("1", "B-000000","selected");
 		Assert.isTrue(status == true);
 
 	}

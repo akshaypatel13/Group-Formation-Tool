@@ -8,11 +8,11 @@ import CSCI5308.GroupFormationTool.GroupFormation.IGroupsPersistence;
 public class GroupsDBMock implements IGroupsPersistence {
 
 	@Override
-	public boolean insertGroups(ArrayList<IGroups> groups) {
-		if (groups.size() == 0) {
-			return false;
-		} else {
+	public boolean insertGroups(IGroups groups) {
+		if (groups.getBannerId() == "B0999") {
 			return true;
+		} else {
+			return false;
 		}
 	}
 
