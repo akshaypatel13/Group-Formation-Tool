@@ -30,7 +30,9 @@ public class StudentCSVImport implements IStudentCSVImport {
 	}
 
 	public void enrollStudentFromRecord() {
+		LOG.info("Parsing the imported CSV student list ");
 		List<IUser> studentList = parser.parseCSVFile(failureResults);
+		LOG.info("Checking if students already exist in database");
 		for (IUser u : studentList) {
 			String bannerID = u.getBanner();
 			String firstName = u.getFirstName();
@@ -41,7 +43,7 @@ public class StudentCSVImport implements IStudentCSVImport {
 			IUser user = UserAbstractFactory.instance().createUserInstance();
 			userDB.loadUserByBannerID(bannerID, user);
 
-			if (!user.isValidUser()) {
+			if (user.isInValidUser()) {
 				user.setBannerID(bannerID);
 				user.setFirstName(firstName);
 				user.setLastName(lastName);
@@ -50,6 +52,7 @@ public class StudentCSVImport implements IStudentCSVImport {
 					successResults.add("Created: " + userDetails);
 					userDB.loadUserByBannerID(bannerID, user);
 				} else {
+					LOG.warn("Unable to add user:" + user.getBannerID()+ " to DB ");
 					failureResults.add("Unable to save this user to DB: " + userDetails);
 					return;
 				}

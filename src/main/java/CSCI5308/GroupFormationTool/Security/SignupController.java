@@ -52,7 +52,7 @@ public class SignupController {
 		if (userInstance.isBannerIDValid(bannerID) && userInstance.isEmailValid(email)
 				&& userInstance.isFirstNameValid(firstName) && userInstance.isLastNameValid(lastName)
 				&& password.equals(passwordConfirm)) {
-			LOG.info("Operation = User meets Criteria for registration, Status = Success");
+			LOG.info("User data validated for registration");
 			IUser u = UserAbstractFactory.instance().createUserInstance();
 			u.setBannerID(bannerID);
 			u.setPassword(password);
@@ -65,11 +65,11 @@ public class SignupController {
 			passwordValidatorEnumerator = PasswordValidationAbstractFactory.instance().getPasswordValidatorEnumerator();
 
 			success = u.createUser(userDB, passwordValidatorEnumerator, passwordEncryption, null, errorMessages);
-			LOG.info("Operation = User Registerd in DB, Status = Success, Id =" + u.getID());
+			LOG.info("User Registerd in DB successfully for userId =" + u.getID());
 		}
 		ModelAndView m = new ModelAndView("login");
 		if (success == false) {
-			LOG.error("Operation = Invalid data, password Invalid, Status = Failed");
+			LOG.error("Invalid data, user registration failed");
 			m = new ModelAndView("signup");
 			m.addObject("errorMessage", "Invalid data, please check your values.");
 			m.addObject("passwordInvalid", errorMessages);

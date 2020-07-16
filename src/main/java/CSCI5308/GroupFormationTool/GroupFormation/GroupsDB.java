@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
+import CSCI5308.GroupFormationTool.Database.DatabaseAbstractFactory;
 
 public class GroupsDB implements IGroupsPersistence {
 	private static final Logger LOG = LogManager.getLogger();
@@ -17,7 +18,8 @@ public class GroupsDB implements IGroupsPersistence {
 
 			CallStoredProcedure proc = null;
 			try {
-				proc = new CallStoredProcedure("spCreateGroup(?, ?, ?)");
+				proc = DatabaseAbstractFactory.instance()
+						.createCallStoredProcedureInstance("spCreateGroup(?, ?, ?)");
 				proc.setParameter(1, group.getGroupId());
 				proc.setParameter(2, group.getSurveyId());
 				proc.setParameter(3, group.getStudentId());
@@ -41,7 +43,8 @@ public class GroupsDB implements IGroupsPersistence {
 		CallStoredProcedure proc = null;
 		ArrayList<IGroups> groupsInfo = GroupsAbstractFactory.instance().createArrayListGroups();
 		try {
-			proc = new CallStoredProcedure("spFetchGroupsInfo()");
+			proc = DatabaseAbstractFactory.instance()
+					.createCallStoredProcedureInstance("spFetchGroupsInfo()");
 			ResultSet results = proc.executeWithResults();
 			if (null != results) {
 				while (results.next()) {

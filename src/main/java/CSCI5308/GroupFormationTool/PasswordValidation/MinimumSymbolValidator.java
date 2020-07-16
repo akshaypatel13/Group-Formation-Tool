@@ -1,7 +1,11 @@
 package CSCI5308.GroupFormationTool.PasswordValidation;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class MinimumSymbolValidator extends PasswordValidator
 {
+	private static final Logger LOG = LogManager.getLogger();
 	public MinimumSymbolValidator(String constraint) 
 	{
 		this.constraint = constraint;
@@ -25,6 +29,7 @@ public class MinimumSymbolValidator extends PasswordValidator
 		
 		if(passSymbols<minSymbols) 
 		{
+			LOG.error("Password is violating Minimum Symbols required policy");
 			return false;
 		}
 		

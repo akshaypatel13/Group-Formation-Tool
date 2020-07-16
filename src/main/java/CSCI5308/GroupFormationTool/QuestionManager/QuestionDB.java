@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
+import CSCI5308.GroupFormationTool.Database.DatabaseAbstractFactory;
 
 public class QuestionDB implements IQuestionPersistence {
 	@Override
@@ -14,7 +15,8 @@ public class QuestionDB implements IQuestionPersistence {
 		List<IQuestion> questionList = new ArrayList<>();
 		CallStoredProcedure proc = null;
 		try {
-			proc = new CallStoredProcedure("spFindSortedQuestionsByTitle(?)");
+			proc = DatabaseAbstractFactory.instance()
+					.createCallStoredProcedureInstance("spFindSortedQuestionsByTitle(?)");
 			proc.setParameter(1, bannerID);
 			ResultSet results = proc.executeWithResults();
 			IQuestion question;
@@ -52,7 +54,8 @@ public class QuestionDB implements IQuestionPersistence {
 		List<IQuestion> questionList = new ArrayList<>();
 		CallStoredProcedure proc = null;
 		try {
-			proc = new CallStoredProcedure("spFindSortedQuestionsByDate(?)");
+			proc = DatabaseAbstractFactory.instance()
+					.createCallStoredProcedureInstance("spFindSortedQuestionsByDate(?)");
 			proc.setParameter(1, bannerID);
 			ResultSet results = proc.executeWithResults();
 			IQuestion question;
@@ -89,7 +92,8 @@ public class QuestionDB implements IQuestionPersistence {
 	public boolean deleteQuestionByQuestionId(long questionID) {
 		CallStoredProcedure proc = null;
 		try {
-			proc = new CallStoredProcedure("spDeleteQuestionsByQuestionID(?)");
+			proc = DatabaseAbstractFactory.instance()
+					.createCallStoredProcedureInstance("spDeleteQuestionsByQuestionID(?)");
 			proc.setParameter(1, questionID);
 			proc.execute();
 		} catch (SQLException e) {
@@ -108,7 +112,8 @@ public class QuestionDB implements IQuestionPersistence {
 		long id = -1;
 		CallStoredProcedure proc = null;
 		try {
-			proc = new CallStoredProcedure("spCreateQuestion(?,?,?,?)");
+			proc = DatabaseAbstractFactory.instance()
+					.createCallStoredProcedureInstance("spCreateQuestion(?,?,?,?)");
 			proc.setParameter(1, question.getTitle());
 			proc.setParameter(2, question.getText());
 			proc.setParameter(3, question.getType().toString());
@@ -135,7 +140,8 @@ public class QuestionDB implements IQuestionPersistence {
 	public boolean createQuestionOption(IOptionValue option, int order, long questionID) {
 		CallStoredProcedure proc = null;
 		try {
-			proc = new CallStoredProcedure("spCreateOptions(?,?,?,?)");
+			proc = DatabaseAbstractFactory.instance()
+					.createCallStoredProcedureInstance("spCreateOptions(?,?,?,?)");
 			proc.setParameter(1, questionID);
 			proc.setParameter(2, option.getText());
 			proc.setParameter(3, option.getStoredAs());

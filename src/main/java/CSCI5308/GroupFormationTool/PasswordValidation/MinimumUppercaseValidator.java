@@ -1,7 +1,11 @@
 package CSCI5308.GroupFormationTool.PasswordValidation;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class MinimumUppercaseValidator extends PasswordValidator 
 {
+	private static final Logger LOG = LogManager.getLogger();
 	public MinimumUppercaseValidator(String constraint) 
 	{
 		this.constraint = constraint;
@@ -23,6 +27,7 @@ public class MinimumUppercaseValidator extends PasswordValidator
 		
 		if(passUpper<minUpper) 
 		{
+			LOG.error("Password is violating Minimum upper case required policy");
 			return false;
 		}
 		

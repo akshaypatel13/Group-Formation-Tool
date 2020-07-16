@@ -91,6 +91,7 @@ public class Question implements IQuestion
 	
 	public long createQuestion(IQuestionPersistence questionDB, String bannerID) 
 	{
+		
 		return questionDB.createQuestion(this, bannerID);
 	}
 	
