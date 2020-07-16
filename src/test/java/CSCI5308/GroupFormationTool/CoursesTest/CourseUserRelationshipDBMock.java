@@ -11,10 +11,9 @@ import CSCI5308.GroupFormationTool.Courses.ICourse;
 import CSCI5308.GroupFormationTool.Courses.ICourseUserRelationshipPersistence;
 import CSCI5308.GroupFormationTool.Courses.Role;
 
-class CourseUserRelationshipDBMock implements ICourseUserRelationshipPersistence 
+class CourseUserRelationshipDBMock implements ICourseUserRelationshipPersistence
 {
-	@Override
-	public List<IUser> findAllUsersWithoutCourseRole(Role role, long courseID) 
+	public List<IUser> findAllUsersWithoutCourseRole(Role role, long courseID)
 	{
 		List<IUser> userList = new ArrayList<>();
 		IUser u = UserAbstractFactory.instance().createUserInstance();
@@ -26,7 +25,7 @@ class CourseUserRelationshipDBMock implements ICourseUserRelationshipPersistence
 		return userList;
 	}
 
-	public List<IUser> findAllUsersWithCourseRole(Role role, long courseID) 
+	public List<IUser> findAllUsersWithCourseRole(Role role, long courseID)
 	{
 		List<IUser> userList = new ArrayList<>();
 		IUser u = UserAbstractFactory.instance().createUserInstance();
@@ -54,5 +53,6 @@ class CourseUserRelationshipDBMock implements ICourseUserRelationshipPersistence
 		userRoles.add(Role.TA);
 		return userRoles;
 	}
+
 
 }

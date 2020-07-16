@@ -11,7 +11,7 @@ import org.springframework.util.Assert;
 
 @SpringBootTest
 @SuppressWarnings("deprecation")
-public class UserTest implements IUserTest
+public class UserTest
 {
 
 	@Test
@@ -23,7 +23,7 @@ public class UserTest implements IUserTest
 		Assert.isTrue(u.getLastName().isEmpty());
 		Assert.isTrue(u.getEmail().isEmpty());
 		IUser user = UserAbstractFactory.instance().createUserInstance();
-		IUserDBMock userDBMock = UserAbstractFactoryMock.instance().getUserDBMock();
+		IUserPersistence userDBMock = UserAbstractFactoryMock.instance().getUserDBMock();
 		user.setBannerID("B00000000");
 		user.setPassword("Pass@123");
 		user.setFirstName("Rob");
@@ -32,7 +32,7 @@ public class UserTest implements IUserTest
 		Assert.isTrue(userDBMock.createUser(user));
 		assertThat(user.equals("Z000000")).isFalse();
 	}
-	
+
 	@Test
 	public void setIDTest()
 	{
@@ -40,7 +40,7 @@ public class UserTest implements IUserTest
 		u.setID(10);
 		Assert.isTrue(10 == u.getID());
 	}
-	
+
 	@Test
 	public void getIDTest()
 	{
@@ -48,7 +48,7 @@ public class UserTest implements IUserTest
 		u.setID(10);
 		Assert.isTrue(10 == u.getID());
 	}
-	
+
 	@Test
 	public void setBannerIDTest()
 	{
@@ -56,7 +56,7 @@ public class UserTest implements IUserTest
 		u.setBannerID("B00000000");
 		Assert.isTrue(u.getBannerID().equals("B00000000"));
 	}
-	
+
 	@Test
 	public void getBannerIDTest()
 	{
@@ -64,7 +64,7 @@ public class UserTest implements IUserTest
 		u.setBannerID("B00000000");
 		Assert.isTrue(u.getBannerID().equals("B00000000"));
 	}
-	
+
 	@Test
 	public void setFirstNameTest()
 	{
@@ -72,7 +72,7 @@ public class UserTest implements IUserTest
 		u.setFirstName("Rob");
 		Assert.isTrue(u.getFirstName().equals("Rob"));
 	}
-	
+
 	@Test
 	public void getFirstNameTest()
 	{
@@ -96,7 +96,7 @@ public class UserTest implements IUserTest
 		u.setLastName("Hawkey");
 		Assert.isTrue(u.getLastName().equals("Hawkey"));
 	}
-	
+
 	@Test
 	public void setEmailTest()
 	{
@@ -104,7 +104,7 @@ public class UserTest implements IUserTest
 		u.setEmail("rhawkey@dal.ca");
 		Assert.isTrue(u.getEmail().equals("rhawkey@dal.ca"));
 	}
-	
+
 	@Test
 	public void getEmailTest()
 	{
@@ -112,11 +112,11 @@ public class UserTest implements IUserTest
 		u.setEmail("rhawkey@dal.ca");
 		Assert.isTrue(u.getEmail().equals("rhawkey@dal.ca"));
 	}
-	
+
 	@Test
 	public void createUser()
-	{		
-		IUserDBMock userDB = UserAbstractFactoryMock.instance().getUserDBMock();
+	{
+		IUserPersistence userDB = UserAbstractFactoryMock.instance().getUserDBMock();
 		IUser user = UserAbstractFactory.instance().createUserInstance();
 		userDB.createUser(user);
 		Assert.isTrue(user.getId() == 0);
@@ -131,7 +131,7 @@ public class UserTest implements IUserTest
 		assertThat(userInstance.isBannerIDValid(null)).isFalse();
 		assertThat(userInstance.isBannerIDValid("")).isFalse();
 	}
-		
+
 	@Test
 	public void isFirstNameValidTest()
 	{
@@ -140,7 +140,7 @@ public class UserTest implements IUserTest
 		assertThat(userInstance.isFirstNameValid(null)).isFalse();
 		assertThat(userInstance.isFirstNameValid("")).isFalse();
 	}
-	
+
 	@Test
 	public void isLastNameValidTest()
 	{
@@ -149,7 +149,7 @@ public class UserTest implements IUserTest
 		assertThat(userInstance.isLastNameValid(null)).isFalse();
 		assertThat(userInstance.isLastNameValid("")).isFalse();
 	}
-	
+
 	@Test
 	public void isEmailValidTest()
 	{
@@ -159,20 +159,5 @@ public class UserTest implements IUserTest
 		assertThat(userInstance.isEmailValid("")).isFalse();
 		assertThat(userInstance.isEmailValid("@dal.ca")).isFalse();
 		assertThat(userInstance.isEmailValid("rhawkey@")).isFalse();
-	}
-
-	public boolean createUserTest(
-			IUserDBMock userDB,
-			IUserNotifications notification,
-			IUser user
-	)
-	{
-		String rawPassword = "password";
-		boolean success = userDB.createUser(user);
-		if (success && (null != notification))
-		{
-			notification.sendUserLoginCredentials(user, rawPassword);
-		}
-		return success;
 	}
 }

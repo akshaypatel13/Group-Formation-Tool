@@ -11,104 +11,104 @@ public class QuestionTest
 	@Test
 	public void ConstructorTests()
 	{
-		Question q = new Question();
+		IQuestion q = QuestionManagerAbstractFactory.instance().createQuestionInstance();
 		Assert.isTrue(q.getTitle().isEmpty());
 		Assert.isTrue(q.getText().isEmpty());
 		Assert.isNull(q.getType());
 		Assert.isNull(q.getTimestamp());
 	}
-	
+
 	@Test
-	public void getTimestamp() 
+	public void getTimestamp()
 	{
-		Question q = new Question();
+		IQuestion q = QuestionManagerAbstractFactory.instance().createQuestionInstance();
 		Timestamp time = Timestamp.valueOf("2020-06-16 00:00:00");
 		q.setTimestamp(time);
 		Assert.isTrue(time == q.getTimestamp());
 	}
-	
+
 	@Test
-	public void setTimestamp() 
+	public void setTimestamp()
 	{
-		Question q = new Question();
+		IQuestion q = QuestionManagerAbstractFactory.instance().createQuestionInstance();
 		Timestamp time = Timestamp.valueOf("2020-06-16 00:00:00");
 		q.setTimestamp(time);
 		Assert.isTrue(time == q.getTimestamp());
 	}
-	
+
 	@Test
-	public void getId() 
+	public void getId()
 	{
-		Question q = new Question();
+		IQuestion q = QuestionManagerAbstractFactory.instance().createQuestionInstance();
 		q.setId(7);
 		Assert.isTrue(q.getId() == 7);
 	}
-	
+
 	@Test
-	public void setId() 
+	public void setId()
 	{
-		Question q = new Question();
+		IQuestion q = QuestionManagerAbstractFactory.instance().createQuestionInstance();
 		q.setId(7);
 		Assert.isTrue(q.getId() == 7);
 	}
-	
+
 	@Test
-	public void getTitle() 
+	public void getTitle()
 	{
-		Question q = new Question();
+		IQuestion q = QuestionManagerAbstractFactory.instance().createQuestionInstance();
 		q.setTitle("Test title");
 		Assert.isTrue(q.getTitle().equals("Test title"));
 	}
-	
+
 	@Test
-	public void setTitle() 
+	public void setTitle()
 	{
-		Question q = new Question();
+		IQuestion q = QuestionManagerAbstractFactory.instance().createQuestionInstance();
 		q.setTitle("Test title");
 		Assert.isTrue(q.getTitle().equals("Test title"));
 	}
-	
+
 	@Test
-	public void getText() 
+	public void getText()
 	{
-		Question q = new Question();
+		IQuestion q = QuestionManagerAbstractFactory.instance().createQuestionInstance();
 		q.setText("Test text");
 		Assert.isTrue(q.getText().equals("Test text"));
 	}
-	
+
 	@Test
-	public void setText() 
+	public void setText()
 	{
-		Question q = new Question();
+		IQuestion q = QuestionManagerAbstractFactory.instance().createQuestionInstance();
 		q.setText("Test text");
 		Assert.isTrue(q.getText().equals("Test text"));
 	}
-	
+
 	@Test
-	public void getType() 
+	public void getType()
 	{
-		Question q = new Question();
+		IQuestion q = QuestionManagerAbstractFactory.instance().createQuestionInstance();
 		q.setType(QuestionType.TEXT);
 		Assert.isTrue(q.getType() == QuestionType.TEXT);
 	}
-	
+
 	@Test
-	public void setType() 
+	public void setType()
 	{
-		Question q = new Question();
+		IQuestion q = QuestionManagerAbstractFactory.instance().createQuestionInstance();
 		q.setType(QuestionType.TEXT);
 		Assert.isTrue(q.getType() == QuestionType.TEXT);
 	}
-	
+
 	@Test
-	public void deleteQuestion() 
+	public void deleteQuestion()
 	{
-		Question q = new Question();
-		IQuestionPersistence questionDB = new QuestionDBMock();
+		IQuestion q = QuestionManagerAbstractFactory.instance().createQuestionInstance();
+		IQuestionPersistence questionDB = QuestionManagerAbstractFactoryTest.instance().getQuestionPersistence();
 		q.setDefaults();
 		boolean status = questionDB.deleteQuestionByQuestionId(q.getId());
 		Assert.isTrue(status == false);
-		
+
 		q.setId(1);
 		q.setTitle("Test title");
 		q.setText("Test text");

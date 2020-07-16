@@ -1,9 +1,11 @@
 package CSCI5308.GroupFormationTool.AccessControlTest;
 
+import CSCI5308.GroupFormationTool.AccessControl.IUserPersistence;
+
 public class UserAbstractFactoryMock {
 
     private static UserAbstractFactoryMock uniqueInstance = null;
-    private IUserDBMock userDBMock;
+    private IUserPersistence userDBMock;
 
     public static UserAbstractFactoryMock instance() {
         if (null == uniqueInstance) {
@@ -16,13 +18,11 @@ public class UserAbstractFactoryMock {
         userDBMock = new UserDBMock();
     }
 
-    public ICurrentUserMock getCurrentUserMock(){
+    public CurrentUserMock getCurrentUserMock(){
         return new CurrentUserMock();
     }
 
-    public IUserDBMock getUserDBMock() { return userDBMock;}
-
-    public IUserTest getUser() { return new UserTest(); }
+    public IUserPersistence getUserDBMock() { return userDBMock;}
 
 
 }

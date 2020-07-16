@@ -14,17 +14,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @SuppressWarnings("deprecation")
 class CourseTest 
+{@Test
+public void ConstructorTests()
 {
-	@Test
-	public void ConstructorTests() 
-	{
-		ICourse course = CourseAbstractFactory.instance().createCourseInstance();
-		Assert.isTrue(course.getId() == -1);
-		Assert.isTrue(course.getTitle().isEmpty());
-	}
+
+	ICourse course = CourseAbstractFactory.instance().createCourseInstance();
+	Assert.isTrue(course.getId() == -1);
+	Assert.isTrue(course.getTitle().isEmpty());
+}
 
 	@Test
-	public void setIdTest() 
+	public void setIdTest()
 	{
 		ICourse course = CourseAbstractFactory.instance().createCourseInstance();
 		course.setId(7);
@@ -32,7 +32,7 @@ class CourseTest
 	}
 
 	@Test
-	public void getIdTest() 
+	public void getIdTest()
 	{
 		ICourse course = CourseAbstractFactory.instance().createCourseInstance();
 		course.setId(7);
@@ -40,7 +40,7 @@ class CourseTest
 	}
 
 	@Test
-	public void setTitleTest() 
+	public void setTitleTest()
 	{
 		ICourse course = CourseAbstractFactory.instance().createCourseInstance();
 		course.setTitle("Advanced Topics in Software Development");
@@ -48,7 +48,7 @@ class CourseTest
 	}
 
 	@Test
-	public void getTitleTest() 
+	public void getTitleTest()
 	{
 		ICourse course = CourseAbstractFactory.instance().createCourseInstance();
 		course.setTitle("Advanced Topics in Software Development");
@@ -56,21 +56,21 @@ class CourseTest
 	}
 
 	@Test
-	public void deleteCourseTest() 
+	public void deleteCourseTest()
 	{
-		ICourseDBMock courseDB = CourseAbstractFactoryTest.instance().getCourseDBMock();
-		boolean status = courseDB.deleteCourseTest(0);
+		ICoursePersistence courseDB = CourseAbstractFactoryTest.instance().getCourseDBMock();
+		boolean status = courseDB.deleteCourse(0);
 		Assert.isTrue(status);
 	}
 
 	@Test
-	public void createCourseTest() 
+	public void createCourseTest()
 	{
-		ICourseDBMock courseDB = CourseAbstractFactoryTest.instance().getCourseDBMock();
+		ICoursePersistence courseDB = CourseAbstractFactoryTest.instance().getCourseDBMock();
 		ICourse course = CourseAbstractFactory.instance().createCourseInstance();
 		course.setId(0);
 		course.setTitle("Software Engineering");
-		courseDB.createCourseTest(course);
+		courseDB.createCourse(course);
 		Assert.isTrue(course.getId() == 0);
 		Assert.isTrue(course.getTitle().equals("Software Engineering"));
 	}

@@ -21,7 +21,7 @@ public class IndexController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.isAuthenticated()) {
 			ICoursePersistence courseDB = CourseAbstractFactory.instance().createCourseDBInstance();
-			List<Course> allCourses = courseDB.loadAllCourses();
+			List<ICourse> allCourses = courseDB.loadAllCourses();
 			model.addAttribute("courses", allCourses);
 		}
 		return "index";

@@ -14,20 +14,19 @@ import CSCI5308.GroupFormationTool.PasswordValidation.IPasswordValidatorPersiste
 class PasswordValidatorEnumeratorTest
 {
 	@Test
-	public void getActiveValidators() 
+	public void getActiveValidators()
 	{
-		IPasswordValidatorPersistence validatorDB = new PasswordValidatorDBMock();
+		IPasswordValidatorPersistence validatorDB = PasswordAbstractFactoryTest.instance().getPasswordValidatorPersistence();
 		HashMap<Long, String> activeValidators = validatorDB.loadActivePasswordValidators();
 		assertThat(activeValidators.size()>0).isTrue();
 		assertThat(activeValidators.size()==2).isTrue();
-		for (@SuppressWarnings("rawtypes") Map.Entry item : activeValidators.entrySet()) 
+		for (@SuppressWarnings("rawtypes") Map.Entry item : activeValidators.entrySet())
 		{
 			String constraint = validatorDB.loadConstraintByValidatorId((long) item.getKey());
 			assertThat(constraint.length()>0).isTrue();
 			assertThat(constraint).isNotBlank();
 			assertThat(constraint).isNotEmpty();
 		}
-
 	}
 	
 }

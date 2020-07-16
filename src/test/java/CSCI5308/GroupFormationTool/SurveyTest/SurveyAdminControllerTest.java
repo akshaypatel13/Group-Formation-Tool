@@ -19,12 +19,11 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class SuveryAdminControllerTest {
+public class SurveyAdminControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -69,6 +68,38 @@ public class SuveryAdminControllerTest {
                 .andExpect(status().isFound());
     }
 
+    @Test
+    public void publishSurveyTest() throws Exception{
+        this.mockMvc.perform(post("/survey/publish")
+                .param("courseID","1")
+                .param("groupSize","10")
+                .with(csrf())
+                .with(
+                        user("B-000000")
+                                .password("1234")
+                                .roles(Role.INSTRUCTOR.toString())
+                ))
+                .andDo(print())
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(redirectedUrl("/survey/survey?courseID=1"))
+                .andExpect(status().isFound());
+    }
+
+    @Test
+    public void disableSurveyTest() throws Exception{
+        this.mockMvc.perform(get("/survey/disable")
+                .param("courseID","1")
+                .with(csrf())
+                .with(
+                        user("B-000000")
+                                .password("1234")
+                                .roles(Role.INSTRUCTOR.toString())
+                ))
+                .andDo(print())
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(redirectedUrl("/survey/survey?courseID=1"))
+                .andExpect(status().isFound());
+    }
 
 
 

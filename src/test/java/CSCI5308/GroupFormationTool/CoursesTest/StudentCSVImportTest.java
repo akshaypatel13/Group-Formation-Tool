@@ -7,22 +7,16 @@ import java.util.List;
 
 import CSCI5308.GroupFormationTool.AccessControl.IUser;
 import CSCI5308.GroupFormationTool.AccessControl.UserAbstractFactory;
-import CSCI5308.GroupFormationTool.AccessControlTest.IUserDBMock;
-import CSCI5308.GroupFormationTool.AccessControlTest.IUserTest;
 import CSCI5308.GroupFormationTool.AccessControlTest.UserAbstractFactoryMock;
 import CSCI5308.GroupFormationTool.Courses.CourseAbstractFactory;
 import CSCI5308.GroupFormationTool.Courses.ICourse;
-import CSCI5308.GroupFormationTool.SecurityTest.SecurityTestAbstarctFactory;
+import CSCI5308.GroupFormationTool.SecurityTest.SecurityTestAbstractFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 import CSCI5308.GroupFormationTool.AccessControl.IUserPersistence;
-import CSCI5308.GroupFormationTool.AccessControl.User;
-import CSCI5308.GroupFormationTool.AccessControlTest.UserDBMock;
-import CSCI5308.GroupFormationTool.Courses.Course;
 import CSCI5308.GroupFormationTool.Courses.Role;
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
-import CSCI5308.GroupFormationTool.SecurityTest.PasswordEncryptionMock;
 
 @SpringBootTest
 @SuppressWarnings("deprecation")
@@ -30,12 +24,11 @@ class StudentCSVImportTest {
 
 	@Test
 	public void enrollStudentFromRecord() {
-		IUserTest userTest = UserAbstractFactoryMock.instance().getUser();
 		IUser user = UserAbstractFactory.instance().createUserInstance();
 		ICourse course = CourseAbstractFactory.instance().createCourseInstance();
-		IUserDBMock userDB = UserAbstractFactoryMock.instance().getUserDBMock();
-		IPasswordEncryption passwordEncryption = SecurityTestAbstarctFactory.instance().getPasswordEncryption();
-		Assert.isTrue(userTest.createUserTest(userDB, null,user));
+		IUserPersistence userDB = UserAbstractFactoryMock.instance().getUserDBMock();
+		IPasswordEncryption passwordEncryption = SecurityTestAbstractFactory.instance().getPasswordEncryption();
+		Assert.isTrue(user.createUser(userDB, passwordEncryption,null));
 		Assert.isTrue(course.enrollUserInCourse(Role.STUDENT, user) == false);
 	}
 
