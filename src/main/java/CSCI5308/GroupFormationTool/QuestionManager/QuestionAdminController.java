@@ -12,8 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 @Controller
 public class QuestionAdminController {
+	
+	private static final Logger LOG = LogManager.getLogger(QuestionAdminController.class);
 	private static final String ID = "id";
 	private static final String BannerID = "bannerID";
 	private IQuestionPersistence questionDB;
@@ -28,6 +33,7 @@ public class QuestionAdminController {
 	public ModelAndView deleteQuestion(Model model, @RequestParam(name = ID) long questionId,
 			@RequestParam(name = BannerID) String bannerId) {
 		questionDB.deleteQuestionByQuestionId(questionId);
+		LOG.info("Question Deleted :" + questionId);
 		ModelAndView mav = new ModelAndView("redirect:/question/questionmanager/title?bannerID=" + bannerId);
 		return mav;
 	}
@@ -48,6 +54,7 @@ public class QuestionAdminController {
 		options = QuestionManagerAbstractFactory.instance().createOptionsInstance();
 		options.addOption();
 		ModelAndView mav = new ModelAndView();
+		LOG.info("Question review :" + question.getText());
 		mav.addObject("question", question);
 		mav.addObject("options", options);
 		mav.setViewName("question/reviewquestion");
@@ -59,6 +66,7 @@ public class QuestionAdminController {
 			@RequestParam(name = BannerID) String bannerId) {
 		long questionID = question.createQuestion(questionDB, bannerId);
 		options.saveOptions(questionDB, questionID);
+		LOG.info("Question added :" + question.getId());
 		ModelAndView mav = new ModelAndView("redirect:/question/questionmanager/title?bannerID=" + bannerId);
 		return mav;
 	}
@@ -67,6 +75,7 @@ public class QuestionAdminController {
 	public ModelAndView addOptionRow(@ModelAttribute Question question, @ModelAttribute Options options,
 			final BindingResult bindingResult) {
 		options.addOption();
+		LOG.info("Options added :" + options.getOptionList());
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("question", question);
 		mav.addObject("options", options);

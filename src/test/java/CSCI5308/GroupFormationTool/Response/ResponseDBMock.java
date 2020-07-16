@@ -1,15 +1,11 @@
 package CSCI5308.GroupFormationTool.Response;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import CSCI5308.GroupFormationTool.QuestionManager.IQuestion;
-import CSCI5308.GroupFormationTool.QuestionManager.Question;
 import CSCI5308.GroupFormationTool.QuestionManager.QuestionManagerAbstractFactory;
 import CSCI5308.GroupFormationTool.QuestionManager.QuestionType;
-import org.junit.jupiter.api.Test;
-import org.springframework.util.Assert;
 
 public class ResponseDBMock implements IResponsePersistence
 {
@@ -20,14 +16,14 @@ public class ResponseDBMock implements IResponsePersistence
     public List<IQuestion> loadQuestionsWithoutOptions(long courseId) {
         List<IQuestion> questions = new ArrayList<IQuestion>();
 
-        Question q = new Question();
+        IQuestion q = QuestionManagerAbstractFactory.instance().createQuestionInstance();
         q.setId(1);
         q.setTitle("Text Title");
         q.setText("Text Question");
         q.setType(QuestionType.TEXT);
         questions.add(q);
 
-        q = new Question();
+        q = QuestionManagerAbstractFactory.instance().createQuestionInstance();
         q.setId(1);
         q.setTitle("Numeric Title");
         q.setText("Numeric Question");
@@ -39,14 +35,14 @@ public class ResponseDBMock implements IResponsePersistence
     @Override
     public List<IQuestion> loadQuestionsWithOptions(long courseId) {
         List<IQuestion> questions = new ArrayList<IQuestion>();
-        Question q = new Question();
+        IQuestion q = QuestionManagerAbstractFactory.instance().createQuestionInstance();
         q.setId(1);
         q.setTitle("Mcqone Title");
         q.setText("Mcqone Question");
         q.setType(QuestionType.MCQONE);
         questions.add(q);
 
-        q = new Question();
+        q = QuestionManagerAbstractFactory.instance().createQuestionInstance();
         q.setId(1);
         q.setTitle("Mcqmultiple Title");
         q.setText("Mcqmultiple Question");
