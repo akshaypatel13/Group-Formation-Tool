@@ -4,21 +4,22 @@ import CSCI5308.GroupFormationTool.PasswordValidation.IPasswordValidatorPersiste
 
 public class PasswordAbstractFactoryTest {
 
-    private static PasswordAbstractFactoryTest uniqueInstance = null;
-    private IPasswordValidatorPersistence passwordValidatorPersistence;
-    public static PasswordAbstractFactoryTest instance() {
-        if (null == uniqueInstance) {
-            uniqueInstance = new PasswordAbstractFactoryTest();
-        }
-        return uniqueInstance;
-    }
+	private static PasswordAbstractFactoryTest uniqueInstance = null;
+	private IPasswordValidatorPersistence passwordValidatorPersistence;
 
-    private PasswordAbstractFactoryTest(){
-        passwordValidatorPersistence = new PasswordValidatorDBMock();
-    }
+	public static PasswordAbstractFactoryTest instance() {
+		if (null == uniqueInstance) {
+			uniqueInstance = new PasswordAbstractFactoryTest();
+		}
+		return uniqueInstance;
+	}
 
-    public IPasswordValidatorPersistence getPasswordValidatorPersistence(){
-        return passwordValidatorPersistence;
-    }
+	private PasswordAbstractFactoryTest() {
+		passwordValidatorPersistence = new PasswordValidatorDBMock();
+	}
+
+	public IPasswordValidatorPersistence getPasswordValidatorPersistence() {
+		return passwordValidatorPersistence;
+	}
 
 }

@@ -29,7 +29,7 @@ public class PasswordHistoryValidator extends PasswordValidator {
 		List<String> previousPass = validatorDB.fetchPreviousPasswordsByBannerID(user.getBannerID(),
 				Integer.parseInt(constraint));
 		for (int i = 0; i < previousPass.size(); i++) {
-			
+
 			if (passwordEncryption.matches(password, previousPass.get(i))) {
 				LOG.error("Password is violating History constraint");
 				return false;

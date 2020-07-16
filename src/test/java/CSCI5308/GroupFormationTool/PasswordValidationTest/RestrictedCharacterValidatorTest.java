@@ -6,17 +6,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RestrictedCharacterValidatorTest 
-{
+class RestrictedCharacterValidatorTest {
 	@Test
-	public void isValid() 
-	{
-		String restrictedChar="#";
+	public void isValid() {
+		String restrictedChar = "#";
 		String pass = "Pas@sed";
 		assertThat(pass.contains(restrictedChar) == false).isTrue();
 		pass = "Fai#led";
 		assertThat(pass.contains(restrictedChar) == false).isFalse();
-		
+
 	}
 
 }

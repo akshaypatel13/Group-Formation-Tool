@@ -17,37 +17,32 @@ import com.opencsv.CSVReaderBuilder;
 
 import CSCI5308.GroupFormationTool.AccessControl.IUser;
 
-public class StudentCSVParser implements IStudentCSVParser
-{
+public class StudentCSVParser implements IStudentCSVParser {
 	private static final Logger LOG = LogManager.getLogger();
 	private MultipartFile uploadedFile;
-	private List<IUser> studentList = new ArrayList<>(); 
+	private List<IUser> studentList = new ArrayList<>();
 
-	public StudentCSVParser(MultipartFile file) 
-	{
+	public StudentCSVParser(MultipartFile file) {
 		this.uploadedFile = file;
 
 	}
-	
+
 	@Override
-	public List<IUser> parseCSVFile(List<String> failureResults) 
-	{
-		try
-		{
+	public List<IUser> parseCSVFile(List<String> failureResults) {
+		try {
 			Reader reader = new InputStreamReader(uploadedFile.getInputStream());
 			CSVReader csvReader = new CSVReaderBuilder(reader).build();
 			List<String[]> records = csvReader.readAll();
 			Iterator<String[]> iter = records.iterator();
 			IUser u;
-			while (iter.hasNext())
-			{
+			while (iter.hasNext()) {
 				String[] record = iter.next();
-				
+
 				String bannerID = record[0];
 				String firstName = record[1];
 				String lastName = record[2];
 				String email = record[3];
-				
+
 				u = UserAbstractFactory.instance().createUserInstance();
 				u.setBannerID(bannerID);
 				u.setFirstName(firstName);
@@ -55,16 +50,12 @@ public class StudentCSVParser implements IStudentCSVParser
 				u.setEmail(email);
 				studentList.add(u);
 			}
-			LOG.info("CSV Upload operation successful for File = "+uploadedFile.getName());
-		}
-		catch (IOException e)
-		{
-			LOG.error("CSV Upload operation failed for File = "+uploadedFile.getName());
+			LOG.info("CSV Upload operation successful for File = " + uploadedFile.getName());
+		} catch (IOException e) {
+			LOG.error("CSV Upload operation failed for File = " + uploadedFile.getName());
 			failureResults.add("Failure reading uploaded file: " + e.getMessage());
-		}
-		catch (Exception e)
-		{
-			LOG.error("CSV parse operation failed for File = "+uploadedFile.getName());
+		} catch (Exception e) {
+			LOG.error("CSV parse operation failed for File = " + uploadedFile.getName());
 			failureResults.add("Failure parsing CSV file: " + e.getMessage());
 		}
 

@@ -6,16 +6,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MinimumLengthValidatorTest 
-{
+class MinimumLengthValidatorTest {
 	@Test
-	public void isValid() 
-	{
+	public void isValid() {
 		int minLength = 5;
 		String pass = "passed";
-		assertThat(pass.length()>=minLength).isTrue();
+		assertThat(pass.length() >= minLength).isTrue();
 		pass = "fail";
-		assertThat(pass.length()>=minLength).isFalse();
+		assertThat(pass.length() >= minLength).isFalse();
 	}
 
 }

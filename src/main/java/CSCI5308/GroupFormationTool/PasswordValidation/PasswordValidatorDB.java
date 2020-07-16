@@ -47,7 +47,7 @@ public class PasswordValidatorDB implements IPasswordValidatorPersistence {
 		CallStoredProcedure proc = null;
 		String constraint = null;
 		try {
-			proc =DatabaseAbstractFactory.instance()
+			proc = DatabaseAbstractFactory.instance()
 					.createCallStoredProcedureInstance("spLoadConstraintByValidator(?)");
 			proc.setParameter(1, id);
 			ResultSet results = proc.executeWithResults();
@@ -82,7 +82,7 @@ public class PasswordValidatorDB implements IPasswordValidatorPersistence {
 				while (results.next()) {
 					passwordList.add(results.getString(1));
 				}
-				LOG.info("Operation =Fetching Previous password, Status = Success,BannerId:" +bannerID);
+				LOG.info("Operation =Fetching Previous password, Status = Success,BannerId:" + bannerID);
 			}
 		} catch (SQLException e) {
 			LOG.error("Status = Failed, Error Message=" + e.getMessage());

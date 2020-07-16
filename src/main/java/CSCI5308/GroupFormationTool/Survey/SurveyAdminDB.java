@@ -9,7 +9,6 @@ import org.apache.logging.log4j.Logger;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-
 public class SurveyAdminDB implements ISurveyAdminPersistence {
 	private static final Logger LOG = LogManager.getLogger();
 
@@ -17,8 +16,7 @@ public class SurveyAdminDB implements ISurveyAdminPersistence {
 	public boolean createSurvey(long courseID) {
 		CallStoredProcedure proc = null;
 		try {
-			proc = DatabaseAbstractFactory.instance()
-					.createCallStoredProcedureInstance("spCreateSurvey(?)");
+			proc = DatabaseAbstractFactory.instance().createCallStoredProcedureInstance("spCreateSurvey(?)");
 			proc.setParameter(1, courseID);
 			proc.execute();
 			LOG.info("Operation = Create Survey, Status = Success");
@@ -60,8 +58,7 @@ public class SurveyAdminDB implements ISurveyAdminPersistence {
 	public boolean deleteSurveyQuestion(long questionID) {
 		CallStoredProcedure proc = null;
 		try {
-			proc = DatabaseAbstractFactory.instance()
-					.createCallStoredProcedureInstance("spDeleteSurveyQuestion(?)");
+			proc = DatabaseAbstractFactory.instance().createCallStoredProcedureInstance("spDeleteSurveyQuestion(?)");
 			proc.setParameter(1, questionID);
 			proc.execute();
 			LOG.info("Operation = Delete Survey Question, Status = Success");
@@ -80,8 +77,7 @@ public class SurveyAdminDB implements ISurveyAdminPersistence {
 	public boolean publishSurvey(long courseID, long groupSize) {
 		CallStoredProcedure proc = null;
 		try {
-			proc = DatabaseAbstractFactory.instance()
-					.createCallStoredProcedureInstance("spPublishSurvey(?,?)");
+			proc = DatabaseAbstractFactory.instance().createCallStoredProcedureInstance("spPublishSurvey(?,?)");
 			proc.setParameter(1, courseID);
 			proc.setParameter(2, groupSize);
 			proc.execute();
@@ -101,8 +97,7 @@ public class SurveyAdminDB implements ISurveyAdminPersistence {
 	public boolean disableSurvey(long courseID) {
 		CallStoredProcedure proc = null;
 		try {
-			proc = DatabaseAbstractFactory.instance()
-					.createCallStoredProcedureInstance("spDisableSurvey(?)");
+			proc = DatabaseAbstractFactory.instance().createCallStoredProcedureInstance("spDisableSurvey(?)");
 			proc.setParameter(1, courseID);
 			proc.execute();
 			LOG.info("Operation = Disable survey, Status = Success");

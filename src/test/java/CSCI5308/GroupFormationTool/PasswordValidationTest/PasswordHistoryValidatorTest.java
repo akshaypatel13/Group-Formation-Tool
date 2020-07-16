@@ -10,17 +10,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 import CSCI5308.GroupFormationTool.PasswordValidation.IPasswordValidatorPersistence;
 
 @SpringBootTest
-class PasswordHistoryValidatorTest 
-{
+class PasswordHistoryValidatorTest {
 	@Test
-	public void isValid()
-	{
-		IPasswordValidatorPersistence validatorDB = PasswordAbstractFactoryTest.instance().getPasswordValidatorPersistence();
-		int historyCount=3;
-		String pass="pass";
+	public void isValid() {
+		IPasswordValidatorPersistence validatorDB = PasswordAbstractFactoryTest.instance()
+				.getPasswordValidatorPersistence();
+		int historyCount = 3;
+		String pass = "pass";
 		List<String> passwordList = validatorDB.fetchPreviousPasswordsByBannerID("B000000", historyCount);
 		assertThat(passwordList.contains(pass) == false).isTrue();
-		pass="fail";
+		pass = "fail";
 		passwordList = validatorDB.fetchPreviousPasswordsByBannerID("B1234567", historyCount);
 		assertThat(passwordList.contains(pass) == false).isFalse();
 	}

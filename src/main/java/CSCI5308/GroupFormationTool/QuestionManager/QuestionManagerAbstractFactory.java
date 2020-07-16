@@ -1,10 +1,5 @@
 package CSCI5308.GroupFormationTool.QuestionManager;
 
-import CSCI5308.GroupFormationTool.PasswordValidation.PasswordValidationAbstractFactory;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class QuestionManagerAbstractFactory {
 
 	private static QuestionManagerAbstractFactory uniqueInstance = null;

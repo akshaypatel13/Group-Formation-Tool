@@ -1,10 +1,9 @@
 package CSCI5308.GroupFormationTool.AccessControlTest;
 
 import CSCI5308.GroupFormationTool.AccessControl.*;
-public class UserDBMock  implements IUserPersistence
-{
-	public void loadUserByID(long id, IUser user)
-	{
+
+public class UserDBMock implements IUserPersistence {
+	public void loadUserByID(long id, IUser user) {
 		user.setID(id);
 		user.setBannerID("B00000000");
 		user.setPassword("Pass@123");
@@ -13,8 +12,7 @@ public class UserDBMock  implements IUserPersistence
 		user.setEmail("rhawkey@dal.ca");
 	}
 
-	public void loadUserByBannerID(String bannerID, IUser user)
-	{
+	public void loadUserByBannerID(String bannerID, IUser user) {
 		user.setID(1);
 		user.setBannerID(bannerID);
 		user.setPassword("Pass@123");
@@ -22,9 +20,8 @@ public class UserDBMock  implements IUserPersistence
 		user.setLastName("Hawkey");
 		user.setEmail("rhawkey@dal.ca");
 	}
-	
-	public boolean createUser(IUser user)
-	{
+
+	public boolean createUser(IUser user) {
 		user.setID(0);
 		user.setBannerID("B00000000");
 		user.setPassword("Pass@123");
@@ -33,9 +30,8 @@ public class UserDBMock  implements IUserPersistence
 		user.setEmail("rhawkey@dal.ca");
 		return true;
 	}
-	
-	public boolean updateUser(IUser user)
-	{
+
+	public boolean updateUser(IUser user) {
 		user.setID(0);
 		user.setBannerID("B00000000");
 		user.setPassword("Pass@123");

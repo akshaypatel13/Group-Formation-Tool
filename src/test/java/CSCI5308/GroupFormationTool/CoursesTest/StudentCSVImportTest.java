@@ -28,7 +28,7 @@ class StudentCSVImportTest {
 		ICourse course = CourseAbstractFactory.instance().createCourseInstance();
 		IUserPersistence userDB = UserAbstractFactoryMock.instance().getUserDBMock();
 		IPasswordEncryption passwordEncryption = SecurityTestAbstractFactory.instance().getPasswordEncryption();
-		Assert.isTrue(user.createUser(userDB, passwordEncryption,null));
+		Assert.isTrue(user.createUser(userDB, passwordEncryption, null));
 		Assert.isTrue(course.enrollUserInCourse(Role.STUDENT, user) == false);
 	}
 

@@ -14,52 +14,34 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 
 public class ResponseControllerTest {
 
-    @Mock
-    private IResponsePersistence responsePersistence;
-    @InjectMocks
-    private ResponseController responseController;
+	@Mock
+	private IResponsePersistence responsePersistence;
+	@InjectMocks
+	private ResponseController responseController;
 
-    private MockMvc mockMvc;
+	private MockMvc mockMvc;
 
-    @BeforeEach
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        this.mockMvc = MockMvcBuilders
-                .standaloneSetup(responseController)
-                .build();
-    }
+	@BeforeEach
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+		this.mockMvc = MockMvcBuilders.standaloneSetup(responseController).build();
+	}
 
-    @Test
-    public void loadQuestionsTest() throws Exception {
-        this.mockMvc.perform(get("/response/takingsurvey")
-                .param("id", "121")
-                .with(csrf())
-                .with(
-                        user("B-009911")
-                                .password("Abcd@11")
-                                .roles(Role.INSTRUCTOR.toString())
-                ))
-                .andDo(print())
-                .andExpect(model().attributeExists("courseId", "questionList"));
-    }
+	@Test
+	public void loadQuestionsTest() throws Exception {
+		this.mockMvc
+				.perform(get("/response/takingsurvey").param("id", "121").with(csrf())
+						.with(user("B-009911").password("Abcd@11").roles(Role.INSTRUCTOR.toString())))
+				.andDo(print()).andExpect(model().attributeExists("courseId", "questionList"));
+	}
 
-    @Test
-    public void submitSurveyTest() throws Exception {
-        this.mockMvc.perform(get("/response/survey")
-                .param("id", "121")
-                .param("bannerID", "B00854211")
-                .with(csrf())
-                .with(
-                        user("B00854211")
-                                .password("Abcd@11")
-                                .roles(Role.INSTRUCTOR.toString())
-                ))
-                .andDo(print());
-    }
+	@Test
+	public void submitSurveyTest() throws Exception {
+		this.mockMvc.perform(get("/response/survey").param("id", "121").param("bannerID", "B00854211").with(csrf())
+				.with(user("B00854211").password("Abcd@11").roles(Role.INSTRUCTOR.toString()))).andDo(print());
+	}
 
 }

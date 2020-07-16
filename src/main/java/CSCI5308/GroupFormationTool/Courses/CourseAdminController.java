@@ -17,8 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import CSCI5308.GroupFormationTool.AccessControl.IUser;
 
 @Controller
-public class CourseAdminController
-{
+public class CourseAdminController {
 	private static final Logger LOG = LogManager.getLogger(CourseAdminController.class);
 	private static final String ID = "id";
 	private static final String TITLE = "title";
@@ -26,34 +25,32 @@ public class CourseAdminController
 	private static ICoursePersistence courseDB;
 	private static ICourseUserRelationshipPersistence courseUserRelationshipDB;
 
-	public CourseAdminController(){
+	public CourseAdminController() {
 		courseDB = CourseAbstractFactory.instance().createCourseDBInstance();
 		courseUserRelationshipDB = CourseAbstractFactory.instance().courseUserRelationshipDBInstance();
 	}
 
 	@GetMapping("/admin/course")
-	public String course(Model model)
-	{
+	public String course(Model model) {
 		List<ICourse> allCourses = courseDB.loadAllCourses();
 
 		model.addAttribute("courses", allCourses);
 		return "admin/course";
 	}
-	
+
 	@GetMapping("/admin/assigninstructor")
-	public String assignInstructor(Model model, @RequestParam(name = ID) long courseID)
-	{
+	public String assignInstructor(Model model, @RequestParam(name = ID) long courseID) {
 		ICourse course = CourseAbstractFactory.instance().createCourseInstance();
 		courseDB.loadCourseByID(courseID, course);
 		model.addAttribute("course", course);
-		List<IUser> allUsersNotCurrentlyInstructors = courseUserRelationshipDB.findAllUsersWithoutCourseRole(Role.INSTRUCTOR, courseID);
+		List<IUser> allUsersNotCurrentlyInstructors = courseUserRelationshipDB
+				.findAllUsersWithoutCourseRole(Role.INSTRUCTOR, courseID);
 		model.addAttribute("users", allUsersNotCurrentlyInstructors);
 		return "admin/assigninstructor";
 	}
-	
+
 	@GetMapping("/admin/deletecourse")
-	public ModelAndView deleteCourse(@RequestParam(name = ID) long courseID)
-	{
+	public ModelAndView deleteCourse(@RequestParam(name = ID) long courseID) {
 		ICourse course = CourseAbstractFactory.instance().createCourseInstance();
 		course.setId(courseID);
 		course.delete(courseDB);
@@ -62,9 +59,8 @@ public class CourseAdminController
 		return mav;
 	}
 
-	@RequestMapping(value = "/admin/createcourse", method = RequestMethod.POST) 
-	public ModelAndView createCourse(@RequestParam(name = TITLE) String title)
-	{
+	@RequestMapping(value = "/admin/createcourse", method = RequestMethod.POST)
+	public ModelAndView createCourse(@RequestParam(name = TITLE) String title) {
 		ICourse course = CourseAbstractFactory.instance().createCourseInstance();
 		course.setTitle(title);
 		course.createCourse(courseDB);
@@ -72,23 +68,21 @@ public class CourseAdminController
 		ModelAndView mav = new ModelAndView("redirect:/admin/course");
 		return mav;
 	}
-	
-	@RequestMapping(value = "/admin/assigninstructor", method = RequestMethod.POST) 
+
+	@RequestMapping(value = "/admin/assigninstructor", method = RequestMethod.POST)
 	public ModelAndView assignInstructorToCourse(@RequestParam(name = INSTRUCTOR) List<Integer> instructor,
-		   @RequestParam(name = ID) long courseID)
-	{
+			@RequestParam(name = ID) long courseID) {
 		ICourse course = CourseAbstractFactory.instance().createCourseInstance();
 		course.setId(courseID);
 		Iterator<Integer> iter = instructor.iterator();
-		while (iter.hasNext())
-		{
+		while (iter.hasNext()) {
 			IUser u = UserAbstractFactory.instance().createUserInstance();
 			u.setId(iter.next().longValue());
 			courseUserRelationshipDB.enrollUser(course, u, Role.INSTRUCTOR);
 		}
-		LOG.info("Instructor Assigned:"+ instructor+ "for Course: "+ courseID);
+		LOG.info("Instructor Assigned:" + instructor + "for Course: " + courseID);
 		ModelAndView mav = new ModelAndView("redirect:/admin/course");
 		return mav;
-   }
-	
+	}
+
 }

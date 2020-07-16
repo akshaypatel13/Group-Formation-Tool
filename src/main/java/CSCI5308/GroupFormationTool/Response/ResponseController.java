@@ -31,12 +31,10 @@ public class ResponseController {
 		IResponse response = ResponseAbstractFactory.instance().createResponseInstance();
 		List<IQuestion> questionList = responseDB.loadQuestionsWithoutOptions(courseId);
 		List<IQuestion> questionListWithOptions = responseDB.loadQuestionsWithOptions(courseId);
-		List<IQuestion> loadQuestionsOptions = response.loadQuestionOptions(questionListWithOptions,responseDB);
+		List<IQuestion> loadQuestionsOptions = response.loadQuestionOptions(questionListWithOptions, responseDB);
 
 		List<IQuestion> questions = response.sortQuestionByDateCreated(questionList, loadQuestionsOptions);
-
 		LOG.info("Loading Questions for CourseID = " + courseId + ", Questions =" + questions);
-
 		model.addAttribute("courseId", courseId);
 		model.addAttribute("questionList", questions);
 
@@ -53,18 +51,16 @@ public class ResponseController {
 		List<IQuestion> loadQuestionsOptions = response.loadQuestionOptions(questionListWithOptions, responseDB);
 		LOG.info("Loaded Questions Without Options for CourseID = " + courseId + ", Questions =" + questionList);
 
-		LOG.info("Loaded Questions With Options for CourseID = " + courseId + ", Questions ="
-				+ loadQuestionsOptions);
+		LOG.info("Loaded Questions With Options for CourseID = " + courseId + ", Questions =" + loadQuestionsOptions);
 
 		HashMap<String, String> answer = response.saveResponseAnswer(request, questionList, loadQuestionsOptions);
 
 		boolean status = response.saveResponse(answer, bannerId);
-		model.addAttribute("status",status);
-		if(status) {
+		model.addAttribute("status", status);
+		if (status) {
 			return "redirect:/course/course?id=" + courseId;
-		}else{
+		} else {
 			return "responseExceptionHandling";
 		}
-		}
+	}
 }
-

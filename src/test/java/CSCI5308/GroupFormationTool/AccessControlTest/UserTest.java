@@ -4,19 +4,16 @@ import CSCI5308.GroupFormationTool.AccessControl.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
 @SpringBootTest
 @SuppressWarnings("deprecation")
-public class UserTest
-{
+public class UserTest {
 
 	@Test
-	public void ConstructorTests()
-	{
+	public void ConstructorTests() {
 		IUser u = UserAbstractFactory.instance().createUserInstance();
 		Assert.isTrue(u.getBannerID().isEmpty());
 		Assert.isTrue(u.getFirstName().isEmpty());
@@ -34,88 +31,77 @@ public class UserTest
 	}
 
 	@Test
-	public void setIDTest()
-	{
+	public void setIDTest() {
 		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setID(10);
 		Assert.isTrue(10 == u.getID());
 	}
 
 	@Test
-	public void getIDTest()
-	{
+	public void getIDTest() {
 		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setID(10);
 		Assert.isTrue(10 == u.getID());
 	}
 
 	@Test
-	public void setBannerIDTest()
-	{
+	public void setBannerIDTest() {
 		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setBannerID("B00000000");
 		Assert.isTrue(u.getBannerID().equals("B00000000"));
 	}
 
 	@Test
-	public void getBannerIDTest()
-	{
+	public void getBannerIDTest() {
 		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setBannerID("B00000000");
 		Assert.isTrue(u.getBannerID().equals("B00000000"));
 	}
 
 	@Test
-	public void setFirstNameTest()
-	{
+	public void setFirstNameTest() {
 		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setFirstName("Rob");
 		Assert.isTrue(u.getFirstName().equals("Rob"));
 	}
 
 	@Test
-	public void getFirstNameTest()
-	{
+	public void getFirstNameTest() {
 		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setFirstName("Rob");
 		Assert.isTrue(u.getFirstName().equals("Rob"));
 	}
 
 	@Test
-	public void setLastNameTest()
-	{
+	public void setLastNameTest() {
 		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setLastName("Hawkey");
 		Assert.isTrue(u.getLastName().equals("Hawkey"));
 	}
 
 	@Test
-	public void getLastNameTest()
-	{
+	public void getLastNameTest() {
 		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setLastName("Hawkey");
 		Assert.isTrue(u.getLastName().equals("Hawkey"));
 	}
 
 	@Test
-	public void setEmailTest()
-	{
+	public void setEmailTest() {
 		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setEmail("rhawkey@dal.ca");
 		Assert.isTrue(u.getEmail().equals("rhawkey@dal.ca"));
 	}
 
 	@Test
-	public void getEmailTest()
-	{
+	public void getEmailTest() {
 		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setEmail("rhawkey@dal.ca");
 		Assert.isTrue(u.getEmail().equals("rhawkey@dal.ca"));
 	}
 
 	@Test
-	public void createUser()
-	{
+	public void createUser() {
 		IUserPersistence userDB = UserAbstractFactoryMock.instance().getUserDBMock();
 		IUser user = UserAbstractFactory.instance().createUserInstance();
 		userDB.createUser(user);
@@ -124,8 +110,7 @@ public class UserTest
 	}
 
 	@Test
-	public void isBannerIDValidTest()
-	{
+	public void isBannerIDValidTest() {
 		IUser userInstance = UserAbstractFactory.instance().createUserInstance();
 		Assert.isTrue(userInstance.isBannerIDValid("B000000000"));
 		assertThat(userInstance.isBannerIDValid(null)).isFalse();
@@ -133,8 +118,7 @@ public class UserTest
 	}
 
 	@Test
-	public void isFirstNameValidTest()
-	{
+	public void isFirstNameValidTest() {
 		IUser userInstance = UserAbstractFactory.instance().createUserInstance();
 		Assert.isTrue(userInstance.isFirstNameValid("rob"));
 		assertThat(userInstance.isFirstNameValid(null)).isFalse();
@@ -142,8 +126,7 @@ public class UserTest
 	}
 
 	@Test
-	public void isLastNameValidTest()
-	{
+	public void isLastNameValidTest() {
 		IUser userInstance = UserAbstractFactory.instance().createUserInstance();
 		Assert.isTrue(userInstance.isLastNameValid("hawkey"));
 		assertThat(userInstance.isLastNameValid(null)).isFalse();
@@ -151,8 +134,7 @@ public class UserTest
 	}
 
 	@Test
-	public void isEmailValidTest()
-	{
+	public void isEmailValidTest() {
 		IUser userInstance = UserAbstractFactory.instance().createUserInstance();
 		Assert.isTrue(userInstance.isEmailValid("rhawkey@dal.ca"));
 		assertThat(userInstance.isEmailValid(null)).isFalse();

@@ -24,82 +24,50 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class SurveyAdminControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+	@Autowired
+	private MockMvc mockMvc;
 
-    @InjectMocks
-    private SurveyAdminController surveyAdminController;
+	@InjectMocks
+	private SurveyAdminController surveyAdminController;
 
-    @BeforeEach
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        this.mockMvc = MockMvcBuilders
-                .standaloneSetup(surveyAdminController)
-                .build();
-    }
+	@BeforeEach
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+		this.mockMvc = MockMvcBuilders.standaloneSetup(surveyAdminController).build();
+	}
 
-    @Test
-    public void insertQuestionSurveyTest() throws Exception{
-        this.mockMvc.perform(post("/survey/insertquestion").param("questionID","1")
-                .param("courseID","22")
-                .param("algo","test")
-                .with(csrf())
-                .with(
-                        user("B-2232")
-                                .password("1234")
-                                .roles(Role.INSTRUCTOR.toString())
-                ))
-                .andDo(print());
-    }
+	@Test
+	public void insertQuestionSurveyTest() throws Exception {
+		this.mockMvc.perform(
+				post("/survey/insertquestion").param("questionID", "1").param("courseID", "22").param("algo", "test")
+						.with(csrf()).with(user("B-2232").password("1234").roles(Role.INSTRUCTOR.toString())))
+				.andDo(print());
+	}
 
-    @Test
-    public void deleteSurveyQuestionTest() throws Exception{
-        this.mockMvc.perform(post("/surveyQuestion/delete").param("questionID","1")
-                .param("courseID","1")
-                .with(csrf())
-                .with(
-                        user("B-000000")
-                                .password("1234")
-                                .roles(Role.INSTRUCTOR.toString())
-                ))
-                .andDo(print())
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isFound());
-    }
+	@Test
+	public void deleteSurveyQuestionTest() throws Exception {
+		this.mockMvc
+				.perform(post("/surveyQuestion/delete").param("questionID", "1").param("courseID", "1").with(csrf())
+						.with(user("B-000000").password("1234").roles(Role.INSTRUCTOR.toString())))
+				.andDo(print()).andDo(MockMvcResultHandlers.print()).andExpect(status().isFound());
+	}
 
-    @Test
-    public void publishSurveyTest() throws Exception{
-        this.mockMvc.perform(post("/survey/publish")
-                .param("courseID","1")
-                .param("groupSize","10")
-                .with(csrf())
-                .with(
-                        user("B-000000")
-                                .password("1234")
-                                .roles(Role.INSTRUCTOR.toString())
-                ))
-                .andDo(print())
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(redirectedUrl("/survey/survey?courseID=1"))
-                .andExpect(status().isFound());
-    }
+	@Test
+	public void publishSurveyTest() throws Exception {
+		this.mockMvc
+				.perform(post("/survey/publish").param("courseID", "1").param("groupSize", "10").with(csrf())
+						.with(user("B-000000").password("1234").roles(Role.INSTRUCTOR.toString())))
+				.andDo(print()).andDo(MockMvcResultHandlers.print())
+				.andExpect(redirectedUrl("/survey/survey?courseID=1")).andExpect(status().isFound());
+	}
 
-    @Test
-    public void disableSurveyTest() throws Exception{
-        this.mockMvc.perform(get("/survey/disable")
-                .param("courseID","1")
-                .with(csrf())
-                .with(
-                        user("B-000000")
-                                .password("1234")
-                                .roles(Role.INSTRUCTOR.toString())
-                ))
-                .andDo(print())
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(redirectedUrl("/survey/survey?courseID=1"))
-                .andExpect(status().isFound());
-    }
-
-
+	@Test
+	public void disableSurveyTest() throws Exception {
+		this.mockMvc
+				.perform(get("/survey/disable").param("courseID", "1").with(csrf())
+						.with(user("B-000000").password("1234").roles(Role.INSTRUCTOR.toString())))
+				.andDo(print()).andDo(MockMvcResultHandlers.print())
+				.andExpect(redirectedUrl("/survey/survey?courseID=1")).andExpect(status().isFound());
+	}
 
 }

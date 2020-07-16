@@ -79,10 +79,10 @@ public class Groups implements IGroups {
 
 		}
 		LOG.info("Calling groupsDB to insert groups in Database");
-		for(IGroups group:groupsList) {
+		for (IGroups group : groupsList) {
 			status = groupDB.insertGroups(group);
 		}
-		
+
 		return status;
 	}
 

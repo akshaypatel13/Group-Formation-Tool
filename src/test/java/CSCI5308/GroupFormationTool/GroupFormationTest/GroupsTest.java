@@ -76,7 +76,7 @@ public class GroupsTest {
 		IGroupsPersistence groupsDBMock = GroupsAbstractFactoryTest.instance().createGroupsDBInstanceTest();
 
 		IGroups groups = GroupsAbstractFactoryTest.instance().createGroupsInstanceTest();
-		ArrayList<IGroups> groupList =GroupsAbstractFactoryTest.instance().createArrayListGroupsTest(); 
+		ArrayList<IGroups> groupList = GroupsAbstractFactoryTest.instance().createArrayListGroupsTest();
 
 		assertFalse(groupsDBMock.insertGroups(groups));
 		groupList = groupsDBMock.fetchGroups();

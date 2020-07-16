@@ -1,4 +1,8 @@
-package CSCI5308.GroupFormationTool.SurveyTest;
+package CSCI5308.GroupFormationTool.GroupFormationTest;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.util.Assert;
@@ -6,13 +10,7 @@ import org.springframework.util.Assert;
 import CSCI5308.GroupFormationTool.GroupFormation.DefaultGroupCreator;
 import CSCI5308.GroupFormationTool.GroupFormation.IGroupCreator;
 
-import javax.validation.constraints.AssertTrue;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class DefaultGroupCreatorTest {
-
 	@Test
 	public void createGroupsTest() {
 		IGroupCreator groupCreator = new DefaultGroupCreator();
@@ -50,4 +48,5 @@ public class DefaultGroupCreatorTest {
 		Assert.isTrue(groups.size() == noOfGroups);
 		Assert.isTrue(oneGroup.size() == groupSize);
 	}
+
 }
