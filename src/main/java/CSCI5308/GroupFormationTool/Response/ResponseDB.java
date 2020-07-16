@@ -23,7 +23,7 @@ public class ResponseDB implements IResponsePersistence {
 	@Override
 	public List<IQuestion> loadQuestionsWithoutOptions(long courseId) {
 
-		
+
 		List<IQuestion> questionList = new ArrayList<IQuestion>();
 		CallStoredProcedure proc = null;
 		try {
