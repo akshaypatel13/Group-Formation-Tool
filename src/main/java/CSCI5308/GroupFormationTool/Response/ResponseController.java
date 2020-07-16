@@ -51,7 +51,6 @@ public class ResponseController {
 
 		List<IQuestion> questionListWithOptions = responseDB.loadQuestionsWithOptions(courseId);
 		List<IQuestion> loadQuestionsOptions = response.loadQuestionOptions(questionListWithOptions, responseDB);
-
 		LOG.info("Loaded Questions Without Options for CourseID = " + courseId + ", Questions =" + questionList);
 
 		LOG.info("Loaded Questions With Options for CourseID = " + courseId + ", Questions ="
@@ -60,12 +59,12 @@ public class ResponseController {
 		HashMap<String, String> answer = response.saveResponseAnswer(request, questionList, loadQuestionsOptions);
 
 		boolean status = response.saveResponse(answer, bannerId);
-
-		if (status) {
+		model.addAttribute("status",status);
+		if(status) {
 			return "redirect:/course/course?id=" + courseId;
-		}
-		else{
+		}else{
 			return "responseExceptionHandling";
 		}
-	}
+		}
 }
+

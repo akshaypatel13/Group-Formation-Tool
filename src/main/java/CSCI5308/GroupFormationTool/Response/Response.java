@@ -102,7 +102,7 @@ public class Response implements IResponse {
 
 	public boolean saveResponse(HashMap<String, String> answer, String bannerId) {
 		IResponsePersistence responseDB = ResponseAbstractFactory.instance().createResponseDBInstance();
-		boolean status = true;
+		boolean status = false;
 		for (String questionId : answer.keySet()) {
 			if (responseDB.checkIsMCQMultiple(questionId)) {
 				String[] options = answer.get(questionId).split(":");
@@ -112,7 +112,7 @@ public class Response implements IResponse {
 					} else {
 						try {
 							status = responseDB.saveResponse(questionId, bannerId, option);
-						} catch (SQLException throwables) {
+						} catch (SQLException e) {
 							return false;
 						}
 					}
@@ -120,7 +120,7 @@ public class Response implements IResponse {
 			} else {
 				try {
 					status = responseDB.saveResponse(questionId, bannerId, answer.get(questionId));
-				} catch (SQLException throwables) {
+				} catch (SQLException e) {
 					return false;
 				}
 			}
