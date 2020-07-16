@@ -59,10 +59,11 @@ public class Groups implements IGroups {
 		LOG.info("Fetching responses for survey , SurveyId:" + surveyId);
 		Boolean status = true;
 		Map<Long, Map<Long, String>> responses = surveyManageDB.getSurveyResponses(surveyId);
+		Map<Long, Long> surveyAlgo = surveyManageDB.getSurveyGroupAlgo(surveyId);
 		long groupSize = surveyManageDB.getSurveyGroupSize(surveyId);
 		Map<Integer, List<Long>> groups = new HashMap<Integer, List<Long>>();
 		LOG.info("Fetching groups from groups created for SurveyId:" + surveyId);
-		groups = groupCreator.createGroups(responses, groupSize);
+		groups = groupCreator.createGroups(responses, surveyAlgo, groupSize);
 		ArrayList<IGroups> groupsList = GroupsAbstractFactory.instance().createArrayListGroups();
 
 		for (Entry<Integer, List<Long>> entry : groups.entrySet()) {
