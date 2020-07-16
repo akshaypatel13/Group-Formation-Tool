@@ -1,80 +1,81 @@
-2020-07-16 17:55:07,142 INFO o.s.b.StartupInfoLogger [restartedMain] Starting GroupFormationToolApplication on Manpreets-MacBook-Pro.local with PID 59518 (/Users/manpreetsingh/Documents/gitASDC/group21/build/classes/java/main started by manpreetsingh in /Users/manpreetsingh/Documents/gitASDC/group21)
-2020-07-16 17:55:07,150 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2020-07-16 17:55:07,190 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2020-07-16 17:55:07,191 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2020-07-16 17:55:07,983 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
-2020-07-16 17:55:08,001 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
-2020-07-16 17:55:08,002 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
-2020-07-16 17:55:08,002 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.30]
-2020-07-16 17:55:08,061 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
-2020-07-16 17:55:08,061 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 870 ms
-2020-07-16 17:55:08,229 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Creating filter chain: Ant [pattern='/resources/**'], []
-2020-07-16 17:55:08,248 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@707424fa, org.springframework.security.web.context.SecurityContextPersistenceFilter@2e469fdb, org.springframework.security.web.header.HeaderWriterFilter@5f52a3e2, org.springframework.security.web.csrf.CsrfFilter@b3807a7, org.springframework.security.web.authentication.logout.LogoutFilter@1566ba12, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@be0b7e0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7700d77e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@36b10348, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7c50bf99, org.springframework.security.web.session.SessionManagementFilter@32d5edad, org.springframework.security.web.access.ExceptionTranslationFilter@6fb8828, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6fa0297a]
-2020-07-16 17:55:08,313 INFO o.s.s.c.ExecutorConfigurationSupport [restartedMain] Initializing ExecutorService 'applicationTaskExecutor'
-2020-07-16 17:55:08,370 INFO o.s.b.a.w.s.WelcomePageHandlerMapping [restartedMain] Adding welcome page template: index
-2020-07-16 17:55:08,462 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
-2020-07-16 17:55:08,476 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
-2020-07-16 17:55:08,491 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
-2020-07-16 17:55:08,493 INFO o.s.b.StartupInfoLogger [restartedMain] Started GroupFormationToolApplication in 1.567 seconds (JVM running for 2.437)
-2020-07-16 17:55:13,744 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-07-16 17:55:13,745 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
-2020-07-16 17:55:13,753 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 8 ms
-2020-07-16 17:55:13,779 INFO C.G.W.IndexController [http-nio-8080-exec-1] Welcome to Group Formation Tool !!!! :-
-2020-07-16 17:55:14,182 INFO C.G.C.CourseDB [http-nio-8080-exec-1] Operation = FetchAllCourses, Status = Success, RowCount=60
-2020-07-16 17:55:19,314 INFO C.G.A.CurrentUser [http-nio-8080-exec-4] Calling security Context Holder to check if user is authenticated
-2020-07-16 17:55:19,315 INFO C.G.A.CurrentUser [http-nio-8080-exec-4] checking if current user is Valid user
-2020-07-16 17:55:20,286 INFO C.G.A.UserDB [http-nio-8080-exec-4] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-16 17:55:20,956 INFO C.G.A.UserDB [http-nio-8080-exec-4] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-16 17:55:20,957 INFO C.G.C.CourseController [http-nio-8080-exec-4] Username:-stu, login = Success
-2020-07-16 17:55:21,211 INFO C.G.S.SurveyManageDB [http-nio-8080-exec-4] Operation = Check if survey published or not, Status = Success
-2020-07-16 17:55:21,441 ERROR C.G.C.CourseDB [http-nio-8080-exec-4] Status = Failed, Error Message=null
-2020-07-16 17:55:21,442 INFO C.G.C.Course [http-nio-8080-exec-4] Get all Roles for User in course
-2020-07-16 17:55:21,443 INFO C.G.A.CurrentUser [http-nio-8080-exec-4] Calling security Context Holder to check if user is authenticated
-2020-07-16 17:55:21,443 INFO C.G.A.CurrentUser [http-nio-8080-exec-4] checking if current user is Valid user
-2020-07-16 17:55:21,683 INFO C.G.A.UserDB [http-nio-8080-exec-4] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-16 17:55:21,926 INFO C.G.A.UserDB [http-nio-8080-exec-4] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-16 17:55:21,928 INFO C.G.C.CourseUserRelationship [http-nio-8080-exec-4] Calling UserRelationShipDB to fetch all Roles of User for Course:Advance Software Development
-2020-07-16 17:55:22,137 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-4] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
-2020-07-16 17:55:22,489 INFO C.G.W.IndexController [http-nio-8080-exec-5] Welcome to Group Formation Tool !!!! :-
-2020-07-16 17:55:22,727 INFO C.G.C.CourseDB [http-nio-8080-exec-5] Operation = FetchAllCourses, Status = Success, RowCount=60
-2020-07-16 17:55:24,295 INFO C.G.A.CurrentUser [http-nio-8080-exec-6] Calling security Context Holder to check if user is authenticated
-2020-07-16 17:55:24,296 INFO C.G.A.CurrentUser [http-nio-8080-exec-6] checking if current user is Valid user
-2020-07-16 17:55:24,534 INFO C.G.A.UserDB [http-nio-8080-exec-6] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-16 17:55:25,790 INFO C.G.A.UserDB [http-nio-8080-exec-6] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-16 17:55:25,792 INFO C.G.C.CourseController [http-nio-8080-exec-6] Username:-stu, login = Success
-2020-07-16 17:55:26,011 INFO C.G.S.SurveyManageDB [http-nio-8080-exec-6] Operation = Check if survey published or not, Status = Success
-2020-07-16 17:55:26,560 ERROR C.G.C.CourseDB [http-nio-8080-exec-6] Status = Failed, Error Message=null
-2020-07-16 17:55:26,561 INFO C.G.C.Course [http-nio-8080-exec-6] Get all Roles for User in course
-2020-07-16 17:55:26,562 INFO C.G.A.CurrentUser [http-nio-8080-exec-6] Calling security Context Holder to check if user is authenticated
-2020-07-16 17:55:26,563 INFO C.G.A.CurrentUser [http-nio-8080-exec-6] checking if current user is Valid user
-2020-07-16 17:55:26,784 INFO C.G.A.UserDB [http-nio-8080-exec-6] Operation = LoadUserByBannerID, Status = Success, RowCount:0
-2020-07-16 17:55:27,028 INFO C.G.A.UserDB [http-nio-8080-exec-6] Operation = LoadUser, Status = Success, RowCount:0
-2020-07-16 17:55:27,029 INFO C.G.C.CourseUserRelationship [http-nio-8080-exec-6] Calling UserRelationShipDB to fetch all Roles of User for Course:Advance Software Development
-2020-07-16 17:55:27,261 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-6] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
-2020-07-16 17:55:28,745 INFO C.G.R.ResponseDB [http-nio-8080-exec-7] Operation = Load Questions without options, Status = Success
-2020-07-16 17:55:28,951 INFO C.G.R.ResponseDB [http-nio-8080-exec-7] Operation = Load Questions with options, Status = Success
-2020-07-16 17:55:29,190 INFO C.G.R.ResponseDB [http-nio-8080-exec-7] Operation = Load Question options, Status = Success
-2020-07-16 17:55:29,432 INFO C.G.R.ResponseDB [http-nio-8080-exec-7] Operation = Load Question options, Status = Success
-2020-07-16 17:55:29,434 INFO C.G.R.Response [http-nio-8080-exec-7] Sorting the question list based on date created
-2020-07-16 17:55:29,435 INFO C.G.R.ResponseController [http-nio-8080-exec-7] Loading Questions for CourseID = 2, Questions =[Question [id=13, title=asd, text=asda, type=Text, timestamp=2020-07-11 21:00:00.0, options=null], Question [id=36, title=fv, text=sd, type=Text, timestamp=2020-07-14 21:00:00.0, options=null], Question [id=37, title=sfsd, text=sdf, type=Text, timestamp=2020-07-15 21:00:00.0, options=null], Question [id=46, title=fg, text=dfghy, type=Text, timestamp=2020-07-15 21:00:00.0, options=null], Question [id=47, title=vjsd, text=kcjj, type=MCQOne, timestamp=2020-07-15 21:00:00.0, options=[1, 2]], Question [id=48, title=lfvl, text=nld, type=MCQMultiple, timestamp=2020-07-15 21:00:00.0, options=[1, 2, 3]]]
-2020-07-16 17:55:40,424 INFO C.G.R.ResponseDB [http-nio-8080-exec-8] Operation = Load Questions without options, Status = Success
-2020-07-16 17:55:40,679 INFO C.G.R.ResponseDB [http-nio-8080-exec-8] Operation = Load Questions with options, Status = Success
-2020-07-16 17:55:40,896 INFO C.G.R.ResponseDB [http-nio-8080-exec-8] Operation = Load Question options, Status = Success
-2020-07-16 17:55:41,144 INFO C.G.R.ResponseDB [http-nio-8080-exec-8] Operation = Load Question options, Status = Success
-2020-07-16 17:55:41,145 INFO C.G.R.ResponseController [http-nio-8080-exec-8] Loaded Questions Without Options for CourseID = 2, Questions =[Question [id=13, title=asd, text=asda, type=Text, timestamp=2020-07-11 21:00:00.0, options=null], Question [id=36, title=fv, text=sd, type=Text, timestamp=2020-07-14 21:00:00.0, options=null], Question [id=37, title=sfsd, text=sdf, type=Text, timestamp=2020-07-15 21:00:00.0, options=null], Question [id=46, title=fg, text=dfghy, type=Text, timestamp=2020-07-15 21:00:00.0, options=null]]
-2020-07-16 17:55:41,145 INFO C.G.R.ResponseController [http-nio-8080-exec-8] Loaded Questions With Options for CourseID = 2, Questions =[Question [id=47, title=vjsd, text=kcjj, type=MCQOne, timestamp=2020-07-15 21:00:00.0, options=[1, 2]], Question [id=48, title=lfvl, text=nld, type=MCQMultiple, timestamp=2020-07-15 21:00:00.0, options=[1, 2, 3]]]
-2020-07-16 17:55:41,359 INFO C.G.R.ResponseDB [http-nio-8080-exec-8] Operation = Check if MCQ is Multiple, Status = Success
-2020-07-16 17:55:41,579 ERROR C.G.R.ResponseDB [http-nio-8080-exec-8] Status = Failed, Error Message=PROCEDURE CSCI5308_21_TEST.SaveQuestionResponse does not exist
-2020-07-16 17:55:41,792 INFO C.G.R.ResponseDB [http-nio-8080-exec-8] Operation = Check if MCQ is Multiple, Status = Success
-2020-07-16 17:55:42,026 ERROR C.G.R.ResponseDB [http-nio-8080-exec-8] Status = Failed, Error Message=PROCEDURE CSCI5308_21_TEST.SaveQuestionResponse does not exist
-2020-07-16 17:55:42,244 INFO C.G.R.ResponseDB [http-nio-8080-exec-8] Operation = Check if MCQ is Multiple, Status = Success
-2020-07-16 17:55:42,463 ERROR C.G.R.ResponseDB [http-nio-8080-exec-8] Status = Failed, Error Message=PROCEDURE CSCI5308_21_TEST.SaveQuestionResponse does not exist
-2020-07-16 17:55:42,974 INFO C.G.R.ResponseDB [http-nio-8080-exec-8] Operation = Check if MCQ is Multiple, Status = Success
-2020-07-16 17:55:43,164 ERROR C.G.R.ResponseDB [http-nio-8080-exec-8] Status = Failed, Error Message=PROCEDURE CSCI5308_21_TEST.SaveQuestionResponse does not exist
-2020-07-16 17:55:43,411 INFO C.G.R.ResponseDB [http-nio-8080-exec-8] Operation = Check if MCQ is Multiple, Status = Success
-2020-07-16 17:55:43,616 ERROR C.G.R.ResponseDB [http-nio-8080-exec-8] Status = Failed, Error Message=PROCEDURE CSCI5308_21_TEST.SaveQuestionResponse does not exist
-2020-07-16 17:55:43,856 INFO C.G.R.ResponseDB [http-nio-8080-exec-8] Operation = Check if MCQ is Multiple, Status = Success
-2020-07-16 17:55:44,069 ERROR C.G.R.ResponseDB [http-nio-8080-exec-8] Status = Failed, Error Message=PROCEDURE CSCI5308_21_TEST.SaveQuestionResponse does not exist
-2020-07-16 17:55:49,962 INFO C.G.W.IndexController [http-nio-8080-exec-9] Welcome to Group Formation Tool !!!! :-
-2020-07-16 17:55:50,216 INFO C.G.C.CourseDB [http-nio-8080-exec-9] Operation = FetchAllCourses, Status = Success, RowCount=60
-2020-07-16 18:23:26,116 INFO o.s.s.c.ExecutorConfigurationSupport [SpringContextShutdownHook] Shutting down ExecutorService 'applicationTaskExecutor'
+2020-07-16 19:43:00,705 INFO o.s.b.StartupInfoLogger [restartedMain] Starting GroupFormationToolApplication on DESKTOP-FS0KFH1 with PID 16216 (started by DELL in D:\Term 2\Adv. Software Dev\M3\group21)
+2020-07-16 19:43:00,818 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-07-16 19:43:00,986 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-07-16 19:43:00,986 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-07-16 19:43:04,707 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2020-07-16 19:43:04,748 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-16 19:43:04,758 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2020-07-16 19:43:04,758 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.30]
+2020-07-16 19:43:05,003 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2020-07-16 19:43:05,003 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 4017 ms
+2020-07-16 19:43:05,306 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Creating filter chain: Ant [pattern='/resources/**'], []
+2020-07-16 19:43:05,353 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@70a1cd44, org.springframework.security.web.context.SecurityContextPersistenceFilter@5bf20375, org.springframework.security.web.header.HeaderWriterFilter@1a47187f, org.springframework.security.web.csrf.CsrfFilter@740d9447, org.springframework.security.web.authentication.logout.LogoutFilter@3ce4edce, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@236288fb, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@e26905e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@73acbc6b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7265437f, org.springframework.security.web.session.SessionManagementFilter@7fcdf651, org.springframework.security.web.access.ExceptionTranslationFilter@4936a3f6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7c1790e5]
+2020-07-16 19:43:05,535 INFO o.s.s.c.ExecutorConfigurationSupport [restartedMain] Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-16 19:43:05,702 INFO o.s.b.a.w.s.WelcomePageHandlerMapping [restartedMain] Adding welcome page template: index
+2020-07-16 19:43:05,912 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2020-07-16 19:43:05,946 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2020-07-16 19:43:05,993 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-16 19:43:05,998 INFO o.s.b.StartupInfoLogger [restartedMain] Started GroupFormationToolApplication in 5.931 seconds (JVM running for 9.233)
+2020-07-16 19:43:06,594 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-10] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-16 19:43:06,595 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-10] Initializing Servlet 'dispatcherServlet'
+2020-07-16 19:43:06,601 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-10] Completed initialization in 6 ms
+2020-07-16 19:43:06,646 INFO C.G.W.IndexController [http-nio-8080-exec-10] Welcome to Group Formation Tool !!!! :- 
+2020-07-16 19:43:07,120 INFO C.G.C.CourseDB [http-nio-8080-exec-10] Operation = FetchAllCourses, Status = Success, RowCount=67
+2020-07-16 19:43:09,742 INFO C.G.A.UserDB [http-nio-8080-exec-4] Operation = LoadUserByBannerID, Status = Success, RowCount:0
+2020-07-16 19:43:09,920 INFO C.G.A.UserDB [http-nio-8080-exec-4] Operation = LoadUser, Status = Success, RowCount:0
+2020-07-16 19:43:09,921 INFO C.G.S.CustomAuthenticationManager [http-nio-8080-exec-4] User Authentication successful for user:B-111111
+2020-07-16 19:43:09,926 INFO C.G.S.BCryptPasswordEncryption [http-nio-8080-exec-4] Check if password plain text matches with encrypted password
+2020-07-16 19:43:10,033 INFO C.G.S.CustomAuthenticationManager [http-nio-8080-exec-4] Encrypted password match successful
+2020-07-16 19:43:10,040 INFO C.G.W.IndexController [http-nio-8080-exec-3] Welcome to Group Formation Tool !!!! :- 
+2020-07-16 19:43:10,208 INFO C.G.C.CourseDB [http-nio-8080-exec-3] Operation = FetchAllCourses, Status = Success, RowCount=67
+2020-07-16 19:43:12,247 INFO C.G.A.CurrentUser [http-nio-8080-exec-10] Calling security Context Holder to check if user is authenticated
+2020-07-16 19:43:12,247 INFO C.G.A.CurrentUser [http-nio-8080-exec-10] checking if current user is Valid user
+2020-07-16 19:43:12,426 INFO C.G.A.UserDB [http-nio-8080-exec-10] Operation = LoadUserByBannerID, Status = Success, RowCount:0
+2020-07-16 19:43:12,609 INFO C.G.A.UserDB [http-nio-8080-exec-10] Operation = LoadUser, Status = Success, RowCount:0
+2020-07-16 19:43:12,610 INFO C.G.C.CourseController [http-nio-8080-exec-10] Username:-stu, login = Success
+2020-07-16 19:43:12,812 INFO C.G.S.SurveyManageDB [http-nio-8080-exec-10] Operation = Check if survey published or not, Status = Success
+2020-07-16 19:43:12,996 ERROR C.G.C.CourseDB [http-nio-8080-exec-10] Status = Failed, Error Message=null
+2020-07-16 19:43:12,997 INFO C.G.C.Course [http-nio-8080-exec-10] Get all Roles for User in course
+2020-07-16 19:43:12,997 INFO C.G.A.CurrentUser [http-nio-8080-exec-10] Calling security Context Holder to check if user is authenticated
+2020-07-16 19:43:12,998 INFO C.G.A.CurrentUser [http-nio-8080-exec-10] checking if current user is Valid user
+2020-07-16 19:43:13,187 INFO C.G.A.UserDB [http-nio-8080-exec-10] Operation = LoadUserByBannerID, Status = Success, RowCount:0
+2020-07-16 19:43:13,375 INFO C.G.A.UserDB [http-nio-8080-exec-10] Operation = LoadUser, Status = Success, RowCount:0
+2020-07-16 19:43:13,376 INFO C.G.C.CourseUserRelationship [http-nio-8080-exec-10] Calling UserRelationShipDB to fetch all Roles of User for Course:Advance Software Development
+2020-07-16 19:43:13,566 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-10] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
+2020-07-16 19:43:19,165 INFO C.G.R.ResponseDB [http-nio-8080-exec-8] Operation = Load Questions without options, Status = Success
+2020-07-16 19:43:19,346 INFO C.G.R.ResponseDB [http-nio-8080-exec-8] Operation = Load Questions with options, Status = Success
+2020-07-16 19:43:19,552 INFO C.G.R.ResponseDB [http-nio-8080-exec-8] Operation = Load Question options, Status = Success
+2020-07-16 19:43:19,737 INFO C.G.R.ResponseDB [http-nio-8080-exec-8] Operation = Load Question options, Status = Success
+2020-07-16 19:43:19,738 INFO C.G.R.Response [http-nio-8080-exec-8] Sorting the question list based on date created
+2020-07-16 19:43:19,739 INFO C.G.R.ResponseController [http-nio-8080-exec-8] Loading Questions for CourseID = 2, Questions =[Question [id=13, title=asd, text=asda, type=Text, timestamp=2020-07-11 21:00:00.0, options=null], Question [id=36, title=fv, text=sd, type=Text, timestamp=2020-07-14 21:00:00.0, options=null], Question [id=37, title=sfsd, text=sdf, type=Text, timestamp=2020-07-15 21:00:00.0, options=null], Question [id=46, title=fg, text=dfghy, type=Text, timestamp=2020-07-15 21:00:00.0, options=null], Question [id=47, title=vjsd, text=kcjj, type=MCQOne, timestamp=2020-07-15 21:00:00.0, options=[1, 2]], Question [id=48, title=lfvl, text=nld, type=MCQMultiple, timestamp=2020-07-15 21:00:00.0, options=[1, 2, 3]]]
+2020-07-16 19:43:24,020 INFO C.G.R.ResponseDB [http-nio-8080-exec-9] Operation = Load Questions without options, Status = Success
+2020-07-16 19:43:24,208 INFO C.G.R.ResponseDB [http-nio-8080-exec-9] Operation = Load Questions with options, Status = Success
+2020-07-16 19:43:24,384 INFO C.G.R.ResponseDB [http-nio-8080-exec-9] Operation = Load Question options, Status = Success
+2020-07-16 19:43:24,568 INFO C.G.R.ResponseDB [http-nio-8080-exec-9] Operation = Load Question options, Status = Success
+2020-07-16 19:43:24,569 INFO C.G.R.ResponseController [http-nio-8080-exec-9] Loaded Questions Without Options for CourseID = 2, Questions =[Question [id=13, title=asd, text=asda, type=Text, timestamp=2020-07-11 21:00:00.0, options=null], Question [id=36, title=fv, text=sd, type=Text, timestamp=2020-07-14 21:00:00.0, options=null], Question [id=37, title=sfsd, text=sdf, type=Text, timestamp=2020-07-15 21:00:00.0, options=null], Question [id=46, title=fg, text=dfghy, type=Text, timestamp=2020-07-15 21:00:00.0, options=null]]
+2020-07-16 19:43:24,569 INFO C.G.R.ResponseController [http-nio-8080-exec-9] Loaded Questions With Options for CourseID = 2, Questions =[Question [id=47, title=vjsd, text=kcjj, type=MCQOne, timestamp=2020-07-15 21:00:00.0, options=[1, 2]], Question [id=48, title=lfvl, text=nld, type=MCQMultiple, timestamp=2020-07-15 21:00:00.0, options=[1, 2, 3]]]
+2020-07-16 19:43:24,746 INFO C.G.R.ResponseDB [http-nio-8080-exec-9] Operation = Check if MCQ is Multiple, Status = Success
+2020-07-16 19:43:25,021 INFO C.G.R.ResponseDB [http-nio-8080-exec-9] Operation = Save Responses for user:B-111111, Status = Success
+2020-07-16 19:43:25,203 INFO C.G.R.ResponseDB [http-nio-8080-exec-9] Operation = Check if MCQ is Multiple, Status = Success
+2020-07-16 19:43:25,487 INFO C.G.R.ResponseDB [http-nio-8080-exec-9] Operation = Save Responses for user:B-111111, Status = Success
+2020-07-16 19:43:25,690 INFO C.G.R.ResponseDB [http-nio-8080-exec-9] Operation = Check if MCQ is Multiple, Status = Success
+2020-07-16 19:43:25,901 INFO C.G.R.ResponseDB [http-nio-8080-exec-9] Operation = Save Responses for user:B-111111, Status = Success
+2020-07-16 19:43:26,085 INFO C.G.R.ResponseDB [http-nio-8080-exec-9] Operation = Check if MCQ is Multiple, Status = Success
+2020-07-16 19:43:26,274 INFO C.G.R.ResponseDB [http-nio-8080-exec-9] Operation = Save Responses for user:B-111111, Status = Success
+2020-07-16 19:43:26,440 INFO C.G.R.ResponseDB [http-nio-8080-exec-9] Operation = Check if MCQ is Multiple, Status = Success
+2020-07-16 19:43:26,682 INFO C.G.R.ResponseDB [http-nio-8080-exec-9] Operation = Save Responses for user:B-111111, Status = Success
+2020-07-16 19:43:26,854 INFO C.G.R.ResponseDB [http-nio-8080-exec-9] Operation = Check if MCQ is Multiple, Status = Success
+2020-07-16 19:43:26,861 INFO C.G.A.CurrentUser [http-nio-8080-exec-7] Calling security Context Holder to check if user is authenticated
+2020-07-16 19:43:26,862 INFO C.G.A.CurrentUser [http-nio-8080-exec-7] checking if current user is Valid user
+2020-07-16 19:43:27,053 INFO C.G.A.UserDB [http-nio-8080-exec-7] Operation = LoadUserByBannerID, Status = Success, RowCount:0
+2020-07-16 19:43:27,234 INFO C.G.A.UserDB [http-nio-8080-exec-7] Operation = LoadUser, Status = Success, RowCount:0
+2020-07-16 19:43:27,235 INFO C.G.C.CourseController [http-nio-8080-exec-7] Username:-stu, login = Success
+2020-07-16 19:43:27,427 INFO C.G.S.SurveyManageDB [http-nio-8080-exec-7] Operation = Check if survey published or not, Status = Success
+2020-07-16 19:43:27,599 ERROR C.G.C.CourseDB [http-nio-8080-exec-7] Status = Failed, Error Message=null
+2020-07-16 19:43:27,600 INFO C.G.C.Course [http-nio-8080-exec-7] Get all Roles for User in course
+2020-07-16 19:43:27,600 INFO C.G.A.CurrentUser [http-nio-8080-exec-7] Calling security Context Holder to check if user is authenticated
+2020-07-16 19:43:27,600 INFO C.G.A.CurrentUser [http-nio-8080-exec-7] checking if current user is Valid user
+2020-07-16 19:43:27,779 INFO C.G.A.UserDB [http-nio-8080-exec-7] Operation = LoadUserByBannerID, Status = Success, RowCount:0
+2020-07-16 19:43:27,971 INFO C.G.A.UserDB [http-nio-8080-exec-7] Operation = LoadUser, Status = Success, RowCount:0
+2020-07-16 19:43:27,971 INFO C.G.C.CourseUserRelationship [http-nio-8080-exec-7] Calling UserRelationShipDB to fetch all Roles of User for Course:Advance Software Development
+2020-07-16 19:43:28,165 INFO C.G.C.CourseUserRelationshipDB [http-nio-8080-exec-7] Operation = LoadUserRoleForCourse, Status = Success, RowCount=1
