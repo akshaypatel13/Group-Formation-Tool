@@ -17,22 +17,34 @@ public class DefaultGroupCreatorTest {
 	public void createGroupsTest() {
 		IGroupCreator groupCreator = new DefaultGroupCreator();
 
-		int students = 12;
+		int students = 11;
 		int questions = 4;
 
 		int groupSize = 3;
-		int noOfGroups = students / groupSize;
+		int noOfGroups;
+		if(students % groupSize == 0){
+			noOfGroups = (int) (students / groupSize);
+		}else{
+			noOfGroups = (int) ((students / groupSize)+1);
+		}
 		Map<Long, Map<Long, String>> responses = new HashMap<>();
 
-		for (long i = 0; i < questions; i++) {
+		for(long i=0;i<questions;i++){
 
 			Map<Long, String> responsesForQuestion = new HashMap<>();
-			for (long j = 0; j < students; j++) {
+			for(long j=0;j<students;j++){
 				responsesForQuestion.put(j, "answer");
 			}
 			responses.put(i, responsesForQuestion);
 		}
-		Map<Integer, List<Long>> groups = groupCreator.createGroups(responses, groupSize);
+		Map<Long, Long> algo = new HashMap<>();
+		for(long i=0;i<questions;i++){
+
+			algo.put(i,1l);
+
+		}
+
+		Map<Integer, List<Long>>  groups = groupCreator.createGroups(responses, algo, groupSize);
 		List<Long> oneGroup = groups.get(groups.keySet().toArray()[0]);
 
 		Assert.isTrue(groups.size() == noOfGroups);
