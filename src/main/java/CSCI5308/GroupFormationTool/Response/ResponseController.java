@@ -38,7 +38,7 @@ public class ResponseController {
 		model.addAttribute("courseId", courseId);
 		model.addAttribute("questionList", questions);
 
-		return "/response/response";
+		return "response/response";
 	}
 
 	@RequestMapping("/response/survey")

@@ -71,7 +71,6 @@ public class ReponseTest {
 		
 		IQuestion question = QuestionManagerAbstractFactory.instance().createQuestionInstance();
 		IResponsePersistence responsePersistence = ResponseAbstractFactoryTest.instance().getResponsePersistence();
-		IResponse response = ResponseAbstractFactory.instance().createResponseInstance();
 		IQuestion questionOptions = responsePersistence.loadQuestionsOptions(question);
 		
 		Assert.isTrue(questionOptions.getTitle().equals("Mcqone Title"));

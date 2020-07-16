@@ -1,8 +1,6 @@
 package CSCI5308.GroupFormationTool.Survey;
 
 import CSCI5308.GroupFormationTool.AccessControl.CurrentUser;
-import CSCI5308.GroupFormationTool.QuestionManager.IQuestionPersistence;
-import CSCI5308.GroupFormationTool.QuestionManager.QuestionManagerAbstractFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -15,14 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class SurveyAdminController {
 
 	private static final String courseID = "courseID";
-	private static final String questionID = "questionID";
 	private static final Logger LOG = LogManager.getLogger(SurveyAdminController.class);
-	private IQuestionPersistence questionDB;
 	private ISurveyAdminPersistence surveyAdminDB;
 	private ISurveyManagePersistence surveyManageDB;
 
 	public SurveyAdminController() {
-		questionDB = QuestionManagerAbstractFactory.instance().createQuestionDBInstance();
 		surveyAdminDB = SurveyAbstractFactory.instance().createSurveyAdminDBInstance();
 		surveyManageDB = SurveyAbstractFactory.instance().createSurveyManageDBInstance();
 
