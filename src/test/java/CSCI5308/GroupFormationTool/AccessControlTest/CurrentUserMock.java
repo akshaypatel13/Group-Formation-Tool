@@ -5,7 +5,7 @@ import CSCI5308.GroupFormationTool.AccessControl.IUserPersistence;
 import CSCI5308.GroupFormationTool.AccessControl.User;
 import CSCI5308.GroupFormationTool.AccessControl.UserAbstractFactory;
 
-public class CurrentUserMock implements ICurrentUserMock
+public class CurrentUserMock
 {
 	public IUser getCurrentAuthenticatedUser()
 	{

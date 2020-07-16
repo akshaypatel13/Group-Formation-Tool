@@ -8,9 +8,9 @@ import CSCI5308.GroupFormationTool.Courses.CourseAbstractFactory;
 import CSCI5308.GroupFormationTool.Courses.ICourse;
 import CSCI5308.GroupFormationTool.Courses.ICoursePersistence;
 
-public class CourseDBMock implements ICourseDBMock
+public class CourseDBMock implements ICoursePersistence
 {
-	public List<ICourse> loadAllCoursesTest()
+	public List<ICourse> loadAllCourses()
 	{
 		List<ICourse> courseList = new ArrayList<>();
 		ICourse course = CourseAbstractFactory.instance().createCourseInstance();
@@ -24,20 +24,20 @@ public class CourseDBMock implements ICourseDBMock
 		return courseList;
 	}
 
-	public void loadCourseByIDTest(long id, ICourse course)
+	public void loadCourseByID(long id, ICourse course)
 	{
 		course.setId(id);
 		course.setTitle("Software Engineering");
 	}
 
-	public boolean createCourseTest(ICourse course)
+	public boolean createCourse(ICourse course)
 	{
 		course.setId(0);
 		course.setTitle("Software Engineering");
 		return true;
 	}
 
-	public boolean deleteCourseTest(long id)
+	public boolean deleteCourse(long id)
 	{
 		ICourse course = CourseAbstractFactory.instance().createCourseInstance();
 		course.setId(id);
@@ -45,5 +45,4 @@ public class CourseDBMock implements ICourseDBMock
 		course.setDefaults();
 		return true;
 	}
-
 }

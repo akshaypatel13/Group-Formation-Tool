@@ -13,16 +13,15 @@ import CSCI5308.GroupFormationTool.PasswordValidation.IPasswordValidatorPersiste
 class PasswordHistoryValidatorTest 
 {
 	@Test
-	public void isValid() 
+	public void isValid()
 	{
-		IPasswordValidatorPersistence validatorDB = new PasswordValidatorDBMock();
+		IPasswordValidatorPersistence validatorDB = PasswordAbstractFactoryTest.instance().getPasswordValidatorPersistence();
 		int historyCount=3;
-		String pass="pass"; 
+		String pass="pass";
 		List<String> passwordList = validatorDB.fetchPreviousPasswordsByBannerID("B000000", historyCount);
 		assertThat(passwordList.contains(pass) == false).isTrue();
 		pass="fail";
 		passwordList = validatorDB.fetchPreviousPasswordsByBannerID("B1234567", historyCount);
 		assertThat(passwordList.contains(pass) == false).isFalse();
 	}
-
 }

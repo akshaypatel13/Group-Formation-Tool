@@ -34,7 +34,7 @@ public class CourseAdminController
 	@GetMapping("/admin/course")
 	public String course(Model model)
 	{
-		List<Course> allCourses = courseDB.loadAllCourses();
+		List<ICourse> allCourses = courseDB.loadAllCourses();
 		model.addAttribute("courses", allCourses);
 		return "admin/course";
 	}

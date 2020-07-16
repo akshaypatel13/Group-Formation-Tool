@@ -1,21 +1,20 @@
 package CSCI5308.GroupFormationTool.SecurityTest;
 
-import CSCI5308.GroupFormationTool.CoursesTest.CourseAbstractFactoryTest;
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
 
-public class SecurityTestAbstarctFactory {
+public class SecurityTestAbstractFactory {
 
-    private static SecurityTestAbstarctFactory uniqueInstance = null;
+    private static SecurityTestAbstractFactory uniqueInstance = null;
     private IPasswordEncryption passwordEncryption;
 
-    public static SecurityTestAbstarctFactory instance() {
+    public static SecurityTestAbstractFactory instance() {
         if (null == uniqueInstance) {
-            uniqueInstance = new SecurityTestAbstarctFactory();
+            uniqueInstance = new SecurityTestAbstractFactory();
         }
         return uniqueInstance;
     }
 
-    private SecurityTestAbstarctFactory(){
+    private SecurityTestAbstractFactory(){
         passwordEncryption = new PasswordEncryptionMock();
     }
 
