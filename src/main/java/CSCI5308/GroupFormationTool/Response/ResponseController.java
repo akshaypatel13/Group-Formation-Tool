@@ -60,11 +60,9 @@ public class ResponseController {
 
 		boolean status = response.saveResponse(answer, bannerId);
 		model.addAttribute("status",status);
-		if(status) {
-			return "redirect:/course/course?id=" + courseId;
-		}else{
-			return "responseExceptionHandling";
-		}
+		System.out.print("dkvbdjvbdkjckjdnvkdv"+status);
+		return "redirect:/course/course?id=" + courseId+"&status="+status;
+
 		}
 }
 

@@ -18,6 +18,7 @@ public class CourseController
 {
 	private static final Logger LOG = LogManager.getLogger(CourseController.class);
 	private static final String ID = "id";
+	private static final String STATUS = "status";
 	private ISurveyManagePersistence surveyManageDB;
 	private ICoursePersistence courseDB;
 	
@@ -28,17 +29,19 @@ public class CourseController
 	}
 	
 	@GetMapping("/course/course")
-	public String course(Model model, @RequestParam(name = ID) long courseID)
+	public String course(Model model, @RequestParam(name = ID) long courseID, @RequestParam(name = STATUS, required = false, defaultValue = "true") String status)
+
 	{
 		LOG.info("Username:-"+ CurrentUser.instance().getCurrentAuthenticatedUser().getFirstName()
 		+ ", login = Success");
 		ICourse course = CourseAbstractFactory.instance().createCourseInstance();
 		boolean surveyNotPublished = surveyManageDB.surveyPublishedOrNot(courseID);
 		courseDB.loadCourseByID(courseID, course);
+		model.addAttribute("status",true);
 		model.addAttribute("survey", surveyNotPublished);
 		model.addAttribute("course", course);
 		List<Role> userRoles = course.getAllRolesForCurrentUserInCourse();
-		
+		model.addAttribute("status",status);
 		if (null == userRoles)
 		{
 			model.addAttribute("instructor", false);

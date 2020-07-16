@@ -147,7 +147,7 @@ public class ResponseDB implements IResponsePersistence {
 
 
 			proc = DatabaseAbstractFactory.instance()
-					.createCallStoredProcedureInstance("spSaveQuestionResponse(?,?,?)");
+					.createCallStoredProcedureInstance("spSaveQuestionRespons(?,?,?)");
 
 			proc.setParameter(1, Long.parseLong(questionId));
 			proc.setParameter(2, bannerId);
