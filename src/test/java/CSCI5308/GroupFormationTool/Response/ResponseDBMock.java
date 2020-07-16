@@ -8,12 +8,12 @@ import CSCI5308.GroupFormationTool.QuestionManager.IQuestion;
 import CSCI5308.GroupFormationTool.QuestionManager.Question;
 import CSCI5308.GroupFormationTool.QuestionManager.QuestionType;
 
-public class ResponseDBMock implements IResponsePersistence {
-
+public class ResponseDBMock //implements IResponsePersistence
+{
+/*
 	List<IQuestion> questions;
 	ArrayList<String> options;
 	
-	@Override
 	public List<IQuestion> loadQuestionsWithoutOptions(long courseId) {
 		
 		questions = new ArrayList<IQuestion>();
@@ -35,7 +35,6 @@ public class ResponseDBMock implements IResponsePersistence {
 		return questions;
 	}
 
-	@Override
 	public List<IQuestion> loadQuestionsWithOptions(long courseId) {
 		
 		Question q = new Question();
@@ -55,7 +54,6 @@ public class ResponseDBMock implements IResponsePersistence {
 		return questions;
 	}
 
-	@Override
 	public List<IQuestion> loadQuestionsOptions(List<IQuestion> quesions) {
 		
 		questions = new ArrayList<IQuestion>();
@@ -83,7 +81,6 @@ public class ResponseDBMock implements IResponsePersistence {
 		return questions;
 	}
 
-	@Override
 	public boolean saveResponse(HashMap<String, String> answer, String bannerId) {
 		if(answer.isEmpty()) 
 		{
@@ -93,12 +90,11 @@ public class ResponseDBMock implements IResponsePersistence {
 		
 	}
 
-	@Override
 	public boolean checkIsMCQMultiple(String questionId) {
 		if(questionId.isEmpty()) {
 			return false;
 		}
 		return true;
-	}
+	}*/
 
 }
