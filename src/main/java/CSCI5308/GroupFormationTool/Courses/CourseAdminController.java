@@ -35,6 +35,7 @@ public class CourseAdminController
 	public String course(Model model)
 	{
 		List<ICourse> allCourses = courseDB.loadAllCourses();
+
 		model.addAttribute("courses", allCourses);
 		return "admin/course";
 	}

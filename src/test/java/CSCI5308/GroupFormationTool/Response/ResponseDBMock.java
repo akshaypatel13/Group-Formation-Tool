@@ -6,11 +6,15 @@ import java.util.List;
 
 import CSCI5308.GroupFormationTool.QuestionManager.IQuestion;
 import CSCI5308.GroupFormationTool.QuestionManager.Question;
+import CSCI5308.GroupFormationTool.QuestionManager.QuestionManagerAbstractFactory;
 import CSCI5308.GroupFormationTool.QuestionManager.QuestionType;
+import org.junit.jupiter.api.Test;
+import org.springframework.util.Assert;
 
 public class ResponseDBMock implements IResponsePersistence
 {
 
+    ArrayList<String> options;
 
     @Override
     public List<IQuestion> loadQuestionsWithoutOptions(long courseId) {
@@ -52,30 +56,22 @@ public class ResponseDBMock implements IResponsePersistence
         return questions;    }
 
     @Override
-    public List<IQuestion> loadQuestionsOptions(List<IQuestion> quesions) {
-        List<IQuestion> questions = new ArrayList<IQuestion>();
-        ArrayList<String> options = new ArrayList<String>();
+    public IQuestion loadQuestionsOptions(IQuestion question) {
+        options = new ArrayList<String>();
 
         options.add("1");
         options.add("2");
 
-        Question q = new Question();
+        IQuestion q = QuestionManagerAbstractFactory.instance().createQuestionInstance();
         q.setId(1);
         q.setTitle("Mcqone Title");
         q.setText("Mcqone Question");
         q.setOptions(options);
         q.setType(QuestionType.MCQONE);
-        questions.add(q);
+        return q;
+    }
 
-        q = new Question();
-        q.setId(1);
-        q.setTitle("Mcqmultiple Title");
-        q.setText("Mcqmultiple Question");
-        q.setOptions(options);
-        q.setType(QuestionType.MCQMULTIPLE);
-        questions.add(q);
 
-        return questions;    }
 
     @Override
     public boolean saveResponse(String questionId, String bannerId, String option) {

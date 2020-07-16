@@ -1,18 +1,14 @@
 package CSCI5308.GroupFormationTool.Response;
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import CSCI5308.GroupFormationTool.QuestionManager.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.Assert;
-
-import CSCI5308.GroupFormationTool.QuestionManager.IQuestion;
-import CSCI5308.GroupFormationTool.QuestionManager.IQuestionPersistence;
-import CSCI5308.GroupFormationTool.QuestionManager.OptionValue;
-import CSCI5308.GroupFormationTool.QuestionManager.Question;
-import CSCI5308.GroupFormationTool.QuestionManager.QuestionDBMock;
 
 @SuppressWarnings("deprecation")
 public class ReponseTest {
@@ -70,13 +66,30 @@ public class ReponseTest {
 	}
 
 	@Test
+	public void loadQuestionOptions(){
+		IQuestion question = QuestionManagerAbstractFactory.instance().createQuestionInstance();
+		IResponsePersistence responsePersistence =new ResponseDBMock();
+		IResponse response = ResponseAbstractFactory.instance().createResponseInstance();
+		IQuestion questionOptions = responsePersistence.loadQuestionsOptions(question);
+		Assert.isTrue(questionOptions.getTitle().equals("Mcqone Title"));
+		Assert.isTrue(questionOptions.getText().equals("Mcqone Question"));
+		Assert.isTrue(questionOptions.getId()==1);
+		Assert.isTrue(questionOptions.getType().equals(QuestionType.MCQONE));
+	}
+
+	@Test
 	public void saveResponseAnswer() {
 
 		HashMap<String, String> answer = new HashMap<>();
 		answer.put("Question", "Response");
 
 		IResponsePersistence responseDB = new ResponseDBMock();
-		boolean status = responseDB.saveResponse("1", "B-000000","selected");
+		boolean status = false;
+		try {
+			status = responseDB.saveResponse("1", "B-000000","selected");
+		} catch (SQLException e) {
+			System.out.print(e.getMessage());
+		}
 		Assert.isTrue(status == true);
 
 	}
