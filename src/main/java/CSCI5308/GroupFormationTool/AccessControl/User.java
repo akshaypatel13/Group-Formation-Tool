@@ -147,6 +147,13 @@ public class User implements IUser
 	{
 		return id != -1;
 	}
+	
+	@Override
+	public boolean isInValidUser()
+	{
+		return id == -1;
+	}
+	
 
 	@Override
 	public boolean createUser(

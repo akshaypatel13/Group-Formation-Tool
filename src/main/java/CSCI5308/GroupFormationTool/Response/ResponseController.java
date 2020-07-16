@@ -13,56 +13,53 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import CSCI5308.GroupFormationTool.QuestionManager.IQuestion;
-import CSCI5308.GroupFormationTool.QuestionManager.Question;
 
 @Controller
 public class ResponseController {
 
 	private static final String ID = "id";
 	private static final String BannerID = "bannerID";
-    private static final Logger LOG = LogManager.getLogger(ResponseController.class);
+	private static final Logger LOG = LogManager.getLogger(ResponseController.class);
 	private IResponsePersistence responseDB;
-	
-	public ResponseController() 
-	{
+
+	public ResponseController() {
 		responseDB = ResponseAbstractFactory.instance().createResponseDBInstance();
 	}
-	
+
 	@RequestMapping("/response/takingsurvey")
-	public String loadQuestions(Model model,  @RequestParam(name = ID) long courseId) 
-	{
+	public String loadQuestions(Model model, @RequestParam(name = ID) long courseId) {
 		List<IQuestion> questionList = responseDB.loadQuestionsWithoutOptions(courseId);
 		List<IQuestion> questionListWithOptions = responseDB.loadQuestionsWithOptions(courseId);
 		List<IQuestion> loadQuestionsOptions = responseDB.loadQuestionsOptions(questionListWithOptions);
-		
+
 		IResponse response = ResponseAbstractFactory.instance().createResponseInstance();
 		List<IQuestion> questions = response.sortQuestionByDateCreated(questionList, loadQuestionsOptions);
-		
-        LOG.info("Operation = Load Question, CourseID = "+courseId+", Questions ="+questions);
-		
+
+		LOG.info("Operation = Load Question, CourseID = " + courseId + ", Questions =" + questions);
+
 		model.addAttribute("courseId", courseId);
 		model.addAttribute("questionList", questions);
-		
+
 		return "/response/response";
 	}
-	
+
 	@RequestMapping("/response/survey")
 	public String submitSurvey(Model model, @RequestParam(name = ID) long courseId,
-			@RequestParam(name = BannerID) String bannerId, HttpServletRequest request) 
-	{
-		
+			@RequestParam(name = BannerID) String bannerId, HttpServletRequest request) {
+
 		List<IQuestion> questionList = responseDB.loadQuestionsWithoutOptions(courseId);
 		List<IQuestion> questionListWithOptions = responseDB.loadQuestionsWithOptions(courseId);
 		List<IQuestion> loadQuestionsOptions = responseDB.loadQuestionsOptions(questionListWithOptions);
-		
-        LOG.info("Operation = Load Questions Without Options, CourseID = "+courseId+", Questions ="+questionList);
-        LOG.info("Operation = Load Questions With Options, CourseID = "+courseId+", Questions ="+loadQuestionsOptions);
-        
+
+		LOG.info("Operation = Load Questions Without Options, CourseID = " + courseId + ", Questions =" + questionList);
+		LOG.info("Operation = Load Questions With Options, CourseID = " + courseId + ", Questions ="
+				+ loadQuestionsOptions);
+
 		IResponse response = ResponseAbstractFactory.instance().createResponseInstance();
 		HashMap<String, String> answer = response.saveResponseAnswer(request, questionList, loadQuestionsOptions);
-		
+
 		responseDB.saveResponse(answer, bannerId);
-		
-		return "redirect:/course/course?id="+courseId;
+
+		return "redirect:/course/course?id=" + courseId;
 	}
 }

@@ -1,15 +1,14 @@
 package CSCI5308.GroupFormationTool.Survey;
 
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
-import CSCI5308.GroupFormationTool.QuestionManager.Question;
+import CSCI5308.GroupFormationTool.Database.DatabaseAbstractFactory;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+
 
 public class SurveyAdminDB implements ISurveyAdminPersistence {
 	private static final Logger LOG = LogManager.getLogger();
@@ -18,7 +17,8 @@ public class SurveyAdminDB implements ISurveyAdminPersistence {
 	public boolean createSurvey(long courseID) {
 		CallStoredProcedure proc = null;
 		try {
-			proc = new CallStoredProcedure("spCreateSurvey(?)");
+			proc = DatabaseAbstractFactory.instance()
+					.createCallStoredProcedureInstance("spCreateSurvey(?)");
 			proc.setParameter(1, courseID);
 			proc.execute();
 			return true;
@@ -36,7 +36,8 @@ public class SurveyAdminDB implements ISurveyAdminPersistence {
 	public boolean insertSurveyQuestion(long surveyID, long questionID, long algo) {
 		CallStoredProcedure proc = null;
 		try {
-			proc = new CallStoredProcedure("spInsertSurveyQuestion(?, ?, ?, ?)");
+			proc = DatabaseAbstractFactory.instance()
+					.createCallStoredProcedureInstance("spInsertSurveyQuestion(?, ?, ?, ?)");
 			proc.setParameter(1, surveyID);
 			proc.setParameter(2, questionID);
 			proc.setParameter(3, LocalDate.now().toString());
@@ -57,7 +58,8 @@ public class SurveyAdminDB implements ISurveyAdminPersistence {
 	public boolean deleteSurveyQuestion(long questionID) {
 		CallStoredProcedure proc = null;
 		try {
-			proc = new CallStoredProcedure("spDeleteSurveyQuestion(?)");
+			proc = DatabaseAbstractFactory.instance()
+					.createCallStoredProcedureInstance("spDeleteSurveyQuestion(?)");
 			proc.setParameter(1, questionID);
 			proc.execute();
 			return true;
@@ -75,7 +77,8 @@ public class SurveyAdminDB implements ISurveyAdminPersistence {
 	public boolean publishSurvey(long courseID, long groupSize) {
 		CallStoredProcedure proc = null;
 		try {
-			proc = new CallStoredProcedure("spPublishSurvey(?,?)");
+			proc = DatabaseAbstractFactory.instance()
+					.createCallStoredProcedureInstance("spPublishSurvey(?,?)");
 			proc.setParameter(1, courseID);
 			proc.setParameter(2, groupSize);
 			proc.execute();
@@ -94,7 +97,8 @@ public class SurveyAdminDB implements ISurveyAdminPersistence {
 	public boolean disableSurvey(long courseID) {
 		CallStoredProcedure proc = null;
 		try {
-			proc = new CallStoredProcedure("spDisableSurvey(?)");
+			proc = DatabaseAbstractFactory.instance()
+					.createCallStoredProcedureInstance("spDisableSurvey(?)");
 			proc.setParameter(1, courseID);
 			proc.execute();
 			return true;

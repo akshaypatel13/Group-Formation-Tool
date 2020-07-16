@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
+import CSCI5308.GroupFormationTool.Database.DatabaseAbstractFactory;
 
 public class UserDB implements IUserPersistence {
 	private static final Logger LOG = LogManager.getLogger();
@@ -14,7 +15,8 @@ public class UserDB implements IUserPersistence {
 	public void loadUserByID(long id, IUser user) {
 		CallStoredProcedure proc = null;
 		try {
-			proc = new CallStoredProcedure("spLoadUser(?)");
+			proc = DatabaseAbstractFactory.instance()
+					.createCallStoredProcedureInstance("spLoadUser(?)");
 			proc.setParameter(1, id);
 			ResultSet results = proc.executeWithResults();
 			if (null != results) {
@@ -47,7 +49,8 @@ public class UserDB implements IUserPersistence {
 		CallStoredProcedure proc = null;
 		long userID = -1;
 		try {
-			proc = new CallStoredProcedure("spFindUserByBannerID(?)");
+			proc = DatabaseAbstractFactory.instance()
+					.createCallStoredProcedureInstance("spFindUserByBannerID(?)");
 			proc.setParameter(1, bannerID);
 			ResultSet results = proc.executeWithResults();
 			if (null != results) {
@@ -72,7 +75,8 @@ public class UserDB implements IUserPersistence {
 	public boolean createUser(IUser user) {
 		CallStoredProcedure proc = null;
 		try {
-			proc = new CallStoredProcedure("spCreateUser(?, ?, ?, ?, ?, ?)");
+			proc = DatabaseAbstractFactory.instance()
+					.createCallStoredProcedureInstance("spCreateUser(?, ?, ?, ?, ?, ?)");
 			proc.setParameter(1, user.getBannerID());
 			proc.setParameter(2, user.getPassword());
 			proc.setParameter(3, user.getFirstName());

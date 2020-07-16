@@ -15,7 +15,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
-import CSCI5308.GroupFormationTool.SystemConfig;
 import CSCI5308.GroupFormationTool.AccessControl.*;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -25,29 +24,27 @@ public class CustomAuthenticationManager implements AuthenticationManager {
 	private static final String AUTH_SERVICE_EXCEPTION = "1000";
 	private static final String USER = "USER";
 	private static final Logger LOG = LogManager.getLogger();
+
 	public CustomAuthenticationManager() {
 	}
 
 	private Authentication checkAdmin(String password, IUser u, Authentication authentication)
 			throws AuthenticationException {
 
-		if (password.equals(u.getPassword()))
-		{
+		if (password.equals(u.getPassword())) {
 			LOG.info("Operation =AdminAuthentication, Status = Success");
 			List<GrantedAuthority> rights = new ArrayList<GrantedAuthority>();
 			rights.add(new SimpleGrantedAuthority(Role.ADMIN.toString().toUpperCase()));
 			UsernamePasswordAuthenticationToken token;
 			token = new UsernamePasswordAuthenticationToken(authentication.getPrincipal(),
-					authentication.getCredentials(),
-					rights);
+					authentication.getCredentials(), rights);
 			return token;
-		}
-		else
-		{
+		} else {
 			LOG.error("Operation =AdminAuthentication, Status = Failed");
 			throw new BadCredentialsException(BAD_CREDENTIAL_EXCEPTION);
 		}
 	}
+
 	private Authentication checkNormal(String password, IUser u, Authentication authentication)
 			throws AuthenticationException {
 		IPasswordEncryption passwordEncryption = SecurityAbstractFactory.instance().createBCryptPasswordEncryption();
@@ -58,8 +55,7 @@ public class CustomAuthenticationManager implements AuthenticationManager {
 
 			UsernamePasswordAuthenticationToken token;
 			token = new UsernamePasswordAuthenticationToken(authentication.getPrincipal(),
-					authentication.getCredentials(),
-					rights);
+					authentication.getCredentials(), rights);
 			return token;
 		} else {
 			LOG.error("Operation =EncryptedPasswordAuthentication, Status = Failed,");
@@ -73,12 +69,12 @@ public class CustomAuthenticationManager implements AuthenticationManager {
 		IUserPersistence userDB = UserAbstractFactory.instance().createUserDBInstance();
 		IUser u;
 		try {
-			u = UserAbstractFactory.instance().createUserParamInstance(bannerID,userDB);
+			u = UserAbstractFactory.instance().createUserParamInstance(bannerID, userDB);
 		} catch (Exception e) {
 			throw new AuthenticationServiceException(AUTH_SERVICE_EXCEPTION);
 		}
 		if (u.isValidUser()) {
-			LOG.info("Operation = UserAuthentication, Status=Success, BannerId:"+u.getBannerID());
+			LOG.info("Operation = UserAuthentication, Status=Success, BannerId:" + u.getBannerID());
 			if (bannerID.toUpperCase().equals(ADMIN_BANNER_ID)) {
 				return checkAdmin(password, u, authentication);
 			} else {

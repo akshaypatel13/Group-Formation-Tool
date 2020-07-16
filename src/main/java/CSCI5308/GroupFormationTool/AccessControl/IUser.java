@@ -65,4 +65,6 @@ public interface IUser {
 
     boolean isEmailValid(String email);
 
+	public boolean isInValidUser();
+
 }

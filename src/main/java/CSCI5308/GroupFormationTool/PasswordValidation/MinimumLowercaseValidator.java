@@ -1,7 +1,11 @@
 package CSCI5308.GroupFormationTool.PasswordValidation;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class MinimumLowercaseValidator extends PasswordValidator
 {
+	private static final Logger LOG = LogManager.getLogger();
 	public MinimumLowercaseValidator(String constraint) 
 	{
 		this.constraint = constraint;
@@ -23,6 +27,7 @@ public class MinimumLowercaseValidator extends PasswordValidator
 		
 		if(passLower<minLower) 
 		{
+			LOG.error("Password is violating Minimum Lowecase Letters equired policy");
 			return false;
 		}
 		

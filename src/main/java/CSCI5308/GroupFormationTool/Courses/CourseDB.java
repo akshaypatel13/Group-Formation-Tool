@@ -3,6 +3,7 @@ package CSCI5308.GroupFormationTool.Courses;
 import java.util.List;
 
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
+import CSCI5308.GroupFormationTool.Database.DatabaseAbstractFactory;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,7 +19,8 @@ public class CourseDB implements ICoursePersistence {
 		List<Course> courses = new ArrayList<Course>();
 		CallStoredProcedure proc = null;
 		try {
-			proc = new CallStoredProcedure("spLoadAllCourses()");
+			proc = DatabaseAbstractFactory.instance()
+					.createCallStoredProcedureInstance("spLoadAllCourses()");
 			ResultSet results = proc.executeWithResults();
 			if (null != results) {
 				while (results.next()) {
@@ -45,7 +47,8 @@ public class CourseDB implements ICoursePersistence {
 	public void loadCourseByID(long id, ICourse course) {
 		CallStoredProcedure proc = null;
 		try {
-			proc = new CallStoredProcedure("spFindCourseByID(?)");
+			proc = DatabaseAbstractFactory.instance()
+					.createCallStoredProcedureInstance("spFindCourseByID(?)");
 			proc.setParameter(1, id);
 			ResultSet results = proc.executeWithResults();
 			if (null != results) {
@@ -68,7 +71,8 @@ public class CourseDB implements ICoursePersistence {
 	public boolean createCourse(ICourse course) {
 		CallStoredProcedure proc = null;
 		try {
-			proc = new CallStoredProcedure("spCreateCourse(?, ?)");
+			proc = DatabaseAbstractFactory.instance()
+					.createCallStoredProcedureInstance("spCreateCourse(?, ?)");
 			proc.setParameter(1, course.getTitle());
 			proc.registerOutputParameterLong(2);
 			proc.execute();
@@ -87,7 +91,8 @@ public class CourseDB implements ICoursePersistence {
 	public boolean deleteCourse(long id) {
 		CallStoredProcedure proc = null;
 		try {
-			proc = new CallStoredProcedure("spDeleteCourse(?)");
+			proc = DatabaseAbstractFactory.instance()
+					.createCallStoredProcedureInstance("spDeleteCourse(?)");
 			proc.setParameter(1, id);
 			proc.execute();
 			LOG.info("Operation = DeleteCourse, Status = Success, RowCount=" + id);

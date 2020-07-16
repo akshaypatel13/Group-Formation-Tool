@@ -41,7 +41,7 @@ public class StudentCSVImport implements IStudentCSVImport {
 			IUser user = UserAbstractFactory.instance().createUserInstance();
 			userDB.loadUserByBannerID(bannerID, user);
 
-			if (!user.isValidUser()) {
+			if (user.isInValidUser()) {
 				user.setBannerID(bannerID);
 				user.setFirstName(firstName);
 				user.setLastName(lastName);
