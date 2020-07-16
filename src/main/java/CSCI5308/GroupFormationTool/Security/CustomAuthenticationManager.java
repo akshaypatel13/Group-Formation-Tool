@@ -32,7 +32,7 @@ public class CustomAuthenticationManager implements AuthenticationManager {
 			throws AuthenticationException {
 
 		if (password.equals(u.getPassword())) {
-			LOG.info("Operation =AdminAuthentication, Status = Success");
+			LOG.info("Admin authentication successful");
 			List<GrantedAuthority> rights = new ArrayList<GrantedAuthority>();
 			rights.add(new SimpleGrantedAuthority(Role.ADMIN.toString().toUpperCase()));
 			UsernamePasswordAuthenticationToken token;
@@ -40,7 +40,7 @@ public class CustomAuthenticationManager implements AuthenticationManager {
 					authentication.getCredentials(), rights);
 			return token;
 		} else {
-			LOG.error("Operation =AdminAuthentication, Status = Failed");
+			LOG.error("Admin authentication failed");
 			throw new BadCredentialsException(BAD_CREDENTIAL_EXCEPTION);
 		}
 	}
@@ -49,7 +49,7 @@ public class CustomAuthenticationManager implements AuthenticationManager {
 			throws AuthenticationException {
 		IPasswordEncryption passwordEncryption = SecurityAbstractFactory.instance().createBCryptPasswordEncryption();
 		if (passwordEncryption.matches(password, u.getPassword())) {
-			LOG.info("Operation =EncryptedPasswordAuthentication, Status = Success ");
+			LOG.info("Encrypted password match successful");
 			List<GrantedAuthority> rights = new ArrayList<GrantedAuthority>();
 			rights.add(new SimpleGrantedAuthority(USER));
 
@@ -58,7 +58,7 @@ public class CustomAuthenticationManager implements AuthenticationManager {
 					authentication.getCredentials(), rights);
 			return token;
 		} else {
-			LOG.error("Operation =EncryptedPasswordAuthentication, Status = Failed,");
+			LOG.error("Encrypted Password Authentication failed");
 			throw new BadCredentialsException(BAD_CREDENTIAL_EXCEPTION);
 		}
 	}
@@ -74,14 +74,14 @@ public class CustomAuthenticationManager implements AuthenticationManager {
 			throw new AuthenticationServiceException(AUTH_SERVICE_EXCEPTION);
 		}
 		if (u.isValidUser()) {
-			LOG.info("Operation = UserAuthentication, Status=Success, BannerId:" + u.getBannerID());
+			LOG.info("User Authentication successful for user:" + u.getBannerID());
 			if (bannerID.toUpperCase().equals(ADMIN_BANNER_ID)) {
 				return checkAdmin(password, u, authentication);
 			} else {
 				return checkNormal(password, u, authentication);
 			}
 		} else {
-			LOG.error("Operation = Authentication, Status = Failed, BannerId:" + u.getBannerID());
+			LOG.error("User Authentication failed for user:" + u.getBannerID());
 			throw new BadCredentialsException(BAD_CREDENTIAL_EXCEPTION);
 		}
 	}

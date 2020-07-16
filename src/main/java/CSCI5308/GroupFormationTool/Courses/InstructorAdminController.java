@@ -33,12 +33,14 @@ public class InstructorAdminController
 	public String instructorAdmin(Model model, @RequestParam(name = ID) long courseID)
 	{
 		ICourse course = CourseAbstractFactory.instance().createCourseInstance();
+		LOG.info("Loading course:"+ courseID + "using course DB");
 		courseDB.loadCourseByID(courseID, course);
 		model.addAttribute("course", course);
 		model.addAttribute("displayresults", false);
 		if (course.isCurrentUserEnrolledAsRoleInCourse(Role.INSTRUCTOR) ||
 			 course.isCurrentUserEnrolledAsRoleInCourse(Role.TA))
 		{
+			LOG.info("Loading instructor admin page based on user role");
 			return "course/instructoradmin";
 		}
 		else
@@ -56,6 +58,7 @@ public class InstructorAdminController
 			@RequestParam(name = DISPLAY_RESULTS) boolean displayResults)
 	{
 		ICourse course = CourseAbstractFactory.instance().createCourseInstance();
+		LOG.info("Loading course:"+ courseID + "using course DB");
 		courseDB.loadCourseByID(courseID, course);
 		model.addAttribute("course", course);
 		model.addAttribute("displayresults", false);
@@ -65,6 +68,7 @@ public class InstructorAdminController
 		if (course.isCurrentUserEnrolledAsRoleInCourse(Role.INSTRUCTOR) ||
 			 course.isCurrentUserEnrolledAsRoleInCourse(Role.TA))
 		{
+			LOG.info("Loading instructor admin page based with display results");
 			return "course/instructoradmin";
 		}
 		else
@@ -78,11 +82,13 @@ public class InstructorAdminController
 	public String enrollTA(Model model, @RequestParam(name = ID) long courseID)
 	{
 		ICourse course = CourseAbstractFactory.instance().createCourseInstance();
+		LOG.info("Loading course:"+ courseID + "using course DB");
 		courseDB.loadCourseByID(courseID, course);
 		model.addAttribute("course", course);
 		if (course.isCurrentUserEnrolledAsRoleInCourse(Role.INSTRUCTOR) ||
 			 course.isCurrentUserEnrolledAsRoleInCourse(Role.TA))
 		{
+			LOG.info("Loading enrollta page based on authenticated user");
 			return "course/enrollta";
 		}
 		else
@@ -95,10 +101,13 @@ public class InstructorAdminController
    public ModelAndView upload(@RequestParam(name = FILE) MultipartFile file, @RequestParam(name = ID) long courseID)
    {
 	    ICourse course = CourseAbstractFactory.instance().createCourseInstance();
+	    LOG.info("Loading course:"+ courseID + "using course DB");
 		courseDB.loadCourseByID(courseID, course);
+		
 		IStudentCSVParser parser = CourseAbstractFactory.instance().createStudentCSVParserInstance(file);
 		IStudentCSVImport importer = CourseAbstractFactory.instance().createStudentCSVImportInstance(parser,course);
 		ModelAndView mav = new ModelAndView("redirect:/course/instructoradminresults?id=" + Long.toString(courseID));
+		LOG.info("Passing imported CSV results to the view");
 		mav.addObject("successful", importer.getSuccessResults());
 		mav.addObject("failures", importer.getFailureResults());
 		mav.addObject("displayresults", true);

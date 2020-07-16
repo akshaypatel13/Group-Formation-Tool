@@ -55,16 +55,16 @@ public class StudentCSVParser implements IStudentCSVParser
 				u.setEmail(email);
 				studentList.add(u);
 			}
-			LOG.info("Operation = CSV Upload Operations, Status = Success, File = "+uploadedFile.getName());
+			LOG.info("CSV Upload operation successful for File = "+uploadedFile.getName());
 		}
 		catch (IOException e)
 		{
-			LOG.error("Operation = Upload CSV, Status = Failure, File = "+uploadedFile.getName());
+			LOG.error("CSV Upload operation failed for File = "+uploadedFile.getName());
 			failureResults.add("Failure reading uploaded file: " + e.getMessage());
 		}
 		catch (Exception e)
 		{
-			LOG.error("Operation = Parse CSV, Status = Failure, File = "+uploadedFile.getName());
+			LOG.error("CSV parse operation failed for File = "+uploadedFile.getName());
 			failureResults.add("Failure parsing CSV file: " + e.getMessage());
 		}
 

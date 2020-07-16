@@ -6,6 +6,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import CSCI5308.GroupFormationTool.QuestionManager.IQuestion;
 import CSCI5308.GroupFormationTool.QuestionManager.QuestionType;
 
@@ -13,6 +16,7 @@ public class Response implements IResponse {
 
 	private long id;
 	private String response;
+	private static final Logger LOG = LogManager.getLogger();
 
 	public Response() {
 		setDefaults();
@@ -41,6 +45,7 @@ public class Response implements IResponse {
 
 	public List<IQuestion> sortQuestionByDateCreated(List<IQuestion> quesionsWithoutOptions,
 			List<IQuestion> quesionsWithOptions) {
+		LOG.info("Sorting the question list based on date created");
 		List<IQuestion> questions = new ArrayList<>();
 
 		for (IQuestion question : quesionsWithoutOptions) {

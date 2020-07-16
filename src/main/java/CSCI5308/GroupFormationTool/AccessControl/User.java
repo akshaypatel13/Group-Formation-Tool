@@ -11,8 +11,7 @@ import CSCI5308.GroupFormationTool.PasswordValidation.IPasswordValidatorEnumerat
 import CSCI5308.GroupFormationTool.PasswordValidation.PasswordValidator;
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
 
-public class User implements IUser
-{
+public class User implements IUser {
 	private static final String EMAIL_REGEX = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
 	private static final Logger LOG = LogManager.getLogger();
 	private long id;
@@ -22,28 +21,22 @@ public class User implements IUser
 	private String lastName;
 	private String email;
 
-	public User()
-	{
+	public User() {
 		setDefaults();
 	}
 
-
-	public User(long id, IUserPersistence persistence)
-	{
+	public User(long id, IUserPersistence persistence) {
 		setDefaults();
 		persistence.loadUserByID(id, this);
 	}
 
-
-	public User(String bannerID, IUserPersistence persistence)
-	{
+	public User(String bannerID, IUserPersistence persistence) {
 		setDefaults();
 		persistence.loadUserByBannerID(bannerID, this);
 	}
 
 	@Override
-	public void setDefaults()
-	{
+	public void setDefaults() {
 		id = -1;
 		password = "";
 		bannerID = "";
@@ -53,197 +46,158 @@ public class User implements IUser
 	}
 
 	@Override
-	public void setID(long id)
-	{
+	public void setID(long id) {
 		this.id = id;
 	}
 
 	@Override
-	public long getID()
-	{
+	public long getID() {
 		return id;
 	}
 
 	@Override
-	public void setId(long id)
-	{
+	public void setId(long id) {
 		this.id = id;
 	}
 
 	@Override
-	public long getId()
-	{
+	public long getId() {
 		return id;
 	}
 
 	@Override
-	public void setPassword(String password)
-	{
+	public void setPassword(String password) {
 		this.password = password;
 	}
 
 	@Override
-	public String getPassword()
-	{
+	public String getPassword() {
 		return password;
 	}
 
 	@Override
-	public void setBannerID(String bannerID)
-	{
+	public void setBannerID(String bannerID) {
 		this.bannerID = bannerID;
 	}
 
 	@Override
-	public String getBannerID()
-	{
+	public String getBannerID() {
 		return bannerID;
 	}
 
 	@Override
-	public String getBanner()
-	{
+	public String getBanner() {
 		return bannerID;
 	}
 
 	@Override
-	public void setFirstName(String name)
-	{
+	public void setFirstName(String name) {
 		firstName = name;
 	}
 
 	@Override
-	public String getFirstName()
-	{
+	public String getFirstName() {
 		return firstName;
 	}
 
 	@Override
-	public void setLastName(String name)
-	{
+	public void setLastName(String name) {
 		lastName = name;
 	}
 
 	@Override
-	public String getLastName()
-	{
+	public String getLastName() {
 		return lastName;
 	}
 
 	@Override
-	public void setEmail(String email)
-	{
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
 	@Override
-	public String getEmail()
-	{
+	public String getEmail() {
 		return email;
 	}
 
 	@Override
-	public boolean isValidUser()
-	{
+	public boolean isValidUser() {
 		return id != -1;
 	}
-	
-	@Override
-	public boolean isInValidUser()
-	{
-		return id == -1;
-	}
-	
 
 	@Override
-	public boolean createUser(
-			IUserPersistence userDB,
-			IPasswordValidatorEnumerator passwordEnumerator,
-			IPasswordEncryption passwordEncryption,
-			IUserNotifications notification,
-			List<String> errorMessages
-	)
-	{
+	public boolean isInValidUser() {
+		return id == -1;
+	}
+
+	@Override
+	public boolean createUser(IUserPersistence userDB, IPasswordValidatorEnumerator passwordEnumerator,
+			IPasswordEncryption passwordEncryption, IUserNotifications notification, List<String> errorMessages) {
 		String rawPassword = password;
 		boolean success = true;
 
 		List<PasswordValidator> passwordValidators = passwordEnumerator.getActiveValidators(this);
-		for(int i=0;i<passwordValidators.size();i++)
-		{
-			LOG.info("check for password validation");
+		for (int i = 0; i < passwordValidators.size(); i++) {
+			LOG.info("checking for password security policies validation");
 			PasswordValidator validator = passwordValidators.get(i);
-			if(validator.isValid(rawPassword) == false)
-			{
-				LOG.warn("Password criteria is not met");
+			if (validator.isValid(rawPassword) == false) {
+				LOG.error("User cannot be created due to violation of password security policy");
 				errorMessages.add(validator.getValidatorName() + " - " + validator.constraint);
 				success = false;
 			}
 		}
-		if (success)
-		{
-			LOG.info("User created successfully");
+		if (success) {
 			success = this.createUser(userDB, passwordEncryption, notification);
 		}
 		return success;
 	}
 
-
 	@Override
-	public boolean createUser(
-			IUserPersistence userDB,
-			IPasswordEncryption passwordEncryption,
-			IUserNotifications notification
-	)
-	{
+	public boolean createUser(IUserPersistence userDB, IPasswordEncryption passwordEncryption,
+			IUserNotifications notification) {
 		String rawPassword = password;
 		this.password = passwordEncryption.encryptPassword(this.password);
+		LOG.info("After validating user, passing details to UserDB for user creation");
 		boolean success = userDB.createUser(this);
-		if (success && (null != notification))
-		{
+		if (success && (null != notification)) {
 			notification.sendUserLoginCredentials(this, rawPassword);
 		}
 		return success;
 	}
 
 	@Override
-	public boolean updateUser(IUserPersistence userDB)
-	{
+	public boolean updateUser(IUserPersistence userDB) {
+		LOG.info("Calling UserDB to update user details");
 		return userDB.updateUser(this);
 	}
 
 	@Override
-	public boolean isStringNullOrEmpty(String s)
-	{
-		if (null == s)
-		{
+	public boolean isStringNullOrEmpty(String s) {
+		if (null == s) {
 			return true;
 		}
 		return s.isEmpty();
 	}
 
 	@Override
-	public boolean isBannerIDValid(String bannerID)
-	{
+	public boolean isBannerIDValid(String bannerID) {
 		return !isStringNullOrEmpty(bannerID);
 	}
 
 	@Override
-	public boolean isFirstNameValid(String name)
-	{
+	public boolean isFirstNameValid(String name) {
 		return !isStringNullOrEmpty(name);
 	}
 
 	@Override
-	public boolean isLastNameValid(String name)
-	{
+	public boolean isLastNameValid(String name) {
 		return !isStringNullOrEmpty(name);
 	}
 
 	@Override
-	public boolean isEmailValid(String email)
-	{
-		if (isStringNullOrEmpty(email))
-		{
+	public boolean isEmailValid(String email) {
+		if (isStringNullOrEmpty(email)) {
+
 			return false;
 		}
 

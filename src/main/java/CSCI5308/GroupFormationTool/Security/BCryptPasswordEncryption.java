@@ -22,7 +22,7 @@ public class BCryptPasswordEncryption implements IPasswordEncryption
 
 	public boolean matches(String rawPassword, String encryptedPassword)
 	{
-		LOG.info("Check if password plain text matches wit encrypted password");
+		LOG.info("Check if password plain text matches with encrypted password");
 		return encoder.matches(rawPassword, encryptedPassword);
 	}
 }

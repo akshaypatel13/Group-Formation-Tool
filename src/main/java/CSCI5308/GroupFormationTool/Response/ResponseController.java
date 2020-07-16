@@ -35,7 +35,7 @@ public class ResponseController {
 		IResponse response = ResponseAbstractFactory.instance().createResponseInstance();
 		List<IQuestion> questions = response.sortQuestionByDateCreated(questionList, loadQuestionsOptions);
 
-		LOG.info("Operation = Load Question, CourseID = " + courseId + ", Questions =" + questions);
+		LOG.info("Loading Questions for CourseID = " + courseId + ", Questions =" + questions);
 
 		model.addAttribute("courseId", courseId);
 		model.addAttribute("questionList", questions);
@@ -48,11 +48,13 @@ public class ResponseController {
 			@RequestParam(name = BannerID) String bannerId, HttpServletRequest request) {
 
 		List<IQuestion> questionList = responseDB.loadQuestionsWithoutOptions(courseId);
+		
 		List<IQuestion> questionListWithOptions = responseDB.loadQuestionsWithOptions(courseId);
 		List<IQuestion> loadQuestionsOptions = responseDB.loadQuestionsOptions(questionListWithOptions);
-
-		LOG.info("Operation = Load Questions Without Options, CourseID = " + courseId + ", Questions =" + questionList);
-		LOG.info("Operation = Load Questions With Options, CourseID = " + courseId + ", Questions ="
+		
+		LOG.info("Loaded Questions Without Options for CourseID = " + courseId + ", Questions =" + questionList);
+		
+		LOG.info("Loaded Questions With Options for CourseID = " + courseId + ", Questions ="
 				+ loadQuestionsOptions);
 
 		IResponse response = ResponseAbstractFactory.instance().createResponseInstance();

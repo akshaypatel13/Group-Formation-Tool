@@ -56,13 +56,12 @@ public class Groups implements IGroups {
 
 	public boolean insertGroups(IGroupsPersistence groupDB, long surveyId, IGroupCreator groupCreator,
 			ISurveyManagePersistence surveyManageDB) {
+		LOG.info("Fetching responses for survey , SurveyId:" + surveyId);
 		Map<Long, Map<Long, String>> responses = surveyManageDB.getSurveyResponses(surveyId);
 		long groupSize = surveyManageDB.getSurveyGroupSize(surveyId);
 		Map<Integer, List<Long>> groups = new HashMap<Integer, List<Long>>();
-
+		LOG.info("Fetching groups from groups created for SurveyId:" + surveyId);
 		groups = groupCreator.createGroups(responses, groupSize);
-		LOG.info("Groups created and fetched");
-		System.out.println(groups.size());
 		ArrayList<IGroups> groupsList = GroupsAbstractFactory.instance().createArrayListGroups();
 
 		for (Entry<Integer, List<Long>> entry : groups.entrySet()) {
@@ -77,6 +76,7 @@ public class Groups implements IGroups {
 			}
 
 		}
+		LOG.info("Calling groupsDB to insert groups in Database");
 		groupDB.insertGroups(groupsList);
 		return false;
 	}
@@ -103,7 +103,7 @@ public class Groups implements IGroups {
 	}
 
 	public Map<Integer, ArrayList<IGroups>> fetchGroups(IGroupsPersistence groupDB) {
-
+		LOG.info("Fetching groups from Database for SurveyId:" + surveyId);
 		ArrayList<IGroups> groups = groupDB.fetchGroups();
 		Map<Integer, ArrayList<IGroups>> mapGroups = new HashMap<Integer, ArrayList<IGroups>>();
 		ArrayList<Integer> uniqueGroups = new ArrayList<Integer>();

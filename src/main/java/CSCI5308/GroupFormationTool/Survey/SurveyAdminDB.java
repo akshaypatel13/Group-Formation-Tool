@@ -21,6 +21,7 @@ public class SurveyAdminDB implements ISurveyAdminPersistence {
 					.createCallStoredProcedureInstance("spCreateSurvey(?)");
 			proc.setParameter(1, courseID);
 			proc.execute();
+			LOG.info("Operation = Create Survey, Status = Success");
 			return true;
 		} catch (SQLException e) {
 			LOG.error("Status = Failed, Error Message=" + e.getMessage());
@@ -43,6 +44,7 @@ public class SurveyAdminDB implements ISurveyAdminPersistence {
 			proc.setParameter(3, LocalDate.now().toString());
 			proc.setParameter(4, algo);
 			proc.execute();
+			LOG.info("Operation = Insert Survey Question, Status = Success");
 			return true;
 		} catch (SQLException e) {
 			LOG.error("Status = Failed, Error Message=" + e.getMessage());
@@ -62,6 +64,7 @@ public class SurveyAdminDB implements ISurveyAdminPersistence {
 					.createCallStoredProcedureInstance("spDeleteSurveyQuestion(?)");
 			proc.setParameter(1, questionID);
 			proc.execute();
+			LOG.info("Operation = Delete Survey Question, Status = Success");
 			return true;
 		} catch (SQLException e) {
 			LOG.error("Status = Failed, Error Message=" + e.getMessage());
@@ -82,6 +85,7 @@ public class SurveyAdminDB implements ISurveyAdminPersistence {
 			proc.setParameter(1, courseID);
 			proc.setParameter(2, groupSize);
 			proc.execute();
+			LOG.info("Operation = Publish Survey, Status = Success");
 			return true;
 		} catch (SQLException e) {
 			LOG.error("Status = Failed, Error Message=" + e.getMessage());
@@ -101,6 +105,7 @@ public class SurveyAdminDB implements ISurveyAdminPersistence {
 					.createCallStoredProcedureInstance("spDisableSurvey(?)");
 			proc.setParameter(1, courseID);
 			proc.execute();
+			LOG.info("Operation = Disable survey, Status = Success");
 			return true;
 		} catch (SQLException e) {
 			LOG.error("Status = Failed, Error Message=" + e.getMessage());

@@ -33,7 +33,7 @@ public class SurveyAdminController {
 		surveyAdminDB.createSurvey(courseID);
 		boolean check = surveyManageDB.surveyPublishedOrNot(courseID);
 		long surveyID = surveyManageDB.findSurveyByCourseID(courseID);
-		LOG.info("Operation = Suvrey Creation, SurveyID = " + surveyID + ", Course =" + courseID);
+		LOG.info("Creating survey for SurveyID = " + surveyID + ", Course =" + courseID);
 		model.addAttribute("surveyCheck", check);
 		model.addAttribute("courseID", courseID);
 		model.addAttribute("surveyQuestions", surveyManageDB.findSurveyQuestions(surveyID));
@@ -61,14 +61,14 @@ public class SurveyAdminController {
 	public String publishSurvey(Model model, @RequestParam("courseID") long courseId,
 			@RequestParam("groupSize") long groupSize) {
 		System.out.println("GroupSize: " + groupSize);
-		LOG.info("Operation = Survey Published, Status = Success, Course =" + courseID);
+		LOG.info("Survey published successfully for Course =" + courseID);
 		surveyAdminDB.publishSurvey(courseId, groupSize);
 		return "redirect:/survey/survey?courseID=" + courseId;
 	}
 
 	@GetMapping("/survey/disable")
 	public String disableSurvey(Model model, @RequestParam("courseID") long courseId) {
-		LOG.info("Operation = Survey Disabled, Status = Success, Course =" + courseID);
+		LOG.info("Survey disabled successfully for Course =" + courseID);
 		surveyAdminDB.disableSurvey(courseId);
 		return "redirect:/survey/survey?courseID=" + courseId;
 	}

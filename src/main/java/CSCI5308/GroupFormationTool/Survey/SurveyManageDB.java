@@ -2,10 +2,8 @@ package CSCI5308.GroupFormationTool.Survey;
 
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
 import CSCI5308.GroupFormationTool.QuestionManager.IQuestion;
-
 import CSCI5308.GroupFormationTool.QuestionManager.QuestionManagerAbstractFactory;
 import CSCI5308.GroupFormationTool.QuestionManager.QuestionType;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -134,6 +132,7 @@ public class SurveyManageDB implements ISurveyManagePersistence {
 					published = results.getBoolean(1);
 				}
 			}
+			LOG.info("Operation = Check if survey published or not, Status = Success");
 			return !published;
 		} catch (SQLException e) {
 			LOG.error("Status = Failed, Error Message=" + e.getMessage());
@@ -165,7 +164,7 @@ public class SurveyManageDB implements ISurveyManagePersistence {
 					responses.put(questionID, questionResponse);
 				}
 			}
-
+			LOG.info("Operation = Get Survey Responses, Status = Success");
 		} catch (SQLException e) {
 			LOG.error("Status = Failed, Error Message=" + e.getMessage());
 		} finally {

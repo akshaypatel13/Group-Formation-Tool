@@ -40,14 +40,14 @@ public class GroupFormationController {
 		// change link to show groups
 		// return "redirect:/survey/survey?courseID="+courseId;
 		if (Objects.isNull(surveyId)) {
-			LOG.error("Operation = SurveyNotCreated, Status = Failed, SurveyId:" + surveyId);
+			LOG.error("Survey not created for SurveyId:" + surveyId);
 			model.addAttribute("errorMsg", "Survey not created");
 		} else {
 			LOG.info("check if published or not");
 			check = surveyManageDB.surveyPublishedOrNot(courseId);
 		}
 		if (check) {
-			LOG.error("Operation = Survey is  Not Published, Status = Failed, SurveyId:" + surveyId);
+			LOG.error("Survey is  Not Published for SurveyId:" + surveyId);
 			model.addAttribute("errorMsg", "Survey not published");
 			return "groupFormation/notpublished";
 
@@ -55,7 +55,7 @@ public class GroupFormationController {
 
 			groups.insertGroups(groupDB, surveyId, groupCreator, surveyManageDB);
 			Map<Integer, ArrayList<IGroups>> groupInfo = groups.fetchGroups(groupDB);
-			LOG.info("Operation: SurveyPublished and Groups Created,Status=success," + "surveyId:" + surveyId);
+			LOG.info("Survey published and groups created for SurveyId:"+ surveyId);
 			model.addAttribute("groupInfo", groupInfo);
 		}
 

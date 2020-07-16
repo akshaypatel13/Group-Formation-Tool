@@ -49,6 +49,7 @@ public class ResponseDB implements IResponsePersistence {
 					questionList.add(question);
 				}
 			}
+			LOG.info("Operation = Load Questions without options, Status = Success");
 		} catch (SQLException e) {
 			LOG.error("Status = Failed, Error Message=" + e.getMessage());
 			return null;
@@ -89,6 +90,7 @@ public class ResponseDB implements IResponsePersistence {
 					questionList.add(question);
 				}
 			}
+			LOG.info("Operation = Load Questions with options, Status = Success");
 		} catch (SQLException e) {
 			LOG.error("Status = Failed, Error Message=" + e.getMessage());
 			return null;
@@ -126,7 +128,7 @@ public class ResponseDB implements IResponsePersistence {
 					questionList.add(question);
 				}
 			}
-
+			LOG.info("Operation = Load Question options, Status = Success");
 		} catch (SQLException e) {
 			LOG.error("Status = Failed, Error Message=" + e.getMessage());
 			return null;
@@ -175,7 +177,7 @@ public class ResponseDB implements IResponsePersistence {
 					proc.execute();
 				}
 			}
-
+			LOG.info("Operation = Save Responses for user:"+bannerId+", Status = Success");
 			return true;
 
 		} catch (SQLException e) {
@@ -206,6 +208,7 @@ public class ResponseDB implements IResponsePersistence {
 					}
 				}
 			}
+			LOG.info("Operation = Check if MCQ is Multiple, Status = Success");
 		} catch (SQLException e) {
 			LOG.error("Status = Failed, Error Message=" + e.getMessage());
 			return false;

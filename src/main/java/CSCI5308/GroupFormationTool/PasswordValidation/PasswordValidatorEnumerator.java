@@ -5,12 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import CSCI5308.GroupFormationTool.AccessControl.IUser;
 
 public class PasswordValidatorEnumerator implements IPasswordValidatorEnumerator {
 	private IPasswordValidatorPersistence validatorDB;
 	private List<PasswordValidator> activeValidators;
 	private HashMap<Long, String> validators;
+	private static final Logger LOG = LogManager.getLogger();
 
 	public PasswordValidatorEnumerator(IPasswordValidatorPersistence validatorDB) {
 		this.validatorDB = validatorDB;
@@ -19,12 +23,13 @@ public class PasswordValidatorEnumerator implements IPasswordValidatorEnumerator
 	}
 
 	public List<PasswordValidator> getActiveValidators(IUser user) {
-		System.out.println("Validators active: \n" + validators.values());
+
 		activeValidators = new ArrayList<PasswordValidator>();
 		for (@SuppressWarnings("rawtypes")
 		Map.Entry item : validators.entrySet()) {
 			long key = (long) item.getKey();
 			String value = (String) item.getValue();
+			LOG.info("Calling validator DB to fetch security policies");
 			String constraint = validatorDB.loadConstraintByValidatorId(key);
 
 			if (value.equals(PasswordValidatorType.MINLENGTH.toString())) {
