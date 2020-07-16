@@ -13,7 +13,7 @@ public interface IResponsePersistence {
 
 	public List<IQuestion> loadQuestionsOptions(List<IQuestion> quesions);
 
-	public boolean saveResponse(HashMap<String, String> answer, String bannerId);
+	public boolean saveResponse(String questionId, String bannerId, String option);
 
 	public boolean checkIsMCQMultiple(String questionId);
 

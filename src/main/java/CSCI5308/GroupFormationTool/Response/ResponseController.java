@@ -60,7 +60,7 @@ public class ResponseController {
 		IResponse response = ResponseAbstractFactory.instance().createResponseInstance();
 		HashMap<String, String> answer = response.saveResponseAnswer(request, questionList, loadQuestionsOptions);
 
-		responseDB.saveResponse(answer, bannerId);
+		response.saveResponse(answer, bannerId);
 
 		return "redirect:/course/course?id=" + courseId;
 	}

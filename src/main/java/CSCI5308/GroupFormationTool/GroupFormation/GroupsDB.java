@@ -13,29 +13,26 @@ import CSCI5308.GroupFormationTool.Database.DatabaseAbstractFactory;
 public class GroupsDB implements IGroupsPersistence {
 	private static final Logger LOG = LogManager.getLogger();
 
-	public boolean insertGroups(ArrayList<IGroups> groups) {
-		for (IGroups group : groups) {
-
-			CallStoredProcedure proc = null;
-			try {
-				proc = DatabaseAbstractFactory.instance()
-						.createCallStoredProcedureInstance("spCreateGroup(?, ?, ?)");
-				proc.setParameter(1, group.getGroupId());
-				proc.setParameter(2, group.getSurveyId());
-				proc.setParameter(3, group.getStudentId());
-				proc.execute();
-				LOG.info("Operation = Groups info Inserted, Status = Success, GroupId=" + group.getGroupId());
-			} catch (SQLException e) {
-				LOG.error("Status = Failed, Error Message=" + e.getMessage());
-				return false;
-			} finally {
-				if (null != proc) {
-					proc.cleanup();
-				}
+	public boolean insertGroups(IGroups group) {
+	
+		CallStoredProcedure proc = null;
+		try {
+			proc = DatabaseAbstractFactory.instance()
+					.createCallStoredProcedureInstance("spCreateGroup(?, ?, ?)");
+			proc.setParameter(1, group.getGroupId());
+			proc.setParameter(2, group.getSurveyId());
+			proc.setParameter(3, group.getStudentId());
+			proc.execute();
+			LOG.info("Operation = Groups info Inserted, Status = Success, GroupId=" + group.getGroupId());
+		} catch (SQLException e) {
+			LOG.error("Status = Failed, Error Message=" + e.getMessage());
+			return false;
+		} finally {
+			if (null != proc) {
+				proc.cleanup();
 			}
-
 		}
-		return true;
+	return true;
 	}
 
 	@Override

@@ -57,6 +57,7 @@ public class Groups implements IGroups {
 	public boolean insertGroups(IGroupsPersistence groupDB, long surveyId, IGroupCreator groupCreator,
 			ISurveyManagePersistence surveyManageDB) {
 		LOG.info("Fetching responses for survey , SurveyId:" + surveyId);
+		Boolean status = true;
 		Map<Long, Map<Long, String>> responses = surveyManageDB.getSurveyResponses(surveyId);
 		long groupSize = surveyManageDB.getSurveyGroupSize(surveyId);
 		Map<Integer, List<Long>> groups = new HashMap<Integer, List<Long>>();
@@ -77,8 +78,11 @@ public class Groups implements IGroups {
 
 		}
 		LOG.info("Calling groupsDB to insert groups in Database");
-		groupDB.insertGroups(groupsList);
-		return false;
+		for(IGroups group:groupsList) {
+			status = groupDB.insertGroups(group);
+		}
+		
+		return status;
 	}
 
 	public String getLastName() {

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import CSCI5308.GroupFormationTool.Database.DatabaseAbstractFactory;
 import CSCI5308.GroupFormationTool.QuestionManager.IQuestion;
 import CSCI5308.GroupFormationTool.QuestionManager.QuestionType;
 
@@ -96,5 +97,25 @@ public class Response implements IResponse {
 		}
 
 		return answer;
+	}
+	
+	public boolean saveResponse(HashMap<String, String> answer, String bannerId) {
+		IResponsePersistence responseDB = ResponseAbstractFactory.instance().createResponseDBInstance();
+		boolean status = true;
+		for (String questionId : answer.keySet()) {
+			if (responseDB.checkIsMCQMultiple(questionId)) {
+				String[] options = answer.get(questionId).split(":");
+				for (String option : options) {
+					if (option.equals("")) {
+
+					} else {
+						status = responseDB.saveResponse(questionId, bannerId, option);
+					}
+				}
+			} else {
+				status = responseDB.saveResponse(questionId, bannerId, answer.get(questionId));
+			}
+		}
+		return status;
 	}
 }
