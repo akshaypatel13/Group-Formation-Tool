@@ -56,11 +56,9 @@ public class ResponseController {
 		HashMap<String, String> answer = response.saveResponseAnswer(request, questionList, loadQuestionsOptions);
 
 		boolean status = response.saveResponse(answer, bannerId);
-		model.addAttribute("status", status);
-		if (status) {
-			return "redirect:/course/course?id=" + courseId;
-		} else {
-			return "responseExceptionHandling";
+		model.addAttribute("status",status);
+		return "redirect:/course/course?id=" + courseId+"&status="+status;
+
 		}
-	}
 }
+
