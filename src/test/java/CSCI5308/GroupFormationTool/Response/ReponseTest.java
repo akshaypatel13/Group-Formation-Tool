@@ -65,11 +65,11 @@ public class ReponseTest {
 		questions2.add(question2);
 		
 		Response response = new Response();
-		/*List<IQuestion> result = response.sortQuestionByDateCreated(questions1, questions2);
-		Assert.isTrue(result.indexOf(question1) == 0);*/
+		List<IQuestion> result = response.sortQuestionByDateCreated(questions1, questions2);
+		Assert.isTrue(result.indexOf(question1) == 0);
 	}
 	
-/*	@Test
+	@Test
 	public void saveResponseAnswer() {
 		
 		HashMap<String, String> answer = new HashMap<>();
@@ -79,5 +79,5 @@ public class ReponseTest {
 		boolean status = responseDB.saveResponse(answer, "B-000000");
 		Assert.isTrue(status == true);
 
-	}*/
+	}
 }
