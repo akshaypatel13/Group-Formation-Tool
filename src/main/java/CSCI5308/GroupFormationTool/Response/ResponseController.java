@@ -28,11 +28,11 @@ public class ResponseController {
 
 	@RequestMapping("/response/takingsurvey")
 	public String loadQuestions(Model model, @RequestParam(name = ID) long courseId) {
+		IResponse response = ResponseAbstractFactory.instance().createResponseInstance();
 		List<IQuestion> questionList = responseDB.loadQuestionsWithoutOptions(courseId);
 		List<IQuestion> questionListWithOptions = responseDB.loadQuestionsWithOptions(courseId);
-		List<IQuestion> loadQuestionsOptions = responseDB.loadQuestionsOptions(questionListWithOptions);
+		List<IQuestion> loadQuestionsOptions = response.loadQuestionOptions(questionListWithOptions,responseDB);
 
-		IResponse response = ResponseAbstractFactory.instance().createResponseInstance();
 		List<IQuestion> questions = response.sortQuestionByDateCreated(questionList, loadQuestionsOptions);
 
 		LOG.info("Loading Questions for CourseID = " + courseId + ", Questions =" + questions);
@@ -46,22 +46,25 @@ public class ResponseController {
 	@RequestMapping("/response/survey")
 	public String submitSurvey(Model model, @RequestParam(name = ID) long courseId,
 			@RequestParam(name = BannerID) String bannerId, HttpServletRequest request) {
-
+		IResponse response = ResponseAbstractFactory.instance().createResponseInstance();
 		List<IQuestion> questionList = responseDB.loadQuestionsWithoutOptions(courseId);
-		
+
 		List<IQuestion> questionListWithOptions = responseDB.loadQuestionsWithOptions(courseId);
-		List<IQuestion> loadQuestionsOptions = responseDB.loadQuestionsOptions(questionListWithOptions);
-		
+		List<IQuestion> loadQuestionsOptions = response.loadQuestionOptions(questionListWithOptions, responseDB);
 		LOG.info("Loaded Questions Without Options for CourseID = " + courseId + ", Questions =" + questionList);
-		
+
 		LOG.info("Loaded Questions With Options for CourseID = " + courseId + ", Questions ="
 				+ loadQuestionsOptions);
 
-		IResponse response = ResponseAbstractFactory.instance().createResponseInstance();
 		HashMap<String, String> answer = response.saveResponseAnswer(request, questionList, loadQuestionsOptions);
 
-		response.saveResponse(answer, bannerId);
-
-		return "redirect:/course/course?id=" + courseId;
-	}
+		boolean status = response.saveResponse(answer, bannerId);
+		model.addAttribute("status",status);
+		if(status) {
+			return "redirect:/course/course?id=" + courseId;
+		}else{
+			return "responseExceptionHandling";
+		}
+		}
 }
+
