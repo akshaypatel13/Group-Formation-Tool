@@ -60,12 +60,8 @@ public class ResponseController {
 		IResponse response = ResponseAbstractFactory.instance().createResponseInstance();
 		HashMap<String, String> answer = response.saveResponseAnswer(request, questionList, loadQuestionsOptions);
 
-		boolean status = response.saveResponse(responseDB,answer, bannerId);
-		if(status) {
-			return "redirect:/course/course?id=" + courseId;
-		}
-		else{
-			return "responseExceptionHandling";
-		}
+		response.saveResponse(answer, bannerId);
+
+		return "redirect:/course/course?id=" + courseId;
 	}
 }

@@ -2,7 +2,6 @@ package CSCI5308.GroupFormationTool.Response;
 
 import CSCI5308.GroupFormationTool.QuestionManager.IQuestion;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,7 +13,7 @@ public interface IResponsePersistence {
 
 	public List<IQuestion> loadQuestionsOptions(List<IQuestion> quesions);
 
-	public boolean saveResponse(HashMap<String, String> answer, String bannerId) throws SQLException;
+	public boolean saveResponse(String questionId, String bannerId, String option);
 
 	public boolean checkIsMCQMultiple(String questionId);
 

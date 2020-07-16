@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public interface IGroupsPersistence {
 
-	public boolean insertGroups(ArrayList<IGroups> groups);
+	public boolean insertGroups(IGroups group);
 
 	public ArrayList<IGroups> fetchGroups();
 }

@@ -75,10 +75,12 @@ public class GroupsTest {
 	public void insertGroups() {
 		IGroupsPersistence groupsDBMock = GroupsAbstractFactoryTest.instance().createGroupsDBInstanceTest();
 
-		ArrayList<IGroups> groups = GroupsAbstractFactoryTest.instance().createArrayListGroupsTest();
+		IGroups groups = GroupsAbstractFactoryTest.instance().createGroupsInstanceTest();
+		ArrayList<IGroups> groupList =GroupsAbstractFactoryTest.instance().createArrayListGroupsTest(); 
 
 		assertFalse(groupsDBMock.insertGroups(groups));
-		groups = groupsDBMock.fetchGroups();
+		groupList = groupsDBMock.fetchGroups();
+		groups.setBannerId("B0999");
 		assertTrue(groupsDBMock.insertGroups(groups));
 
 	}

@@ -80,7 +80,6 @@ public class ResponseDB implements IResponsePersistence {
 					String text = results.getString(3);
 					QuestionType type = QuestionType.valueOf(results.getString(4).toUpperCase());
 					Timestamp timestamp = results.getTimestamp(5);
-
 					question = new Question();
 					question.setId(id);
 					question.setTitle(title);
@@ -141,44 +140,23 @@ public class ResponseDB implements IResponsePersistence {
 	}
 
 	@Override
-	public boolean saveResponse(HashMap<String, String> answer, String bannerId) throws SQLException {
+	public boolean saveResponse(String questionId, String bannerId, String option) {
 
 		CallStoredProcedure proc = null;
 		try {
 
-			for (String questionId : answer.keySet()) {
 
-				if (checkIsMCQMultiple(questionId)) {
+			proc = DatabaseAbstractFactory.instance()
+					.createCallStoredProcedureInstance("spSaveQuestionResponse(?,?,?)");
 
-					String[] options = answer.get(questionId).split(":");
-					for (String option : options) {
-						if (option.equals("")) {
+			proc.setParameter(1, Long.parseLong(questionId));
+			proc.setParameter(2, bannerId);
+			proc.setParameter(3, option);
 
-						} else {
-							proc = DatabaseAbstractFactory.instance()
-									.createCallStoredProcedureInstance("spSaveQuestionResponse(?,?,?)");
-
-							proc.setParameter(1, Long.parseLong(questionId));
-							proc.setParameter(2, bannerId);
-							proc.setParameter(3, option);
-
-							proc.execute();
-						}
-					}
-				} else {
-
-					proc = DatabaseAbstractFactory.instance()
-							.createCallStoredProcedureInstance("spSaveQuestionResponse(?,?,?)");
-
-					proc.setParameter(1, Long.parseLong(questionId));
-					proc.setParameter(2, bannerId);
-					proc.setParameter(3, answer.get(questionId));
-
-					proc.execute();
-				}
-			}
+			proc.execute();
 			LOG.info("Operation = Save Responses for user:"+bannerId+", Status = Success");
 			return true;
+
 
 		} catch (SQLException e) {
 			LOG.error("Status = Failed, Error Message=" + e.getMessage());

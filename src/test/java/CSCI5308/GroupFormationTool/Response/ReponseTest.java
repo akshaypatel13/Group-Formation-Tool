@@ -1,6 +1,5 @@
 package CSCI5308.GroupFormationTool.Response;
 
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,20 +68,15 @@ public class ReponseTest {
 		List<IQuestion> result = response.sortQuestionByDateCreated(questions1, questions2);
 		Assert.isTrue(result.indexOf(question1) == 0);
 	}
-	
+
 	@Test
 	public void saveResponseAnswer() {
-		
+
 		HashMap<String, String> answer = new HashMap<>();
 		answer.put("Question", "Response");
 
 		IResponsePersistence responseDB = new ResponseDBMock();
-		boolean status = false;
-		try {
-			status = responseDB.saveResponse(answer, "B-000000");
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
-		}
+		boolean status = responseDB.saveResponse("1", "B-000000","selected");
 		Assert.isTrue(status == true);
 
 	}
