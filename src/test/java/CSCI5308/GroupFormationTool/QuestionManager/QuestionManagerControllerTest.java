@@ -19,40 +19,25 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class QuestionManagerControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+	@Autowired
+	private MockMvc mockMvc;
 
-    @Test
-    public void questionsByTitleTest() throws Exception{
-        this.mockMvc.perform(get("/question/questionmanager/title")
-                .param("bannerID","B00854211")
-                .with(csrf())
-                .with(
-                        user("B00854211")
-                                .password("Abcd@11")
-                                .roles(Role.INSTRUCTOR.toString())
-                ))
-                .andDo(MockMvcResultHandlers.print())
-                .andDo(print())
-                .andExpect(model().attributeExists("questionList"))
-                .andExpect(status().isOk());
-    }
+	@Test
+	public void questionsByTitleTest() throws Exception {
+		this.mockMvc
+				.perform(get("/question/questionmanager/title").param("bannerID", "B00854211").with(csrf())
+						.with(user("B00854211").password("Abcd@11").roles(Role.INSTRUCTOR.toString())))
+				.andDo(MockMvcResultHandlers.print()).andDo(print()).andExpect(model().attributeExists("questionList"))
+				.andExpect(status().isOk());
+	}
 
-    @Test
-    public void questionsByDateTest() throws Exception{
-        this.mockMvc.perform(get("/question/questionmanager/date")
-                .param("bannerID","B00854211")
-                .with(csrf())
-                .with(
-                        user("B00854211")
-                                .password("Abcd@11")
-                                .roles(Role.INSTRUCTOR.toString())
-                ))
-                .andDo(MockMvcResultHandlers.print())
-                .andDo(print())
-                .andExpect(model().attributeExists("questionList"))
-                .andExpect(status().isOk());
-    }
-
+	@Test
+	public void questionsByDateTest() throws Exception {
+		this.mockMvc
+				.perform(get("/question/questionmanager/date").param("bannerID", "B00854211").with(csrf())
+						.with(user("B00854211").password("Abcd@11").roles(Role.INSTRUCTOR.toString())))
+				.andDo(MockMvcResultHandlers.print()).andDo(print()).andExpect(model().attributeExists("questionList"))
+				.andExpect(status().isOk());
+	}
 
 }

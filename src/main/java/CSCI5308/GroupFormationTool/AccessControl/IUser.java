@@ -7,63 +7,57 @@ import java.util.List;
 
 public interface IUser {
 
-    public void setDefaults();
+	public void setDefaults();
 
-    public void setID(long id);
+	public void setID(long id);
 
-    public long getID();
+	public long getID();
 
-    public void setId(long id);
+	public void setId(long id);
 
-    public long getId();
+	public long getId();
 
-    public void setPassword(String password);
+	public void setPassword(String password);
 
-    public String getPassword();
+	public String getPassword();
 
-    public void setBannerID(String bannerID);
+	public void setBannerID(String bannerID);
 
-    public String getBannerID();
+	public String getBannerID();
 
-    public String getBanner();
+	public String getBanner();
 
-    public void setFirstName(String name);
+	public void setFirstName(String name);
 
-    public String getFirstName();
+	public String getFirstName();
 
-    public void setLastName(String name);
+	public void setLastName(String name);
 
-    public String getLastName();
+	public String getLastName();
 
-    public void setEmail(String email);
+	public void setEmail(String email);
 
-    public String getEmail();
+	public String getEmail();
 
-    public boolean isValidUser();
+	public boolean isValidUser();
 
-    public boolean createUser(IUserPersistence userDB,
-                              IPasswordValidatorEnumerator passwordEnumerator,
-                              IPasswordEncryption passwordEncryption,
-                              IUserNotifications notification,
-                              List<String> errorMessages);
+	public boolean createUser(IUserPersistence userDB, IPasswordValidatorEnumerator passwordEnumerator,
+			IPasswordEncryption passwordEncryption, IUserNotifications notification, List<String> errorMessages);
 
-    public boolean createUser(
-            IUserPersistence userDB,
-            IPasswordEncryption passwordEncryption,
-            IUserNotifications notification
-    );
+	public boolean createUser(IUserPersistence userDB, IPasswordEncryption passwordEncryption,
+			IUserNotifications notification);
 
-    public boolean updateUser(IUserPersistence userDB);
+	public boolean updateUser(IUserPersistence userDB);
 
-    public boolean isStringNullOrEmpty(String s);
+	public boolean isStringNullOrEmpty(String s);
 
-    boolean isBannerIDValid(String bannerID);
+	boolean isBannerIDValid(String bannerID);
 
-    boolean isFirstNameValid(String name);
+	boolean isFirstNameValid(String name);
 
-    boolean isLastNameValid(String name);
+	boolean isLastNameValid(String name);
 
-    boolean isEmailValid(String email);
+	boolean isEmailValid(String email);
 
 	public boolean isInValidUser();
 

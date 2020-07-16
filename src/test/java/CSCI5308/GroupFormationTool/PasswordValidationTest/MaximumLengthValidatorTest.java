@@ -6,16 +6,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MaximumLengthValidatorTest 
-{
+class MaximumLengthValidatorTest {
 	@Test
-	public void isValid() 
-	{
+	public void isValid() {
 		int maxLength = 5;
 		String pass = "pass";
-		assertThat(pass.length()<=maxLength).isTrue();
+		assertThat(pass.length() <= maxLength).isTrue();
 		pass = "failed";
-		assertThat(pass.length()<=maxLength).isFalse();
+		assertThat(pass.length() <= maxLength).isFalse();
 	}
 
 }

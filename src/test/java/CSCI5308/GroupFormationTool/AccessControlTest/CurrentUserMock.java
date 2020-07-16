@@ -2,13 +2,10 @@ package CSCI5308.GroupFormationTool.AccessControlTest;
 
 import CSCI5308.GroupFormationTool.AccessControl.IUser;
 import CSCI5308.GroupFormationTool.AccessControl.IUserPersistence;
-import CSCI5308.GroupFormationTool.AccessControl.User;
 import CSCI5308.GroupFormationTool.AccessControl.UserAbstractFactory;
 
-public class CurrentUserMock
-{
-	public IUser getCurrentAuthenticatedUser()
-	{
+public class CurrentUserMock {
+	public IUser getCurrentAuthenticatedUser() {
 		IUserPersistence userDB = UserAbstractFactory.instance().createUserDBInstance();
 		String bannerID = "B00000000";
 		IUser u = UserAbstractFactory.instance().createUserInstance();

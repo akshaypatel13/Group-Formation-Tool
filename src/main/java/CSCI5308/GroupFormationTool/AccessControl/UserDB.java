@@ -15,8 +15,7 @@ public class UserDB implements IUserPersistence {
 	public void loadUserByID(long id, IUser user) {
 		CallStoredProcedure proc = null;
 		try {
-			proc = DatabaseAbstractFactory.instance()
-					.createCallStoredProcedureInstance("spLoadUser(?)");
+			proc = DatabaseAbstractFactory.instance().createCallStoredProcedureInstance("spLoadUser(?)");
 			proc.setParameter(1, id);
 			ResultSet results = proc.executeWithResults();
 			if (null != results) {
@@ -49,8 +48,7 @@ public class UserDB implements IUserPersistence {
 		CallStoredProcedure proc = null;
 		long userID = -1;
 		try {
-			proc = DatabaseAbstractFactory.instance()
-					.createCallStoredProcedureInstance("spFindUserByBannerID(?)");
+			proc = DatabaseAbstractFactory.instance().createCallStoredProcedureInstance("spFindUserByBannerID(?)");
 			proc.setParameter(1, bannerID);
 			ResultSet results = proc.executeWithResults();
 			if (null != results) {

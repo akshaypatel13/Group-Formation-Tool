@@ -3,16 +3,13 @@ package CSCI5308.GroupFormationTool.QuestionManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionDBMock implements IQuestionPersistence 
-{
+public class QuestionDBMock implements IQuestionPersistence {
 	List<IQuestion> questions;
 
 	@Override
-	public List<IQuestion> loadQuestionsSortedByTitle(String bannerId)
-	{
+	public List<IQuestion> loadQuestionsSortedByTitle(String bannerId) {
 		questions = new ArrayList<IQuestion>();
-		if(bannerId.equals("B-000000"))
-		{
+		if (bannerId.equals("B-000000")) {
 			IQuestion q = QuestionManagerAbstractFactory.instance().createQuestionInstance();
 			q.setId(1);
 			q.setTitle("Test Title");
@@ -31,11 +28,9 @@ public class QuestionDBMock implements IQuestionPersistence
 	}
 
 	@Override
-	public List<IQuestion> loadSortedQuestionsSortedByDate(String bannerId)
-	{
+	public List<IQuestion> loadSortedQuestionsSortedByDate(String bannerId) {
 		questions = new ArrayList<IQuestion>();
-		if(bannerId.equals("B-000000"))
-		{
+		if (bannerId.equals("B-000000")) {
 			IQuestion q = QuestionManagerAbstractFactory.instance().createQuestionInstance();
 			q.setId(1);
 			q.setTitle("Test Title 2");
@@ -54,16 +49,14 @@ public class QuestionDBMock implements IQuestionPersistence
 	}
 
 	@Override
-	public boolean deleteQuestionByQuestionId(long questionId)
-	{
+	public boolean deleteQuestionByQuestionId(long questionId) {
 		IQuestion q = QuestionManagerAbstractFactory.instance().createQuestionInstance();
 		q.setId(1);
 		q.setTitle("Test Title");
 		q.setText("Test Question");
 		q.setType(QuestionType.TEXT);
 
-		if(questionId>-1)
-		{
+		if (questionId > -1) {
 			q.setDefaults();
 			return true;
 		}
@@ -71,28 +64,23 @@ public class QuestionDBMock implements IQuestionPersistence
 	}
 
 	@Override
-	public long createQuestion(IQuestion question, String bannerID)
-	{
-		if(question.getId()>-1)
-		{
+	public long createQuestion(IQuestion question, String bannerID) {
+		if (question.getId() > -1) {
 			return 1;
 		}
 		return 0;
 	}
 
 	@Override
-	public boolean createQuestionOption(IOptionValue option, int order, long questionID)
-	{
-		if(questionID == -1 || isStringEmpty(option.getText()) || isStringEmpty(option.getStoredAs()))
-		{
+	public boolean createQuestionOption(IOptionValue option, int order, long questionID) {
+		if (questionID == -1 || isStringEmpty(option.getText()) || isStringEmpty(option.getStoredAs())) {
 			return false;
 		}
 		return true;
 	}
 
-	public boolean isStringEmpty(String s)
-	{
-		return s.replaceAll(" ","").length() == 0;
+	public boolean isStringEmpty(String s) {
+		return s.replaceAll(" ", "").length() == 0;
 	}
 
 }

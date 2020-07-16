@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import CSCI5308.GroupFormationTool.Database.DatabaseAbstractFactory;
 import CSCI5308.GroupFormationTool.QuestionManager.IQuestion;
 import CSCI5308.GroupFormationTool.QuestionManager.QuestionType;
 
@@ -128,10 +127,9 @@ public class Response implements IResponse {
 		return status;
 	}
 
-	public List<IQuestion> loadQuestionOptions(List<IQuestion> questions, IResponsePersistence responsePersistence){
+	public List<IQuestion> loadQuestionOptions(List<IQuestion> questions, IResponsePersistence responsePersistence) {
 		List<IQuestion> questionList = new ArrayList<IQuestion>();
-		for(IQuestion question : questions) {
-			ArrayList<String> options = new ArrayList<String>();
+		for (IQuestion question : questions) {
 			IQuestion loadOptions = responsePersistence.loadQuestionsOptions(question);
 			questionList.add(loadOptions);
 		}

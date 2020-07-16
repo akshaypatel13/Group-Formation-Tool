@@ -12,68 +12,71 @@ import org.springframework.util.Assert;
 
 @SuppressWarnings("deprecation")
 public class ReponseTest {
-		
+
 	@Test
 	public void getId() 
 	{
-		Response response = new Response();
+		IResponse response = ResponseAbstractFactory.instance().createResponseInstance();
 		response.setId(7);
 		Assert.isTrue(response.getId() == 7);
 	}
-	
+
 	@Test
 	public void setId() 
 	{
-		Response response = new Response();
+		IResponse response = ResponseAbstractFactory.instance().createResponseInstance();
 		response.setId(7);
 		Assert.isTrue(response.getId() == 7);
 	}
-	
+
 	@Test
 	public void getResponse() 
 	{
-		Response response = new Response();
+		IResponse response = ResponseAbstractFactory.instance().createResponseInstance();
 		response.setResponse("Here is the answer");
 		Assert.isTrue(response.getResponse().equals("Here is the answer"));
 	}
-	
+
 	@Test
 	public void setResponse() 
 	{
-		Response response = new Response();
+		IResponse response = ResponseAbstractFactory.instance().createResponseInstance();
 		response.setResponse("Here is the answer");
 		Assert.isTrue(response.getResponse().equals("Here is the answer"));
 	}
-	
+
 	@Test
 	public void sortQuestionByDateCreated() {
-		
+
 		List<IQuestion> questions1 = new ArrayList<>();
 		List<IQuestion> questions2 = new ArrayList<>();
 		
-		Question question1 = new Question();
+		IQuestion question1 = QuestionManagerAbstractFactory.instance().createQuestionInstance();
 		question1.setTimestamp(Timestamp.valueOf("2020-06-16 00:00:00"));
 
-		Question question2 = new Question();
+		IQuestion question2 = QuestionManagerAbstractFactory.instance().createQuestionInstance();
 		question2.setTimestamp(Timestamp.valueOf("2020-06-26 00:00:00"));
-		
+
 		questions1.add(question1);
 		questions2.add(question2);
-		
-		Response response = new Response();
+
+		IResponse response = ResponseAbstractFactory.instance().createResponseInstance();
 		List<IQuestion> result = response.sortQuestionByDateCreated(questions1, questions2);
 		Assert.isTrue(result.indexOf(question1) == 0);
 	}
 
 	@Test
+
 	public void loadQuestionOptions(){
+		
 		IQuestion question = QuestionManagerAbstractFactory.instance().createQuestionInstance();
-		IResponsePersistence responsePersistence =new ResponseDBMock();
+		IResponsePersistence responsePersistence = ResponseAbstractFactoryTest.instance().getResponsePersistence();
 		IResponse response = ResponseAbstractFactory.instance().createResponseInstance();
 		IQuestion questionOptions = responsePersistence.loadQuestionsOptions(question);
+		
 		Assert.isTrue(questionOptions.getTitle().equals("Mcqone Title"));
 		Assert.isTrue(questionOptions.getText().equals("Mcqone Question"));
-		Assert.isTrue(questionOptions.getId()==1);
+		Assert.isTrue(questionOptions.getId() == 1);
 		Assert.isTrue(questionOptions.getType().equals(QuestionType.MCQONE));
 	}
 
@@ -83,10 +86,12 @@ public class ReponseTest {
 		HashMap<String, String> answer = new HashMap<>();
 		answer.put("Question", "Response");
 
-		IResponsePersistence responseDB = new ResponseDBMock();
+		IResponsePersistence responsePersistence = ResponseAbstractFactoryTest.instance().getResponsePersistence();
 		boolean status = false;
 		try {
-			status = responseDB.saveResponse("1", "B-000000","selected");
+
+			status = responsePersistence.saveResponse("1", "B-000000","selected");
+
 		} catch (SQLException e) {
 			System.out.print(e.getMessage());
 		}

@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -22,7 +21,6 @@ public class ResponseDB implements IResponsePersistence {
 
 	@Override
 	public List<IQuestion> loadQuestionsWithoutOptions(long courseId) {
-
 
 		List<IQuestion> questionList = new ArrayList<IQuestion>();
 		CallStoredProcedure proc = null;
@@ -107,32 +105,24 @@ public class ResponseDB implements IResponsePersistence {
 	public IQuestion loadQuestionsOptions(IQuestion question) {
 
 		CallStoredProcedure proc = null;
-		try
-		{
+		try {
 			proc = new CallStoredProcedure("spLoadQuestionsOptions(?)");
 			proc.setParameter(1, question.getId());
 			ResultSet results = proc.executeWithResults();
 			ArrayList<String> options = new ArrayList<String>();
-			if (null != results)
-			{
-				while (results.next())
-				{
+			if (null != results) {
+				while (results.next()) {
 					String displayText = results.getString(5);
 					options.add(displayText);
 				}
 				question.setOptions(options);
 			}
 			LOG.info("Operation = Load Question options, Status = Success");
-		}
-		catch (SQLException e)
-		{
-			LOG.error("Status = Failed, Error Message="+e.getMessage());
+		} catch (SQLException e) {
+			LOG.error("Status = Failed, Error Message=" + e.getMessage());
 			return null;
-		}
-		finally
-		{
-			if (null != proc)
-			{
+		} finally {
+			if (null != proc) {
 				proc.cleanup();
 			}
 		}
@@ -145,7 +135,6 @@ public class ResponseDB implements IResponsePersistence {
 		CallStoredProcedure proc = null;
 		try {
 
-
 			proc = DatabaseAbstractFactory.instance()
 					.createCallStoredProcedureInstance("spSaveQuestionRespons(?,?,?)");
 
@@ -154,9 +143,8 @@ public class ResponseDB implements IResponsePersistence {
 			proc.setParameter(3, option);
 
 			proc.execute();
-			LOG.info("Operation = Save Responses for user:"+bannerId+", Status = Success");
+			LOG.info("Operation = Save Responses for user:" + bannerId + ", Status = Success");
 			return true;
-
 
 		} catch (SQLException e) {
 			LOG.error("Status = Failed, Error Message=" + e.getMessage());

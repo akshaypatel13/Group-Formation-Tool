@@ -14,11 +14,10 @@ public class GroupsDB implements IGroupsPersistence {
 	private static final Logger LOG = LogManager.getLogger();
 
 	public boolean insertGroups(IGroups group) {
-	
+
 		CallStoredProcedure proc = null;
 		try {
-			proc = DatabaseAbstractFactory.instance()
-					.createCallStoredProcedureInstance("spCreateGroup(?, ?, ?)");
+			proc = DatabaseAbstractFactory.instance().createCallStoredProcedureInstance("spCreateGroup(?, ?, ?)");
 			proc.setParameter(1, group.getGroupId());
 			proc.setParameter(2, group.getSurveyId());
 			proc.setParameter(3, group.getStudentId());
@@ -32,7 +31,7 @@ public class GroupsDB implements IGroupsPersistence {
 				proc.cleanup();
 			}
 		}
-	return true;
+		return true;
 	}
 
 	@Override
@@ -40,8 +39,7 @@ public class GroupsDB implements IGroupsPersistence {
 		CallStoredProcedure proc = null;
 		ArrayList<IGroups> groupsInfo = GroupsAbstractFactory.instance().createArrayListGroups();
 		try {
-			proc = DatabaseAbstractFactory.instance()
-					.createCallStoredProcedureInstance("spFetchGroupsInfo()");
+			proc = DatabaseAbstractFactory.instance().createCallStoredProcedureInstance("spFetchGroupsInfo()");
 			ResultSet results = proc.executeWithResults();
 			if (null != results) {
 				while (results.next()) {

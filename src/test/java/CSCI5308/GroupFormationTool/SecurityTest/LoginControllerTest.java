@@ -13,13 +13,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class LoginControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+	@Autowired
+	private MockMvc mockMvc;
 
-    @Test
-    public void loginTest() throws Exception{
-        this.mockMvc.perform(get("/login"))
-                .andExpect(status().isOk());
-    }
+	@Test
+	public void loginTest() throws Exception {
+		this.mockMvc.perform(get("/login")).andExpect(status().isOk());
+	}
 
 }

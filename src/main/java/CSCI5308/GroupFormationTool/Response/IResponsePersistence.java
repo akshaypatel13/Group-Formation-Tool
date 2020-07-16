@@ -3,7 +3,6 @@ package CSCI5308.GroupFormationTool.Response;
 import CSCI5308.GroupFormationTool.QuestionManager.IQuestion;
 
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 
 public interface IResponsePersistence {

@@ -9,7 +9,13 @@ import java.util.List;
 import CSCI5308.GroupFormationTool.Database.CallStoredProcedure;
 import CSCI5308.GroupFormationTool.Database.DatabaseAbstractFactory;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class QuestionDB implements IQuestionPersistence {
+	
+	private static final Logger LOG = LogManager.getLogger();
+	
 	@Override
 	public List<IQuestion> loadQuestionsSortedByTitle(String bannerID) {
 		List<IQuestion> questionList = new ArrayList<>();
@@ -38,9 +44,10 @@ public class QuestionDB implements IQuestionPersistence {
 					questionList.add(question);
 				}
 			}
+
+			LOG.info("Operation = loadQuestionsSortedByTitle, Status = Success, RowCount=" + results.getRow());
 		} catch (SQLException e) {
-			System.out.println(e);
-			// Logging needed.
+			LOG.error("Status = Failed, Error Message=" + e.getMessage());
 		} finally {
 			if (null != proc) {
 				proc.cleanup();
@@ -77,9 +84,10 @@ public class QuestionDB implements IQuestionPersistence {
 					questionList.add(question);
 				}
 			}
+			
+			LOG.info("Operation = loadSortedQuestionsSortedByDate, Status = Success, RowCount=" + results.getRow());
 		} catch (SQLException e) {
-			System.out.println(e);
-			// Logging needed.
+			LOG.error("Status = Failed, Error Message=" + e.getMessage());
 		} finally {
 			if (null != proc) {
 				proc.cleanup();
@@ -96,8 +104,9 @@ public class QuestionDB implements IQuestionPersistence {
 					.createCallStoredProcedureInstance("spDeleteQuestionsByQuestionID(?)");
 			proc.setParameter(1, questionID);
 			proc.execute();
+			LOG.info("Operation = DeleteQuestion, Status = Success, RowCount=" + questionID);
 		} catch (SQLException e) {
-			System.out.println(e);
+			LOG.error("Status = Failed, Error Message=" + e.getMessage());
 			return false;
 		} finally {
 			if (null != proc) {
@@ -125,9 +134,9 @@ public class QuestionDB implements IQuestionPersistence {
 					id = results.getLong(1);
 				}
 			}
+			LOG.info("Operation = Question Created, Status = Success, QuestionId=" + question.getId());
 		} catch (SQLException e) {
-			System.out.println(e);
-			// Logging needed.
+			LOG.error("Status = Failed, Error Message=" + e.getMessage());
 		} finally {
 			if (null != proc) {
 				proc.cleanup();
@@ -147,11 +156,10 @@ public class QuestionDB implements IQuestionPersistence {
 			proc.setParameter(3, option.getStoredAs());
 			proc.setParameter(4, order);
 			proc.execute();
-
+			LOG.info("Operation = Question Option Created, Status = Success, OptionsId=" + option.getText());
 		} catch (SQLException e) {
-			System.out.println(e);
+			LOG.error("Status = Failed, Error Message=" + e.getMessage());
 			return false;
-			// Logging needed.
 		} finally {
 			if (null != proc) {
 				proc.cleanup();

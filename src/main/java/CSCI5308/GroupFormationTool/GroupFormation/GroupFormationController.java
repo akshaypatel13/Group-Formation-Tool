@@ -35,10 +35,6 @@ public class GroupFormationController {
 		long surveyId = surveyManageDB.findSurveyByCourseID(courseId);
 		IGroups groups = GroupsAbstractFactory.instance().createGroupsInstance();
 		boolean check = false;
-		// surveyManageDB.getSurveyGroupAlgo(surveyID);
-
-		// change link to show groups
-		// return "redirect:/survey/survey?courseID="+courseId;
 		if (Objects.isNull(surveyId)) {
 			LOG.error("Survey not created for SurveyId:" + surveyId);
 			model.addAttribute("errorMsg", "Survey not created");
@@ -55,7 +51,7 @@ public class GroupFormationController {
 
 			groups.insertGroups(groupDB, surveyId, groupCreator, surveyManageDB);
 			Map<Integer, ArrayList<IGroups>> groupInfo = groups.fetchGroups(groupDB);
-			LOG.info("Survey published and groups created for SurveyId:"+ surveyId);
+			LOG.info("Survey published and groups created for SurveyId:" + surveyId);
 			model.addAttribute("groupInfo", groupInfo);
 		}
 

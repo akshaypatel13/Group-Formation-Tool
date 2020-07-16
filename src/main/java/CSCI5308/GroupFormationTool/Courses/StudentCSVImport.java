@@ -52,7 +52,7 @@ public class StudentCSVImport implements IStudentCSVImport {
 					successResults.add("Created: " + userDetails);
 					userDB.loadUserByBannerID(bannerID, user);
 				} else {
-					LOG.warn("Unable to add user:" + user.getBannerID()+ " to DB ");
+					LOG.warn("Unable to add user:" + user.getBannerID() + " to DB ");
 					failureResults.add("Unable to save this user to DB: " + userDetails);
 					return;
 				}
