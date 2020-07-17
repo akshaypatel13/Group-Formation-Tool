@@ -1,19 +1,26 @@
-2020-07-16 20:14:54,414 INFO o.s.b.StartupInfoLogger [restartedMain] Starting GroupFormationToolApplication on Manpreets-MacBook-Pro.local with PID 61962 (/Users/manpreetsingh/Documents/gitASDC/group21/build/classes/java/main started by manpreetsingh in /Users/manpreetsingh/Documents/gitASDC/group21)
-2020-07-16 20:14:54,422 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
-2020-07-16 20:14:54,471 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2020-07-16 20:14:54,472 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2020-07-16 20:14:55,718 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
-2020-07-16 20:14:55,740 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
-2020-07-16 20:14:55,741 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
-2020-07-16 20:14:55,742 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.30]
-2020-07-16 20:14:55,829 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
-2020-07-16 20:14:55,829 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1357 ms
-2020-07-16 20:14:56,048 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Creating filter chain: Ant [pattern='/resources/**'], []
-2020-07-16 20:14:56,071 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5c238032, org.springframework.security.web.context.SecurityContextPersistenceFilter@5e83f948, org.springframework.security.web.header.HeaderWriterFilter@568e67a0, org.springframework.security.web.csrf.CsrfFilter@383a59d8, org.springframework.security.web.authentication.logout.LogoutFilter@2b1dae08, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@62164ebb, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@548e13ac, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2d67c159, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@372da880, org.springframework.security.web.session.SessionManagementFilter@7021d3f9, org.springframework.security.web.access.ExceptionTranslationFilter@19797617, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@742861cf]
-2020-07-16 20:14:56,139 INFO o.s.s.c.ExecutorConfigurationSupport [restartedMain] Initializing ExecutorService 'applicationTaskExecutor'
-2020-07-16 20:14:56,205 INFO o.s.b.a.w.s.WelcomePageHandlerMapping [restartedMain] Adding welcome page template: index
-2020-07-16 20:14:56,324 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
-2020-07-16 20:14:56,340 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
-2020-07-16 20:14:56,362 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
-2020-07-16 20:14:56,365 INFO o.s.b.StartupInfoLogger [restartedMain] Started GroupFormationToolApplication in 2.239 seconds (JVM running for 2.888)
-2020-07-16 20:14:59,782 INFO o.s.s.c.ExecutorConfigurationSupport [SpringContextShutdownHook] Shutting down ExecutorService 'applicationTaskExecutor'
+2020-07-16 21:54:08,872 INFO o.s.b.StartupInfoLogger [restartedMain] Starting GroupFormationToolApplication on Manpreets-MacBook-Pro.local with PID 62930 (/Users/manpreetsingh/Documents/gitASDC/group21/build/classes/java/main started by manpreetsingh in /Users/manpreetsingh/Documents/gitASDC/group21)
+2020-07-16 21:54:08,879 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2020-07-16 21:54:08,926 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-07-16 21:54:08,926 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-07-16 21:54:10,274 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2020-07-16 21:54:10,298 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-16 21:54:10,299 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2020-07-16 21:54:10,299 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.30]
+2020-07-16 21:54:10,373 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2020-07-16 21:54:10,373 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1447 ms
+2020-07-16 21:54:10,590 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Creating filter chain: Ant [pattern='/resources/**'], []
+2020-07-16 21:54:10,626 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6bf98e6, org.springframework.security.web.context.SecurityContextPersistenceFilter@59c9894c, org.springframework.security.web.header.HeaderWriterFilter@4ca23436, org.springframework.security.web.csrf.CsrfFilter@9f4e944, org.springframework.security.web.authentication.logout.LogoutFilter@7a4ad0af, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@3dfa21c8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1c03df7a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@21e2c733, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6aa71d98, org.springframework.security.web.session.SessionManagementFilter@6cf46459, org.springframework.security.web.access.ExceptionTranslationFilter@422df5c, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@15754a75]
+2020-07-16 21:54:10,726 INFO o.s.s.c.ExecutorConfigurationSupport [restartedMain] Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-16 21:54:10,839 INFO o.s.b.a.w.s.WelcomePageHandlerMapping [restartedMain] Adding welcome page template: index
+2020-07-16 21:54:10,983 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2020-07-16 21:54:11,006 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2020-07-16 21:54:11,038 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-16 21:54:11,042 INFO o.s.b.StartupInfoLogger [restartedMain] Started GroupFormationToolApplication in 2.435 seconds (JVM running for 3.398)
+2020-07-16 21:54:12,877 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-16 21:54:12,877 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2020-07-16 21:54:12,884 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 7 ms
+2020-07-16 21:54:12,935 INFO C.G.W.IndexController [http-nio-8080-exec-1] Welcome to Group Formation Tool !!!! :- 
+2020-07-16 21:54:13,426 INFO C.G.C.CourseDB [http-nio-8080-exec-1] Operation = FetchAllCourses, Status = Success, RowCount=72
+2020-07-16 21:54:17,233 INFO C.G.W.IndexController [http-nio-8080-exec-7] Welcome to Group Formation Tool !!!! :- 
+2020-07-16 21:54:19,626 INFO C.G.C.CourseDB [http-nio-8080-exec-7] Operation = FetchAllCourses, Status = Success, RowCount=72
+2020-07-16 21:54:27,065 INFO o.s.s.c.ExecutorConfigurationSupport [SpringContextShutdownHook] Shutting down ExecutorService 'applicationTaskExecutor'
