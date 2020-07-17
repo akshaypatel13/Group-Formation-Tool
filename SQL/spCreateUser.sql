@@ -2,7 +2,7 @@ DELIMITER $$
 
 DROP PROCEDURE IF EXISTS spCreateUser $$
 
-CREATE PROCEDURE spCreateUser (
+CREATE PROCEDURE spCreateUser(
 	IN bannerID VARCHAR(20),
     IN password VARCHAR(76),
     IN firstName VARCHAR(100),
@@ -18,6 +18,8 @@ BEGIN
     INSERT INTO UserContactInfo(userID, firstName, lastName, email)
     VALUES (@userID, firstName, lastName, email);
     
+    INSERT INTO UserPasswordHistory (userID, password) values(@userID, password);
+    
     SELECT Role.id
     INTO @guestRoleID
     FROM Role
@@ -25,6 +27,5 @@ BEGIN
 
     INSERT INTO SystemRole(roleID, userID)
     VALUES (@guestRoleID, @userID);
-END $$
-
+END$$
 DELIMITER ;

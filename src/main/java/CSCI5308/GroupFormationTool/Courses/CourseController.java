@@ -2,27 +2,46 @@ package CSCI5308.GroupFormationTool.Courses;
 
 import java.util.List;
 
+import CSCI5308.GroupFormationTool.AccessControl.CurrentUser;
+import CSCI5308.GroupFormationTool.Survey.SurveyAbstractFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import CSCI5308.GroupFormationTool.SystemConfig;
+import CSCI5308.GroupFormationTool.Survey.ISurveyManagePersistence;
 
 @Controller
 public class CourseController
 {
-
+	private static final Logger LOG = LogManager.getLogger(CourseController.class);
 	private static final String ID = "id";
+	private static final String STATUS = "status";
+	private ISurveyManagePersistence surveyManageDB;
+	private ICoursePersistence courseDB;
+	
+	public CourseController() 
+	{
+        surveyManageDB = SurveyAbstractFactory.instance().createSurveyManageDBInstance();
+		courseDB = CourseAbstractFactory.instance().createCourseDBInstance();
+	}
 	
 	@GetMapping("/course/course")
-	public String course(Model model, @RequestParam(name = ID) long courseID)
+	public String course(Model model, @RequestParam(name = ID) long courseID, @RequestParam(name = STATUS, required = false, defaultValue = "true") String status)
+
 	{
-		ICoursePersistence courseDB = SystemConfig.instance().getCourseDB();
-		Course course = new Course();
+		LOG.info("Username:-"+ CurrentUser.instance().getCurrentAuthenticatedUser().getFirstName()
+		+ ", login = Success");
+		ICourse course = CourseAbstractFactory.instance().createCourseInstance();
+		boolean surveyNotPublished = surveyManageDB.surveyPublishedOrNot(courseID);
 		courseDB.loadCourseByID(courseID, course);
+		model.addAttribute("status",true);
+		model.addAttribute("survey", surveyNotPublished);
 		model.addAttribute("course", course);
 		List<Role> userRoles = course.getAllRolesForCurrentUserInCourse();
+		model.addAttribute("status",status);
 		if (null == userRoles)
 		{
 			model.addAttribute("instructor", false);

@@ -2,49 +2,49 @@ package CSCI5308.GroupFormationTool.Courses;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import CSCI5308.GroupFormationTool.AccessControl.*;
-import CSCI5308.GroupFormationTool.SystemConfig;
 
-public class CourseUserRelationship implements ICourseUserRelationship
-{
+public class CourseUserRelationship implements ICourseUserRelationship {
+	private static final Logger LOG = LogManager.getLogger();
+	private ICourseUserRelationshipPersistence userCourseRelationshipDB;
 
-	public boolean userHasRoleInCourse(User user, Role role, Course course)
-	{
-		if (null == user || user.isInvalidUser())
-		{
+	@Override
+	public boolean userHasRoleInCourse(IUser user, Role role, ICourse course) {
+		userCourseRelationshipDB = CourseAbstractFactory.instance().courseUserRelationshipDBInstance();
+		if (null == user || user.isInValidUser()) {
+			LOG.error("User is Invalid");
 			return false;
 		}
-		if (null == role)
-		{
+		if (null == role) {
+			LOG.warn("Role object is empty");
 			return false;
 		}
-		if (null == course)
-		{
+		if (null == course) {
+			LOG.warn("Course object is empty");
 			return false;
 		}
-		ICourseUserRelationshipPersistence userCourseRelationshipDB = SystemConfig.instance()
-				.getCourseUserRelationshipDB();
 		List<Role> roles = userCourseRelationshipDB.loadUserRolesForCourse(course, user);
-		if (null != roles && roles.contains(role))
-		{
+		if (null != roles && roles.contains(role)) {
+			LOG.info("User has Role:" + role + " for the given Course");
 			return true;
 		}
 		return false;
 	}
 
-	public List<Role> loadAllRoluesForUserInCourse(User user, Course course)
-	{
-		ICourseUserRelationshipPersistence userCourseRelationshipDB = SystemConfig.instance()
-				.getCourseUserRelationshipDB();
+	@Override
+	public List<Role> loadAllRoluesForUserInCourse(IUser user, ICourse course) {
+		LOG.info("Calling UserRelationShipDB to fetch all Roles of User for Course:" + course.getTitle());
+		userCourseRelationshipDB = CourseAbstractFactory.instance().courseUserRelationshipDBInstance();
 		List<Role> roles = userCourseRelationshipDB.loadUserRolesForCourse(course, user);
 		return roles;
 	}
 
-	public boolean enrollUserInCourse(User user, Course course, Role role)
-	{
-		ICourseUserRelationshipPersistence userCourseRelationshipDB = SystemConfig.instance()
-				.getCourseUserRelationshipDB();
+	@Override
+	public boolean enrollUserInCourse(IUser user, ICourse course, Role role) {
+		userCourseRelationshipDB = CourseAbstractFactory.instance().courseUserRelationshipDBInstance();
 		return userCourseRelationshipDB.enrollUser(course, user, role);
 	}
-
 }

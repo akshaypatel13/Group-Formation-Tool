@@ -2,154 +2,144 @@ package CSCI5308.GroupFormationTool.AccessControlTest;
 
 import CSCI5308.GroupFormationTool.AccessControl.*;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
+@SpringBootTest
 @SuppressWarnings("deprecation")
-public class UserTest
-{
+public class UserTest {
 
 	@Test
-	public void ConstructorTests()
-	{
-		User u = new User();
+	public void ConstructorTests() {
+		IUser u = UserAbstractFactory.instance().createUserInstance();
 		Assert.isTrue(u.getBannerID().isEmpty());
 		Assert.isTrue(u.getFirstName().isEmpty());
 		Assert.isTrue(u.getLastName().isEmpty());
 		Assert.isTrue(u.getEmail().isEmpty());
-		
-		IUserPersistence userDBMock = new UserDBMock();
-		u = new User(1, userDBMock);
-		Assert.isTrue(u.getBannerID().equals("B00000000"));
-		
-		u = new User("B00000000", userDBMock);
-		Assert.isTrue(u.getBannerID().equals("B00000000"));
+		IUser user = UserAbstractFactory.instance().createUserInstance();
+		IUserPersistence userDBMock = UserAbstractFactoryMock.instance().getUserDBMock();
+		user.setBannerID("B00000000");
+		user.setPassword("Pass@123");
+		user.setFirstName("Rob");
+		user.setLastName("Hawkey");
+		user.setEmail("rhawkey@dal.ca");
+		Assert.isTrue(userDBMock.createUser(user));
+		assertThat(user.equals("Z000000")).isFalse();
 	}
-	
+
 	@Test
-	public void setIDTest()
-	{
-		User u = new User();
+	public void setIDTest() {
+		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setID(10);
 		Assert.isTrue(10 == u.getID());
 	}
-	
+
 	@Test
-	public void getIDTest()
-	{
-		User u = new User();
+	public void getIDTest() {
+		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setID(10);
 		Assert.isTrue(10 == u.getID());
 	}
-	
+
 	@Test
-	public void setBannerIDTest()
-	{
-		User u = new User();
+	public void setBannerIDTest() {
+		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setBannerID("B00000000");
 		Assert.isTrue(u.getBannerID().equals("B00000000"));
 	}
-	
+
 	@Test
-	public void getBannerIDTest()
-	{
-		User u = new User();
+	public void getBannerIDTest() {
+		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setBannerID("B00000000");
 		Assert.isTrue(u.getBannerID().equals("B00000000"));
 	}
-	
+
 	@Test
-	public void setFirstNameTest()
-	{
-		User u = new User();
-		u.setFirstName("Rob");
-		Assert.isTrue(u.getFirstName().equals("Rob"));
-	}
-	
-	@Test
-	public void getFirstNameTest()
-	{
-		User u = new User();
+	public void setFirstNameTest() {
+		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setFirstName("Rob");
 		Assert.isTrue(u.getFirstName().equals("Rob"));
 	}
 
 	@Test
-	public void setLastNameTest()
-	{
-		User u = new User();
+	public void getFirstNameTest() {
+		IUser u = UserAbstractFactory.instance().createUserInstance();
+		u.setFirstName("Rob");
+		Assert.isTrue(u.getFirstName().equals("Rob"));
+	}
+
+	@Test
+	public void setLastNameTest() {
+		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setLastName("Hawkey");
 		Assert.isTrue(u.getLastName().equals("Hawkey"));
 	}
 
 	@Test
-	public void getLastNameTest()
-	{
-		User u = new User();
+	public void getLastNameTest() {
+		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setLastName("Hawkey");
 		Assert.isTrue(u.getLastName().equals("Hawkey"));
 	}
-	
+
 	@Test
-	public void setEmailTest()
-	{
-		User u = new User();
+	public void setEmailTest() {
+		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setEmail("rhawkey@dal.ca");
 		Assert.isTrue(u.getEmail().equals("rhawkey@dal.ca"));
 	}
-	
+
 	@Test
-	public void getEmailTest()
-	{
-		User u = new User();
+	public void getEmailTest() {
+		IUser u = UserAbstractFactory.instance().createUserInstance();
 		u.setEmail("rhawkey@dal.ca");
 		Assert.isTrue(u.getEmail().equals("rhawkey@dal.ca"));
 	}
-	
+
 	@Test
-	public void createUser()
-	{		
-		IUserPersistence userDB = new UserDBMock();
-		User user = new User();
+	public void createUser() {
+		IUserPersistence userDB = UserAbstractFactoryMock.instance().getUserDBMock();
+		IUser user = UserAbstractFactory.instance().createUserInstance();
 		userDB.createUser(user);
 		Assert.isTrue(user.getId() == 0);
 		Assert.isTrue(user.getBannerID().equals("B00000000"));
 	}
 
 	@Test
-	public void isBannerIDValidTest()
-	{
-		Assert.isTrue(User.isBannerIDValid("B000000000"));
-		assertFalse(User.isBannerIDValid(null));
-		assertFalse(User.isBannerIDValid(""));
-	}
-		
-	@Test
-	public void isFirstNameValidTest()
-	{
-		Assert.isTrue(User.isFirstNameValid("rob"));
-		assertFalse(User.isFirstNameValid(null));
-		assertFalse(User.isFirstNameValid(""));
-	}
-	
-	@Test
-	public void isLastNameValidTest()
-	{
-		Assert.isTrue(User.isLastNameValid("hawkey"));
-		assertFalse(User.isLastNameValid(null));
-		assertFalse(User.isLastNameValid(""));
-	}
-	
-	@Test
-	public void isEmailValidTest()
-	{
-		Assert.isTrue(User.isEmailValid("rhawkey@dal.ca"));
-		assertFalse(User.isEmailValid(null));
-		assertFalse(User.isEmailValid(""));
-		assertFalse(User.isEmailValid("@dal.ca"));
-		assertFalse(User.isEmailValid("rhawkey@"));
+	public void isBannerIDValidTest() {
+		IUser userInstance = UserAbstractFactory.instance().createUserInstance();
+		Assert.isTrue(userInstance.isBannerIDValid("B000000000"));
+		assertThat(userInstance.isBannerIDValid(null)).isFalse();
+		assertThat(userInstance.isBannerIDValid("")).isFalse();
 	}
 
+	@Test
+	public void isFirstNameValidTest() {
+		IUser userInstance = UserAbstractFactory.instance().createUserInstance();
+		Assert.isTrue(userInstance.isFirstNameValid("rob"));
+		assertThat(userInstance.isFirstNameValid(null)).isFalse();
+		assertThat(userInstance.isFirstNameValid("")).isFalse();
+	}
+
+	@Test
+	public void isLastNameValidTest() {
+		IUser userInstance = UserAbstractFactory.instance().createUserInstance();
+		Assert.isTrue(userInstance.isLastNameValid("hawkey"));
+		assertThat(userInstance.isLastNameValid(null)).isFalse();
+		assertThat(userInstance.isLastNameValid("")).isFalse();
+	}
+
+	@Test
+	public void isEmailValidTest() {
+		IUser userInstance = UserAbstractFactory.instance().createUserInstance();
+		Assert.isTrue(userInstance.isEmailValid("rhawkey@dal.ca"));
+		assertThat(userInstance.isEmailValid(null)).isFalse();
+		assertThat(userInstance.isEmailValid("")).isFalse();
+		assertThat(userInstance.isEmailValid("@dal.ca")).isFalse();
+		assertThat(userInstance.isEmailValid("rhawkey@")).isFalse();
+	}
 }

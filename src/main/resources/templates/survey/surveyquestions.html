@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="https://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<head>
+    <title>CSCI5308 - Group Formation Tool</title>
+    <style>
+        .floatLeft { width: 50%; float: left; }
+        .floatRight {width: 50%; float: right; }
+        .container { overflow: hidden; }
+    </style>
+</head>
+<body>
+
+<div sec:authorize="isAuthenticated()">
+    <h4 th:inline="text">BannerID: [[${#httpServletRequest.remoteUser}]]</h4>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+    <br/>
+    <br/>
+    <a th:href="@{/course/course(courseid=${courseID})}">Continue Editing Later</a>
+    <br/>
+    <br/>
+    <form th:action="@{/survey/publish}" th:if="${surveyCheck}" method="post">
+        <input type="hidden" name="courseID" th:value="${courseID}"/>
+        <label for="groupSize">Group Size:</label>
+        <input type="number" id="groupSize" name="groupSize" required/>
+        <input type="submit" value="Publish Survey" />
+    </form>
+
+    <a th:href="@{/survey/disable(courseID=${courseID})}" th:unless="${surveyCheck}">Disable</a>
+</div>
+
+<div class="container">
+    <div class="floatLeft"  sec:authorize="isAuthenticated()">
+        <br>
+        <br>
+        <h1>Add Questions to Survey</h1>
+        <br>
+        <br>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Algorithm</th>
+            </tr>
+            <tr th:each="question : ${questionsNotInSurvey}">
+                <td><a th:text="${question.title}"></a></td>
+                <td><a th:text="${question.text}"></a></td>
+                <td><a th:text="${question.type}"></a></td>
+                <td>
+                    <form th:action="@{/survey/insertquestion}" method="post">
+                        <input type="hidden" name="questionID" th:value="${question.id}"/>
+                        <input type="hidden" name="courseID" th:value="${courseID}"/>
+                        <select name="algo">
+                            <option disabled>Select Algo..</option>
+                            <option th:value="'1'" th:text="Similar"></option>
+                            <option th:value="'2'" th:text="Dissimilar"></option>
+                        </select>
+                        <input type="submit" value="Add Question to Survey" th:if="${surveyCheck}"/>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="floatRight" sec:authorize="isAuthenticated()">
+        <br>
+        <br>
+        <h1>Questions Added to Survey</h1>
+        <br>
+        <br>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Action</th>
+            </tr>
+            <tr th:each="question : ${surveyQuestions}">
+                <td><a th:text="${question.title}"></a></td>
+                <td><a th:text="${question.text}"></a></td>
+                <td><a th:text="${question.type}"></a></td>
+                <td>
+                    <form th:action="@{/surveyQuestion/delete}" method="post">
+                        <input type="hidden" name="questionID" th:value="${question.id}"/>
+                        <input type="hidden" name="courseID" th:value="${courseID}"/>
+                        <input type="submit" value="Delete" th:if="${surveyCheck}"/>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>
