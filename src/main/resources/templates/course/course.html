@@ -1,29 +1,66 @@
 <!DOCTYPE html>
 <html
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="https://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="https://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
 >
-	<head>
-		<title>CSCI5308 - Group Formation Tool</title>
-	</head>
-	<body>
-		<!-- I got the idea for how to do this from https://www.thymeleaf.org/doc/articles/springsecurity.html -->
-	  	<div sec:authorize="isAuthenticated()">
-	       <h4 th:inline="text">BannerID: [[${#httpServletRequest.remoteUser}]]</h4>
-	       <form th:action="@{/logout}" method="post">
-	           <input type="submit" value="Sign Out"/>
-	       </form>
-		</div>
+<head>
+    <title>CSCI5308 - Group Formation Tool</title>
+</head>
+<body>
+<div>
+    <!-- I got the idea for how to do this from https://www.thymeleaf.org/doc/articles/springsecurity.html -->
+    <div sec:authorize="isAuthenticated()">
+        <h4 th:inline="text">BannerID: [[${#httpServletRequest.remoteUser}]]</h4>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
+    <div th:if="${status}">
 		<h1 th:text="'Course: ' + ${course.title}">Course: Title Not Found</h1>
 		<div th:if="${instructor} or ${ta}">
 			<br/>
 			<a th:href="@{/course/instructoradmin(id=${course.id})}">Course Administration</a>
 		</div>
-		
 		<div th:if="${instructor}">
 			<br/>
-			<a th:href="@{/question/question}">Question Bank</a>
+			<a th:href="@{/question/questionmanager/title(bannerID=${#httpServletRequest.remoteUser})}">Question Manager</a>
 		</div>
-	</body>
+		<div th:if="${instructor} or ${ta}">
+			<br/>
+			<a th:href="@{/survey/survey(courseID=${course.id})}">Survey Manager</a>
+		</div>
+		<div th:if="${instructor}">
+			<br/>
+			<a th:href="@{/formgroups(courseID=${course.id})}">FormGroups</a>
+		</div>				
+		<div th:if="${survey}">
+			<p>Survey Not publish</p>
+		</div>
+				
+		<div th:unless="${survey}">
+			<div th:if="${student}">
+			<br/>
+			<form th:action="@{/response/takingsurvey}" method="POST">		        
+				<input type="hidden" name="id" id="id" th:value="${course.id}" />
+				<input type="hidden" name="bannerID" id="bannerID" th:value="${#httpServletRequest.remoteUser}" />
+				<button type="submit" >Taking Survey</button>
+			</form>
+			</div>
+		</div>
+    <div>
+    </div>
+        <h1 th:unless="${status}">
+            <br/>
+            <br/>
+            <h3>Error! Loading Database please try Again in an hour.</h3>
+            <br/>
+            <br/>
+            <a th:href="@{/}">Go to HomePage</a>
+            <br/>
+            <br/>
+        </h1>
+    </div>
+</div>
+</body>
 </html>

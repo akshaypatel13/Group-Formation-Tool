@@ -3,56 +3,56 @@ package CSCI5308.GroupFormationTool.Courses;
 import java.util.ArrayList;
 import java.util.List;
 
-import CSCI5308.GroupFormationTool.SystemConfig;
+import CSCI5308.GroupFormationTool.Security.SecurityAbstractFactory;
+
 import CSCI5308.GroupFormationTool.AccessControl.*;
-import CSCI5308.GroupFormationTool.PasswordPolicy.IPasswordPolicyList;
 import CSCI5308.GroupFormationTool.Security.IPasswordEncryption;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public class StudentCSVImport
-{
-
+public class StudentCSVImport implements IStudentCSVImport {
+	private static final Logger LOG = LogManager.getLogger();
 	private List<String> successResults;
 	private List<String> failureResults;
-	private Course course;
+	private ICourse course;
 	private IUserPersistence userDB;
 	private IPasswordEncryption passwordEncryption;
 	private IStudentCSVParser parser;
-	private IUserNotifications userNotifications;
-	private IPasswordPolicyList passwordPolicyList;
 
-	public StudentCSVImport(IStudentCSVParser parser, Course course)
-	{
+	public StudentCSVImport(IStudentCSVParser parser, ICourse course) {
 		this.course = course;
 		successResults = new ArrayList<String>();
 		failureResults = new ArrayList<String>();
-		userDB = SystemConfig.instance().getUserDB();
-		passwordEncryption = SystemConfig.instance().getPasswordEncryption();
-		userNotifications = SystemConfig.instance().getUserNotifications();
-		passwordPolicyList = SystemConfig.instance().getIPasswordPolicyList();
+		userDB = UserAbstractFactory.instance().createUserDBInstance();
+		passwordEncryption = SecurityAbstractFactory.instance().createBCryptPasswordEncryption();
 		this.parser = parser;
 		enrollStudentFromRecord();
 	}
 
-	private void enrollStudentFromRecord()
-	{
-		List<User> studentList = parser.parseCSVFile(failureResults);
-		for (User u : studentList) {
+	public void enrollStudentFromRecord() {
+		LOG.info("Parsing the imported CSV student list ");
+		List<IUser> studentList = parser.parseCSVFile(failureResults);
+		LOG.info("Checking if students already exist in database");
+		for (IUser u : studentList) {
 			String bannerID = u.getBanner();
 			String firstName = u.getFirstName();
 			String lastName = u.getLastName();
 			String email = u.getEmail();
 			String userDetails = bannerID + " " + firstName + " " + lastName + " " + email;
-			User user = new User();
+
+			IUser user = UserAbstractFactory.instance().createUserInstance();
 			userDB.loadUserByBannerID(bannerID, user);
-			if (user.isInvalidUser()) {
+
+			if (user.isInValidUser()) {
 				user.setBannerID(bannerID);
 				user.setFirstName(firstName);
 				user.setLastName(lastName);
 				user.setEmail(email);
-				if (user.createUser(userDB, passwordEncryption, userNotifications, passwordPolicyList)) {
+				if (user.createUser(userDB, passwordEncryption, null)) {
 					successResults.add("Created: " + userDetails);
 					userDB.loadUserByBannerID(bannerID, user);
 				} else {
+					LOG.warn("Unable to add user:" + user.getBannerID() + " to DB ");
 					failureResults.add("Unable to save this user to DB: " + userDetails);
 					return;
 				}
@@ -63,6 +63,11 @@ public class StudentCSVImport
 				failureResults.add("Unable to enroll user in course: " + userDetails);
 			}
 		}
+		if (failureResults.size() >= 1) {
+			LOG.error("Failure to Enroll Users Count: " + failureResults.size() + " , Course: " + course.getId());
+		} else {
+			LOG.info("Users Enrolled Count: " + successResults.size() + " , Course: " + course.getId());
+		}
 	}
 
 	public List<String> getSuccessResults() {
@@ -72,4 +77,5 @@ public class StudentCSVImport
 	public List<String> getFailureResults() {
 		return failureResults;
 	}
+
 }

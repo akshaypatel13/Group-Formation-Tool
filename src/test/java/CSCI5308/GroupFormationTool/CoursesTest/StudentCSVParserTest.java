@@ -11,18 +11,14 @@ import org.springframework.util.Assert;
 
 @SpringBootTest
 @SuppressWarnings("deprecation")
-class StudentCSVParserTest 
-{
-
+class StudentCSVParserTest {
 	@Test
-	public void parseCSVFile() 
-	{
+	public void parseCSVFile() {
 		Reader reader = null;
-		CSVReaderMock csvReader = new CSVReaderMock();
+		ICSVReaderMock csvReader = CourseAbstractFactoryTest.instance().getCsvReaderMock();
 		List<String[]> records = csvReader.readAll(reader);
 		assertThat(records).isNotNull();
 		assertThat(records).isNotEmpty();
 		Assert.isTrue(records.size() > 0);
 	}
-
 }

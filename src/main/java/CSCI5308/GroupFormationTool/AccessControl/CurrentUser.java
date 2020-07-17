@@ -1,42 +1,36 @@
 package CSCI5308.GroupFormationTool.AccessControl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import CSCI5308.GroupFormationTool.SystemConfig;
-
-public class CurrentUser
-{
+public class CurrentUser {
 
 	private static CurrentUser uniqueInstance = null;
-	
-	private CurrentUser()
-	{
-		
+	IUserPersistence userDB;
+	private static final Logger LOG = LogManager.getLogger();
+
+	private CurrentUser() {
+		userDB = UserAbstractFactory.instance().createUserDBInstance();
 	}
-	
-	public static CurrentUser instance()
-	{
-		if (null == uniqueInstance)
-		{
+
+	public static CurrentUser instance() {
+		if (null == uniqueInstance) {
 			uniqueInstance = new CurrentUser();
 		}
 		return uniqueInstance;
 	}
-	
-	public User getCurrentAuthenticatedUser()
-	{
-		IUserPersistence userDB = SystemConfig.instance().getUserDB();
+
+	public IUser getCurrentAuthenticatedUser() {
+		LOG.info("Calling security Context Holder to check if user is authenticated");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication.isAuthenticated())
-		{
+		if (authentication.isAuthenticated()) {
+			LOG.info("checking if current user is Valid user");
 			String bannerID = authentication.getPrincipal().toString();
-			User u = new User();
+			IUser u = UserAbstractFactory.instance().createUserInstance();
 			userDB.loadUserByBannerID(bannerID, u);
-			if (u.isInvalidUser())
-			{
-				return null;
-			} else {
+			if (u.isValidUser()) {
 				return u;
 			}
 		}
