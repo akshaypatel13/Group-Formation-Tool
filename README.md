@@ -7,7 +7,15 @@ The project built using Java and Spring MVC Web application that facilitates the
 * Uncle Bob's Refactoring Techniques
 * Design Patterns (Creational, Structural and Behavioral)
 * GitFlow
-* CI/CD
+* Continuous Integration / Deployment
+
+## Key Features
+
+* User authentication and authorization
+* Group Formation Algorithm
+* Course Management and Administration
+* Error handling and logging
+* Remote Database Handling
 
 ## Continuous Integration and Deployment
 
