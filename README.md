@@ -1,5 +1,5 @@
 # GroupFormationTool
-*CSCI-5308 Advance Topics in Software Development Group Project
+*CSCI-5308 Advance Topics in Software Development Group Project*
 
 The project built using Java and Spring MVC Web application that facilitates the users (adminstrators, instructors or students) to organize, track and display the result of peer group assessments. The Group Formation Algorithm helps course instructor to form groups based on the survey presented to the student. The entire project adheres to the best coding and refactoring practices such as:
 
